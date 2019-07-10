@@ -1,0 +1,499 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Evaluable Parsing Tutorial &mdash; Booleano v1.0a1 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0a1',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Booleano v1.0a1 documentation" href="../index.html" />
+    <link rel="up" title="Quick tutorials" href="index.html" />
+    <link rel="next" title="Pythonic Operations Tutorial" href="pythonic-operations.html" />
+    <link rel="prev" title="Convertible Parsing Tutorial" href="convertible-parsing.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="pythonic-operations.html" title="Pythonic Operations Tutorial"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="convertible-parsing.html" title="Convertible Parsing Tutorial"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Booleano v1.0a1 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Quick tutorials</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="evaluable-parsing-tutorial">
+<h1>Evaluable Parsing Tutorial<a class="headerlink" href="#evaluable-parsing-tutorial" title="Permalink to this headline">¶</a></h1>
+<div class="admonition-todo admonition " id="todo-1">
+<p class="first admonition-title">Todo</p>
+<p class="last">Rewrite this tutorial to explain step-by-step how to develop an small
+yet real project with Booleano.</p>
+</div>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p><strong>Evaluable parsing</strong> is when a boolean expression represents a condition that
+some items must meet, or else they&#8217;ll be ignored.</p>
+</div>
+<div class="section" id="what-you-need">
+<h2>What you need<a class="headerlink" href="#what-you-need" title="Permalink to this headline">¶</a></h2>
+<p>You need an <a title="booleano.parser.EvaluableParseManager" class="reference external" href="../api/parser.html#booleano.parser.EvaluableParseManager"><tt class="xref docutils literal"><span class="pre">evaluable</span> <span class="pre">parse</span> <span class="pre">manager</span></tt></a> configured with a
+<a title="booleano.parser.SymbolTable" class="reference external" href="../api/parser.html#booleano.parser.SymbolTable"><tt class="xref docutils literal"><span class="pre">symbol</span> <span class="pre">table</span></tt></a> and at least one
+<a title="booleano.parser.Grammar" class="reference external" href="../api/parser.html#booleano.parser.Grammar"><tt class="xref docutils literal"><span class="pre">grammar</span></tt></a>, as well as define all the Booleano
+variables and functions that may be used in the expressions.</p>
+<div class="section" id="defining-variables-and-functions">
+<h3>Defining variables and functions<a class="headerlink" href="#defining-variables-and-functions" title="Permalink to this headline">¶</a></h3>
+<div class="admonition-todo admonition " id="todo-2">
+<p class="first admonition-title">Todo</p>
+<p class="last">Explain how to define a function.</p>
+</div>
+<p>Once you know the Booleano functions and variables (not the same as Python
+functions and variables), it&#8217;s time to implement them.</p>
+<p>If, for example, you have a bookstore, you may need the variables to represent
+the following:</p>
+<ul class="simple">
+<li>The title of a book.</li>
+<li>The amount of pages in a book.</li>
+<li>The author(s) of a book.</li>
+</ul>
+<p>You could define them as follows:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">booleano.operations</span> <span class="kn">import</span> <span class="n">Variable</span>
+
+<span class="k">class</span> <span class="nc">BookTitle</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Booleano variable that represents the title of a book.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c"># We can perform equality (==, !=) and membership operations on the</span>
+    <span class="c"># name of a book:</span>
+    <span class="n">operations</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s">&quot;equality&quot;</span><span class="p">,</span> <span class="s">&quot;membership&quot;</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">equals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check if ``value`` is the title of the book.</span>
+
+<span class="sd">        Comparison is case-insensitive.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">actual_book_title</span> <span class="o">=</span> <span class="n">context</span><span class="p">[</span><span class="s">&#39;title&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">other_book_title</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">actual_book_title</span> <span class="o">==</span> <span class="n">other_book_title</span>
+
+    <span class="k">def</span> <span class="nf">belongs_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check if word ``value`` is part of the words in the book title.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">word</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="n">context</span><span class="p">[</span><span class="s">&#39;title&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">title</span>
+
+    <span class="k">def</span> <span class="nf">is_subset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check if the words in ``value`` are part of the words in the book</span>
+<span class="sd">        title.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+        <span class="n">title_words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">context</span><span class="p">[</span><span class="s">&#39;title&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">words</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="n">title_words</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">to_python</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">unicode</span><span class="p">(</span><span class="n">context</span><span class="p">[</span><span class="s">&#39;title&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+
+<span class="k">class</span> <span class="nc">BookPages</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Booleano variable that represents the amount of pages in a book.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c"># This variable supports equality (==, !=) and inequality (&lt;, &gt;, &lt;=, &gt;=)</span>
+    <span class="c"># operations:</span>
+    <span class="n">operations</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s">&quot;equality&quot;</span><span class="p">,</span> <span class="s">&quot;inequality&quot;</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">equals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check that the book has the same amount of pages as ``value``.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">actual_pages</span> <span class="o">=</span> <span class="n">context</span><span class="p">[</span><span class="s">&#39;pages&#39;</span><span class="p">]</span>
+        <span class="n">expected_pages</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">actual_pages</span> <span class="o">==</span> <span class="n">expected_pages</span>
+
+    <span class="k">def</span> <span class="nf">greater_than</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check that the amount of pages in the book is greater than</span>
+<span class="sd">        ``value``.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">actual_pages</span> <span class="o">=</span> <span class="n">context</span><span class="p">[</span><span class="s">&#39;pages&#39;</span><span class="p">]</span>
+        <span class="n">expected_pages</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">actual_pages</span> <span class="o">&gt;</span> <span class="n">expected_pages</span>
+
+    <span class="k">def</span> <span class="nf">less_than</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check that the amount of pages in the book is less than ``value``.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">actual_pages</span> <span class="o">=</span> <span class="n">context</span><span class="p">[</span><span class="s">&#39;pages&#39;</span><span class="p">]</span>
+        <span class="n">expected_pages</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">actual_pages</span> <span class="o">&lt;</span> <span class="n">expected_pages</span>
+
+    <span class="k">def</span> <span class="nf">to_python</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">context</span><span class="p">[</span><span class="s">&#39;pages&#39;</span><span class="p">])</span>
+
+<span class="k">class</span> <span class="nc">BookAuthor</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Booleano variable that represents the name of a book author.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c"># This variable only supports equality and boolean operations:</span>
+    <span class="n">operations</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s">&quot;equality&quot;</span><span class="p">,</span> <span class="s">&quot;boolean&quot;</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check if the author of the book is known.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">context</span><span class="p">[</span><span class="s">&#39;author&#39;</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">equals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check if ``value`` is the name of the book author.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">expected_name</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">actual_name</span> <span class="o">=</span> <span class="n">context</span><span class="p">[</span><span class="s">&#39;author&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">expected_name</span> <span class="o">==</span> <span class="n">actual_name</span>
+
+    <span class="k">def</span> <span class="nf">to_python</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">unicode</span><span class="p">(</span><span class="n">context</span><span class="p">[</span><span class="s">&#39;author&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="defining-the-symbol-table">
+<h3>Defining the symbol table<a class="headerlink" href="#defining-the-symbol-table" title="Permalink to this headline">¶</a></h3>
+<p>Once the required variables and functions have been defined, it&#8217;s time give them
+names in the expressions:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">booleano.parser</span> <span class="kn">import</span> <span class="n">SymbolTable</span><span class="p">,</span> <span class="n">Bind</span>
+<span class="kn">from</span> <span class="nn">booleano.operations</span> <span class="kn">import</span> <span class="n">Number</span>
+
+<span class="n">book_title_var</span> <span class="o">=</span> <span class="n">BookTitle</span><span class="p">()</span>
+
+<span class="n">root_table</span> <span class="o">=</span> <span class="n">SymbolTable</span><span class="p">(</span><span class="s">&quot;root&quot;</span><span class="p">,</span>
+    <span class="p">(</span>
+    <span class="n">Bind</span><span class="p">(</span><span class="s">&quot;book&quot;</span><span class="p">,</span> <span class="n">book_title_var</span><span class="p">),</span>
+    <span class="p">),</span>
+    <span class="n">SymbolTable</span><span class="p">(</span><span class="s">&quot;book&quot;</span><span class="p">,</span>
+        <span class="p">(</span>
+        <span class="n">Bind</span><span class="p">(</span><span class="s">&quot;title&quot;</span><span class="p">,</span> <span class="n">book_title_var</span><span class="p">),</span>
+        <span class="n">Bind</span><span class="p">(</span><span class="s">&quot;author&quot;</span><span class="p">,</span> <span class="n">BookAuthor</span><span class="p">()),</span>
+        <span class="n">Bind</span><span class="p">(</span><span class="s">&quot;pages&quot;</span><span class="p">,</span> <span class="n">BookPages</span><span class="p">())</span>
+        <span class="p">)</span>
+    <span class="p">),</span>
+    <span class="n">SymbolTable</span><span class="p">(</span><span class="s">&quot;constants&quot;</span><span class="p">,</span>
+        <span class="p">(</span>
+        <span class="n">Bind</span><span class="p">(</span><span class="s">&quot;average_pages&quot;</span><span class="p">,</span> <span class="n">Number</span><span class="p">(</span><span class="mi">200</span><span class="p">)),</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>With the symbol table above, we have 5 identifiers:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">book</span></tt> and <tt class="docutils literal"><span class="pre">book:title</span></tt>, which are equivalent, represent the title of
+the book.</li>
+<li><tt class="docutils literal"><span class="pre">book:author</span></tt> represents the name of the book author.</li>
+<li><tt class="docutils literal"><span class="pre">book:pages</span></tt> represents the amounts of pages in the book.</li>
+<li><tt class="docutils literal"><span class="pre">constants:average_pages</span></tt> is a named constant that represents the average
+amount of pages in all the books (200 in this case).</li>
+</ul>
+</div>
+<div class="section" id="defining-the-grammar">
+<h3>Defining the grammar<a class="headerlink" href="#defining-the-grammar" title="Permalink to this headline">¶</a></h3>
+<p>We&#8217;re going to customize the tokens for the following operators:</p>
+<ul class="simple">
+<li>&#8220;~&#8221; (negation) will be &#8220;not&#8221;.</li>
+<li>&#8220;==&#8221; (&#8220;equals&#8221;) will be &#8220;is&#8221;.</li>
+<li>&#8220;!=&#8221; (&#8220;not equals&#8221;) will be &#8220;isn&#8217;t&#8221;.</li>
+<li>&#8220;∈&#8221; (&#8220;belongs to&#8221;) will be &#8220;in&#8221;.</li>
+<li>&#8220;⊂&#8221; (&#8220;is sub-set of&#8221;) will be &#8220;are included in&#8221;.</li>
+</ul>
+<p>So we instatiate it like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">booleano.parser</span> <span class="kn">import</span> <span class="n">Grammar</span>
+
+<span class="n">new_tokens</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">&#39;not&#39;</span><span class="p">:</span> <span class="s">&quot;not&quot;</span><span class="p">,</span>
+    <span class="s">&#39;eq&#39;</span><span class="p">:</span> <span class="s">&quot;is&quot;</span><span class="p">,</span>
+    <span class="s">&#39;ne&#39;</span><span class="p">:</span> <span class="s">&quot;isn&#39;t&quot;</span><span class="p">,</span>
+    <span class="s">&#39;belongs_to&#39;</span><span class="p">:</span> <span class="s">&quot;in&quot;</span><span class="p">,</span>
+    <span class="s">&#39;is_subset&#39;</span><span class="p">:</span> <span class="s">&quot;are included in&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">english_grammar</span> <span class="o">=</span> <span class="n">Grammar</span><span class="p">(</span><span class="o">**</span><span class="n">new_tokens</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-the-parse-manager">
+<h3>Creating the parse manager<a class="headerlink" href="#creating-the-parse-manager" title="Permalink to this headline">¶</a></h3>
+<p>Finally, it&#8217;s time to put it all together:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">booleano.parser</span> <span class="kn">import</span> <span class="n">EvaluableParseManager</span>
+
+<span class="n">parse_manager</span> <span class="o">=</span> <span class="n">EvaluableParseManager</span><span class="p">(</span><span class="n">root_table</span><span class="p">,</span> <span class="n">english_grammar</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="parsing-and-evaluating-expressions">
+<h2>Parsing and evaluating expressions<a class="headerlink" href="#parsing-and-evaluating-expressions" title="Permalink to this headline">¶</a></h2>
+<p>First let&#8217;s check that our parser works correctly with our custom grammar:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">parse_manager</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;book is &quot;Programming in Ada 2005&quot;&#39;</span><span class="p">)</span>
+<span class="go">&lt;Parse tree (evaluable) &lt;Equal &lt;Anonymous variable [BookTitle]&gt; &lt;String &quot;Programming in Ada 2005&quot;&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parse_manager</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;book:title is &quot;Programming in Ada 2005&quot;&#39;</span><span class="p">)</span>
+<span class="go">&lt;Parse tree (evaluable) &lt;Equal &lt;Anonymous variable [BookTitle]&gt; &lt;String &quot;Programming in Ada 2005&quot;&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parse_manager</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;&quot;Programming in Ada 2005&quot; is book&#39;</span><span class="p">)</span>
+<span class="go">&lt;Parse tree (evaluable) &lt;Equal &lt;Anonymous variable [BookTitle]&gt; &lt;String &quot;Programming in Ada 2005&quot;&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parse_manager</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;book:title isn</span><span class="se">\&#39;</span><span class="s">t &quot;Programming in Ada 2005&quot;&#39;</span><span class="p">)</span>
+<span class="go">&lt;Parse tree (evaluable) &lt;NotEqual &lt;Anonymous variable [BookTitle]&gt; &lt;String &quot;Programming in Ada 2005&quot;&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parse_manager</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;{&quot;ada&quot;, &quot;programming&quot;} are included in book:title&#39;</span><span class="p">)</span>
+<span class="go">&lt;Parse tree (evaluable) &lt;IsSubset &lt;Anonymous variable [BookTitle]&gt; &lt;Set &lt;String &quot;ada&quot;&gt;, &lt;String &quot;programming&quot;&gt;&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parse_manager</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;&quot;software measurement&quot; in book:title&#39;</span><span class="p">)</span>
+<span class="go">&lt;Parse tree (evaluable) &lt;BelongsTo &lt;Anonymous variable [BookTitle]&gt; &lt;String &quot;software measurement&quot;&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parse_manager</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;&quot;software engineering&quot; in book:title &amp; book:author is &quot;Ian Sommerville&quot;&#39;</span><span class="p">)</span>
+<span class="go">&lt;Parse tree (evaluable) &lt;And &lt;BelongsTo &lt;Anonymous variable [BookTitle]&gt; &lt;String &quot;software engineering&quot;&gt;&gt; &lt;Equal &lt;Anonymous variable [BookAuthor]&gt; &lt;String &quot;Ian Sommerville&quot;&gt;&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p>They all look great, so finally let&#8217;s check if they are evaluated correctly
+too:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">books</span> <span class="o">=</span> <span class="p">(</span>
+<span class="gp">... </span><span class="p">{</span><span class="s">&#39;title&#39;</span><span class="p">:</span> <span class="s">&quot;Programming in Ada 2005&quot;</span><span class="p">,</span> <span class="s">&#39;author&#39;</span><span class="p">:</span> <span class="s">&quot;John Barnes&quot;</span><span class="p">,</span> <span class="s">&#39;pages&#39;</span><span class="p">:</span> <span class="mi">828</span><span class="p">},</span>
+<span class="gp">... </span><span class="p">{</span><span class="s">&#39;title&#39;</span><span class="p">:</span> <span class="s">&quot;Software Engineering, 8th edition&quot;</span><span class="p">,</span> <span class="s">&#39;author&#39;</span><span class="p">:</span> <span class="s">&quot;Ian Sommerville&quot;</span><span class="p">,</span> <span class="s">&#39;pages&#39;</span><span class="p">:</span> <span class="mi">864</span><span class="p">},</span>
+<span class="gp">... </span><span class="p">{</span><span class="s">&#39;title&#39;</span><span class="p">:</span> <span class="s">&quot;Software Testing&quot;</span><span class="p">,</span> <span class="s">&#39;author&#39;</span><span class="p">:</span> <span class="s">&quot;Ron Patton&quot;</span><span class="p">,</span> <span class="s">&#39;pages&#39;</span><span class="p">:</span> <span class="mi">408</span><span class="p">},</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr1</span> <span class="o">=</span> <span class="n">parse_manager</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;book is &quot;Programming in Ada 2005&quot;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr1</span><span class="p">(</span><span class="n">books</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr1</span><span class="p">(</span><span class="n">books</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr1</span><span class="p">(</span><span class="n">books</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr2</span> <span class="o">=</span> <span class="n">parse_manager</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;&quot;ron patton&quot; is book:author&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr2</span><span class="p">(</span><span class="n">books</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr2</span><span class="p">(</span><span class="n">books</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr2</span><span class="p">(</span><span class="n">books</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr3</span> <span class="o">=</span> <span class="n">parse_manager</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;&quot;software&quot; in book:title&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr3</span><span class="p">(</span><span class="n">books</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr3</span><span class="p">(</span><span class="n">books</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr3</span><span class="p">(</span><span class="n">books</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr4</span> <span class="o">=</span> <span class="n">parse_manager</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;book:pages &gt; 800&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr4</span><span class="p">(</span><span class="n">books</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr4</span><span class="p">(</span><span class="n">books</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr4</span><span class="p">(</span><span class="n">books</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<p>And there you go! They were all evaluated correctly!</p>
+</div>
+<div class="section" id="supporting-more-than-one-grammar">
+<h2>Supporting more than one grammar<a class="headerlink" href="#supporting-more-than-one-grammar" title="Permalink to this headline">¶</a></h2>
+<p>If you have more than one language to support, that&#8217;d be a piece of cake! You
+can add translations in the symbol table and/or add a customized grammar.</p>
+<p>For example, if we had to support Castilian (aka Spanish), our symbol table
+would&#8217;ve looked like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">booleano.parser</span> <span class="kn">import</span> <span class="n">SymbolTable</span><span class="p">,</span> <span class="n">Bind</span>
+<span class="kn">from</span> <span class="nn">booleano.operations</span> <span class="kn">import</span> <span class="n">Number</span>
+
+<span class="n">book_title_var</span> <span class="o">=</span> <span class="n">BookTitle</span><span class="p">()</span>
+
+<span class="n">root_table</span> <span class="o">=</span> <span class="n">SymbolTable</span><span class="p">(</span><span class="s">&quot;root&quot;</span><span class="p">,</span>
+    <span class="p">(</span>
+    <span class="n">Bind</span><span class="p">(</span><span class="s">&quot;book&quot;</span><span class="p">,</span> <span class="n">book_title_var</span><span class="p">,</span> <span class="n">es</span><span class="o">=</span><span class="s">&quot;libro&quot;</span><span class="p">),</span>
+    <span class="p">),</span>
+    <span class="n">SymbolTable</span><span class="p">(</span><span class="s">&quot;book&quot;</span><span class="p">,</span>
+        <span class="p">(</span>
+        <span class="n">Bind</span><span class="p">(</span><span class="s">&quot;title&quot;</span><span class="p">,</span> <span class="n">book_title_var</span><span class="p">,</span> <span class="n">es</span><span class="o">=</span><span class="s">u&quot;título&quot;</span><span class="p">),</span>
+        <span class="n">Bind</span><span class="p">(</span><span class="s">&quot;author&quot;</span><span class="p">,</span> <span class="n">BookAuthor</span><span class="p">(),</span> <span class="n">es</span><span class="o">=</span><span class="s">&quot;autor&quot;</span><span class="p">),</span>
+        <span class="n">Bind</span><span class="p">(</span><span class="s">&quot;pages&quot;</span><span class="p">,</span> <span class="n">BookPages</span><span class="p">(),</span> <span class="n">es</span><span class="o">=</span><span class="s">u&quot;páginas&quot;</span><span class="p">)</span>
+        <span class="p">),</span>
+        <span class="n">es</span><span class="o">=</span><span class="s">&quot;libro&quot;</span>
+    <span class="p">),</span>
+    <span class="n">SymbolTable</span><span class="p">(</span><span class="s">&quot;constants&quot;</span><span class="p">,</span>
+        <span class="p">(</span>
+        <span class="n">Bind</span><span class="p">(</span><span class="s">&quot;average_pages&quot;</span><span class="p">,</span> <span class="n">Number</span><span class="p">(</span><span class="mi">200</span><span class="p">)),</span>
+        <span class="p">),</span>
+        <span class="n">es</span><span class="o">=</span><span class="s">&quot;constantes&quot;</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>And we could&#8217;ve customized the grammar like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">booleano.parser</span> <span class="kn">import</span> <span class="n">Grammar</span>
+
+<span class="n">new_es_tokens</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">&#39;not&#39;</span><span class="p">:</span> <span class="s">&quot;no&quot;</span><span class="p">,</span>
+    <span class="s">&#39;eq&#39;</span><span class="p">:</span> <span class="s">&quot;es&quot;</span><span class="p">,</span>
+    <span class="s">&#39;ne&#39;</span><span class="p">:</span> <span class="s">&quot;no es&quot;</span><span class="p">,</span>
+    <span class="s">&#39;belongs_to&#39;</span><span class="p">:</span> <span class="s">u&quot;está en&quot;</span><span class="p">,</span>
+    <span class="s">&#39;is_subset&#39;</span><span class="p">:</span> <span class="s">u&quot;están en&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">castilian_grammar</span> <span class="o">=</span> <span class="n">Grammar</span><span class="p">(</span><span class="o">**</span><span class="n">new_es_tokens</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Finally, we&#8217;d have to add the new grammar to the parse manager:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">booleano.parser</span> <span class="kn">import</span> <span class="n">EvaluableParseManager</span>
+
+<span class="n">parse_manager</span> <span class="o">=</span> <span class="n">EvaluableParseManager</span><span class="p">(</span><span class="n">root_table</span><span class="p">,</span> <span class="n">english_grammar</span><span class="p">,</span> <span class="n">es</span><span class="o">=</span><span class="n">castilian_grammar</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now test the expressions, but this time with our new localization:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">expr1</span> <span class="o">=</span> <span class="n">parse_manager</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;libro es &quot;Programming in Ada 2005&quot;&#39;</span><span class="p">,</span> <span class="s">&quot;es&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr1</span>
+<span class="go">&lt;Parse tree (evaluable) &lt;Equal &lt;Anonymous variable [BookTitle]&gt; &lt;String &quot;Programming in Ada 2005&quot;&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr1</span><span class="p">(</span><span class="n">books</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr1</span><span class="p">(</span><span class="n">books</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr1</span><span class="p">(</span><span class="n">books</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr2</span> <span class="o">=</span> <span class="n">parse_manager</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">u&#39;libro:páginas &lt; 500&#39;</span><span class="p">,</span> <span class="s">&quot;es&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr2</span>
+<span class="go">&lt;Parse tree (evaluable) &lt;LessThan &lt;Anonymous variable [BookPages]&gt; &lt;Number 500.0&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr2</span><span class="p">(</span><span class="n">books</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr2</span><span class="p">(</span><span class="n">books</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr2</span><span class="p">(</span><span class="n">books</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr3</span> <span class="o">=</span> <span class="n">parse_manager</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">u&#39;&quot;software&quot; está en libro&#39;</span><span class="p">,</span> <span class="s">&quot;es&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr3</span>
+<span class="go">&lt;Parse tree (evaluable) &lt;BelongsTo &lt;Anonymous variable [BookTitle]&gt; &lt;String &quot;software&quot;&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr3</span><span class="p">(</span><span class="n">books</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr3</span><span class="p">(</span><span class="n">books</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr3</span><span class="p">(</span><span class="n">books</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>They worked just like the original, English expressions!</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="">Evaluable Parsing Tutorial</a><ul>
+<li><a class="reference external" href="#overview">Overview</a></li>
+<li><a class="reference external" href="#what-you-need">What you need</a><ul>
+<li><a class="reference external" href="#defining-variables-and-functions">Defining variables and functions</a></li>
+<li><a class="reference external" href="#defining-the-symbol-table">Defining the symbol table</a></li>
+<li><a class="reference external" href="#defining-the-grammar">Defining the grammar</a></li>
+<li><a class="reference external" href="#creating-the-parse-manager">Creating the parse manager</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#parsing-and-evaluating-expressions">Parsing and evaluating expressions</a></li>
+<li><a class="reference external" href="#supporting-more-than-one-grammar">Supporting more than one grammar</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="convertible-parsing.html"
+                                  title="previous chapter">Convertible Parsing Tutorial</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="pythonic-operations.html"
+                                  title="next chapter">Pythonic Operations Tutorial</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/tutorials/evaluable-parsing.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pythonic-operations.html" title="Pythonic Operations Tutorial"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="convertible-parsing.html" title="Convertible Parsing Tutorial"
+             >previous</a> |</li>
+        <li><a href="../index.html">Booleano v1.0a1 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Quick tutorials</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009, Gustavo Narea.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.3.
+    </div>
+  </body>
+</html>

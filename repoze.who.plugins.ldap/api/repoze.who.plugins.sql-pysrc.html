@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>repoze.who.plugins.sql</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="repoze.who.plugins.ldap-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://code.gustavonarea.net/repoze.who.plugins.ldap/">repoze.who LDAP plugin</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="repoze-module.html">Package&nbsp;repoze</a> ::
+        <a href="repoze.who-module.html">Package&nbsp;who</a> ::
+        <a href="repoze.who.plugins-module.html">Package&nbsp;plugins</a> ::
+        Module&nbsp;sql
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="repoze.who.plugins.sql-module.html">Module repoze.who.plugins.sql</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">zope</tt><tt class="py-op">.</tt><tt class="py-name">interface</tt> <tt class="py-keyword">import</tt> <tt class="py-name">implements</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package repoze=repoze-module.html"><a title="repoze" class="py-name" href="#" onclick="return doclink('link-0', 'repoze', 'link-0');">repoze</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package repoze.who=repoze.who-module.html"><a title="repoze.who" class="py-name" href="#" onclick="return doclink('link-1', 'who', 'link-1');">who</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Module repoze.who.interfaces=repoze.who.interfaces-module.html"><a title="repoze.who.interfaces" class="py-name" href="#" onclick="return doclink('link-2', 'interfaces', 'link-2');">interfaces</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Class repoze.who.interfaces.IAuthenticator=repoze.who.interfaces.IAuthenticator-class.html"><a title="repoze.who.interfaces.IAuthenticator" class="py-name" href="#" onclick="return doclink('link-3', 'IAuthenticator', 'link-3');">IAuthenticator</a></tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-4" class="py-name"><a title="repoze" class="py-name" href="#" onclick="return doclink('link-4', 'repoze', 'link-0');">repoze</a></tt><tt class="py-op">.</tt><tt id="link-5" class="py-name"><a title="repoze.who" class="py-name" href="#" onclick="return doclink('link-5', 'who', 'link-1');">who</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name"><a title="repoze.who.interfaces" class="py-name" href="#" onclick="return doclink('link-6', 'interfaces', 'link-2');">interfaces</a></tt> <tt class="py-keyword">import</tt> <tt id="link-7" class="py-name" targets="Class repoze.who.interfaces.IMetadataProvider=repoze.who.interfaces.IMetadataProvider-class.html"><a title="repoze.who.interfaces.IMetadataProvider" class="py-name" href="#" onclick="return doclink('link-7', 'IMetadataProvider', 'link-7');">IMetadataProvider</a></tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"> </tt>
+<a name="default_password_compare"></a><div id="default_password_compare-def"><a name="L6"></a><tt class="py-lineno">  6</tt> <a class="py-toggle" href="#" id="default_password_compare-toggle" onclick="return toggle('default_password_compare');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.plugins.sql-module.html#default_password_compare">default_password_compare</a><tt class="py-op">(</tt><tt class="py-param">cleartext_password</tt><tt class="py-op">,</tt> <tt class="py-param">stored_password_hash</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="default_password_compare-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="default_password_compare-expanded"><a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line">        <tt class="py-keyword">from</tt> <tt class="py-name">hashlib</tt> <tt class="py-keyword">import</tt> <tt class="py-name">sha1</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line">    <tt class="py-keyword">except</tt> <tt class="py-name">ImportError</tt><tt class="py-op">:</tt> <tt class="py-comment"># Python &lt; 2.5 #pragma NO COVERAGE</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line">        <tt class="py-keyword">from</tt> <tt class="py-name">sha</tt> <tt class="py-keyword">import</tt> <tt class="py-name">new</tt> <tt class="py-keyword">as</tt> <tt class="py-name">sha1</tt>    <tt class="py-comment">#pragma NO COVERAGE</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line">    <tt class="py-comment"># the stored password is stored as '{SHA}&lt;SHA hexdigest&gt;'.</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line">    <tt class="py-comment"># or as a cleartext password (no {SHA} prefix)</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">stored_password_hash</tt><tt class="py-op">.</tt><tt class="py-name">startswith</tt><tt class="py-op">(</tt><tt class="py-string">'{SHA}'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line">        <tt class="py-name">stored_password_hash</tt> <tt class="py-op">=</tt> <tt class="py-name">stored_password_hash</tt><tt class="py-op">[</tt><tt class="py-number">5</tt><tt class="py-op">:</tt><tt class="py-op">]</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line">        <tt class="py-name">digest</tt> <tt class="py-op">=</tt> <tt class="py-name">sha1</tt><tt class="py-op">(</tt><tt class="py-name">cleartext_password</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">hexdigest</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line">        <tt class="py-name">digest</tt> <tt class="py-op">=</tt> <tt class="py-name">cleartext_password</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">         </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">stored_password_hash</tt> <tt class="py-op">==</tt> <tt class="py-name">digest</tt><tt class="py-op">:</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">True</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">False</tt> </tt>
+</div><a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"> </tt>
+<a name="make_psycopg_conn_factory"></a><div id="make_psycopg_conn_factory-def"><a name="L26"></a><tt class="py-lineno"> 26</tt> <a class="py-toggle" href="#" id="make_psycopg_conn_factory-toggle" onclick="return toggle('make_psycopg_conn_factory');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.plugins.sql-module.html#make_psycopg_conn_factory">make_psycopg_conn_factory</a><tt class="py-op">(</tt><tt class="py-op">**</tt><tt class="py-param">kw</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="make_psycopg_conn_factory-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="make_psycopg_conn_factory-expanded"><a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">    <tt class="py-comment"># convenience (I always seem to use Postgres)</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">    <tt class="py-keyword">def</tt> <tt class="py-def-name">conn_factory</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> <tt class="py-comment">#pragma NO COVERAGE</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">        <tt class="py-keyword">import</tt> <tt class="py-name">psycopg2</tt> <tt class="py-comment">#pragma NO COVERAGE</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">psycopg2</tt><tt class="py-op">.</tt><tt class="py-name">connect</tt><tt class="py-op">(</tt><tt class="py-name">kw</tt><tt class="py-op">[</tt><tt class="py-string">'repoze.who.dsn'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> <tt class="py-comment">#pragma NO COVERAGE</tt> </tt>
+</div><a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">conn_factory</tt> <tt class="py-comment">#pragma NO COVERAGE</tt> </tt>
+</div><a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"> </tt>
+<a name="SQLAuthenticatorPlugin"></a><div id="SQLAuthenticatorPlugin-def"><a name="L33"></a><tt class="py-lineno"> 33</tt> <a class="py-toggle" href="#" id="SQLAuthenticatorPlugin-toggle" onclick="return toggle('SQLAuthenticatorPlugin');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="repoze.who.plugins.sql.SQLAuthenticatorPlugin-class.html">SQLAuthenticatorPlugin</a><tt class="py-op">:</tt> </tt>
+</div><div id="SQLAuthenticatorPlugin-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="SQLAuthenticatorPlugin-expanded"><a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">    <tt class="py-name">implements</tt><tt class="py-op">(</tt><tt id="link-8" class="py-name"><a title="repoze.who.interfaces.IAuthenticator" class="py-name" href="#" onclick="return doclink('link-8', 'IAuthenticator', 'link-3');">IAuthenticator</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">     </tt>
+<a name="SQLAuthenticatorPlugin.__init__"></a><div id="SQLAuthenticatorPlugin.__init__-def"><a name="L36"></a><tt class="py-lineno"> 36</tt> <a class="py-toggle" href="#" id="SQLAuthenticatorPlugin.__init__-toggle" onclick="return toggle('SQLAuthenticatorPlugin.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.plugins.sql.SQLAuthenticatorPlugin-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">query</tt><tt class="py-op">,</tt> <tt class="py-param">conn_factory</tt><tt class="py-op">,</tt> <tt class="py-param">compare_fn</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SQLAuthenticatorPlugin.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SQLAuthenticatorPlugin.__init__-expanded"><a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">        <tt class="py-comment"># statement should be pyformat dbapi binding-style, e.g.</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">        <tt class="py-comment"># "select user_id, password from users where login=%(login)s"</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Variable repoze.who.plugins.tests.test_sql.DummyConnectionFactory.query=repoze.who.plugins.tests.test_sql.DummyConnectionFactory-class.html#query"><a title="repoze.who.plugins.tests.test_sql.DummyConnectionFactory.query" class="py-name" href="#" onclick="return doclink('link-9', 'query', 'link-9');">query</a></tt> <tt class="py-op">=</tt> <tt id="link-10" class="py-name"><a title="repoze.who.plugins.tests.test_sql.DummyConnectionFactory.query" class="py-name" href="#" onclick="return doclink('link-10', 'query', 'link-9');">query</a></tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">conn_factory</tt> <tt class="py-op">=</tt> <tt class="py-name">conn_factory</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">compare_fn</tt> <tt class="py-op">=</tt> <tt class="py-name">compare_fn</tt> <tt class="py-keyword">or</tt> <tt id="link-11" class="py-name" targets="Function repoze.who.plugins.sql.default_password_compare()=repoze.who.plugins.sql-module.html#default_password_compare"><a title="repoze.who.plugins.sql.default_password_compare" class="py-name" href="#" onclick="return doclink('link-11', 'default_password_compare', 'link-11');">default_password_compare</a></tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">conn</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+</div><a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">    <tt class="py-comment"># IAuthenticator</tt> </tt>
+<a name="SQLAuthenticatorPlugin.authenticate"></a><div id="SQLAuthenticatorPlugin.authenticate-def"><a name="L45"></a><tt class="py-lineno"> 45</tt> <a class="py-toggle" href="#" id="SQLAuthenticatorPlugin.authenticate-toggle" onclick="return toggle('SQLAuthenticatorPlugin.authenticate');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.plugins.sql.SQLAuthenticatorPlugin-class.html#authenticate">authenticate</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">environ</tt><tt class="py-op">,</tt> <tt class="py-param">identity</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SQLAuthenticatorPlugin.authenticate-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SQLAuthenticatorPlugin.authenticate-expanded"><a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-string">'login'</tt> <tt class="py-keyword">in</tt> <tt class="py-name">identity</tt><tt class="py-op">:</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">conn</tt><tt class="py-op">:</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">conn</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">conn_factory</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">        <tt class="py-name">curs</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">conn</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Method repoze.who.plugins.tests.test_sql.DummyConnectionFactory.cursor()=repoze.who.plugins.tests.test_sql.DummyConnectionFactory-class.html#cursor"><a title="repoze.who.plugins.tests.test_sql.DummyConnectionFactory.cursor" class="py-name" href="#" onclick="return doclink('link-12', 'cursor', 'link-12');">cursor</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">        <tt class="py-name">curs</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name" targets="Method repoze.who.plugins.tests.test_sql.DummyConnectionFactory.execute()=repoze.who.plugins.tests.test_sql.DummyConnectionFactory-class.html#execute"><a title="repoze.who.plugins.tests.test_sql.DummyConnectionFactory.execute" class="py-name" href="#" onclick="return doclink('link-13', 'execute', 'link-13');">execute</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name"><a title="repoze.who.plugins.tests.test_sql.DummyConnectionFactory.query" class="py-name" href="#" onclick="return doclink('link-14', 'query', 'link-9');">query</a></tt><tt class="py-op">,</tt> <tt class="py-name">identity</tt><tt class="py-op">)</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">        <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt class="py-name">curs</tt><tt class="py-op">.</tt><tt id="link-15" class="py-name" targets="Method repoze.who.plugins.tests.test_sql.DummyConnectionFactory.fetchone()=repoze.who.plugins.tests.test_sql.DummyConnectionFactory-class.html#fetchone"><a title="repoze.who.plugins.tests.test_sql.DummyConnectionFactory.fetchone" class="py-name" href="#" onclick="return doclink('link-15', 'fetchone', 'link-15');">fetchone</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">        <tt class="py-name">curs</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Method repoze.who.plugins.tests.test_sql.DummyConnectionFactory.close()=repoze.who.plugins.tests.test_sql.DummyConnectionFactory-class.html#close"><a title="repoze.who.plugins.tests.test_sql.DummyConnectionFactory.close" class="py-name" href="#" onclick="return doclink('link-16', 'close', 'link-16');">close</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">result</tt><tt class="py-op">:</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">            <tt class="py-name">user_id</tt><tt class="py-op">,</tt> <tt class="py-name">password</tt> <tt class="py-op">=</tt> <tt class="py-name">result</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">compare_fn</tt><tt class="py-op">(</tt><tt class="py-name">identity</tt><tt class="py-op">[</tt><tt class="py-string">'password'</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">password</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">user_id</tt> </tt>
+</div></div><a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"> </tt>
+<a name="SQLMetadataProviderPlugin"></a><div id="SQLMetadataProviderPlugin-def"><a name="L59"></a><tt class="py-lineno"> 59</tt> <a class="py-toggle" href="#" id="SQLMetadataProviderPlugin-toggle" onclick="return toggle('SQLMetadataProviderPlugin');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="repoze.who.plugins.sql.SQLMetadataProviderPlugin-class.html">SQLMetadataProviderPlugin</a><tt class="py-op">:</tt> </tt>
+</div><div id="SQLMetadataProviderPlugin-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="SQLMetadataProviderPlugin-expanded"><a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">    <tt class="py-name">implements</tt><tt class="py-op">(</tt><tt id="link-17" class="py-name"><a title="repoze.who.interfaces.IMetadataProvider" class="py-name" href="#" onclick="return doclink('link-17', 'IMetadataProvider', 'link-7');">IMetadataProvider</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">     </tt>
+<a name="SQLMetadataProviderPlugin.__init__"></a><div id="SQLMetadataProviderPlugin.__init__-def"><a name="L62"></a><tt class="py-lineno"> 62</tt> <a class="py-toggle" href="#" id="SQLMetadataProviderPlugin.__init__-toggle" onclick="return toggle('SQLMetadataProviderPlugin.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.plugins.sql.SQLMetadataProviderPlugin-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">name</tt><tt class="py-op">,</tt> <tt class="py-param">query</tt><tt class="py-op">,</tt> <tt class="py-param">conn_factory</tt><tt class="py-op">,</tt> <tt class="py-param">filter</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SQLMetadataProviderPlugin.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SQLMetadataProviderPlugin.__init__-expanded"><a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">name</tt> <tt class="py-op">=</tt> <tt class="py-name">name</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name"><a title="repoze.who.plugins.tests.test_sql.DummyConnectionFactory.query" class="py-name" href="#" onclick="return doclink('link-18', 'query', 'link-9');">query</a></tt> <tt class="py-op">=</tt> <tt id="link-19" class="py-name"><a title="repoze.who.plugins.tests.test_sql.DummyConnectionFactory.query" class="py-name" href="#" onclick="return doclink('link-19', 'query', 'link-9');">query</a></tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">conn_factory</tt> <tt class="py-op">=</tt> <tt class="py-name">conn_factory</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">filter</tt> <tt class="py-op">=</tt> <tt class="py-name">filter</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">conn</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+</div><a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">    <tt class="py-comment"># IMetadataProvider</tt> </tt>
+<a name="SQLMetadataProviderPlugin.add_metadata"></a><div id="SQLMetadataProviderPlugin.add_metadata-def"><a name="L70"></a><tt class="py-lineno"> 70</tt> <a class="py-toggle" href="#" id="SQLMetadataProviderPlugin.add_metadata-toggle" onclick="return toggle('SQLMetadataProviderPlugin.add_metadata');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.plugins.sql.SQLMetadataProviderPlugin-class.html#add_metadata">add_metadata</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">environ</tt><tt class="py-op">,</tt> <tt class="py-param">identity</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SQLMetadataProviderPlugin.add_metadata-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SQLMetadataProviderPlugin.add_metadata-expanded"><a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">conn</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">conn</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">conn_factory</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">        <tt class="py-name">curs</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">conn</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name"><a title="repoze.who.plugins.tests.test_sql.DummyConnectionFactory.cursor" class="py-name" href="#" onclick="return doclink('link-20', 'cursor', 'link-12');">cursor</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">        <tt class="py-comment"># can't use dots in names in python string formatting :-(</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">        <tt class="py-name">identity</tt><tt class="py-op">[</tt><tt class="py-string">'__userid'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">identity</tt><tt class="py-op">[</tt><tt class="py-string">'repoze.who.userid'</tt><tt class="py-op">]</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">        <tt class="py-name">curs</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name"><a title="repoze.who.plugins.tests.test_sql.DummyConnectionFactory.execute" class="py-name" href="#" onclick="return doclink('link-21', 'execute', 'link-13');">execute</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="repoze.who.plugins.tests.test_sql.DummyConnectionFactory.query" class="py-name" href="#" onclick="return doclink('link-22', 'query', 'link-9');">query</a></tt><tt class="py-op">,</tt> <tt class="py-name">identity</tt><tt class="py-op">)</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">        <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt class="py-name">curs</tt><tt class="py-op">.</tt><tt id="link-23" class="py-name" targets="Method repoze.who.plugins.tests.test_sql.DummyConnectionFactory.fetchall()=repoze.who.plugins.tests.test_sql.DummyConnectionFactory-class.html#fetchall"><a title="repoze.who.plugins.tests.test_sql.DummyConnectionFactory.fetchall" class="py-name" href="#" onclick="return doclink('link-23', 'fetchall', 'link-23');">fetchall</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">filter</tt><tt class="py-op">:</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">            <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">filter</tt><tt class="py-op">(</tt><tt class="py-name">result</tt><tt class="py-op">)</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">        <tt class="py-name">curs</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="repoze.who.plugins.tests.test_sql.DummyConnectionFactory.close" class="py-name" href="#" onclick="return doclink('link-24', 'close', 'link-16');">close</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">        <tt class="py-keyword">del</tt> <tt class="py-name">identity</tt><tt class="py-op">[</tt><tt class="py-string">'__userid'</tt><tt class="py-op">]</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">        <tt class="py-name">identity</tt><tt class="py-op">[</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">name</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt>  <tt class="py-name">result</tt> </tt>
+</div></div><a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"> </tt>
+<a name="make_authenticator_plugin"></a><div id="make_authenticator_plugin-def"><a name="L84"></a><tt class="py-lineno"> 84</tt> <a class="py-toggle" href="#" id="make_authenticator_plugin-toggle" onclick="return toggle('make_authenticator_plugin');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.plugins.sql-module.html#make_authenticator_plugin">make_authenticator_plugin</a><tt class="py-op">(</tt><tt class="py-param">query</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">conn_factory</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">                              <tt class="py-param">compare_fn</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kw</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="make_authenticator_plugin-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="make_authenticator_plugin-expanded"><a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt id="link-25" class="py-name"><a title="repoze" class="py-name" href="#" onclick="return doclink('link-25', 'repoze', 'link-0');">repoze</a></tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="repoze.who" class="py-name" href="#" onclick="return doclink('link-26', 'who', 'link-1');">who</a></tt><tt class="py-op">.</tt><tt id="link-27" class="py-name" targets="Module repoze.who.utils=repoze.who.utils-module.html"><a title="repoze.who.utils" class="py-name" href="#" onclick="return doclink('link-27', 'utils', 'link-27');">utils</a></tt> <tt class="py-keyword">import</tt> <tt id="link-28" class="py-name" targets="Function repoze.who.utils.resolveDotted()=repoze.who.utils-module.html#resolveDotted"><a title="repoze.who.utils.resolveDotted" class="py-name" href="#" onclick="return doclink('link-28', 'resolveDotted', 'link-28');">resolveDotted</a></tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-29" class="py-name"><a title="repoze.who.plugins.tests.test_sql.DummyConnectionFactory.query" class="py-name" href="#" onclick="return doclink('link-29', 'query', 'link-9');">query</a></tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">'query must be specified'</tt><tt class="py-op">)</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">conn_factory</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">'conn_factory must be specified'</tt><tt class="py-op">)</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">        <tt class="py-name">conn_factory</tt> <tt class="py-op">=</tt> <tt id="link-30" class="py-name"><a title="repoze.who.utils.resolveDotted" class="py-name" href="#" onclick="return doclink('link-30', 'resolveDotted', 'link-28');">resolveDotted</a></tt><tt class="py-op">(</tt><tt class="py-name">conn_factory</tt><tt class="py-op">)</tt><tt class="py-op">(</tt><tt class="py-op">**</tt><tt class="py-name">kw</tt><tt class="py-op">)</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">    <tt class="py-keyword">except</tt> <tt class="py-name">Exception</tt><tt class="py-op">,</tt> <tt class="py-name">why</tt><tt class="py-op">:</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">'conn_factory could not be resolved: %s'</tt> <tt class="py-op">%</tt> <tt class="py-name">why</tt><tt class="py-op">)</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">compare_fn</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">        <tt class="py-name">compare_fn</tt> <tt class="py-op">=</tt> <tt id="link-31" class="py-name"><a title="repoze.who.utils.resolveDotted" class="py-name" href="#" onclick="return doclink('link-31', 'resolveDotted', 'link-28');">resolveDotted</a></tt><tt class="py-op">(</tt><tt class="py-name">compare_fn</tt><tt class="py-op">)</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-32" class="py-name" targets="Class repoze.who.plugins.sql.SQLAuthenticatorPlugin=repoze.who.plugins.sql.SQLAuthenticatorPlugin-class.html"><a title="repoze.who.plugins.sql.SQLAuthenticatorPlugin" class="py-name" href="#" onclick="return doclink('link-32', 'SQLAuthenticatorPlugin', 'link-32');">SQLAuthenticatorPlugin</a></tt><tt class="py-op">(</tt><tt id="link-33" class="py-name"><a title="repoze.who.plugins.tests.test_sql.DummyConnectionFactory.query" class="py-name" href="#" onclick="return doclink('link-33', 'query', 'link-9');">query</a></tt><tt class="py-op">,</tt> <tt class="py-name">conn_factory</tt><tt class="py-op">,</tt> <tt class="py-name">compare_fn</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"> </tt>
+<a name="make_metadata_plugin"></a><div id="make_metadata_plugin-def"><a name="L99"></a><tt class="py-lineno"> 99</tt> <a class="py-toggle" href="#" id="make_metadata_plugin-toggle" onclick="return toggle('make_metadata_plugin');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.plugins.sql-module.html#make_metadata_plugin">make_metadata_plugin</a><tt class="py-op">(</tt><tt class="py-param">name</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">query</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">conn_factory</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">                         <tt class="py-param">filter</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kw</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="make_metadata_plugin-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="make_metadata_plugin-expanded"><a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt id="link-34" class="py-name"><a title="repoze" class="py-name" href="#" onclick="return doclink('link-34', 'repoze', 'link-0');">repoze</a></tt><tt class="py-op">.</tt><tt id="link-35" class="py-name"><a title="repoze.who" class="py-name" href="#" onclick="return doclink('link-35', 'who', 'link-1');">who</a></tt><tt class="py-op">.</tt><tt id="link-36" class="py-name"><a title="repoze.who.utils" class="py-name" href="#" onclick="return doclink('link-36', 'utils', 'link-27');">utils</a></tt> <tt class="py-keyword">import</tt> <tt id="link-37" class="py-name"><a title="repoze.who.utils.resolveDotted" class="py-name" href="#" onclick="return doclink('link-37', 'resolveDotted', 'link-28');">resolveDotted</a></tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">name</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">'name must be specified'</tt><tt class="py-op">)</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-38" class="py-name"><a title="repoze.who.plugins.tests.test_sql.DummyConnectionFactory.query" class="py-name" href="#" onclick="return doclink('link-38', 'query', 'link-9');">query</a></tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">'query must be specified'</tt><tt class="py-op">)</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">conn_factory</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">'conn_factory must be specified'</tt><tt class="py-op">)</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">        <tt class="py-name">conn_factory</tt> <tt class="py-op">=</tt> <tt id="link-39" class="py-name"><a title="repoze.who.utils.resolveDotted" class="py-name" href="#" onclick="return doclink('link-39', 'resolveDotted', 'link-28');">resolveDotted</a></tt><tt class="py-op">(</tt><tt class="py-name">conn_factory</tt><tt class="py-op">)</tt><tt class="py-op">(</tt><tt class="py-op">**</tt><tt class="py-name">kw</tt><tt class="py-op">)</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">    <tt class="py-keyword">except</tt> <tt class="py-name">Exception</tt><tt class="py-op">,</tt> <tt class="py-name">why</tt><tt class="py-op">:</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">'conn_factory could not be resolved: %s'</tt> <tt class="py-op">%</tt> <tt class="py-name">why</tt><tt class="py-op">)</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">filter</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">        <tt class="py-name">filter</tt> <tt class="py-op">=</tt> <tt id="link-40" class="py-name"><a title="repoze.who.utils.resolveDotted" class="py-name" href="#" onclick="return doclink('link-40', 'resolveDotted', 'link-28');">resolveDotted</a></tt><tt class="py-op">(</tt><tt class="py-name">filter</tt><tt class="py-op">)</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-41" class="py-name" targets="Class repoze.who.plugins.sql.SQLMetadataProviderPlugin=repoze.who.plugins.sql.SQLMetadataProviderPlugin-class.html"><a title="repoze.who.plugins.sql.SQLMetadataProviderPlugin" class="py-name" href="#" onclick="return doclink('link-41', 'SQLMetadataProviderPlugin', 'link-41');">SQLMetadataProviderPlugin</a></tt><tt class="py-op">(</tt><tt class="py-name">name</tt><tt class="py-op">,</tt> <tt id="link-42" class="py-name"><a title="repoze.who.plugins.tests.test_sql.DummyConnectionFactory.query" class="py-name" href="#" onclick="return doclink('link-42', 'query', 'link-9');">query</a></tt><tt class="py-op">,</tt> <tt class="py-name">conn_factory</tt><tt class="py-op">,</tt> <tt class="py-name">filter</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="repoze.who.plugins.ldap-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://code.gustavonarea.net/repoze.who.plugins.ldap/">repoze.who LDAP plugin</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Jun  3 10:41:58 2010
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

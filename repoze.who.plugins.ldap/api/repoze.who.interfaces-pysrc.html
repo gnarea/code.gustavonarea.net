@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>repoze.who.interfaces</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="repoze.who.plugins.ldap-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://code.gustavonarea.net/repoze.who.plugins.ldap/">repoze.who LDAP plugin</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="repoze-module.html">Package&nbsp;repoze</a> ::
+        <a href="repoze.who-module.html">Package&nbsp;who</a> ::
+        Module&nbsp;interfaces
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="repoze.who.interfaces-module.html">Module repoze.who.interfaces</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">zope</tt><tt class="py-op">.</tt><tt class="py-name">interface</tt> <tt class="py-keyword">import</tt> <tt class="py-name">Interface</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"> </tt>
+<a name="IPlugin"></a><div id="IPlugin-def"><a name="L3"></a><tt class="py-lineno">  3</tt> <a class="py-toggle" href="#" id="IPlugin-toggle" onclick="return toggle('IPlugin');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="repoze.who.interfaces.IPlugin-class.html">IPlugin</a><tt class="py-op">(</tt><tt class="py-base-class">Interface</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IPlugin-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="IPlugin-expanded"><a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line">    <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"> </tt>
+<a name="IRequestClassifier"></a><div id="IRequestClassifier-def"><a name="L6"></a><tt class="py-lineno">  6</tt> <a class="py-toggle" href="#" id="IRequestClassifier-toggle" onclick="return toggle('IRequestClassifier');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="repoze.who.interfaces.IRequestClassifier-class.html">IRequestClassifier</a><tt class="py-op">(</tt><tt class="py-base-class">IPlugin</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IRequestClassifier-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="IRequestClassifier-expanded"><a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line">    <tt class="py-docstring">""" On ingress: classify a request.</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="IRequestClassifier.__call__"></a><div id="IRequestClassifier.__call__-def"><a name="L9"></a><tt class="py-lineno">  9</tt> <a class="py-toggle" href="#" id="IRequestClassifier.__call__-toggle" onclick="return toggle('IRequestClassifier.__call__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.interfaces.IRequestClassifier-class.html#__call__">__call__</a><tt class="py-op">(</tt><tt class="py-param">environ</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IRequestClassifier.__call__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="IRequestClassifier.__call__-expanded"><a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line">        <tt class="py-docstring">""" environ -&gt; request classifier string</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-docstring">        This interface is responsible for returning a string</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-docstring">        value representing a request classification.</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-docstring">        o 'environ' is the WSGI environment.</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+</div></div><a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"> </tt>
+<a name="IChallengeDecider"></a><div id="IChallengeDecider-def"><a name="L18"></a><tt class="py-lineno"> 18</tt> <a class="py-toggle" href="#" id="IChallengeDecider-toggle" onclick="return toggle('IChallengeDecider');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="repoze.who.interfaces.IChallengeDecider-class.html">IChallengeDecider</a><tt class="py-op">(</tt><tt class="py-base-class">IPlugin</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IChallengeDecider-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="IChallengeDecider-expanded"><a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line">    <tt class="py-docstring">""" On egress: decide whether a challenge needs to be presented</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-docstring">    to the user.</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="IChallengeDecider.__call__"></a><div id="IChallengeDecider.__call__-def"><a name="L22"></a><tt class="py-lineno"> 22</tt> <a class="py-toggle" href="#" id="IChallengeDecider.__call__-toggle" onclick="return toggle('IChallengeDecider.__call__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.interfaces.IChallengeDecider-class.html#__call__">__call__</a><tt class="py-op">(</tt><tt class="py-param">environ</tt><tt class="py-op">,</tt> <tt class="py-param">status</tt><tt class="py-op">,</tt> <tt class="py-param">headers</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IChallengeDecider.__call__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="IChallengeDecider.__call__-expanded"><a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">        <tt class="py-docstring">""" args -&gt; True | False</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-docstring">        o 'environ' is the WSGI environment.</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-docstring">        o 'status' is the HTTP status as returned by the downstream</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-docstring">          WSGI application.</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt class="py-docstring">        o 'headers' are the headers returned by the downstream WSGI</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-docstring">          application.</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-docstring">        This interface is responsible for returning True if</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt class="py-docstring">        a challenge needs to be presented to the user, False otherwise.</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+</div></div><a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"> </tt>
+<a name="IIdentifier"></a><div id="IIdentifier-def"><a name="L37"></a><tt class="py-lineno"> 37</tt> <a class="py-toggle" href="#" id="IIdentifier-toggle" onclick="return toggle('IIdentifier');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="repoze.who.interfaces.IIdentifier-class.html">IIdentifier</a><tt class="py-op">(</tt><tt class="py-base-class">IPlugin</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IIdentifier-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="IIdentifier-expanded"><a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt class="py-docstring">    On ingress: Extract credentials from the WSGI environment and</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"><tt class="py-docstring">    turn them into an identity.</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"><tt class="py-docstring">    On egress (remember): Conditionally set information in the response headers</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"><tt class="py-docstring">    allowing the remote system to remember this identity.</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"><tt class="py-docstring">    On egress (forget): Conditionally set information in the response</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"><tt class="py-docstring">    headers allowing the remote system to forget this identity (during</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"><tt class="py-docstring">    a challenge).</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"> </tt>
+<a name="IIdentifier.identify"></a><div id="IIdentifier.identify-def"><a name="L51"></a><tt class="py-lineno"> 51</tt> <a class="py-toggle" href="#" id="IIdentifier.identify-toggle" onclick="return toggle('IIdentifier.identify');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.interfaces.IIdentifier-class.html#identify">identify</a><tt class="py-op">(</tt><tt class="py-param">environ</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IIdentifier.identify-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="IIdentifier.identify-expanded"><a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">        <tt class="py-docstring">""" On ingress:</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"><tt class="py-docstring">        environ -&gt; {   k1 : v1</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"><tt class="py-docstring">                       ,   ...</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"><tt class="py-docstring">                       , kN : vN</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"><tt class="py-docstring">                       } | None</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"><tt class="py-docstring">        o 'environ' is the WSGI environment.</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"><tt class="py-docstring">        o If credentials are found, the returned identity mapping will</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"><tt class="py-docstring">          contain an arbitrary set of key/value pairs.  If the</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"><tt class="py-docstring">          identity is based on a login and password, the environment</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"><tt class="py-docstring">          is recommended to contain at least 'login' and 'password'</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"><tt class="py-docstring">          keys as this provides compatibility between the plugin and</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"><tt class="py-docstring">          existing authenticator plugins.  If the identity can be</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"><tt class="py-docstring">          'preauthenticated' (e.g. if the userid is embedded in the</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"><tt class="py-docstring">          identity, such as when we're using ticket-based</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-docstring">          authentication), the plugin should set the userid in the</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt class="py-docstring">          special 'repoze.who.userid' key; no authenticators will be</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"><tt class="py-docstring">          asked to authenticate the identity thereafer.</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"><tt class="py-docstring">        o Return None to indicate that the plugin found no appropriate</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"><tt class="py-docstring">          credentials.</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"><tt class="py-docstring">        o Only IIdentifier plugins which match one of the the current</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"><tt class="py-docstring">          request's classifications will be asked to perform</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"><tt class="py-docstring">          identification.</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"><tt class="py-docstring">        o An identifier plugin is permitted to add a key to the</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"><tt class="py-docstring">          environment named 'repoze.who.application', which should be</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt class="py-docstring">          an arbitrary WSGI application.  If an identifier plugin does</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-docstring">          so, this application is used instead of the downstream</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-docstring">          application set up within the middleware.  This feature is</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"><tt class="py-docstring">          useful for identifier plugins which need to perform</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"><tt class="py-docstring">          redirection to obtain credentials.  If two identifier</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"><tt class="py-docstring">          plugins add a 'repoze.who.application' WSGI application to</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"><tt class="py-docstring">          the environment, the last one consulted will"win".</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+</div><a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"> </tt>
+<a name="IIdentifier.remember"></a><div id="IIdentifier.remember-def"><a name="L91"></a><tt class="py-lineno"> 91</tt> <a class="py-toggle" href="#" id="IIdentifier.remember-toggle" onclick="return toggle('IIdentifier.remember');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.interfaces.IIdentifier-class.html#remember">remember</a><tt class="py-op">(</tt><tt class="py-param">environ</tt><tt class="py-op">,</tt> <tt class="py-param">identity</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IIdentifier.remember-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="IIdentifier.remember-expanded"><a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">        <tt class="py-docstring">""" On egress (no challenge required):</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"><tt class="py-docstring">        args -&gt; [ (header-name, header-value), ...] | None</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"><tt class="py-docstring">        Return a list of headers suitable for allowing the requesting</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"><tt class="py-docstring">        system to remember the identification information (e.g. a</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"><tt class="py-docstring">        Set-Cookie header).  Return None if no headers need to be set.</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"><tt class="py-docstring">        These headers will be appended to any headers returned by the</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"><tt class="py-docstring">        downstream application.</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+</div><a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"> </tt>
+<a name="IIdentifier.forget"></a><div id="IIdentifier.forget-def"><a name="L103"></a><tt class="py-lineno">103</tt> <a class="py-toggle" href="#" id="IIdentifier.forget-toggle" onclick="return toggle('IIdentifier.forget');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.interfaces.IIdentifier-class.html#forget">forget</a><tt class="py-op">(</tt><tt class="py-param">environ</tt><tt class="py-op">,</tt> <tt class="py-param">identity</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IIdentifier.forget-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="IIdentifier.forget-expanded"><a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">        <tt class="py-docstring">""" On egress (challenge required):</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"><tt class="py-docstring">        args -&gt; [ (header-name, header-value), ...] | None</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"><tt class="py-docstring">        Return a list of headers suitable for allowing the requesting</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line"><tt class="py-docstring">        system to forget the identification information (e.g. a</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"><tt class="py-docstring">        Set-Cookie header with an expires date in the past).  Return</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"><tt class="py-docstring">        None if no headers need to be set.  These headers will be</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"><tt class="py-docstring">        included in the response provided by the challenge app.</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+</div></div><a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"> </tt>
+<a name="IAuthenticator"></a><div id="IAuthenticator-def"><a name="L115"></a><tt class="py-lineno">115</tt> <a class="py-toggle" href="#" id="IAuthenticator-toggle" onclick="return toggle('IAuthenticator');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="repoze.who.interfaces.IAuthenticator-class.html">IAuthenticator</a><tt class="py-op">(</tt><tt class="py-base-class">IPlugin</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IAuthenticator-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="IAuthenticator-expanded"><a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">    <tt class="py-docstring">""" On ingress: validate the identity and return a user id or None.</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"> </tt>
+<a name="IAuthenticator.authenticate"></a><div id="IAuthenticator.authenticate-def"><a name="L120"></a><tt class="py-lineno">120</tt> <a class="py-toggle" href="#" id="IAuthenticator.authenticate-toggle" onclick="return toggle('IAuthenticator.authenticate');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.interfaces.IAuthenticator-class.html#authenticate">authenticate</a><tt class="py-op">(</tt><tt class="py-param">environ</tt><tt class="py-op">,</tt> <tt class="py-param">identity</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IAuthenticator.authenticate-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="IAuthenticator.authenticate-expanded"><a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">        <tt class="py-docstring">""" identity -&gt; 'userid' | None</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"><tt class="py-docstring">        o 'environ' is the WSGI environment.</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line"><tt class="py-docstring">        o 'identity' will be a dictionary (with arbitrary keys and</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line"><tt class="py-docstring">          values).</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line"><tt class="py-docstring"> </tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"><tt class="py-docstring">        o The IAuthenticator should return a single user id (optimally</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line"><tt class="py-docstring">          a string) if the identity can be authenticated.  If the</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line"><tt class="py-docstring">          identify cannot be authenticated, the IAuthenticator should</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line"><tt class="py-docstring">          return None.</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line"><tt class="py-docstring">        Each instance of a registered IAuthenticator plugin that</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line"><tt class="py-docstring">        matches the request classifier will be called N times during a</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line"><tt class="py-docstring">        single request, where N is the number of identities found by</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line"><tt class="py-docstring">        any IIdentifierPlugin instances.</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line"><tt class="py-docstring">        An authenticator must not raise an exception if it is provided</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line"><tt class="py-docstring">        an identity dictionary that it does not understand (e.g. if it</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line"><tt class="py-docstring">        presumes that 'login' and 'password' are keys in the</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line"><tt class="py-docstring">        dictionary, it should check for the existence of these keys</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line"><tt class="py-docstring">        before attempting to do anything; if they don't exist, it</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line"><tt class="py-docstring">        should return None).</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line"><tt class="py-docstring">        An authenticator is permitted to add extra keys to the 'identity'</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line"><tt class="py-docstring">        dictionary (e.g., to save metadata from a database query, rather</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line"><tt class="py-docstring">        than requiring a separate query from an IMetadataProvider plugin).</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+</div></div><a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line"> </tt>
+<a name="IChallenger"></a><div id="IChallenger-def"><a name="L150"></a><tt class="py-lineno">150</tt> <a class="py-toggle" href="#" id="IChallenger-toggle" onclick="return toggle('IChallenger');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="repoze.who.interfaces.IChallenger-class.html">IChallenger</a><tt class="py-op">(</tt><tt class="py-base-class">IPlugin</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IChallenger-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="IChallenger-expanded"><a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line"> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line">    <tt class="py-docstring">""" On egress: Conditionally initiate a challenge to the user to</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line"><tt class="py-docstring">        provide credentials.</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line"><tt class="py-docstring">        Only challenge plugins which match one of the the current</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line"><tt class="py-docstring">        response's classifications will be asked to perform a</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line"><tt class="py-docstring">        challenge.</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line"> </tt>
+<a name="IChallenger.challenge"></a><div id="IChallenger.challenge-def"><a name="L160"></a><tt class="py-lineno">160</tt> <a class="py-toggle" href="#" id="IChallenger.challenge-toggle" onclick="return toggle('IChallenger.challenge');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.interfaces.IChallenger-class.html#challenge">challenge</a><tt class="py-op">(</tt><tt class="py-param">environ</tt><tt class="py-op">,</tt> <tt class="py-param">status</tt><tt class="py-op">,</tt> <tt class="py-param">app_headers</tt><tt class="py-op">,</tt> <tt class="py-param">forget_headers</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IChallenger.challenge-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="IChallenger.challenge-expanded"><a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line">        <tt class="py-docstring">""" args -&gt; WSGI application or None</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line"><tt class="py-docstring">        o 'environ' is the WSGI environment.</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line"><tt class="py-docstring">        o 'status' is the status written into start_response by the</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line"><tt class="py-docstring">          downstream application.</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line"><tt class="py-docstring">        o 'app_headers' is the headers list written into start_response by the</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line"><tt class="py-docstring">          downstream application.</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line"><tt class="py-docstring">        o 'forget_headers' is a list of headers which must be passed</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line"><tt class="py-docstring">          back in the response in order to perform credentials reset</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line"><tt class="py-docstring">          (logout).  These come from the 'forget' method of</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line"><tt class="py-docstring">          IIdentifier plugin used to do the request's identification.</tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line"><tt class="py-docstring">        Examine the values passed in and return a WSGI application</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line"><tt class="py-docstring">        (a callable which accepts environ and start_response as its</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line"><tt class="py-docstring">        two positional arguments, ala PEP 333) which causes a</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line"><tt class="py-docstring">        challenge to be performed.  Return None to forego performing a</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line"><tt class="py-docstring">        challenge.</tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+</div></div><a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line"> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line"> </tt>
+<a name="IMetadataProvider"></a><div id="IMetadataProvider-def"><a name="L184"></a><tt class="py-lineno">184</tt> <a class="py-toggle" href="#" id="IMetadataProvider-toggle" onclick="return toggle('IMetadataProvider');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="repoze.who.interfaces.IMetadataProvider-class.html">IMetadataProvider</a><tt class="py-op">(</tt><tt class="py-base-class">IPlugin</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IMetadataProvider-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="IMetadataProvider-expanded"><a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line">    <tt class="py-docstring">"""On ingress: When an identity is authenticated, metadata</tt> </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line"><tt class="py-docstring">       providers may scribble on the identity dictionary arbitrarily.</tt> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line"><tt class="py-docstring">       Return values from metadata providers are ignored.</tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line">     </tt>
+<a name="IMetadataProvider.add_metadata"></a><div id="IMetadataProvider.add_metadata-def"><a name="L190"></a><tt class="py-lineno">190</tt> <a class="py-toggle" href="#" id="IMetadataProvider.add_metadata-toggle" onclick="return toggle('IMetadataProvider.add_metadata');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.interfaces.IMetadataProvider-class.html#add_metadata">add_metadata</a><tt class="py-op">(</tt><tt class="py-param">environ</tt><tt class="py-op">,</tt> <tt class="py-param">identity</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IMetadataProvider.add_metadata-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="IMetadataProvider.add_metadata-expanded"><a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line"><tt class="py-docstring">        Add metadata to the identity (which is a dictionary).  One</tt> </tt>
+<a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line"><tt class="py-docstring">        value is always guaranteed to be in the dictionary when</tt> </tt>
+<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line"><tt class="py-docstring">        add_metadata is called: 'repoze.who.userid', representing the</tt> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line"><tt class="py-docstring">        user id of the identity.  Availability and composition of</tt> </tt>
+<a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line"><tt class="py-docstring">        other keys will depend on the identifier plugin which created</tt> </tt>
+<a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line"><tt class="py-docstring">        the identity.</tt> </tt>
+<a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+</div></div><a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="repoze.who.plugins.ldap-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://code.gustavonarea.net/repoze.who.plugins.ldap/">repoze.who LDAP plugin</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Jun  3 10:41:58 2010
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

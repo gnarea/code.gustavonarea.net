@@ -1,0 +1,308 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Test authentication independently &mdash; repoze.who Test Utilities v1.0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/repoze.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="repoze.who Test Utilities v1.0.1 documentation" href="../index.html" />
+    <link rel="up" title="How to test protected areas in Web sites" href="index.html" />
+    <link rel="next" title="repoze.who-testutil API" href="../API.html" />
+    <link rel="prev" title="Test protected areas without authentication" href="TestingProtectedAreas.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../API.html" title="repoze.who-testutil API"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="TestingProtectedAreas.html" title="Test protected areas without authentication"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">repoze.who Test Utilities v1.0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">How to test protected areas in Web sites</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="test-authentication-independently">
+<h1>Test authentication independently<a class="headerlink" href="#test-authentication-independently" title="Permalink to this headline">¶</a></h1>
+<p>You may want to test authentication in order to make sure <a class="reference external" href="http://static.repoze.org/whodocs/index.html#module-repoze.who" title="(in repoze.who v1.0.10)"><tt class="xref py py-mod docutils literal"><span class="pre">repoze.who</span></tt></a> is
+working properly within your application, which is also known as &#8220;integration
+tests&#8221;.</p>
+<p>This section will help you test authentication <em>only</em>, based on the
+<tt class="docutils literal"><span class="pre">test.ini</span></tt> file defined in the previous section.</p>
+<div class="section" id="the-test-case">
+<h2>The test case<a class="headerlink" href="#the-test-case" title="Permalink to this headline">¶</a></h2>
+<p>In most situations, a single test case will be enough to test authentication
+exhaustively.</p>
+<p>While testing authentication, you have to check the behavior of your
+application in the following situations:</p>
+<ul class="simple">
+<li>When authorization is denied with the 401 HTTP status code: <a class="reference external" href="http://static.repoze.org/whodocs/index.html#module-repoze.who" title="(in repoze.who v1.0.10)"><tt class="xref py py-mod docutils literal"><span class="pre">repoze.who</span></tt></a>
+must catch it and run the challenger(s) you specified. This is, when the user
+is forced to log in.</li>
+<li>When the user logs in voluntarily.</li>
+<li>When the user logs out.</li>
+</ul>
+<p>So, your test case for authentication should be made up of at least three
+tests.</p>
+<div class="section" id="setup">
+<h3>.setUp()<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h3>
+<p>The <tt class="docutils literal"><span class="pre">.setUp()</span></tt> method of this test case should perform the traditional
+procedure to test applications with WebTest:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">unittest</span> <span class="kn">import</span> <span class="n">TestCase</span>
+
+<span class="kn">from</span> <span class="nn">paste.deploy</span> <span class="kn">import</span> <span class="n">loadapp</span>
+<span class="kn">from</span> <span class="nn">webtest</span> <span class="kn">import</span> <span class="n">TestApp</span>
+
+<span class="c"># Set the path to your configuration directory here:</span>
+<span class="n">conf_dir</span> <span class="o">=</span> <span class="s">&#39;/path/to/configuration/dir&#39;</span>
+
+<span class="k">class</span> <span class="nc">TestAuthentication</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Test case for the authentication sub-system in the application&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">appconfig</span> <span class="o">=</span> <span class="n">loadapp</span><span class="p">(</span><span class="s">&#39;config:test.ini&#39;</span><span class="p">,</span> <span class="n">relative_to</span><span class="o">=</span><span class="n">conf_dir</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">TestApp</span><span class="p">(</span><span class="n">appconfig</span><span class="p">)</span>
+
+    <span class="c"># (...)</span>
+</pre></div>
+</td></tr></table></div>
+<p>Note that we&#8217;re using the <tt class="docutils literal"><span class="pre">main</span></tt> application, which doesn&#8217;t skip
+authentication. This way, authentication will behave the same way as in a
+production environment.</p>
+</div>
+</div>
+<div class="section" id="sample-test-case">
+<h2>Sample test case<a class="headerlink" href="#sample-test-case" title="Permalink to this headline">¶</a></h2>
+<p>Say we have the following <a class="reference external" href="http://static.repoze.org/whodocs/index.html#module-repoze.who" title="(in repoze.who v1.0.10)"><tt class="xref py py-mod docutils literal"><span class="pre">repoze.who</span></tt></a> configuration file:</p>
+<div class="highlight-ini"><pre>[plugin:form]
+use = repoze.who.plugins.form:make_redirecting_plugin
+login_form_url = /login
+login_handler_path = /login_handler
+logout_handler_path = /logout_handler
+rememberer_name = auth_tkt
+
+[plugin:auth_tkt]
+use = repoze.who.plugins.auth_tkt:make_plugin
+secret = something
+
+[plugin:htpasswd_authenticator]
+use = repoze.who.plugins.htpasswd:make_plugin
+filename = %(here)s/users.htpasswd
+check_fn = repoze.who.plugins.htpasswd:crypt_check
+
+[general]
+request_classifier = repoze.who.classifiers:default_request_classifier
+challenge_decider = repoze.who.classifiers:default_challenge_decider
+
+[identifiers]
+plugins =
+    form;browser
+    auth_tkt
+
+[authenticators]
+plugins =
+        htpasswd_authenticator
+
+[challengers]
+plugins =
+    form;browser
+</pre>
+</div>
+<p>The following test case illustrates how you could test authentication for that
+setup:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">unittest</span> <span class="kn">import</span> <span class="n">TestCase</span>
+
+<span class="kn">from</span> <span class="nn">paste.deploy</span> <span class="kn">import</span> <span class="n">loadapp</span>
+<span class="kn">from</span> <span class="nn">webtest</span> <span class="kn">import</span> <span class="n">TestApp</span>
+
+<span class="c"># Set the path to your configuration directory here:</span>
+<span class="n">conf_dir</span> <span class="o">=</span> <span class="s">&#39;/path/to/configuration/dir&#39;</span>
+
+<span class="k">class</span> <span class="nc">TestAuthentication</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Test case for the authentication sub-system in the application&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">wsgiapp</span> <span class="o">=</span> <span class="n">loadapp</span><span class="p">(</span><span class="s">&#39;config:test.ini&#39;</span><span class="p">,</span> <span class="n">relative_to</span><span class="o">=</span><span class="n">conf_dir</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">TestApp</span><span class="p">(</span><span class="n">wsgiapp</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_forced_login</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Anonymous users should be redirected to the login form when they</span>
+<span class="sd">        request a protected area.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># Requesting a protected area as anonymous:</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;/panel/&#39;</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">302</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">resp</span><span class="o">.</span><span class="n">location</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;http://localhost/login?&#39;</span><span class="p">)</span>
+        <span class="c"># Being redirected to the login page:</span>
+        <span class="n">login_page</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">follow</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+        <span class="n">login_form</span> <span class="o">=</span> <span class="n">login_page</span><span class="o">.</span><span class="n">form</span>
+        <span class="n">login_form</span><span class="p">[</span><span class="s">&#39;login&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;gustavo&#39;</span>
+        <span class="n">login_form</span><span class="p">[</span><span class="s">&#39;password&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;hola&#39;</span>
+        <span class="c"># Submitting the login form:</span>
+        <span class="n">login_handler</span> <span class="o">=</span> <span class="n">login_form</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="mi">302</span><span class="p">)</span>
+        <span class="c"># We should be redirected to the initially requested page:</span>
+        <span class="k">assert</span> <span class="n">login_handler</span><span class="o">.</span><span class="n">location</span> <span class="o">==</span> <span class="s">&#39;http://localhost/panel/&#39;</span>
+        <span class="c"># Checking that the user was correctly authenticated:</span>
+        <span class="n">initial_page</span> <span class="o">=</span> <span class="n">login_handler</span><span class="o">.</span><span class="n">follow</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="s">&#39;auth_tkt&#39;</span> <span class="ow">in</span> <span class="n">initial_page</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">cookies</span><span class="p">,</span> \
+               <span class="s">&quot;Session cookie wasn&#39;t defined: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">initial_page</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">cookies</span>
+
+    <span class="k">def</span> <span class="nf">test_voluntary_login</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Voluntary logins should work perfectly&quot;&quot;&quot;</span>
+        <span class="c"># Requesting the login form:</span>
+        <span class="n">login_page</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;/login&#39;</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+        <span class="n">login_form</span> <span class="o">=</span> <span class="n">login_page</span><span class="o">.</span><span class="n">form</span>
+        <span class="n">login_form</span><span class="p">[</span><span class="s">&#39;login&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;gustavo&#39;</span>
+        <span class="n">login_form</span><span class="p">[</span><span class="s">&#39;password&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;hola&#39;</span>
+        <span class="c"># Submitting the login form:</span>
+        <span class="n">login_handler</span> <span class="o">=</span> <span class="n">login_form</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="mi">302</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">login_handler</span><span class="o">.</span><span class="n">location</span> <span class="o">==</span> <span class="s">&#39;http://localhost/&#39;</span>
+        <span class="c"># Checking that the user was correctly authenticated:</span>
+        <span class="n">initial_page</span> <span class="o">=</span> <span class="n">login_handler</span><span class="o">.</span><span class="n">follow</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="mi">302</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="s">&#39;auth_tkt&#39;</span> <span class="ow">in</span> <span class="n">initial_page</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">cookies</span><span class="p">,</span> \
+               <span class="s">&quot;Session cookie wasn&#39;t defined: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">initial_page</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">cookies</span>
+
+    <span class="k">def</span> <span class="nf">test_logout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Users should be logged out correctly&quot;&quot;&quot;</span>
+        <span class="c"># Logging in:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;/login_handler?login=gustavo&amp;password=hola&#39;</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">302</span><span class="p">)</span>
+        <span class="c"># Checking that the user was correctly authenticated:</span>
+        <span class="n">home_page</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="s">&#39;auth_tkt&#39;</span> <span class="ow">in</span> <span class="n">home_page</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">cookies</span><span class="p">,</span> \
+               <span class="s">&quot;Session cookie wasn&#39;t defined: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">home_page</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">cookies</span>
+        <span class="c"># Now let&#39;s log out:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;/logout_handler&#39;</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">302</span><span class="p">)</span>
+        <span class="c"># Finally, let&#39;s check that the session cookie was destroyed after logout:</span>
+        <span class="n">home_page</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">home_page</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">cookies</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;auth_tkt&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&#39;&#39;</span><span class="p">,</span> \
+               <span class="s">&quot;Session cookie wasn&#39;t deleted: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">home_page</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">cookies</span>
+</pre></div>
+</div>
+<p>Depending on your <a class="reference external" href="http://static.repoze.org/whodocs/index.html#module-repoze.who" title="(in repoze.who v1.0.10)"><tt class="xref py py-mod docutils literal"><span class="pre">repoze.who</span></tt></a> plugins and the way you use them, you may
+need more tests. In our example, it also makes sense to test what happens when
+the user tries to log in with the wrong credentials.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo_hi.gif" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Test authentication independently</a><ul>
+<li><a class="reference internal" href="#the-test-case">The test case</a><ul>
+<li><a class="reference internal" href="#setup">.setUp()</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sample-test-case">Sample test case</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="TestingProtectedAreas.html"
+                        title="previous chapter">Test protected areas without authentication</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../API.html"
+                        title="next chapter"><strong>repoze.who-testutil</strong> API</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/HowTo/TestingAuthentication.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../API.html" title="repoze.who-testutil API"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="TestingProtectedAreas.html" title="Test protected areas without authentication"
+             >previous</a> |</li>
+        <li><a href="../index.html">repoze.who Test Utilities v1.0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" >How to test protected areas in Web sites</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009, The Repoze Project.
+      Last updated on Aug 17, 2010.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.2.
+    </div>
+  </body>
+</html>

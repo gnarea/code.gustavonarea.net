@@ -1,0 +1,6 @@
+# Sphinx inventory version 1
+# Project: Collection of repoze.who friendly form plugins
+# Version: 1.0
+repoze.who.plugins.friendlyform mod index.html
+repoze.who.plugins.friendlyform.FriendlyFormPlugin class index.html
+repoze.who.plugins.friendlyform.FriendlyFormPlugin.__init__ method index.html

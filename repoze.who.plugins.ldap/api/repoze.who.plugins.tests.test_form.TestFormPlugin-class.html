@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>repoze.who.plugins.tests.test_form.TestFormPlugin</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="repoze.who.plugins.ldap-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://code.gustavonarea.net/repoze.who.plugins.ldap/">repoze.who LDAP plugin</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="repoze-module.html">Package&nbsp;repoze</a> ::
+        <a href="repoze.who-module.html">Package&nbsp;who</a> ::
+        <a href="repoze.who.plugins-module.html">Package&nbsp;plugins</a> ::
+        <a href="repoze.who.plugins.tests-module.html">Package&nbsp;tests</a> ::
+        <a href="repoze.who.plugins.tests.test_form-module.html">Module&nbsp;test_form</a> ::
+        Class&nbsp;TestFormPlugin
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class TestFormPlugin</h1><p class="nomargin-top"><span class="codelink"><a href="repoze.who.plugins.tests.test_form-pysrc.html#TestFormPlugin">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_repoze_w_37" name="uml_class_diagram_for_repoze_w_37">
+<area shape="rect" href="repoze.who.plugins.tests.test_form.TestFormPlugin-class.html#test_implements" title="repoze.who.plugins.tests.test_form.TestFormPlugin.test_implements" alt="" coords="17,385,268,404"/>
+<area shape="rect" href="repoze.who.plugins.tests.test_form.TestFormPlugin-class.html#test_identify_noqs" title="repoze.who.plugins.tests.test_form.TestFormPlugin.test_identify_noqs" alt="" coords="17,404,268,423"/>
+<area shape="rect" href="repoze.who.plugins.tests.test_form.TestFormPlugin-class.html#test_identify_qs_no_values" title="repoze.who.plugins.tests.test_form.TestFormPlugin.test_identify_qs_no_values" alt="" coords="17,423,268,441"/>
+<area shape="rect" href="repoze.who.plugins.tests.test_form.TestFormPlugin-class.html#test_identify_nologin" title="repoze.who.plugins.tests.test_form.TestFormPlugin.test_identify_nologin" alt="" coords="17,441,268,460"/>
+<area shape="rect" href="repoze.who.plugins.tests.test_form.TestFormPlugin-class.html#test_identify_nopassword" title="repoze.who.plugins.tests.test_form.TestFormPlugin.test_identify_nopassword" alt="" coords="17,460,268,479"/>
+<area shape="rect" href="repoze.who.plugins.tests.test_form.TestFormPlugin-class.html#test_identify_success" title="repoze.who.plugins.tests.test_form.TestFormPlugin.test_identify_success" alt="" coords="17,479,268,497"/>
+<area shape="rect" href="repoze.who.plugins.tests.test_form.TestFormPlugin-class.html#test_identify_success_with_max_age" title="repoze.who.plugins.tests.test_form.TestFormPlugin.test_identify_success_with_max_age" alt="" coords="17,497,268,516"/>
+<area shape="rect" href="repoze.who.plugins.tests.test_form.TestFormPlugin-class.html#test_remember" title="repoze.who.plugins.tests.test_form.TestFormPlugin.test_remember" alt="" coords="17,516,268,535"/>
+<area shape="rect" href="repoze.who.plugins.tests.test_form.TestFormPlugin-class.html#test_forget" title="repoze.who.plugins.tests.test_form.TestFormPlugin.test_forget" alt="" coords="17,535,268,553"/>
+<area shape="rect" href="repoze.who.plugins.tests.test_form.TestFormPlugin-class.html#test_challenge_defaultform" title="repoze.who.plugins.tests.test_form.TestFormPlugin.test_challenge_defaultform" alt="" coords="17,553,268,572"/>
+<area shape="rect" href="repoze.who.plugins.tests.test_form.TestFormPlugin-class.html#test_challenge_customform" title="repoze.who.plugins.tests.test_form.TestFormPlugin.test_challenge_customform" alt="" coords="17,572,268,591"/>
+<area shape="rect" href="repoze.who.plugins.tests.test_form.TestFormPlugin-class.html#test_challenge_formcallable" title="repoze.who.plugins.tests.test_form.TestFormPlugin.test_challenge_formcallable" alt="" coords="17,591,268,609"/>
+<area shape="rect" href="repoze.who.plugins.tests.test_form.TestFormPlugin-class.html#test_challenge_with_location" title="repoze.who.plugins.tests.test_form.TestFormPlugin.test_challenge_with_location" alt="" coords="17,609,268,628"/>
+<area shape="rect" href="repoze.who.plugins.tests.test_form.TestFormPlugin-class.html" title="repoze.who.plugins.tests.test_form.TestFormPlugin" alt="" coords="16,360,269,629"/>
+<area shape="rect" href="exceptions.AssertionError-class.html" title="Assertion failed." alt="" coords="33,28,252,47"/>
+<area shape="rect" href="javascript:void(0);" title="Create an instance of the class that will use the named test method when &#160;executed." alt="" coords="33,49,252,68"/>
+<area shape="rect" href="javascript:void(0);" title="Hook method for setting up the test fixture before exercising it." alt="" coords="33,68,252,87"/>
+<area shape="rect" href="javascript:void(0);" title="Hook method for deconstructing the test fixture after testing it." alt="" coords="33,87,252,105"/>
+<area shape="rect" href="javascript:void(0);" title="unittest.TestCase.countTestCases" alt="" coords="33,105,252,124"/>
+<area shape="rect" href="javascript:void(0);" title="unittest.TestCase.defaultTestResult" alt="" coords="33,124,252,143"/>
+<area shape="rect" href="javascript:void(0);" title="Returns a one&#45;line description of the test, or None if no description has &#160;been provided." alt="" coords="33,143,252,161"/>
+<area shape="rect" href="javascript:void(0);" title="unittest.TestCase.id" alt="" coords="33,161,252,180"/>
+<area shape="rect" href="javascript:void(0);" title="unittest.TestCase.__eq__" alt="" coords="33,180,252,199"/>
+<area shape="rect" href="javascript:void(0);" title="unittest.TestCase.__ne__" alt="" coords="33,199,252,217"/>
+<area shape="rect" href="javascript:void(0);" title="hash(x)" alt="" coords="33,217,252,236"/>
+<area shape="rect" href="javascript:void(0);" title="str(x)" alt="" coords="33,236,252,255"/>
+<area shape="rect" href="javascript:void(0);" title="repr(x)" alt="" coords="33,255,252,273"/>
+<area shape="rect" href="javascript:void(0);" title="unittest.TestCase.run" alt="" coords="33,273,252,292"/>
+<area shape="rect" href="javascript:void(0);" title="Fail the test if the expression is true." alt="" coords="33,311,252,329"/>
+<area shape="rect" href="javascript:void(0);" title="A class whose instances are single test cases." alt="" coords="32,11,253,331"/>
+</map>
+  <img src="uml_class_diagram_for_repoze_w_37.gif" alt='' usemap="#uml_class_diagram_for_repoze_w_37" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<!-- ==================== NESTED CLASSES ==================== -->
+<a name="section-NestedClasses"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Nested Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-NestedClasses"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>unittest.TestCase</code></b>:
+      <code><a href="exceptions.AssertionError-class.html">failureException</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_getTargetClass"></a><span class="summary-sig-name">_getTargetClass</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="repoze.who.plugins.tests.test_form-pysrc.html#TestFormPlugin._getTargetClass">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_makeOne"></a><span class="summary-sig-name">_makeOne</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">login_form_qs</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">__do_login</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">rememberer_name</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">cookie</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">formbody</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">formcallable</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="repoze.who.plugins.tests.test_form-pysrc.html#TestFormPlugin._makeOne">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_makeEnviron"></a><span class="summary-sig-name">_makeEnviron</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">login</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">password</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">do_login</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">max_age</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="repoze.who.plugins.tests.test_form-pysrc.html#TestFormPlugin._makeEnviron">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="test_implements"></a><span class="summary-sig-name">test_implements</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="repoze.who.plugins.tests.test_form-pysrc.html#TestFormPlugin.test_implements">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="test_identify_noqs"></a><span class="summary-sig-name">test_identify_noqs</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="repoze.who.plugins.tests.test_form-pysrc.html#TestFormPlugin.test_identify_noqs">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="test_identify_qs_no_values"></a><span class="summary-sig-name">test_identify_qs_no_values</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="repoze.who.plugins.tests.test_form-pysrc.html#TestFormPlugin.test_identify_qs_no_values">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="test_identify_nologin"></a><span class="summary-sig-name">test_identify_nologin</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="repoze.who.plugins.tests.test_form-pysrc.html#TestFormPlugin.test_identify_nologin">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="test_identify_nopassword"></a><span class="summary-sig-name">test_identify_nopassword</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="repoze.who.plugins.tests.test_form-pysrc.html#TestFormPlugin.test_identify_nopassword">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="test_identify_success"></a><span class="summary-sig-name">test_identify_success</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="repoze.who.plugins.tests.test_form-pysrc.html#TestFormPlugin.test_identify_success">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="test_identify_success_with_max_age"></a><span class="summary-sig-name">test_identify_success_with_max_age</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="repoze.who.plugins.tests.test_form-pysrc.html#TestFormPlugin.test_identify_success_with_max_age">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="test_remember"></a><span class="summary-sig-name">test_remember</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="repoze.who.plugins.tests.test_form-pysrc.html#TestFormPlugin.test_remember">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="test_forget"></a><span class="summary-sig-name">test_forget</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="repoze.who.plugins.tests.test_form-pysrc.html#TestFormPlugin.test_forget">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="test_challenge_defaultform"></a><span class="summary-sig-name">test_challenge_defaultform</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="repoze.who.plugins.tests.test_form-pysrc.html#TestFormPlugin.test_challenge_defaultform">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="test_challenge_customform"></a><span class="summary-sig-name">test_challenge_customform</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="repoze.who.plugins.tests.test_form-pysrc.html#TestFormPlugin.test_challenge_customform">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="test_challenge_formcallable"></a><span class="summary-sig-name">test_challenge_formcallable</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="repoze.who.plugins.tests.test_form-pysrc.html#TestFormPlugin.test_challenge_formcallable">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="test_challenge_with_location"></a><span class="summary-sig-name">test_challenge_with_location</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="repoze.who.plugins.tests.test_form-pysrc.html#TestFormPlugin.test_challenge_with_location">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>unittest.TestCase</code></b>:
+      <code>__call__</code>,
+      <code>__eq__</code>,
+      <code>__hash__</code>,
+      <code>__init__</code>,
+      <code>__ne__</code>,
+      <code>__repr__</code>,
+      <code>__str__</code>,
+      <code>assertAlmostEqual</code>,
+      <code>assertAlmostEquals</code>,
+      <code>assertEqual</code>,
+      <code>assertEquals</code>,
+      <code>assertFalse</code>,
+      <code>assertNotAlmostEqual</code>,
+      <code>assertNotAlmostEquals</code>,
+      <code>assertNotEqual</code>,
+      <code>assertNotEquals</code>,
+      <code>assertRaises</code>,
+      <code>assertTrue</code>,
+      <code>assert_</code>,
+      <code>countTestCases</code>,
+      <code>debug</code>,
+      <code>defaultTestResult</code>,
+      <code>fail</code>,
+      <code>failIf</code>,
+      <code>failIfAlmostEqual</code>,
+      <code>failIfEqual</code>,
+      <code>failUnless</code>,
+      <code>failUnlessAlmostEqual</code>,
+      <code>failUnlessEqual</code>,
+      <code>failUnlessRaises</code>,
+      <code>id</code>,
+      <code>run</code>,
+      <code>setUp</code>,
+      <code>shortDescription</code>,
+      <code>tearDown</code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code>unittest.TestCase</code></b> (private):
+      <code>_exc_info</code>
+      </p></div>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="repoze.who.plugins.ldap-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://code.gustavonarea.net/repoze.who.plugins.ldap/">repoze.who LDAP plugin</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Jun  3 10:41:56 2010
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>How to test protected areas in Web sites &mdash; repoze.who Test Utilities v1.0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/repoze.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="repoze.who Test Utilities v1.0.1 documentation" href="../index.html" />
+    <link rel="next" title="Reconfigure repoze.who" href="Reconfiguring.html" />
+    <link rel="prev" title="Test utilities for repoze.who-powered applications" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Reconfiguring.html" title="Reconfigure repoze.who"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Test utilities for repoze.who-powered applications"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">repoze.who Test Utilities v1.0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="how-to-test-protected-areas-in-web-sites">
+<h1>How to test protected areas in Web sites<a class="headerlink" href="#how-to-test-protected-areas-in-web-sites" title="Permalink to this headline">¶</a></h1>
+<div class="topic">
+<p class="topic-title first">Overview</p>
+<p>This guide will show you how to test protected areas and authentication,
+separately, using <a class="reference external" href="http://pythonpaste.org/deploy/">PasteDeploy</a>,
+<a class="reference external" href="http://pythonpaste.org/webtest/">WebTest</a> and
+<a class="reference internal" href="../API.html#module-repoze.who.plugins.testutil" title="repoze.who.plugins.testutil: Test utilities for repoze.who-powered applications"><tt class="xref py py-mod docutils literal"><span class="pre">repoze.who.plugins.testutil</span></tt></a>.</p>
+<p><strong>I assume that you already have repoze.who working the way you want</strong>,
+configured via an Ini file or Python code. If not, please set it up first
+using the <a class="reference external" href="http://static.repoze.org/whodocs/index.html#module-repoze.who" title="(in repoze.who v1.0.10)"><tt class="xref py py-mod docutils literal"><span class="pre">repoze.who</span></tt></a> manual and then come back to this guide.</p>
+<p>Likewise, I also assume that you already have a <a class="reference external" href="http://pythonpaste.org/deploy/#the-config-file">PasteDeploy configuration
+file</a> for your
+application. It&#8217;s not strictly necessary, but we&#8217;re going to use it in
+this HOWTO.</p>
+</div>
+<p>Three steps are required to test protected areas and authentication
+separately:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Reconfiguring.html">Reconfigure <tt class="docutils literal"><span class="pre">repoze.who</span></tt></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Reconfiguring.html#via-python-code">Via Python code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Reconfiguring.html#via-ini-file">Via .ini file</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="TestingProtectedAreas.html">Test protected areas without authentication</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="TestingProtectedAreas.html#the-test-configuration">The test configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TestingProtectedAreas.html#the-base-test-case">The base test case</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TestingProtectedAreas.html#a-sample-test-case">A sample test case</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="TestingAuthentication.html">Test authentication independently</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="TestingAuthentication.html#the-test-case">The test case</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TestingAuthentication.html#sample-test-case">Sample test case</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo_hi.gif" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../index.html"
+                        title="previous chapter">Test utilities for <tt class="docutils literal docutils literal docutils literal docutils literal docutils literal"><span class="pre">repoze.who</span></tt>-powered applications</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Reconfiguring.html"
+                        title="next chapter">Reconfigure <tt class="docutils literal docutils literal docutils literal"><span class="pre">repoze.who</span></tt></a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/HowTo/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Reconfiguring.html" title="Reconfigure repoze.who"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Test utilities for repoze.who-powered applications"
+             >previous</a> |</li>
+        <li><a href="../index.html">repoze.who Test Utilities v1.0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009, The Repoze Project.
+      Last updated on Aug 17, 2010.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.2.
+    </div>
+  </body>
+</html>

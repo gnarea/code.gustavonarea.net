@@ -1,0 +1,289 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>repoze.who-testutil API &mdash; repoze.who Test Utilities v1.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/repoze.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="repoze.who Test Utilities v1.0.1 documentation" href="index.html" />
+    <link rel="next" title="repoze.who-testutil releases" href="News.html" />
+    <link rel="prev" title="Test authentication independently" href="HowTo/TestingAuthentication.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="News.html" title="repoze.who-testutil releases"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="HowTo/TestingAuthentication.html" title="Test authentication independently"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">repoze.who Test Utilities v1.0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-repoze.who.plugins.testutil">
+<span id="repoze-who-testutil-api"></span><h1><strong>repoze.who-testutil</strong> API<a class="headerlink" href="#module-repoze.who.plugins.testutil" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="authentication-middleware">
+<h2>Authentication middleware<a class="headerlink" href="#authentication-middleware" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="repoze.who.plugins.testutil.AuthenticationForgerMiddleware">
+<em class="property">class </em><tt class="descclassname">repoze.who.plugins.testutil.</tt><tt class="descname">AuthenticationForgerMiddleware</tt><big>(</big><em>app</em>, <em>identifiers</em>, <em>authenticators</em>, <em>challengers</em>, <em>mdproviders</em>, <em>classifier</em>, <em>challenge_decider</em>, <em>log_stream=None</em>, <em>log_level=20</em>, <em>remote_user_key='REMOTE_USER'</em><big>)</big><a class="headerlink" href="#repoze.who.plugins.testutil.AuthenticationForgerMiddleware" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="http://static.repoze.org/whodocs/narr.html#repoze.who.middleware.PluggableAuthenticationMiddleware" title="(in repoze.who v1.0.10)"><tt class="xref py py-class docutils literal"><span class="pre">PluggableAuthenticationMiddleware</span></tt></a> proxy
+to forge authentication, without bypassing identification.</p>
+<dl class="method">
+<dt id="repoze.who.plugins.testutil.AuthenticationForgerMiddleware.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>app</em>, <em>identifiers</em>, <em>authenticators</em>, <em>challengers</em>, <em>mdproviders</em>, <em>classifier</em>, <em>challenge_decider</em>, <em>log_stream=None</em>, <em>log_level=20</em>, <em>remote_user_key='REMOTE_USER'</em><big>)</big><a class="headerlink" href="#repoze.who.plugins.testutil.AuthenticationForgerMiddleware.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Setup authentication in an easy to forge way.</p>
+<p>All the arguments received will be passed as is to
+<a class="reference external" href="http://static.repoze.org/whodocs/narr.html#repoze.who.middleware.PluggableAuthenticationMiddleware" title="(in repoze.who v1.0.10)"><tt class="xref py py-class docutils literal"><span class="pre">repoze.who.middleware.PluggableAuthenticationMiddleware</span></tt></a>,
+with one instance of <a class="reference internal" href="#repoze.who.plugins.testutil.AuthenticationForgerPlugin" title="repoze.who.plugins.testutil.AuthenticationForgerPlugin"><tt class="xref py py-class docutils literal"><span class="pre">AuthenticationForgerPlugin</span></tt></a> in:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">identifiers</span></tt>. This instance will be inserted in the first position
+of the list.</li>
+<li><tt class="docutils literal"><span class="pre">authenticators</span></tt>. Any authenticator passed will be ignored; such
+an instance will be the only authenticator defined.</li>
+<li><tt class="docutils literal"><span class="pre">challengers</span></tt>. Any challenger passed will be ignored; such
+an instance will be the only challenger defined.</li>
+</ul>
+<p>Internally, it will also set <tt class="docutils literal"><span class="pre">remote_user_key</span></tt> to
+<tt class="docutils literal"><span class="pre">'repoze.who.testutil.userid'</span></tt>, so that you can use the standard
+<tt class="docutils literal"><span class="pre">'REMOTE_USER'</span></tt> in your tests.</p>
+<p>The metadata providers won&#8217;t be modified.</p>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="middleware-makers">
+<h3>Middleware makers<a class="headerlink" href="#middleware-makers" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="repoze.who.plugins.testutil.make_middleware">
+<tt class="descclassname">repoze.who.plugins.testutil.</tt><tt class="descname">make_middleware</tt><big>(</big><em>skip_authentication=False</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#repoze.who.plugins.testutil.make_middleware" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the requested authentication middleware.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>skip_authentication</strong> (<em>bool</em>) &#8211; If <tt class="xref docutils literal"><span class="pre">True</span></tt>, an instance of
+<a class="reference internal" href="#repoze.who.plugins.testutil.AuthenticationForgerMiddleware" title="repoze.who.plugins.testutil.AuthenticationForgerMiddleware"><tt class="xref py py-class docutils literal"><span class="pre">AuthenticationForgerMiddleware</span></tt></a> will be returned instead of
+<a class="reference external" href="http://static.repoze.org/whodocs/narr.html#repoze.who.middleware.PluggableAuthenticationMiddleware" title="(in repoze.who v1.0.10)"><tt class="xref py py-class docutils literal"><span class="pre">repoze.who.middleware.PluggableAuthenticationMiddleware</span></tt></a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><tt class="docutils literal"><span class="pre">args</span></tt> and <tt class="docutils literal"><span class="pre">kwargs</span></tt> are the positional and named arguments,
+respectively, to be passed to the relevant authentication middleware.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="repoze.who.plugins.testutil.make_middleware_with_config">
+<tt class="descclassname">repoze.who.plugins.testutil.</tt><tt class="descname">make_middleware_with_config</tt><big>(</big><em>app</em>, <em>global_conf</em>, <em>config_file</em>, <em>log_file=None</em>, <em>log_level=None</em>, <em>skip_authentication=False</em><big>)</big><a class="headerlink" href="#repoze.who.plugins.testutil.make_middleware_with_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Proxy <tt class="xref py py-func docutils literal"><span class="pre">repoze.who.config.make_middleware_with_config()</span></tt> to skip
+authentication when required.</p>
+<p>If  <tt class="docutils literal"><span class="pre">skip_authentication</span></tt> evaluates to <tt class="xref docutils literal"><span class="pre">True</span></tt>, then the returned
+middleware will be an instance of <a class="reference internal" href="#repoze.who.plugins.testutil.AuthenticationForgerMiddleware" title="repoze.who.plugins.testutil.AuthenticationForgerMiddleware"><tt class="xref py py-class docutils literal"><span class="pre">AuthenticationForgerMiddleware</span></tt></a>.</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="repoze-who-plugins">
+<h2><a class="reference external" href="http://static.repoze.org/whodocs/index.html#module-repoze.who" title="(in repoze.who v1.0.10)"><tt class="xref py py-mod docutils literal"><span class="pre">repoze.who</span></tt></a> plugins<a class="headerlink" href="#repoze-who-plugins" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="repoze.who.plugins.testutil.AuthenticationForgerPlugin">
+<em class="property">class </em><tt class="descclassname">repoze.who.plugins.testutil.</tt><tt class="descname">AuthenticationForgerPlugin</tt><big>(</big><em>fake_user_key='REMOTE_USER'</em>, <em>remote_user_key='repoze.who.testutil.userid'</em><big>)</big><a class="headerlink" href="#repoze.who.plugins.testutil.AuthenticationForgerPlugin" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="http://static.repoze.org/whodocs/index.html#module-repoze.who" title="(in repoze.who v1.0.10)"><tt class="xref py py-mod docutils literal"><span class="pre">repoze.who</span></tt></a> plugin to forge authentication easily and bypass
+<a class="reference external" href="http://static.repoze.org/whodocs/index.html#module-repoze.who" title="(in repoze.who v1.0.10)"><tt class="xref py py-mod docutils literal"><span class="pre">repoze.who</span></tt></a> challenges.</p>
+<p>This plugin enables you to write identifier and challenger-independent
+tests. As a result, your protected areas will be easier to test:</p>
+<ol class="arabic">
+<li><p class="first">To forge authentication, without bypassing identification (i.e., running
+MD providers), you can use the following WebTest-powered test:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">test_authorization_granted</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;The right subject must get what she requested&#39;&#39;&#39;</span>
+    <span class="n">environ</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;REMOTE_USER&#39;</span><span class="p">:</span> <span class="s">&#39;manager&#39;</span><span class="p">}</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;/admin/&#39;</span><span class="p">,</span> <span class="n">extra_environ</span><span class="o">=</span><span class="n">environ</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="s">&#39;some text&#39;</span> <span class="ow">in</span> <span class="n">resp</span><span class="o">.</span><span class="n">body</span>
+</pre></div>
+</div>
+<p>As you can see, this is an identifier-independent way to forge
+authentication.</p>
+</li>
+<li><p class="first">To check that authorization was denied, in a challenger-independent way,
+you can use:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">test_authorization_denied_anonymous</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Anonymous users must get a 401 page&#39;&#39;&#39;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;/admin/&#39;</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">401</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">test_authorization_denied_authenticated</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Authenticated users must get a 403 page&#39;&#39;&#39;</span>
+    <span class="n">environ</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;REMOTE_USER&#39;</span><span class="p">:</span> <span class="s">&#39;editor&#39;</span><span class="p">}</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;/admin/&#39;</span><span class="p">,</span> <span class="n">extra_environ</span><span class="o">=</span><span class="n">environ</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">403</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<dl class="method">
+<dt id="repoze.who.plugins.testutil.AuthenticationForgerPlugin.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>fake_user_key='REMOTE_USER'</em>, <em>remote_user_key='repoze.who.testutil.userid'</em><big>)</big><a class="headerlink" href="#repoze.who.plugins.testutil.AuthenticationForgerPlugin.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>fake_user_key</strong> (<em>str</em>) &#8211; The key for the item in the <tt class="docutils literal"><span class="pre">environ</span></tt> which
+will contain the forged user Id.</li>
+<li><strong>remote_user_key</strong> (<em>str</em>) &#8211; The actual &#8220;external&#8221; <tt class="docutils literal"><span class="pre">remote_user_key</span></tt>
+used by <a class="reference external" href="http://static.repoze.org/whodocs/index.html#module-repoze.who" title="(in repoze.who v1.0.10)"><tt class="xref py py-mod docutils literal"><span class="pre">repoze.who</span></tt></a>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="repoze.who.plugins.testutil.AuthenticationForgerPlugin.identify">
+<tt class="descname">identify</tt><big>(</big><em>environ</em><big>)</big><a class="headerlink" href="#repoze.who.plugins.testutil.AuthenticationForgerPlugin.identify" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pre-authenticate using the user Id found in the relevant <tt class="docutils literal"><span class="pre">environ</span></tt>
+item, if any.</p>
+<p>The user Id. found will be put into <tt class="docutils literal"><span class="pre">identity['fake-userid']</span></tt>, for
+<a class="reference internal" href="#repoze.who.plugins.testutil.AuthenticationForgerPlugin.authenticate" title="repoze.who.plugins.testutil.AuthenticationForgerPlugin.authenticate"><tt class="xref py py-meth docutils literal"><span class="pre">authenticate()</span></tt></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="repoze.who.plugins.testutil.AuthenticationForgerPlugin.remember">
+<tt class="descname">remember</tt><big>(</big><em>environ</em>, <em>identity</em><big>)</big><a class="headerlink" href="#repoze.who.plugins.testutil.AuthenticationForgerPlugin.remember" title="Permalink to this definition">¶</a></dt>
+<dd><p>Do nothing</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="repoze.who.plugins.testutil.AuthenticationForgerPlugin.forget">
+<tt class="descname">forget</tt><big>(</big><em>environ</em>, <em>identity</em><big>)</big><a class="headerlink" href="#repoze.who.plugins.testutil.AuthenticationForgerPlugin.forget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Do nothing</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="repoze.who.plugins.testutil.AuthenticationForgerPlugin.authenticate">
+<tt class="descname">authenticate</tt><big>(</big><em>environ</em>, <em>identity</em><big>)</big><a class="headerlink" href="#repoze.who.plugins.testutil.AuthenticationForgerPlugin.authenticate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Turn the value in <tt class="docutils literal"><span class="pre">identity['fake-userid']</span></tt> into the remote user&#8217;s
+name.</p>
+<p>Finally, it removes <tt class="docutils literal"><span class="pre">identity['fake-userid']</span></tt> so that it won&#8217;t reach
+the WSGI application.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="repoze.who.plugins.testutil.AuthenticationForgerPlugin.challenge">
+<tt class="descname">challenge</tt><big>(</big><em>environ</em>, <em>status</em>, <em>app_headers</em>, <em>forget_headers</em><big>)</big><a class="headerlink" href="#repoze.who.plugins.testutil.AuthenticationForgerPlugin.challenge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a 401 page unconditionally.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo_hi.gif" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>repoze.who-testutil</strong> API</a><ul>
+<li><a class="reference internal" href="#authentication-middleware">Authentication middleware</a><ul>
+<li><a class="reference internal" href="#middleware-makers">Middleware makers</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#repoze-who-plugins"><tt class="docutils literal"><span class="pre">repoze.who</span></tt> plugins</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="HowTo/TestingAuthentication.html"
+                        title="previous chapter">Test authentication independently</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="News.html"
+                        title="next chapter"><strong>repoze.who-testutil</strong> releases</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/API.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="News.html" title="repoze.who-testutil releases"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="HowTo/TestingAuthentication.html" title="Test authentication independently"
+             >previous</a> |</li>
+        <li><a href="index.html">repoze.who Test Utilities v1.0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009, The Repoze Project.
+      Last updated on Aug 17, 2010.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.2.
+    </div>
+  </body>
+</html>

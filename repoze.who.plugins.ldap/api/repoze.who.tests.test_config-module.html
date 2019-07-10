@@ -1,0 +1,683 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>repoze.who.tests.test_config</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="repoze.who.plugins.ldap-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://code.gustavonarea.net/repoze.who.plugins.ldap/">repoze.who LDAP plugin</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="repoze-module.html">Package&nbsp;repoze</a> ::
+        <a href="repoze.who-module.html">Package&nbsp;who</a> ::
+        <a href="repoze.who.tests-module.html">Package&nbsp;tests</a> ::
+        Module&nbsp;test_config
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module test_config</h1><p class="nomargin-top"><span class="codelink"><a href="repoze.who.tests.test_config-pysrc.html">source&nbsp;code</a></span></p>
+<!-- ==================== CLASSES ==================== -->
+<a name="section-Classes"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Classes"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="repoze.who.tests.test_config.TestWhoConfig-class.html" class="summary-name">TestWhoConfig</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="repoze.who.tests.test_config.DummyPlugin-class.html" class="summary-name">DummyPlugin</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="repoze.who.tests.test_config.TestConfigMiddleware-class.html" class="summary-name">TestConfigMiddleware</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="repoze.who.tests.test_config.DummyApp-class.html" class="summary-name">DummyApp</a>
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="repoze.who.tests.test_config-module.html#PLUGINS_ONLY" class="summary-name">PLUGINS_ONLY</a> = <code title="'''[plugin:foo]
+use = repoze.who.tests.test_config:DummyPlugin
+
+[plugin:bar]
+use = repoze.who.tests.test_config:DummyPlugin
+credentials = qux
+'''"><code class="variable-quote">'</code><code class="variable-string">[plugin:foo]\nuse = repoze.who.tests.test_conf</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="repoze.who.tests.test_config-module.html#GENERAL_ONLY" class="summary-name">GENERAL_ONLY</a> = <code title="'''[general]
+request_classifier = repoze.who.tests.test_config:DummyPlugin
+challenge_decider = repoze.who.tests.test_config:DummyPlugin
+remote_user_key = ANOTHER_REMOTE_USER
+'''"><code class="variable-quote">'</code><code class="variable-string">[general]\nrequest_classifier = repoze.who.tes</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="repoze.who.tests.test_config-module.html#GENERAL_WITH_PLUGINS" class="summary-name">GENERAL_WITH_PLUGINS</a> = <code title="'''[general]
+request_classifier = classifier
+challenge_decider = decider
+
+[plugin:classifier]
+use = repoze.who.tests.test_config:DummyPlugin
+
+[plugin:decider]
+..."><code class="variable-quote">'</code><code class="variable-string">[general]\nrequest_classifier = classi</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="repoze.who.tests.test_config-module.html#IDENTIFIERS_ONLY" class="summary-name">IDENTIFIERS_ONLY</a> = <code title="'''[identifiers]
+plugins =
+    repoze.who.tests.test_config:DummyPlugin;klass1
+    repoze.who.tests.test_config:DummyPlugin
+'''"><code class="variable-quote">'</code><code class="variable-string">[identifiers]\nplugins =\n    repoze.who.t</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="repoze.who.tests.test_config-module.html#IDENTIFIERS_WITH_PLUGINS" class="summary-name">IDENTIFIERS_WITH_PLUGINS</a> = <code title="'''[identifiers]
+plugins =
+    foo;klass1
+    bar
+
+[plugin:foo]
+use = repoze.who.tests.test_config:DummyPlugin
+
+..."><code class="variable-quote">'</code><code class="variable-string">[identifiers]\nplugins =\n    foo;</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="repoze.who.tests.test_config-module.html#AUTHENTICATORS_ONLY" class="summary-name">AUTHENTICATORS_ONLY</a> = <code title="'''[authenticators]
+plugins =
+    repoze.who.tests.test_config:DummyPlugin;klass1
+    repoze.who.tests.test_config:DummyPlugin
+'''"><code class="variable-quote">'</code><code class="variable-string">[authenticators]\nplugins =\n    repoze</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="repoze.who.tests.test_config-module.html#AUTHENTICATORS_WITH_PLUGINS" class="summary-name">AUTHENTICATORS_WITH_PLUGINS</a> = <code title="'''[authenticators]
+plugins =
+    foo;klass1
+    bar
+
+[plugin:foo]
+use = repoze.who.tests.test_config:DummyPlugin
+
+..."><code class="variable-quote">'</code><code class="variable-string">[authenticators]\nplugins =\n  </code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="repoze.who.tests.test_config-module.html#CHALLENGERS_ONLY" class="summary-name">CHALLENGERS_ONLY</a> = <code title="'''[challengers]
+plugins =
+    repoze.who.tests.test_config:DummyPlugin;klass1
+    repoze.who.tests.test_config:DummyPlugin
+'''"><code class="variable-quote">'</code><code class="variable-string">[challengers]\nplugins =\n    repoze.who.t</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="repoze.who.tests.test_config-module.html#CHALLENGERS_WITH_PLUGINS" class="summary-name">CHALLENGERS_WITH_PLUGINS</a> = <code title="'''[challengers]
+plugins =
+    foo;klass1
+    bar
+
+[plugin:foo]
+use = repoze.who.tests.test_config:DummyPlugin
+
+..."><code class="variable-quote">'</code><code class="variable-string">[challengers]\nplugins =\n    foo;</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="repoze.who.tests.test_config-module.html#MDPROVIDERS_ONLY" class="summary-name">MDPROVIDERS_ONLY</a> = <code title="'''[mdproviders]
+plugins =
+    repoze.who.tests.test_config:DummyPlugin;klass1
+    repoze.who.tests.test_config:DummyPlugin
+'''"><code class="variable-quote">'</code><code class="variable-string">[mdproviders]\nplugins =\n    repoze.who.t</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="repoze.who.tests.test_config-module.html#MDPROVIDERS_WITH_PLUGINS" class="summary-name">MDPROVIDERS_WITH_PLUGINS</a> = <code title="'''[mdproviders]
+plugins =
+    foo;klass1
+    bar
+
+[plugin:foo]
+use = repoze.who.tests.test_config:DummyPlugin
+
+..."><code class="variable-quote">'</code><code class="variable-string">[mdproviders]\nplugins =\n    foo;</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="repoze.who.tests.test_config-module.html#MAKE_PLUGIN_ARG_NAMES" class="summary-name">MAKE_PLUGIN_ARG_NAMES</a> = <code title="'''[plugin:foo]
+use = repoze.who.tests.test_config:DummyPlugin
+name = name
+iface = iface
+'''"><code class="variable-quote">'</code><code class="variable-string">[plugin:foo]\nuse = repoze.who.tests.</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="repoze.who.tests.test_config-module.html#SAMPLE_CONFIG" class="summary-name">SAMPLE_CONFIG</a> = <code title="'''[plugin:form]
+use = repoze.who.plugins.form:make_plugin
+login_form_qs = __do_login
+rememberer_name = auth_tkt
+
+[plugin:auth_tkt]
+use = repoze.who.plugins.auth_tkt:make_plugin
+secret = s33kr1t
+..."><code class="variable-quote">'</code><code class="variable-string">[plugin:form]\nuse = repoze.who.plugins.form:</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__package__"></a><span class="summary-name">__package__</span> = <code title="'repoze.who.tests'"><code class="variable-quote">'</code><code class="variable-string">repoze.who.tests</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES DETAILS ==================== -->
+<a name="section-VariablesDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-VariablesDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="PLUGINS_ONLY"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">PLUGINS_ONLY</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-quote">'''</code><code class="variable-string">[plugin:foo]</code>
+<code class="variable-string">use = repoze.who.tests.test_config:DummyPlugin</code>
+<code class="variable-string"></code>
+<code class="variable-string">[plugin:bar]</code>
+<code class="variable-string">use = repoze.who.tests.test_config:DummyPlugin</code>
+<code class="variable-string">credentials = qux</code>
+<code class="variable-string"></code><code class="variable-quote">'''</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GENERAL_ONLY"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">GENERAL_ONLY</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-quote">'''</code><code class="variable-string">[general]</code>
+<code class="variable-string">request_classifier = repoze.who.tests.test_config:DummyPlugin</code>
+<code class="variable-string">challenge_decider = repoze.who.tests.test_config:DummyPlugin</code>
+<code class="variable-string">remote_user_key = ANOTHER_REMOTE_USER</code>
+<code class="variable-string"></code><code class="variable-quote">'''</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GENERAL_WITH_PLUGINS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">GENERAL_WITH_PLUGINS</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-quote">'''</code><code class="variable-string">[general]</code>
+<code class="variable-string">request_classifier = classifier</code>
+<code class="variable-string">challenge_decider = decider</code>
+<code class="variable-string"></code>
+<code class="variable-string">[plugin:classifier]</code>
+<code class="variable-string">use = repoze.who.tests.test_config:DummyPlugin</code>
+<code class="variable-string"></code>
+<code class="variable-string">[plugin:decider]</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="IDENTIFIERS_ONLY"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">IDENTIFIERS_ONLY</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-quote">'''</code><code class="variable-string">[identifiers]</code>
+<code class="variable-string">plugins =</code>
+<code class="variable-string">    repoze.who.tests.test_config:DummyPlugin;klass1</code>
+<code class="variable-string">    repoze.who.tests.test_config:DummyPlugin</code>
+<code class="variable-string"></code><code class="variable-quote">'''</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="IDENTIFIERS_WITH_PLUGINS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">IDENTIFIERS_WITH_PLUGINS</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-quote">'''</code><code class="variable-string">[identifiers]</code>
+<code class="variable-string">plugins =</code>
+<code class="variable-string">    foo;klass1</code>
+<code class="variable-string">    bar</code>
+<code class="variable-string"></code>
+<code class="variable-string">[plugin:foo]</code>
+<code class="variable-string">use = repoze.who.tests.test_config:DummyPlugin</code>
+<code class="variable-string"></code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="AUTHENTICATORS_ONLY"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">AUTHENTICATORS_ONLY</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-quote">'''</code><code class="variable-string">[authenticators]</code>
+<code class="variable-string">plugins =</code>
+<code class="variable-string">    repoze.who.tests.test_config:DummyPlugin;klass1</code>
+<code class="variable-string">    repoze.who.tests.test_config:DummyPlugin</code>
+<code class="variable-string"></code><code class="variable-quote">'''</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="AUTHENTICATORS_WITH_PLUGINS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">AUTHENTICATORS_WITH_PLUGINS</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-quote">'''</code><code class="variable-string">[authenticators]</code>
+<code class="variable-string">plugins =</code>
+<code class="variable-string">    foo;klass1</code>
+<code class="variable-string">    bar</code>
+<code class="variable-string"></code>
+<code class="variable-string">[plugin:foo]</code>
+<code class="variable-string">use = repoze.who.tests.test_config:DummyPlugin</code>
+<code class="variable-string"></code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="CHALLENGERS_ONLY"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">CHALLENGERS_ONLY</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-quote">'''</code><code class="variable-string">[challengers]</code>
+<code class="variable-string">plugins =</code>
+<code class="variable-string">    repoze.who.tests.test_config:DummyPlugin;klass1</code>
+<code class="variable-string">    repoze.who.tests.test_config:DummyPlugin</code>
+<code class="variable-string"></code><code class="variable-quote">'''</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="CHALLENGERS_WITH_PLUGINS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">CHALLENGERS_WITH_PLUGINS</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-quote">'''</code><code class="variable-string">[challengers]</code>
+<code class="variable-string">plugins =</code>
+<code class="variable-string">    foo;klass1</code>
+<code class="variable-string">    bar</code>
+<code class="variable-string"></code>
+<code class="variable-string">[plugin:foo]</code>
+<code class="variable-string">use = repoze.who.tests.test_config:DummyPlugin</code>
+<code class="variable-string"></code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="MDPROVIDERS_ONLY"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">MDPROVIDERS_ONLY</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-quote">'''</code><code class="variable-string">[mdproviders]</code>
+<code class="variable-string">plugins =</code>
+<code class="variable-string">    repoze.who.tests.test_config:DummyPlugin;klass1</code>
+<code class="variable-string">    repoze.who.tests.test_config:DummyPlugin</code>
+<code class="variable-string"></code><code class="variable-quote">'''</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="MDPROVIDERS_WITH_PLUGINS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">MDPROVIDERS_WITH_PLUGINS</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-quote">'''</code><code class="variable-string">[mdproviders]</code>
+<code class="variable-string">plugins =</code>
+<code class="variable-string">    foo;klass1</code>
+<code class="variable-string">    bar</code>
+<code class="variable-string"></code>
+<code class="variable-string">[plugin:foo]</code>
+<code class="variable-string">use = repoze.who.tests.test_config:DummyPlugin</code>
+<code class="variable-string"></code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="MAKE_PLUGIN_ARG_NAMES"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">MAKE_PLUGIN_ARG_NAMES</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-quote">'''</code><code class="variable-string">[plugin:foo]</code>
+<code class="variable-string">use = repoze.who.tests.test_config:DummyPlugin</code>
+<code class="variable-string">name = name</code>
+<code class="variable-string">iface = iface</code>
+<code class="variable-string"></code><code class="variable-quote">'''</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="SAMPLE_CONFIG"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">SAMPLE_CONFIG</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-quote">'''</code><code class="variable-string">[plugin:form]</code>
+<code class="variable-string">use = repoze.who.plugins.form:make_plugin</code>
+<code class="variable-string">login_form_qs = __do_login</code>
+<code class="variable-string">rememberer_name = auth_tkt</code>
+<code class="variable-string"></code>
+<code class="variable-string">[plugin:auth_tkt]</code>
+<code class="variable-string">use = repoze.who.plugins.auth_tkt:make_plugin</code>
+<code class="variable-string">secret = s33kr1t</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="repoze.who.plugins.ldap-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://code.gustavonarea.net/repoze.who.plugins.ldap/">repoze.who LDAP plugin</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Jun  3 10:41:54 2010
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

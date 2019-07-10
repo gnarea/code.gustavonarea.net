@@ -1,0 +1,476 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Using the repoze.who LDAP plugins in your WSGI Application &mdash; repoze.who.plugins.ldap v1.1a1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.1a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="repoze.who.plugins.ldap v1.1a1 documentation" href="index.html" />
+    <link rel="next" title="Trying the demo project" href="Demo.html" />
+    <link rel="prev" title="Installing repoze.who.plugins.ldap" href="Install.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Demo.html" title="Trying the demo project"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Install.html" title="Installing repoze.who.plugins.ldap"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">repoze.who.plugins.ldap v1.1a1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="using-the-repoze-who-ldap-plugins-in-your-wsgi-application">
+<h1>Using the repoze.who LDAP plugins in your WSGI Application<a class="headerlink" href="#using-the-repoze-who-ldap-plugins-in-your-wsgi-application" title="Permalink to this headline">¶</a></h1>
+<p>Implementing authentication via <cite>repoze.who</cite> is a simple task that requires
+few lines of code. So using its LDAP plugins should not be an exception: You
+just have to configure <cite>repoze.who</cite> in your application and then add the
+<cite>repoze.who.plugins.ldap</cite> plugin(s) you want to use in your application.</p>
+<div class="section" id="setting-up-repoze-who-with-the-ldap-authenticator">
+<h2>Setting up <cite>repoze.who</cite> with the LDAP authenticator<a class="headerlink" href="#setting-up-repoze-who-with-the-ldap-authenticator" title="Permalink to this headline">¶</a></h2>
+<p>This section explains how to setup <cite>repoze.who</cite> in order to use the LDAP plugins
+in your WSGI application. It is based on <a class="reference external" href="http://static.repoze.org/whodocs/">the documentation for repoze.who</a>.</p>
+<p>You can configure your authentication mechanism powered by <cite>repoze.who</cite> with
+two methods: With an INI file or with Python code.</p>
+<p>In the examples below we are only going to use the main plugin provided by this
+package: The LDAP authenticator itself (<tt class="xref py py-class docutils literal"><span class="pre">LDAPAuthenticatorPlugin</span></tt>). The
+other plugins don&#8217;t deal with authentication, but are useful to load automatically
+data related to the authenticated user from the LDAP server.</p>
+<p>Using the <cite>repoze.who</cite> terminology, <tt class="xref py py-class docutils literal"><span class="pre">LDAPAuthenticatorPlugin</span></tt> is an
+<cite>authenticator plugin</cite> and the others are <cite>metadata provider plugins</cite>.</p>
+<div class="section" id="configuring-repoze-who-in-a-ini-file">
+<h3>Configuring <cite>repoze.who</cite> in a INI file<a class="headerlink" href="#configuring-repoze-who-in-a-ini-file" title="Permalink to this headline">¶</a></h3>
+<p>You can configure your <cite>repoze.who</cite> based authentication via a <cite>*.ini</cite> file,
+and then load such settings in your application.</p>
+<p>Say we have a file called <cite>who.ini</cite> with the following contents:</p>
+<div class="highlight-python"><pre># These contents have been adapted from:
+# http://static.repoze.org/whodocs/#middleware-configuration-via-config-file
+[plugin:form]
+use = repoze.who.plugins.form:make_plugin
+rememberer_name = auth_tkt
+
+[plugin:auth_tkt]
+use = repoze.who.plugins.auth_tkt:make_plugin
+secret = something
+
+[plugin:ldap_auth]
+use = repoze.who.plugins.ldap:LDAPAuthenticatorPlugin
+ldap_connection = ldap://ldap.yourcompany.com
+base_dn = ou=developers,dc=yourcompany,dc=com
+
+[general]
+request_classifier = repoze.who.classifiers:default_request_classifier
+challenge_decider = repoze.who.classifiers:default_challenge_decider
+
+[identifiers]
+plugins =
+    form;browser
+    auth_tkt
+
+[authenticators]
+plugins =
+        ldap_auth
+
+[challengers]
+plugins =
+    form;browser</pre>
+</div>
+<p>With the settings above, authentication via <cite>repoze.who</cite> is configured this way:
+Visitors will login with a form, providing their user name and password; then
+these credentials will be checked against the LDAP server <cite>ldap.yourcompany.com</cite>
+under <cite>ou=developers,dc=yourcompany,dc=com</cite>. This form will be displayed
+when your WSGI application issues an HTTP <em>401</em> error.</p>
+<p>For example, if an user enters <cite>jsmith</cite> as the user name and <cite>valencia</cite> as their
+password, the LDAP authenticator will build their Distinguished Name (DN) as
+<cite>uid=jsmith,ou=developers,dc=yourcompany,dc=com</cite> and will try to
+authenticate them in the <cite>ldap.yourcompany.com</cite> LDAP server with this DN and
+<cite>valencia</cite> as the password.</p>
+<p>You may modify the way the DN is generated by subclassing
+<tt class="xref py py-class docutils literal"><span class="pre">LDAPAuthenticatorPlugin</span></tt> to override the <cite>_get_dn</cite> method.</p>
+<p>Finally, you can load these settings by adding the <cite>repoze.who</cite> middleware to your
+application:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">repoze.who.config</span> <span class="kn">import</span> <span class="n">make_middleware_with_config</span>
+<span class="n">app_with_auth</span> <span class="o">=</span> <span class="n">make_middleware_with_config</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="s">&#39;/path/to/who.ini&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In the documentation for <cite>repoze.who</cite> there is <a class="reference external" href="http://static.repoze.org/whodocs/#middleware-configuration-via-config-file">a more detailed explanation</a>
+for the INI file method.</p>
+</div>
+<div class="section" id="configuring-repoze-who-with-python-code">
+<h3>Configuring <cite>repoze.who</cite> with Python code<a class="headerlink" href="#configuring-repoze-who-with-python-code" title="Permalink to this headline">¶</a></h3>
+<p>The Python code below does the same as the INI file above:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># This script has been adapted from</span>
+<span class="c"># http://static.repoze.org/whodocs/#module-repoze.who.middleware</span>
+
+<span class="c"># Importing the plugins to be used</span>
+<span class="kn">from</span> <span class="nn">repoze.who.interfaces</span> <span class="kn">import</span> <span class="n">IIdentifier</span><span class="p">,</span> <span class="n">IChallenger</span>
+<span class="kn">from</span> <span class="nn">repoze.who.plugins.auth_tkt</span> <span class="kn">import</span> <span class="n">AuthTktCookiePlugin</span>
+<span class="kn">from</span> <span class="nn">repoze.who.plugins.form</span> <span class="kn">import</span> <span class="n">FormPlugin</span>
+<span class="kn">from</span> <span class="nn">repoze.who.plugins.ldap</span> <span class="kn">import</span> <span class="n">LDAPAuthenticatorPlugin</span>
+
+<span class="c"># Configuring the plugins</span>
+<span class="n">ldap_auth</span> <span class="o">=</span> <span class="n">LDAPAuthenticatorPlugin</span><span class="p">(</span><span class="s">&#39;ldap://ldap.yourcompany.com&#39;</span><span class="p">,</span>
+                                    <span class="s">&#39;ou=developers,dc=yourcompany,dc=com&#39;</span><span class="p">)</span>
+<span class="n">auth_tkt</span> <span class="o">=</span> <span class="n">AuthTktCookiePlugin</span><span class="p">(</span><span class="s">&#39;secret&#39;</span><span class="p">,</span> <span class="s">&#39;auth_tkt&#39;</span><span class="p">)</span>
+<span class="n">form</span> <span class="o">=</span> <span class="n">FormPlugin</span><span class="p">(</span><span class="s">&#39;__do_login&#39;</span><span class="p">,</span> <span class="n">rememberer_name</span><span class="o">=</span><span class="s">&#39;auth_tkt&#39;</span><span class="p">)</span>
+<span class="n">form</span><span class="o">.</span><span class="n">classifications</span> <span class="o">=</span> <span class="p">{</span> <span class="n">IIdentifier</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;browser&#39;</span><span class="p">],</span>
+                         <span class="n">IChallenger</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;browser&#39;</span><span class="p">]</span> <span class="p">}</span> <span class="c"># only for browser</span>
+<span class="n">identifiers</span> <span class="o">=</span> <span class="p">[(</span><span class="s">&#39;form&#39;</span><span class="p">,</span> <span class="n">form</span><span class="p">),(</span><span class="s">&#39;auth_tkt&#39;</span><span class="p">,</span><span class="n">auth_tkt</span><span class="p">)]</span>
+<span class="n">authenticators</span> <span class="o">=</span> <span class="p">[(</span><span class="s">&#39;ldap_auth&#39;</span><span class="p">,</span> <span class="n">ldap_auth</span><span class="p">)]</span>
+<span class="n">challengers</span> <span class="o">=</span> <span class="p">[(</span><span class="s">&#39;form&#39;</span><span class="p">,</span><span class="n">form</span><span class="p">)]</span>
+<span class="n">mdproviders</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c"># Using the default repoze.who classifiers:</span>
+<span class="kn">from</span> <span class="nn">repoze.who.classifiers</span> <span class="kn">import</span> <span class="n">default_request_classifier</span><span class="p">,</span> \
+                                   <span class="n">default_challenge_decider</span>
+<span class="n">log_stream</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;WHO_LOG&#39;</span><span class="p">):</span>
+    <span class="n">log_stream</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span>
+</pre></div>
+</div>
+<p>Then you can get these settings applied by adding the <cite>repoze.who</cite> middleware
+to your application:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">app_with_auth</span> <span class="o">=</span> <span class="n">PluggableAuthenticationMiddleware</span><span class="p">(</span>
+    <span class="n">app</span><span class="p">,</span>
+    <span class="n">identifiers</span><span class="p">,</span>
+    <span class="n">authenticators</span><span class="p">,</span>
+    <span class="n">challengers</span><span class="p">,</span>
+    <span class="n">mdproviders</span><span class="p">,</span>
+    <span class="n">default_request_classifier</span><span class="p">,</span>
+    <span class="n">default_challenge_decider</span><span class="p">,</span>
+    <span class="n">log_stream</span> <span class="o">=</span> <span class="n">log_stream</span><span class="p">,</span>
+    <span class="n">log_level</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p>In the documentation for <cite>repoze.who</cite> there is <a class="reference external" href="http://static.repoze.org/whodocs/#module-repoze.who.middleware">a detailed explanation</a> for this
+method.</p>
+</div>
+<div class="section" id="framework-specific-documentation">
+<h3>Framework-specific documentation<a class="headerlink" href="#framework-specific-documentation" title="Permalink to this headline">¶</a></h3>
+<p>You may want to check the following framework-specific documents to learn tips
+on how to implement <cite>repoze.who</cite> in the framework you are using:</p>
+<blockquote>
+<ul class="simple">
+<li><strong>Pylons</strong>: <a class="reference external" href="http://wiki.pylonshq.com/display/pylonscookbook/Authentication+and+Authorization+with+%60repoze.who%60">Authentication and Authorization with repoze.who</a>.</li>
+<li><strong>TurboGears 2</strong>: <a class="reference external" href="http://www.turbogears.org/2.1/docs/main/Auth/index.html">Authentication and Authorization in TurboGears 2</a>
+(<tt class="xref py py-mod docutils literal"><span class="pre">repoze.who</span></tt> is the default authentication library).</li>
+</ul>
+</blockquote>
+</div>
+</div>
+<div class="section" id="module-repoze.who.plugins.ldap">
+<span id="using-the-ldap-plugins-for-repoze-who"></span><h2>Using the LDAP plugins for repoze.who<a class="headerlink" href="#module-repoze.who.plugins.ldap" title="Permalink to this headline">¶</a></h2>
+<p>Once you&#8217;ve setup <cite>repoze.who</cite>, you&#8217;ll be ready to use its LDAP plugins. Below
+you will find how to use them in your application. The
+<a class="reference internal" href="index.html#module-repoze.who.plugins.ldap" title="LDAP authentication middleware for WSGI"><tt class="xref py py-mod docutils literal"><span class="pre">repoze.who.plugins.ldap</span></tt></a> module export two different <strong>concrete</strong>
+authentication plugins, both derived from <a class="reference internal" href="#repoze.who.plugins.ldap.LDAPBaseAuthenticatorPlugin" title="repoze.who.plugins.ldap.LDAPBaseAuthenticatorPlugin"><tt class="xref py py-class docutils literal"><span class="pre">LDAPBaseAuthenticatorPlugin</span></tt></a>.</p>
+<dl class="class">
+<dt id="repoze.who.plugins.ldap.LDAPBaseAuthenticatorPlugin">
+<em class="property">class </em><tt class="descclassname">repoze.who.plugins.ldap.</tt><tt class="descname">LDAPBaseAuthenticatorPlugin</tt><big>(</big><em>ldap_connection</em>, <em>base_dn</em>, <em>naming_attribute='uid'</em>, <em>returned_id='dn'</em>, <em>start_tls=False</em>, <em>bind_dn=''</em>, <em>bind_pass=''</em><big>)</big><a class="headerlink" href="#repoze.who.plugins.ldap.LDAPBaseAuthenticatorPlugin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Any class derived from this one is in charge of the LDAP authentication
+itself, using the LDAP connection object provided in the constructor
+(<strong>ldap_connection</strong>) &#8211; which can be an LDAP URL or a
+<tt class="xref py py-class docutils literal"><span class="pre">ldap.ldapobject.SimpleLDAPObject</span></tt> instance.</p>
+<p>By default, the returned user name will be the full DN; if your
+downstream WSGI application needs to use the bare login, you must set
+<tt class="docutils literal"><span class="pre">returned_id</span></tt> to <tt class="docutils literal"><span class="pre">'login'</span></tt>.</p>
+<p>If the parameter <cite>start_tls</cite> is set to a <cite>True</cite> value, any communication
+with the directory server will be encrypted.</p>
+<p>If the parameters <cite>bind_dn</cite> and <cite>bind_pass</cite> are set to non-empty
+strings, before doing any operation, the plugin will try to bind with
+the server using the supplied credentials.</p>
+<p>This plugin and its subclasses are compatible with any <cite>identifier plugin</cite>
+that defines the <cite>login</cite> and <cite>password</cite> items in the <cite>identity</cite> dictionary
+(the <cite>identifier plugins</cite> provided by the built-in <cite>repoze.who.plugins.form</cite>
+plugin are some of them).</p>
+<p>It is a highly customizable plugin which can be adapted to your needs with
+no hassle. You could also include in the login form a <cite>select</cite> field for
+people to select the department they belong to, being the key of such
+departments the <cite>Organizational Unit</cite> in the LDAP server; then, in the
+<strong>_get_dn</strong> method you would get such value from the WSGI environment
+object (<strong>environ</strong>).</p>
+<p>Any derived class must set the way the DN is created by overriding
+the abstract <em>_get_dn</em> method. For example, say in your company
+(with <cite>dc=yourcompany,dc.com</cite> as its DN) everybody belongs to
+the <cite>Organizational Unit</cite> (OU) <strong>employees</strong> (<cite>ou=employees</cite>), except
+the shareholders who belong to the OU <strong>shareholders</strong> (<cite>ou=shareholders</cite>):</p>
+<div class="highlight-python"><pre>class YourCompanyLDAPAuthenticatorPlugin(LDAPBaseAuthenticatorPlugin):
+    """Sample LDAP authenticator adapted to your company."""
+
+    shareholders = ('lgarcia, 'mferreira', 'cnarea')
+    """Set of shareholders of the company"""
+
+    def _get_dn(self, environ, identity):
+        try:
+            if identity['login'] in self.shareholders:
+                ou = 'shareholders'
+            else:
+                ou = 'employees'
+            return u'uid=%s,ou=%s,%s' % (identity['login'], ou,
+                                         self.base_dn)
+        except (KeyError, TypeError):
+            raise ValueError('Could not find the DN from the identity '
+                             'and environment')</pre>
+</div>
+<p>It is possibly an useless example on how to customize the way the DN is
+found, but it&#8217;s enough to show how to override it.</p>
+<p>If you&#8217;re using a custom LDAP authenticator, as in the example above, you
+would have to change the <cite>use</cite> directive accordingly &#8211; for example:</p>
+<div class="highlight-ini"><div class="highlight"><pre><span class="k">[plugin:ldap_auth]</span>
+<span class="na">use</span> <span class="o">=</span> <span class="s">yourpackage.lib.auth:YourCompanyLDAPAuthenticatorPlugin</span>
+<span class="na">ldap_connection</span> <span class="o">=</span> <span class="s">ldap://yourcompany.com</span>
+<span class="na">base_dn</span> <span class="o">=</span> <span class="s">ou=employees,dc=yourcompany,dc=com</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="repoze.who.plugins.ldap.LDAPAuthenticatorPlugin">
+<em class="property">class </em><tt class="descclassname">repoze.who.plugins.ldap.</tt><tt class="descname">LDAPAuthenticatorPlugin</tt><big>(</big><em>ldap_connection</em>, <em>base_dn</em>, <em>naming_attribute='uid'</em>, <em>returned_id='dn'</em><big>)</big><a class="headerlink" href="#repoze.who.plugins.ldap.LDAPAuthenticatorPlugin" title="Permalink to this definition">¶</a></dt>
+<dd><p>This plugin connects to the specified LDAP server and tries to <cite>bind</cite> with the
+<cite>Distinguished Name</cite> (DN) made by joining the <cite>login</cite> in the <cite>identity</cite>
+dictionary as the naming attribute value and the <strong>base_dn</strong> specified in the
+constructor, and then it tries to bind with the <cite>password</cite> found in the
+<cite>identity</cite> dictionary; As a default, the used naming attribute is the
+user id (<cite>uid</cite>).</p>
+<p>For example, if the <cite>login</cite> provided by the identifier is <cite>carla</cite> and the
+<strong>base_dn</strong> provided in the constructor is <cite>ou=employees,dc=example,dc=org</cite>,
+the resulting DN will be <cite>uid=carla,ou=employees,dc=example,dc=org</cite>.</p>
+<p>If the directory server&#8217;s naming attribute were the <cite>email</cite> attribute,
+and we provided naming_attribute=&#8217;email&#8217; in the constructor, the DN
+resulting for the identifier <cite>carla&#64;example.org</cite> would be
+<cite>email=carla&#64;example.org,ou=employees,dc=example,dc=org</cite>.</p>
+<p>To configure this plugin from an INI file, you&#8217;d have to include a section
+like this:</p>
+<div class="highlight-python"><pre>[plugin:ldap_auth]
+use = repoze.who.plugins.ldap:LDAPAuthenticatorPlugin
+ldap_connection = ldap://yourcompany.com
+base_dn = ou=employees,dc=yourcompany,dc=com
+naming_attribute = uid
+start_tls = True</pre>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="repoze.who.plugins.ldap.LDAPSearchAuthenticatorPlugin">
+<em class="property">class </em><tt class="descclassname">repoze.who.plugins.ldap.</tt><tt class="descname">LDAPSearchAuthenticatorPlugin</tt><big>(</big><em>ldap_connection</em>, <em>base_dn</em>, <em>naming_attribute='uid'</em>, <em>search_scope='subtree'</em>, <em>filterstr=''</em>, <em>returned_id='dn'</em><big>)</big><a class="headerlink" href="#repoze.who.plugins.ldap.LDAPSearchAuthenticatorPlugin" title="Permalink to this definition">¶</a></dt>
+<dd><p>This plugin connects to the specified LDAP server and searches an entry
+residing below the <strong>base_dn</strong>, whose naming attribute&#8217;s value is equal
+to the supplied login. If such an entry is found, it tries to bind as the
+entry&#8217;s DN with the <cite>password</cite> found in the <cite>identity</cite> dictionary; As a
+default, the used naming attribute is the user id (<cite>uid</cite>).</p>
+<p>The <cite>search_scope</cite> parameter in the constructor allows to choose whether
+to search the entry in the whole subtree below <strong>base_dn</strong>, or just on
+the level below if set as <cite>search_scope=&#8217;onelevel&#8217;</cite>.</p>
+<p>For example, if the <cite>login</cite> provided by the identifier is <cite>carla</cite> and the
+<strong>base_dn</strong> provided in the constructor is <cite>dc=example,dc=org</cite>,
+with the default settings, the system could find the entry
+<cite>uid=carla,ou=employees,dc=example,dc=org</cite>; if we set
+<cite>search_scope=&#8217;onelevel&#8217;</cite>, the entry would not be found.</p>
+<p>If you would like to only allow some entries, you may setup a filter
+by means of the <strong>filterstr</strong> parameter, which is an string whose format is
+defined by <a class="reference external" href="http://www.faqs.org/rfcs/rfc4515.html">RFC 4515 - Lightweight Directory Access Protocol (LDAP): String
+Representation of Search Filters</a>.
+E.g. we can assert only person entries bearing a telephone number starting
+with <cite>999111</cite> can login by setting:
+<cite>filterstr=&#8217;(&amp;(objectClass=person)(telephoneNumber=999111*))&#8217;</cite>
+in the constructor.</p>
+<p>To configure this plugin from an INI file, you&#8217;d have to include a section
+like this:</p>
+<div class="highlight-ini"><div class="highlight"><pre><span class="k">[plugin:ldap_auth]</span>
+<span class="na">use</span> <span class="o">=</span> <span class="s">repoze.who.plugins.ldap:LDAPSearchAuthenticatorPlugin</span>
+<span class="na">ldap_connection</span> <span class="o">=</span> <span class="s">ldap://yourcompany.com</span>
+<span class="na">base_dn</span> <span class="o">=</span> <span class="s">ou=employees,dc=yourcompany,dc=com</span>
+<span class="na">naming_attribute</span> <span class="o">=</span> <span class="s">uid</span>
+<span class="na">search_scope</span> <span class="o">=</span> <span class="s">subtree</span>
+<span class="na">start_tls</span> <span class="o">=</span> <span class="s">True</span>
+</pre></div>
+</div>
+<p>Finally, add the plugin to the set of authenticators:</p>
+<div class="highlight-python"><pre>[authenticators]
+plugins =
+        ldap_auth</pre>
+</div>
+<p>But if you&#8217;re configuring <cite>repoze.who</cite> via Python code, you can use the code
+below:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">ldap_auth</span> <span class="o">=</span> <span class="n">LDAPAuthenticatorPlugin</span><span class="p">(</span><span class="s">&#39;ldap://ldap.yourcompany.com&#39;</span><span class="p">,</span>
+                                    <span class="s">&#39;ou=developers,dc=yourcompany,dc=com&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>or, respectively:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">ldap_auth</span> <span class="o">=</span> <span class="n">LDAPSearchAuthenticatorPlugin</span><span class="p">(</span><span class="s">&#39;ldap://ldap.yourcompany.com&#39;</span><span class="p">,</span>
+                                    <span class="s">&#39;ou=developers,dc=yourcompany,dc=com&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>But if you&#8217;re using a custom LDAP authenticator, you would have to use the
+code below instead:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">ldap_auth</span> <span class="o">=</span> <span class="n">YourCompanyLDAPAuthenticatorPlugin</span><span class="p">(</span><span class="s">&#39;ldap://ldap.yourcompany.com&#39;</span><span class="p">,</span>
+                                               <span class="s">&#39;ou=employees,dc=yourcompany,dc=com&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Finally, add this authenticator to the set of authenticators:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">authenticators</span> <span class="o">=</span> <span class="p">[(</span><span class="s">&#39;ldap_auth&#39;</span><span class="p">,</span> <span class="n">ldap_auth</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>As in the example above.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="repoze.who.plugins.ldap.LDAPAttributesPlugin">
+<em class="property">class </em><tt class="descclassname">repoze.who.plugins.ldap.</tt><tt class="descname">LDAPAttributesPlugin</tt><big>(</big><em>ldap_connection</em><span class="optional">[</span>, <em>attributes=None</em><span class="optional">[</span>, <em>filterstr='(objectClass=*)'</em><span class="optional">]</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#repoze.who.plugins.ldap.LDAPAttributesPlugin" title="Permalink to this definition">¶</a></dt>
+<dd><p>This plugin enables you to load data for the authenticated user
+automatically and have it available from the WSGI environment — in the
+<cite>identity</cite> dictionary, specifically.</p>
+<p><strong>ldap_connection</strong> represents the connection to the LDAP server, which,
+as in <a class="reference internal" href="#repoze.who.plugins.ldap.LDAPAuthenticatorPlugin" title="repoze.who.plugins.ldap.LDAPAuthenticatorPlugin"><tt class="xref py py-class docutils literal"><span class="pre">LDAPAuthenticatorPlugin</span></tt></a>, can be either an LDAP URL or an
+instance of <cite>ldap.ldapobject.SimpleLDAPObject</cite>. <strong>attributes</strong> represents
+the list of user&#8217;s attributes that you would like to fetch from the LDAP
+server; it can be an iterable, an string where the attributes are separated
+by commas, or <em>None</em> to fetch all the available attributes.</p>
+<p>By default it loads the attributes available for <em>any</em> entry whose <em>DN</em> is
+the same as the one found by <a class="reference internal" href="#repoze.who.plugins.ldap.LDAPAuthenticatorPlugin" title="repoze.who.plugins.ldap.LDAPAuthenticatorPlugin"><tt class="xref py py-class docutils literal"><span class="pre">LDAPAuthenticatorPlugin</span></tt></a>, which is
+desired in most situations.
+However, if you would like to exclude some entries, you may setup a filter
+by means of the <strong>filterstr</strong> parameter, which shares the same semantics
+as the <strong>filterstr</strong> parameter in <a class="reference internal" href="#repoze.who.plugins.ldap.LDAPSearchAuthenticatorPlugin" title="repoze.who.plugins.ldap.LDAPSearchAuthenticatorPlugin"><tt class="xref py py-class docutils literal"><span class="pre">LDAPSearchAuthenticatorPlugin</span></tt></a>.</p>
+<p>There is no advanced usage for this plugin, and hopefully you would never
+need to subclass it to suit your needs.</p>
+<p>To configure this plugin from an INI file, you&#8217;d have to include a section
+like this:</p>
+<div class="highlight-python"><pre>[plugin:ldap_attributes]
+use = repoze.who.plugins.ldap:LDAPAttributesPlugin
+ldap_connection = ldap://ldap.yourcompany.com
+attributes = cn,sn,mail</pre>
+</div>
+<p>If instead of loading the <em>Common Name</em>, <em>surname</em> and <em>email</em>, as with the
+settings above, you&#8217;d prefer to load all the available attributes for the
+authenticated user, you&#8217;d just have to remove the <em>attributes</em> directive.</p>
+<p>Finally, add the plugin to the set of metadata providers:</p>
+<div class="highlight-python"><pre>[mdproviders]
+plugins =
+        ldap_attributes</pre>
+</div>
+<p>But if you want to configure it via Python code, you can use the code
+below:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">ldap_attributes</span> <span class="o">=</span> <span class="n">LDAPAttributesPlugin</span><span class="p">(</span><span class="s">&#39;ldap://ldap.yourcompany.com&#39;</span><span class="p">,</span>
+                                       <span class="p">[</span><span class="s">&#39;cn&#39;</span><span class="p">,</span> <span class="s">&#39;sn&#39;</span><span class="p">,</span> <span class="s">&#39;email&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Again, if you would prefer to load all the available attributes for the
+user, you just have to remove the second parameter.</p>
+<p>Finally, add this authenticator to the set of metadata providers in your
+Python code:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">mdproviders</span> <span class="o">=</span> <span class="p">[(</span><span class="s">&#39;ldap_attributes&#39;</span><span class="p">,</span> <span class="n">ldap_attributes</span><span class="p">)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Using the repoze.who LDAP plugins in your WSGI Application</a><ul>
+<li><a class="reference internal" href="#setting-up-repoze-who-with-the-ldap-authenticator">Setting up <cite>repoze.who</cite> with the LDAP authenticator</a><ul>
+<li><a class="reference internal" href="#configuring-repoze-who-in-a-ini-file">Configuring <cite>repoze.who</cite> in a INI file</a></li>
+<li><a class="reference internal" href="#configuring-repoze-who-with-python-code">Configuring <cite>repoze.who</cite> with Python code</a></li>
+<li><a class="reference internal" href="#framework-specific-documentation">Framework-specific documentation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-repoze.who.plugins.ldap">Using the LDAP plugins for repoze.who</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Install.html"
+                        title="previous chapter">Installing repoze.who.plugins.ldap</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Demo.html"
+                        title="next chapter">Trying the demo project</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/Using.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Demo.html" title="Trying the demo project"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Install.html" title="Installing repoze.who.plugins.ldap"
+             >previous</a> |</li>
+        <li><a href="index.html">repoze.who.plugins.ldap v1.1a1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2008-2010, Gustavo Narea.
+      Last updated on Jun 03, 2010.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0b2.
+    </div>
+  </body>
+</html>

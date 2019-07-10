@@ -1,0 +1,930 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>booleano.parser – Boolean expressions parser &mdash; Booleano v1.0a1 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0a1',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Booleano v1.0a1 documentation" href="../index.html" />
+    <link rel="up" title="booleano API documentation" href="index.html" />
+    <link rel="next" title="booleano.operations – Boolean Operation Nodes" href="operations.html" />
+    <link rel="prev" title="booleano API documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="operations.html" title="booleano.operations – Boolean Operation Nodes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="booleano API documentation"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Booleano v1.0a1 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U"><tt class="docutils literal docutils literal docutils literal docutils literal docutils literal"><span class="pre">booleano</span></tt> API documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-booleano.parser">
+<h1><tt class="xref docutils literal"><span class="pre">booleano.parser</span></tt> &#8211; Boolean expressions parser<a class="headerlink" href="#module-booleano.parser" title="Permalink to this headline">¶</a></h1>
+<p>Parser of boolean expressions.</p>
+<div class="section" id="grammar-definition">
+<h2>Grammar definition<a class="headerlink" href="#grammar-definition" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="booleano.parser.Grammar">
+<em class="property">class </em><tt class="descclassname">booleano.parser.</tt><tt class="descname">Grammar</tt><big>(</big><em>settings=None</em>, <em>generators=None</em>, <em>**tokens</em><big>)</big><a class="headerlink" href="#booleano.parser.Grammar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adaptive grammar.</p>
+<p>Instances of this class contain the properties of the grammar, but are not
+able to generate a parser based on the represented grammar &#8211; that is
+a <tt class="xref docutils literal"><span class="pre">Parser</span></tt>&#8216;s job.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>settings</em> (dict) &#8211; The grammar settings to be overridden, if any.</li>
+<li><em>generators</em> (dict) &#8211; The custom Pyparsing generators for some of the
+elements in the grammar, if any.</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">Raises <a title="booleano.exc.GrammarError" class="reference external" href="exceptions.html#booleano.exc.GrammarError">booleano.exc.GrammarError</a>:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body"><p class="first last">If at least one of the <tt class="docutils literal"><span class="pre">settings</span></tt>,
+<tt class="docutils literal"><span class="pre">generators</span></tt> or <tt class="docutils literal"><span class="pre">tokens</span></tt> are not valid.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Keyword arguments represent the tokens to be overridden.</p>
+<dl class="method">
+<dt id="booleano.parser.Grammar.get_custom_generator">
+<tt class="descname">get_custom_generator</tt><big>(</big><em>generator_name</em><big>)</big><a class="headerlink" href="#booleano.parser.Grammar.get_custom_generator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the generator identified by <tt class="docutils literal"><span class="pre">generator_name</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameter:</th><td class="field-body"><em>generator_name</em> (basestring) &#8211; The name of the generator to be retrieved.</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body">The generator value or <tt class="xref docutils literal"><span class="pre">None</span></tt> if it&#8217;s not been set.</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">Raises <a title="booleano.exc.GrammarError" class="reference external" href="exceptions.html#booleano.exc.GrammarError">booleano.exc.GrammarError</a>:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">If the <tt class="docutils literal"><span class="pre">generator_name</span></tt> is unknown.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="booleano.parser.Grammar.get_setting">
+<tt class="descname">get_setting</tt><big>(</big><em>setting_name</em><big>)</big><a class="headerlink" href="#booleano.parser.Grammar.get_setting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the value of setting identified by <tt class="docutils literal"><span class="pre">setting_name</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameter:</th><td class="field-body"><em>setting_name</em> (basestring) &#8211; The name of the setting to be retrieved.</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body">The setting value.</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">Raises <a title="booleano.exc.GrammarError" class="reference external" href="exceptions.html#booleano.exc.GrammarError">booleano.exc.GrammarError</a>:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">If the <tt class="docutils literal"><span class="pre">setting_name</span></tt> is unknown.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="booleano.parser.Grammar.get_token">
+<tt class="descname">get_token</tt><big>(</big><em>token_name</em><big>)</big><a class="headerlink" href="#booleano.parser.Grammar.get_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the token called <tt class="docutils literal"><span class="pre">token_name</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameter:</th><td class="field-body"><em>token_name</em> (basestring) &#8211; The name/key of the token to be returned.</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body">The requested token.</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body">basestring</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">Raises <a title="booleano.exc.GrammarError" class="reference external" href="exceptions.html#booleano.exc.GrammarError">booleano.exc.GrammarError</a>:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">If the <tt class="docutils literal"><span class="pre">token_name</span></tt> is unknown.</td>
+</tr>
+</tbody>
+</table>
+<p>If the token doesn&#8217;t have a custom value, the default value will be
+returned instead.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="booleano.parser.Grammar.set_custom_generator">
+<tt class="descname">set_custom_generator</tt><big>(</big><em>generator_name</em>, <em>generator</em><big>)</big><a class="headerlink" href="#booleano.parser.Grammar.set_custom_generator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the generator called <tt class="docutils literal"><span class="pre">generator_name</span></tt> to the custom callable
+<tt class="docutils literal"><span class="pre">generator</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>generator_name</em> (basestring) &#8211; The name of the generator to be overridden.</li>
+<li><em>generator</em> &#8211; The custom generator (a Python callable).</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">Raises <a title="booleano.exc.GrammarError" class="reference external" href="exceptions.html#booleano.exc.GrammarError">booleano.exc.GrammarError</a>:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body"><p class="first last">If the <tt class="docutils literal"><span class="pre">generator_name</span></tt> is unknown.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="booleano.parser.Grammar.set_setting">
+<tt class="descname">set_setting</tt><big>(</big><em>setting_name</em>, <em>setting</em><big>)</big><a class="headerlink" href="#booleano.parser.Grammar.set_setting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the setting called <tt class="docutils literal"><span class="pre">setting_name</span></tt> to the custom value <tt class="docutils literal"><span class="pre">setting</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>setting_name</em> (basestring) &#8211; The name of the setting to be customized.</li>
+<li><em>setting</em> (basestring) &#8211; The new value of the setting.</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">Raises <a title="booleano.exc.GrammarError" class="reference external" href="exceptions.html#booleano.exc.GrammarError">booleano.exc.GrammarError</a>:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body"><p class="first last">If the <tt class="docutils literal"><span class="pre">setting_name</span></tt> is
+unknown or <tt class="docutils literal"><span class="pre">setting</span></tt> is an invalid value for <tt class="docutils literal"><span class="pre">setting_name</span></tt>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Settings whose expected value is a Python boolean are not validated.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="booleano.parser.Grammar.set_token">
+<tt class="descname">set_token</tt><big>(</big><em>token_name</em>, <em>token</em><big>)</big><a class="headerlink" href="#booleano.parser.Grammar.set_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the token called <tt class="docutils literal"><span class="pre">token_name</span></tt> to the custom value <tt class="docutils literal"><span class="pre">token</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>token_name</em> (basestring) &#8211; The name of the token to be customized.</li>
+<li><em>token</em> (basestring) &#8211; The new value of the token.</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">Raises <a title="booleano.exc.GrammarError" class="reference external" href="exceptions.html#booleano.exc.GrammarError">booleano.exc.GrammarError</a>:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body"><p class="first last">If the <tt class="docutils literal"><span class="pre">token_name</span></tt> is unknown.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="booleano.parser.Grammar.default_settings">
+<tt class="descname">default_settings</tt><a class="headerlink" href="#booleano.parser.Grammar.default_settings" title="Permalink to this definition">¶</a></dt>
+<dd>The default settings for the grammar.</dd></dl>
+
+<dl class="attribute">
+<dt id="booleano.parser.Grammar.default_tokens">
+<tt class="descname">default_tokens</tt><a class="headerlink" href="#booleano.parser.Grammar.default_tokens" title="Permalink to this definition">¶</a></dt>
+<dd>The default tokens.</dd></dl>
+
+<dl class="attribute">
+<dt id="booleano.parser.Grammar.known_generators">
+<tt class="descname">known_generators</tt><a class="headerlink" href="#booleano.parser.Grammar.known_generators" title="Permalink to this definition">¶</a></dt>
+<dd>The known/valid generators.</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="test-utilities">
+<h3>Test utilities<a class="headerlink" href="#test-utilities" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="booleano.parser.testutils.BaseGrammarTest">
+<em class="property">class </em><tt class="descclassname">booleano.parser.testutils.</tt><tt class="descname">BaseGrammarTest</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#booleano.parser.testutils.BaseGrammarTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base test case for a grammar and the expressions its parser could handle.</p>
+<p>Subclasses must define all the following attributes for the test case to
+work.</p>
+<dl class="attribute">
+<dt id="booleano.parser.BaseGrammarTest.grammar">
+<tt class="descname">grammar</tt><a class="headerlink" href="#booleano.parser.BaseGrammarTest.grammar" title="Permalink to this definition">¶</a></dt>
+<dd><p>An instance of the grammar to be tested. <strong>This attribute must be set
+in the subclasses</strong>, like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">booleano.parser</span> <span class="kn">import</span> <span class="n">Grammar</span>
+
+<span class="k">class</span> <span class="nc">TestMyGrammar</span><span class="p">(</span><span class="n">BaseGrammarTest</span><span class="p">):</span>
+
+    <span class="n">grammar</span> <span class="o">=</span> <span class="n">Grammar</span><span class="p">(</span><span class="n">ne</span><span class="o">=</span><span class="s">&quot;&lt;&gt;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Type:</th><td class="field-body"><a title="booleano.parser.Grammar" class="reference internal" href="#booleano.parser.Grammar"><tt class="xref docutils literal"><span class="pre">booleano.parser.Grammar</span></tt></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="booleano.parser.BaseGrammarTest.expressions">
+<tt class="descname">expressions</tt><a class="headerlink" href="#booleano.parser.BaseGrammarTest.expressions" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dictionary with all the valid expressions recognized by the grammar,
+where each key is the expression itself and its item is the mock
+representation of the operation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="booleano.parser.BaseGrammarTest.badformed_expressions">
+<tt class="descname">badformed_expressions</tt><a class="headerlink" href="#booleano.parser.BaseGrammarTest.badformed_expressions" title="Permalink to this definition">¶</a></dt>
+<dd><p>A list of expressions that are bad-formed in the <a title="booleano.parser.BaseGrammarTest.grammar" class="reference internal" href="#booleano.parser.BaseGrammarTest.grammar"><tt class="xref docutils literal"><span class="pre">grammar</span></tt></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="booleano.parser.BaseGrammarTest.single_operands">
+<tt class="descname">single_operands</tt><a class="headerlink" href="#booleano.parser.BaseGrammarTest.single_operands" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dictionary where the key is an expression that contains a single
+operand (i.e., no operator) and the item is the <em class="xref">root node</em> of the
+expected <em class="xref">parse tree</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="booleano.parser.BaseGrammarTest.invalid_operands">
+<tt class="descname">invalid_operands</tt><a class="headerlink" href="#booleano.parser.BaseGrammarTest.invalid_operands" title="Permalink to this definition">¶</a></dt>
+<dd><p>A list of expressions which contain a single operand and it is invalid.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="scope-definition-name-binding">
+<h2>Scope definition / name <a class="reference external" href="../manual/glossary.html#term-binding"><em class="xref">binding</em></a><a class="headerlink" href="#scope-definition-name-binding" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="booleano.parser.Bind">
+<em class="property">class </em><tt class="descclassname">booleano.parser.</tt><tt class="descname">Bind</tt><big>(</big><em>global_name</em>, <em>operand</em>, <em>**names</em><big>)</big><a class="headerlink" href="#booleano.parser.Bind" title="Permalink to this definition">¶</a></dt>
+<dd><p>Operand binder.</p>
+<p>Each instance is a name <a class="reference external" href="../manual/glossary.html#term-binding"><em class="xref">binding</em></a>, which assigns an identifier to an
+operand (even in different languages).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>global_name</em> (basestring) &#8211; The identifier string (excludes parent names, if
+any).</li>
+<li><em>operand</em> (<a title="booleano.operations.operands.Operand" class="reference external" href="operations.html#booleano.operations.operands.Operand"><tt class="xref docutils literal"><span class="pre">booleano.operations.operands.Operand</span></tt></a>) &#8211; The operand to be bound.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Additional keyword arguments represent the translations of the
+<tt class="docutils literal"><span class="pre">global_name</span></tt> into other languages.</p>
+<dl class="method">
+<dt id="booleano.parser.Bind.get_localized_name">
+<tt class="descname">get_localized_name</tt><big>(</big><em>locale</em><big>)</big><a class="headerlink" href="#booleano.parser.Bind.get_localized_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the localized name of the identifier in <tt class="docutils literal"><span class="pre">locale</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameter:</th><td class="field-body"><em>locale</em> (basestring) &#8211; The locale of the name.</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body">The name of the identifier in <tt class="docutils literal"><span class="pre">locale</span></tt>; if it&#8217;s not defined,
+the global name is returned.</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body">basestring</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="booleano.parser.SymbolTable">
+<em class="property">class </em><tt class="descclassname">booleano.parser.</tt><tt class="descname">SymbolTable</tt><big>(</big><em>global_name</em>, <em>objects</em>, <em>*subtables</em>, <em>**names</em><big>)</big><a class="headerlink" href="#booleano.parser.SymbolTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Symbol table.</p>
+<p>Symbol tables wrap <em>bound</em> operands (aka, &#8220;bindings&#8221;).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>global_name</em> (basestring) &#8211; The name of the symbol table (excludes parent
+symbol tables, if any).</li>
+<li><em>objects</em> (list) &#8211; List of bound operands available in this symbol table.</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">Raises <a title="booleano.exc.ScopeError" class="reference external" href="exceptions.html#booleano.exc.ScopeError">booleano.exc.ScopeError</a>:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body"><p class="first last">If an object/subtable is already 
+included or already belongs to another symbol table.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Additional positional arguments represent the sub-tables of this
+symbol table.</p>
+<p>Additional keyword arguments represent the other names this table
+can take in different locales.</p>
+<dl class="method">
+<dt id="booleano.parser.SymbolTable.add_object">
+<tt class="descname">add_object</tt><big>(</big><em>obj</em><big>)</big><a class="headerlink" href="#booleano.parser.SymbolTable.add_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add the <tt class="docutils literal"><span class="pre">obj</span></tt> object to this symbol table.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameter:</th><td class="field-body"><em>obj</em> (<a title="booleano.parser.Bind" class="reference internal" href="#booleano.parser.Bind"><tt class="xref docutils literal"><span class="pre">Bind</span></tt></a>) &#8211; The bound operand to be added.</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">Raises <a title="booleano.exc.ScopeError" class="reference external" href="exceptions.html#booleano.exc.ScopeError">booleano.exc.ScopeError</a>:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">If <tt class="docutils literal"><span class="pre">obj</span></tt> is already included or it 
+already belongs to another symbol table.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="booleano.parser.SymbolTable.add_subtable">
+<tt class="descname">add_subtable</tt><big>(</big><em>table</em><big>)</big><a class="headerlink" href="#booleano.parser.SymbolTable.add_subtable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Include <tt class="docutils literal"><span class="pre">table</span></tt> in the child tables of this symbol table.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameter:</th><td class="field-body"><em>table</em> (<a title="booleano.parser.SymbolTable" class="reference internal" href="#booleano.parser.SymbolTable"><tt class="xref docutils literal"><span class="pre">SymbolTable</span></tt></a>) &#8211; The symbol table to be added.</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">Raises <a title="booleano.exc.ScopeError" class="reference external" href="exceptions.html#booleano.exc.ScopeError">booleano.exc.ScopeError</a>:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">If <tt class="docutils literal"><span class="pre">table</span></tt> is already included or it
+already belongs to another symbol table.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="booleano.parser.SymbolTable.get_localized_name">
+<tt class="descname">get_localized_name</tt><big>(</big><em>locale</em><big>)</big><a class="headerlink" href="#booleano.parser.SymbolTable.get_localized_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the localized name of the identifier in <tt class="docutils literal"><span class="pre">locale</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameter:</th><td class="field-body"><em>locale</em> (basestring) &#8211; The locale of the name.</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body">The name of the identifier in <tt class="docutils literal"><span class="pre">locale</span></tt>; if it&#8217;s not defined,
+the global name is returned.</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body">basestring</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="booleano.parser.SymbolTable.get_namespace">
+<tt class="descname">get_namespace</tt><big>(</big><em>locale=None</em><big>)</big><a class="headerlink" href="#booleano.parser.SymbolTable.get_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the namespace for this symbol table in the <tt class="docutils literal"><span class="pre">locale</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>locale</em> &#8211; The locale of the namespace; if <tt class="xref docutils literal"><span class="pre">None</span></tt>, the global
+names will be used instead.</li>
+<li><em>locale</em> &#8211; basestring</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The namespace in <tt class="docutils literal"><span class="pre">locale</span></tt>.</p>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a title="booleano.parser.scope.Namespace" class="reference internal" href="#booleano.parser.scope.Namespace"><tt class="xref docutils literal"><span class="pre">booleano.parser.scope.Namespace</span></tt></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="booleano.parser.SymbolTable.validate_scope">
+<tt class="descname">validate_scope</tt><big>(</big><big>)</big><a class="headerlink" href="#booleano.parser.SymbolTable.validate_scope" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make sure there&#8217;s no name clash in the symbol table.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name" colspan="2">Raises <a title="booleano.exc.ScopeError" class="reference external" href="exceptions.html#booleano.exc.ScopeError">booleano.exc.ScopeError</a>:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">If a name clash in found, either in the
+global names or with the localized names.</td>
+</tr>
+</tbody>
+</table>
+<p>Users may want to run this in their test suite, instead of in
+production, for performance reasons.</p>
+<p>Note that it&#8217;s perfectly valid for one object and one sub-table to
+have the same name in the parent symbol table.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="booleano.parser.scope.Namespace">
+<em class="property">class </em><tt class="descclassname">booleano.parser.scope.</tt><tt class="descname">Namespace</tt><big>(</big><em>objects</em>, <em>subnamespaces={}</em><big>)</big><a class="headerlink" href="#booleano.parser.scope.Namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>A namespace for a given locale.</p>
+<p>This is not aimed at end-users, it should only be used internally in
+Booleano.</p>
+<p>The parser only deals with this, not with the symbol table directly.</p>
+<p>A symbol table has one namespace per locale.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>objects</em> (dict) &#8211; The objects that belong to the table.</li>
+<li><em>subnamespaces</em> (dict) &#8211; The namespaces under this namespace, if any.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="parse-managers">
+<h2>Parse managers<a class="headerlink" href="#parse-managers" title="Permalink to this headline">¶</a></h2>
+<p>A parse manager controls the parsers to be used in a single kind of expression,
+with one parser per supported grammar.</p>
+<dl class="class">
+<dt id="booleano.parser.EvaluableParseManager">
+<em class="property">class </em><tt class="descclassname">booleano.parser.</tt><tt class="descname">EvaluableParseManager</tt><big>(</big><em>symbol_table</em>, <em>generic_grammar</em>, <em>cache_limit=0</em>, <em>**localized_grammars</em><big>)</big><a class="headerlink" href="#booleano.parser.EvaluableParseManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parsing manager for evaluable operations.</p>
+<p>It manages evaluable parsers.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>symbol_table</em> (<a title="booleano.parser.SymbolTable" class="reference internal" href="#booleano.parser.SymbolTable"><tt class="xref docutils literal"><span class="pre">SymbolTable</span></tt></a>) &#8211; The symbol table for the supported expressions.</li>
+<li><em>generic_grammar</em> (<a title="booleano.parser.Grammar" class="reference internal" href="#booleano.parser.Grammar"><tt class="xref docutils literal"><span class="pre">Grammar</span></tt></a>) &#8211; The default grammar.</li>
+<li><em>cache_limit</em> (int) &#8211; The maximum amount of expressions to be cached
+internally (use <tt class="xref docutils literal"><span class="pre">None</span></tt> for no limit or <tt class="docutils literal"><span class="pre">0</span></tt> to disable caching).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Additional keyword arguments, if any, will be used as custom grammars
+where each key represents the locale of the grammar in the value.</p>
+<dl class="method">
+<dt id="booleano.parser.EvaluableParseManager.add_parser">
+<tt class="descname">add_parser</tt><big>(</big><em>locale</em>, <em>grammar</em><big>)</big><a class="headerlink" href="#booleano.parser.EvaluableParseManager.add_parser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a parser for <tt class="docutils literal"><span class="pre">grammar</span></tt> and store it.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>locale</em> (basestring) &#8211; The locale of the <tt class="docutils literal"><span class="pre">grammar</span></tt>.</li>
+<li><em>grammar</em> (<a title="booleano.parser.Grammar" class="reference internal" href="#booleano.parser.Grammar"><tt class="xref docutils literal"><span class="pre">Grammar</span></tt></a>) &#8211; The grammar of the parser to be created.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="booleano.parser.EvaluableParseManager.evaluate">
+<tt class="descname">evaluate</tt><big>(</big><em>expression</em>, <em>locale</em>, <em>context</em><big>)</big><a class="headerlink" href="#booleano.parser.EvaluableParseManager.evaluate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse <tt class="docutils literal"><span class="pre">expression</span></tt> and return its evaluation result with <tt class="docutils literal"><span class="pre">context</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>expression</em> (basestring) &#8211; The expression to be parsed.</li>
+<li><em>locale</em> (basestring) &#8211; The locale of the grammar used by <tt class="docutils literal"><span class="pre">expression</span></tt>.</li>
+<li><em>context</em> (object) &#8211; The context under which the parse tree of <tt class="docutils literal"><span class="pre">expression</span></tt>
+has to be evaluated.</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The result of the evaluation of the parse tree for
+<tt class="docutils literal"><span class="pre">expression</span></tt>.</p>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">bool</p>
+</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">Raises BadExpressionError:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body"><p class="first">If <tt class="docutils literal"><span class="pre">expression</span></tt> is bad-formed
+according to the <tt class="docutils literal"><span class="pre">locale</span></tt> grammar.</p>
+</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">Raises InvalidOperationError:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body"><p class="first">If <tt class="docutils literal"><span class="pre">expression</span></tt> has an invalid
+operation.</p>
+</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">Raises ScopeError:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body"><p class="first last">If <tt class="docutils literal"><span class="pre">expression</span></tt> contains unknown identifiers.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="booleano.parser.EvaluableParseManager.parse">
+<tt class="descname">parse</tt><big>(</big><em>expression</em>, <em>locale=None</em><big>)</big><a class="headerlink" href="#booleano.parser.EvaluableParseManager.parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse <tt class="docutils literal"><span class="pre">expression</span></tt> and return its parse tree.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>expression</em> (basestring) &#8211; The expression to be parsed.</li>
+<li><em>locale</em> (basestring) &#8211; The locale of the grammar used by <tt class="docutils literal"><span class="pre">expression</span></tt>
+(or <tt class="xref docutils literal"><span class="pre">None</span></tt> if it uses the generic grammar).</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The parse tree for <tt class="docutils literal"><span class="pre">expression</span></tt>.</p>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a title="booleano.parser.trees.ParseTree" class="reference internal" href="#booleano.parser.trees.ParseTree"><tt class="xref docutils literal"><span class="pre">booleano.parser.trees.ParseTree</span></tt></a></p>
+</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">Raises <a title="booleano.exc.BadExpressionError" class="reference external" href="exceptions.html#booleano.exc.BadExpressionError">booleano.exc.BadExpressionError</a>:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body"><p class="first">If <tt class="docutils literal"><span class="pre">expression</span></tt> is bad-formed
+according to the grammar <tt class="docutils literal"><span class="pre">locale</span></tt>.</p>
+</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">Raises <a title="booleano.exc.InvalidOperationError" class="reference external" href="exceptions.html#booleano.exc.InvalidOperationError">booleano.exc.InvalidOperationError</a>:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body"><p class="first">If <tt class="docutils literal"><span class="pre">expression</span></tt> has an 
+invalid operation.</p>
+</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">Raises <a title="booleano.exc.ScopeError" class="reference external" href="exceptions.html#booleano.exc.ScopeError">booleano.exc.ScopeError</a>:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body"><p class="first last">If <tt class="docutils literal"><span class="pre">expression</span></tt> contains unknown 
+identifiers.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>If caching is enabled and the <tt class="docutils literal"><span class="pre">expression</span></tt> was cached previously,
+<tt class="docutils literal"><span class="pre">expression</span></tt> won&#8217;t be parsed again and its cached parse tree will
+be returned.</p>
+<p>If caching is enabled, but the <tt class="docutils literal"><span class="pre">expression</span></tt> is not cached, it will
+be parsed and the resulting parse tree will be cached and finally
+returned.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="booleano.parser.ConvertibleParseManager">
+<em class="property">class </em><tt class="descclassname">booleano.parser.</tt><tt class="descname">ConvertibleParseManager</tt><big>(</big><em>generic_grammar</em>, <em>cache_limit=0</em>, <em>**localized_grammars</em><big>)</big><a class="headerlink" href="#booleano.parser.ConvertibleParseManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parsing manager for convertible operations.</p>
+<p>It manages convertible parsers.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>generic_grammar</em> (<a title="booleano.parser.Grammar" class="reference internal" href="#booleano.parser.Grammar"><tt class="xref docutils literal"><span class="pre">Grammar</span></tt></a>) &#8211; The default grammar.</li>
+<li><em>cache_limit</em> (int) &#8211; The maximum amount of expressions to be cached
+internally (use <tt class="xref docutils literal"><span class="pre">None</span></tt> for no limit or <tt class="docutils literal"><span class="pre">0</span></tt> to disable caching).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Additional keyword arguments, if any, will be used as custom grammars
+where each key represents the locale of the grammar in the value.</p>
+<dl class="method">
+<dt id="booleano.parser.ConvertibleParseManager.add_parser">
+<tt class="descname">add_parser</tt><big>(</big><em>locale</em>, <em>grammar</em><big>)</big><a class="headerlink" href="#booleano.parser.ConvertibleParseManager.add_parser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a parser for <tt class="docutils literal"><span class="pre">grammar</span></tt> and store it.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>locale</em> (basestring) &#8211; The locale of the <tt class="docutils literal"><span class="pre">grammar</span></tt>.</li>
+<li><em>grammar</em> (<a title="booleano.parser.Grammar" class="reference internal" href="#booleano.parser.Grammar"><tt class="xref docutils literal"><span class="pre">Grammar</span></tt></a>) &#8211; The grammar of the parser to be created.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="booleano.parser.ConvertibleParseManager.parse">
+<tt class="descname">parse</tt><big>(</big><em>expression</em>, <em>locale=None</em><big>)</big><a class="headerlink" href="#booleano.parser.ConvertibleParseManager.parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse <tt class="docutils literal"><span class="pre">expression</span></tt> and return its parse tree.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>expression</em> (basestring) &#8211; The expression to be parsed.</li>
+<li><em>locale</em> (basestring) &#8211; The locale of the grammar used by <tt class="docutils literal"><span class="pre">expression</span></tt>
+(or <tt class="xref docutils literal"><span class="pre">None</span></tt> if it uses the generic grammar).</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The parse tree for <tt class="docutils literal"><span class="pre">expression</span></tt>.</p>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a title="booleano.parser.trees.ParseTree" class="reference internal" href="#booleano.parser.trees.ParseTree"><tt class="xref docutils literal"><span class="pre">booleano.parser.trees.ParseTree</span></tt></a></p>
+</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">Raises <a title="booleano.exc.BadExpressionError" class="reference external" href="exceptions.html#booleano.exc.BadExpressionError">booleano.exc.BadExpressionError</a>:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body"><p class="first">If <tt class="docutils literal"><span class="pre">expression</span></tt> is bad-formed
+according to the grammar <tt class="docutils literal"><span class="pre">locale</span></tt>.</p>
+</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">Raises <a title="booleano.exc.InvalidOperationError" class="reference external" href="exceptions.html#booleano.exc.InvalidOperationError">booleano.exc.InvalidOperationError</a>:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body"><p class="first">If <tt class="docutils literal"><span class="pre">expression</span></tt> has an 
+invalid operation.</p>
+</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">Raises <a title="booleano.exc.ScopeError" class="reference external" href="exceptions.html#booleano.exc.ScopeError">booleano.exc.ScopeError</a>:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body"><p class="first last">If <tt class="docutils literal"><span class="pre">expression</span></tt> contains unknown 
+identifiers.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>If caching is enabled and the <tt class="docutils literal"><span class="pre">expression</span></tt> was cached previously,
+<tt class="docutils literal"><span class="pre">expression</span></tt> won&#8217;t be parsed again and its cached parse tree will
+be returned.</p>
+<p>If caching is enabled, but the <tt class="docutils literal"><span class="pre">expression</span></tt> is not cached, it will
+be parsed and the resulting parse tree will be cached and finally
+returned.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-booleano.parser.parsers">
+<h2>Parsers<a class="headerlink" href="#module-booleano.parser.parsers" title="Permalink to this headline">¶</a></h2>
+<p>Generic Pyparsing-based parser implementation.</p>
+<dl class="class">
+<dt id="booleano.parser.parsers.Parser">
+<em class="property">class </em><tt class="descclassname">booleano.parser.parsers.</tt><tt class="descname">Parser</tt><big>(</big><em>grammar</em><big>)</big><a class="headerlink" href="#booleano.parser.parsers.Parser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for parsers.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameter:</th><td class="field-body"><em>grammar</em> (<a title="booleano.parser.Grammar" class="reference internal" href="#booleano.parser.Grammar"><tt class="xref docutils literal"><span class="pre">booleano.parser.Grammar</span></tt></a>) &#8211; The grammar used by the parser.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="booleano.parser.parsers.EvaluableParser">
+<em class="property">class </em><tt class="descclassname">booleano.parser.parsers.</tt><tt class="descname">EvaluableParser</tt><big>(</big><em>grammar</em>, <em>namespace</em><big>)</big><a class="headerlink" href="#booleano.parser.parsers.EvaluableParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluable parser.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>grammar</em> (<a title="booleano.parser.Grammar" class="reference internal" href="#booleano.parser.Grammar"><tt class="xref docutils literal"><span class="pre">booleano.parser.Grammar</span></tt></a>) &#8211; The grammar used by the parser.</li>
+<li><em>namespace</em> (<a title="booleano.parser.scope.Namespace" class="reference internal" href="#booleano.parser.scope.Namespace"><tt class="xref docutils literal"><span class="pre">booleano.parser.scope.Namespace</span></tt></a>) &#8211; The namespace that contains the objects used by the
+expressions to be parsed.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="booleano.parser.parsers.ConvertibleParser">
+<em class="property">class </em><tt class="descclassname">booleano.parser.parsers.</tt><tt class="descname">ConvertibleParser</tt><big>(</big><em>grammar</em><big>)</big><a class="headerlink" href="#booleano.parser.parsers.ConvertibleParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convertible parser.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameter:</th><td class="field-body"><em>grammar</em> (<a title="booleano.parser.Grammar" class="reference internal" href="#booleano.parser.Grammar"><tt class="xref docutils literal"><span class="pre">booleano.parser.Grammar</span></tt></a>) &#8211; The grammar used by the parser.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-booleano.parser.trees">
+<h2>Parse trees<a class="headerlink" href="#module-booleano.parser.trees" title="Permalink to this headline">¶</a></h2>
+<p>Parse trees.</p>
+<p>Booleano supports two kinds of parse trees:</p>
+<ul class="simple">
+<li><strong>Evaluable parse trees</strong>, which are truth-evaluated against so-called
+context.</li>
+<li><strong>Convertible parse trees</strong>, which are converted into something else (e.g.,
+SQL &#8220;WHERE&#8221; clauses) using so-called parse tree converters.</li>
+</ul>
+<dl class="class">
+<dt id="booleano.parser.trees.ParseTree">
+<em class="property">class </em><tt class="descclassname">booleano.parser.trees.</tt><tt class="descname">ParseTree</tt><big>(</big><em>root_node</em><big>)</big><a class="headerlink" href="#booleano.parser.trees.ParseTree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a></p>
+<p>Base class for parse trees.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameter:</th><td class="field-body"><em>root_node</em> (<a title="booleano.operations.OperationNode" class="reference external" href="operations.html#booleano.operations.OperationNode"><tt class="xref docutils literal"><span class="pre">booleano.operations.OperationNode</span></tt></a>) &#8211; The root node of the parse tree.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="booleano.parser.trees.EvaluableParseTree">
+<em class="property">class </em><tt class="descclassname">booleano.parser.trees.</tt><tt class="descname">EvaluableParseTree</tt><big>(</big><em>root_node</em><big>)</big><a class="headerlink" href="#booleano.parser.trees.EvaluableParseTree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="booleano.parser.trees.ParseTree" class="reference internal" href="#booleano.parser.trees.ParseTree"><tt class="xref docutils literal"><span class="pre">booleano.parser.trees.ParseTree</span></tt></a></p>
+<p>Truth-evaluable parse tree.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameter:</th><td class="field-body"><em>root_node</em> (<a title="booleano.operations.OperationNode" class="reference external" href="operations.html#booleano.operations.OperationNode"><tt class="xref docutils literal"><span class="pre">booleano.operations.OperationNode</span></tt></a>) &#8211; The root node of the parse tree.</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">Raises <a title="booleano.exc.InvalidOperationError" class="reference external" href="exceptions.html#booleano.exc.InvalidOperationError">booleano.exc.InvalidOperationError</a>:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">If the <tt class="docutils literal"><span class="pre">root_node</span></tt> is an 
+operand that doesn&#8217;t support logical values.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="booleano.parser.trees.ConvertibleParseTree">
+<em class="property">class </em><tt class="descclassname">booleano.parser.trees.</tt><tt class="descname">ConvertibleParseTree</tt><big>(</big><em>root_node</em><big>)</big><a class="headerlink" href="#booleano.parser.trees.ConvertibleParseTree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="booleano.parser.trees.ParseTree" class="reference internal" href="#booleano.parser.trees.ParseTree"><tt class="xref docutils literal"><span class="pre">booleano.parser.trees.ParseTree</span></tt></a></p>
+<p>Convertible parse tree.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameter:</th><td class="field-body"><em>root_node</em> (<a title="booleano.operations.OperationNode" class="reference external" href="operations.html#booleano.operations.OperationNode"><tt class="xref docutils literal"><span class="pre">booleano.operations.OperationNode</span></tt></a>) &#8211; The root node of the parse tree.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href=""><tt class="docutils literal"><span class="pre">booleano.parser</span></tt> &#8211; Boolean expressions parser</a><ul>
+<li><a class="reference external" href="#grammar-definition">Grammar definition</a><ul>
+<li><a class="reference external" href="#test-utilities">Test utilities</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#scope-definition-name-binding">Scope definition / name <tt class="docutils literal"><span class="pre">binding</span></tt></a></li>
+<li><a class="reference external" href="#parse-managers">Parse managers</a></li>
+<li><a class="reference external" href="#module-booleano.parser.parsers">Parsers</a></li>
+<li><a class="reference external" href="#module-booleano.parser.trees">Parse trees</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="index.html"
+                                  title="previous chapter"><tt class="docutils literal docutils literal docutils literal docutils literal"><span class="pre">booleano</span></tt> API documentation</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="operations.html"
+                                  title="next chapter"><tt class="docutils literal docutils literal docutils literal"><span class="pre">booleano.operations</span></tt> &#8211; Boolean Operation Nodes</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/api/parser.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="operations.html" title="booleano.operations – Boolean Operation Nodes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="booleano API documentation"
+             >previous</a> |</li>
+        <li><a href="../index.html">Booleano v1.0a1 documentation</a> &raquo;</li>
+          <li><a href="index.html" ><tt class="docutils literal docutils literal docutils literal docutils literal docutils literal"><span class="pre">booleano</span></tt> API documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009, Gustavo Narea.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.3.
+    </div>
+  </body>
+</html>

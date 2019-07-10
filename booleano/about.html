@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>About Booleano &mdash; Booleano v1.0a1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0a1',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="" />
+    <link rel="top" title="Booleano v1.0a1 documentation" href="index.html" />
+    <link rel="next" title="Change log" href="changes.html" />
+    <link rel="prev" title="booleano.exc – Exceptions raised by Booleano" href="api/exceptions.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="changes.html" title="Change log"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="api/exceptions.html" title="booleano.exc – Exceptions raised by Booleano"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Booleano v1.0a1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="about-booleano">
+<h1>About Booleano<a class="headerlink" href="#about-booleano" title="Permalink to this headline">¶</a></h1>
+<p>Booleano is a project started by <a class="reference external" href="http://gustavonarea.net/">Gustavo Narea</a>
+in late April 2009, when he was working on some authorization stuff (<a class="reference external" href="http://pyacl.com">PyACL</a> and <a class="reference external" href="http://what.repoze.org">repoze.what 2</a>) and the
+need to support user-friendly, plain text conditions arose.</p>
+<div class="section" id="community-links">
+<h2>Community links<a class="headerlink" href="#community-links" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://groups.google.com/group/booleano">Mailing list</a>.</li>
+<li><a class="reference external" href="http://feeds.launchpad.net/booleano/announcements.atom">News feed</a>.</li>
+<li><a class="reference external" href="https://launchpad.net/booleano">Development web site</a> at Launchpad.<ul>
+<li><a class="reference external" href="https://bugs.launchpad.net/booleano">Bugs</a>.</li>
+<li><a class="reference external" href="https://code.launchpad.net/booleano">Bazaar repository</a>.</li>
+</ul>
+</li>
+<li>Do you like Booleano? Promote it at <a class="reference external" href="https://www.ohloh.net/p/booleano">Ohloh</a>
+or <a class="reference external" href="http://freshmeat.net/projects/booleano">Freshmeat</a>!</li>
+</ul>
+</div>
+<div class="section" id="how-to-contribute">
+<h2>How to contribute<a class="headerlink" href="#how-to-contribute" title="Permalink to this headline">¶</a></h2>
+<p>Any help is most welcome! Below are some tips:</p>
+<ul class="simple">
+<li>It&#8217;s assumed that you&#8217;ve read and understood <a class="reference internal" href="#legal-terms"><em>Legal stuff (aka &#8220;boring stuff&#8221;)</em></a>.</li>
+<li>Bugs should be reported at <a class="reference external" href="https://launchpad.net/booleano/+filebug">Booleano&#8217;s bug tracking system</a>.</li>
+<li>Feature requests should be posted to the mailing list, so they can be
+discussed first.</li>
+<li>Regular code contributors are encouraged to create a Bazaar branch of the
+mainline development repository (<tt class="docutils literal"><span class="pre">bzr</span> <span class="pre">branch</span> <span class="pre">lp:booleano</span></tt>) and make a <a class="reference external" href="https://help.launchpad.net/Code/Review">merge
+proposal via Launchpad.net</a> when
+they&#8217;re done, instead of sending individual patches. For help, please
+read the tutorial <a class="reference external" href="http://doc.bazaar-vcs.org/latest/en/mini-tutorial/">Bazaar in five minutes</a> or ask on the
+mailing list.</li>
+<li>Patches and merge proposals that meet the <a class="reference internal" href="#coding-conventions">coding conventions</a> will be
+applied immediately. Those that don&#8217;t, will remain in the merge queue until
+the maintainer of Booleano finds the time to improve the changes proposed.</li>
+</ul>
+<p>Sorry about the pickiness, but the goal is to keep Booleano as a transparent
+and high quality library. That&#8217;s something we&#8217;ll all benefit from in the end.</p>
+<div class="section" id="coding-conventions">
+<h3>Coding conventions<a class="headerlink" href="#coding-conventions" title="Permalink to this headline">¶</a></h3>
+<p>The coding conventions for Booleano are not special at all &#8211; they are
+basically the same you will find in other Python projects. Most of the
+conventions below apply to Python files only, but some of them apply to any
+source code file:</p>
+<ul class="simple">
+<li>The character encoding should be UTF-8.</li>
+<li>Lines should not contain more than 80 characters.</li>
+<li>The new line character should be the one used in Unix systems (<tt class="docutils literal"><span class="pre">\n</span></tt>).</li>
+<li>Stick to the <cite>widely</cite> used <a class="reference external" href="http://www.python.org/dev/peps/pep-0008/">Style Guide for Python Code</a> and <a class="reference external" href="http://www.python.org/dev/peps/pep-0257/">Docstring Conventions</a>.</li>
+<li>The <strong>unit test suite</strong> for the package should cover 100% of the code and all
+its tests must pass, otherwise no release will be made. It won&#8217;t make the
+package 100% bug-free (that&#8217;s impossible), but at least we&#8217;ll
+avoid regression bugs effectively and we&#8217;ll be sure that a bug found will be
+just a not yet written test. It should be easy if you practice the
+Test-Driven Development methodology.</li>
+<li>All the public components of the package should be properly documented
+along with examples, so that people won&#8217;t have to dive into our code to
+learn how to achieve what they want. This is optional in alpha releases only.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="acknowledgment">
+<h2>Acknowledgment<a class="headerlink" href="#acknowledgment" title="Permalink to this headline">¶</a></h2>
+<p>Big thank-yous go to:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://sourceforge.net/users/ptmcg">Paul McGuire</a>, for making the awesome
+<a class="reference external" href="http://pyparsing.wikispaces.com/">Pyparsing</a> package (which powers the
+Booleano parser).</li>
+<li><a class="reference external" href="http://spir.wikidot.com/">Denis Spir</a>, for his highly valuable
+recommendations since early in the development of this library and for
+making an <a class="reference external" href="http://spir.wikidot.com/pijnu-samples">alternate Booleano parser</a>.</li>
+</ul>
+</div>
+<div class="section" id="what-s-in-a-name">
+<h2>What&#8217;s in a name?<a class="headerlink" href="#what-s-in-a-name" title="Permalink to this headline">¶</a></h2>
+<p>The author of the library is a Venezuelan guy who enjoys naming projects with
+Castilian (aka Spanish) words. As you may have guessed, &#8220;booleano&#8221; is the
+Castilian translation for &#8220;boolean&#8221;.</p>
+<p>In case you wonder how would a native speaker pronounce it, it&#8217;d be something
+like &#8220;boo-leh-ah-noh&#8221;.</p>
+</div>
+<div class="section" id="legal-stuff-aka-boring-stuff">
+<span id="legal-terms"></span><h2>Legal stuff (aka &#8220;boring stuff&#8221;)<a class="headerlink" href="#legal-stuff-aka-boring-stuff" title="Permalink to this headline">¶</a></h2>
+<p>Except for the logo and this documentation, or unless explicitly told otherwise,
+any resource that is part of the Booleano project, including but not limited to
+source code in the Python Programming Language and its in-code documentation
+(&#8220;docstrings&#8221;), is available under the terms of the <a class="reference external" href="http://www.gnu.org/licenses/gpl-3.0-standalone.html">GNU General Public License
+Version 3</a> or any later
+version published by the Free Software Foundation.</p>
+<p>By contributing software source code to the project, you accept to license
+your work under these terms.</p>
+<p>This documentation, on the other hand, copyright 2009 by Gustavo Narea, is
+available under the terms of the <a class="reference external" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-Share Alike 3.0
+Unported  License</a>. By
+contributing documentation to the project, you accept to license your work under
+the terms of the same license.</p>
+<p>Finally, the logo, also copyright 2009 by Gustavo Narea, is available
+under the terms of <a class="reference external" href="http://creativecommons.org/licenses/by-nd/2.0/uk/">Creative Commons Attribution-No Derivative Works 2.0 UK:
+England &amp; Wales License</a>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.png" alt="Logo"/>
+            </a></p>
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="">About Booleano</a><ul>
+<li><a class="reference external" href="#community-links">Community links</a></li>
+<li><a class="reference external" href="#how-to-contribute">How to contribute</a><ul>
+<li><a class="reference external" href="#coding-conventions">Coding conventions</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#acknowledgment">Acknowledgment</a></li>
+<li><a class="reference external" href="#what-s-in-a-name">What&#8217;s in a name?</a></li>
+<li><a class="reference external" href="#legal-stuff-aka-boring-stuff">Legal stuff (aka &#8220;boring stuff&#8221;)</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="api/exceptions.html"
+                                  title="previous chapter"><tt class="docutils literal"><span class="pre">booleano.exc</span></tt> &#8211; Exceptions raised by Booleano</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="changes.html"
+                                  title="next chapter">Change log</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/about.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="changes.html" title="Change log"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="api/exceptions.html" title="booleano.exc – Exceptions raised by Booleano"
+             >previous</a> |</li>
+        <li><a href="index.html">Booleano v1.0a1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009, Gustavo Narea.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.3.
+    </div>
+  </body>
+</html>

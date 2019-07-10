@@ -1,0 +1,198 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Installing repoze.who.plugins.ldap &mdash; repoze.who.plugins.ldap v1.1a1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.1a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="repoze.who.plugins.ldap v1.1a1 documentation" href="index.html" />
+    <link rel="next" title="Using the repoze.who LDAP plugins in your WSGI Application" href="Using.html" />
+    <link rel="prev" title="repoze.who.plugins.ldap - LDAP Authentication for WSGI Applications" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Using.html" title="Using the repoze.who LDAP plugins in your WSGI Application"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="repoze.who.plugins.ldap - LDAP Authentication for WSGI Applications"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">repoze.who.plugins.ldap v1.1a1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="installing-repoze-who-plugins-ldap">
+<h1>Installing repoze.who.plugins.ldap<a class="headerlink" href="#installing-repoze-who-plugins-ldap" title="Permalink to this headline">¶</a></h1>
+<p>Installing the <a class="reference external" href="http://code.gustavonarea.net/repoze.who.plugins.ldap/">repoze.who.plugins.ldap</a> plugin itself is
+rather easy, but unfortunately, installing <a class="reference external" href="http://python-ldap.sourceforge.net/">python-ldap</a> (the main dependency of this plugin)
+may be a nightmare. Hopefully this document will help you get this plugin
+and its dependencies working quickly.</p>
+<div class="section" id="the-quick-install">
+<h2>The quick install<a class="headerlink" href="#the-quick-install" title="Permalink to this headline">¶</a></h2>
+<p>If you&#8217;ve already installed <cite>python-ldap</cite> on your computer, the following
+command will install <cite>repoze.who.plugins.ldap</cite>:</p>
+<div class="highlight-python"><pre>easy_install repoze.who.plugins.ldap</pre>
+</div>
+<p>If it&#8217;s not already installed on your computer, read on.</p>
+<p><strong>Note:</strong> If you&#8217;re on Ubuntu, don&#8217;t rely on the python-ldap package provided by
+the package manager - <a class="reference external" href="https://bugs.launchpad.net/ubuntu/+source/python-ldap/+bug/267193">its install will be ignored by easy_install for some
+reason</a>;
+this may also happen in Debian. Read on to install it manually.</p>
+</div>
+<div class="section" id="installing-python-ldap-manually">
+<h2>Installing <cite>python-ldap</cite> manually<a class="headerlink" href="#installing-python-ldap-manually" title="Permalink to this headline">¶</a></h2>
+<p>If you have problems to install the plugin, they are very likely to be caused by
+<cite>python-ldap</cite>: You will have to install it manually in order to set the correct
+path to the OpenLDAP libraries.</p>
+<p>Once you&#8217;ve successfully installed <cite>python-ldap</cite>, you&#8217;ll be ready to install
+<cite>repoze.who.plugins.ldap</cite> with the command above.</p>
+<div class="section" id="installing-python-ldap-on-ubuntu">
+<h3>Installing <cite>python-ldap</cite> on Ubuntu<a class="headerlink" href="#installing-python-ldap-on-ubuntu" title="Permalink to this headline">¶</a></h3>
+<p>This may also work for Debian. If this procedure works in your Debian system,
+please let us know.</p>
+<p>First, install its dependencies:</p>
+<div class="highlight-python"><pre>sudo apt-get install build-essential libldap2-dev libsasl2-dev python-dev libssl-dev</pre>
+</div>
+<p>Then, download the source of <cite>python-ldap</cite>, uncompress it and <cite>cd</cite> to its folder.
+Once you&#8217;re there, edit the <cite>setup.cfg</cite> file to correct the parameters in the
+<cite>[_ldap]</cite> section:</p>
+<div class="highlight-python"><pre>extra_objects =
+extra_compile_args =
+libs = ldap_r lber ssl crypto
+library_dirs = /usr/lib
+include_dirs = /usr/include /usr/lib/sasl2</pre>
+</div>
+<p>Save the file and run:</p>
+<div class="highlight-python"><pre>python setup.py build
+sudo python setup.py install</pre>
+</div>
+</div>
+<div class="section" id="installing-on-other-systems">
+<h3>Installing on other systems<a class="headerlink" href="#installing-on-other-systems" title="Permalink to this headline">¶</a></h3>
+<p>For more information, visit:
+<a class="reference external" href="http://python-ldap.sourceforge.net/doc/html/installing.html">http://python-ldap.sourceforge.net/doc/html/installing.html</a></p>
+<p>Please don&#8217;t hesitate to let us know how you installed it on other systems, so
+that we can post it here.</p>
+</div>
+<div class="section" id="troubleshooting">
+<h3>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h3>
+<p>If you have trouble to install <cite>python-ldap</cite> on your system, please ask in <a class="reference external" href="https://lists.sourceforge.net/lists/listinfo/python-ldap-dev">the
+python-ldap mailing list</a>.</p>
+</div>
+</div>
+<div class="section" id="installing-the-mainline-development-branch">
+<h2>Installing the mainline development branch<a class="headerlink" href="#installing-the-mainline-development-branch" title="Permalink to this headline">¶</a></h2>
+<p>The plugin is hosted in <a class="reference external" href="https://code.launchpad.net/repoze.who.plugins.ldap">a Bazaar branch hosted at Launchpad.net</a>. To get the latest source
+code, run:</p>
+<div class="highlight-python"><pre>bzr branch lp:repoze.who.plugins.ldap</pre>
+</div>
+<p>Then run the command below, from the project folder:</p>
+<div class="highlight-python"><pre>python setup.py develop</pre>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Installing repoze.who.plugins.ldap</a><ul>
+<li><a class="reference internal" href="#the-quick-install">The quick install</a></li>
+<li><a class="reference internal" href="#installing-python-ldap-manually">Installing <cite>python-ldap</cite> manually</a><ul>
+<li><a class="reference internal" href="#installing-python-ldap-on-ubuntu">Installing <cite>python-ldap</cite> on Ubuntu</a></li>
+<li><a class="reference internal" href="#installing-on-other-systems">Installing on other systems</a></li>
+<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#installing-the-mainline-development-branch">Installing the mainline development branch</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">repoze.who.plugins.ldap - LDAP Authentication for WSGI Applications</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Using.html"
+                        title="next chapter">Using the repoze.who LDAP plugins in your WSGI Application</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/Install.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Using.html" title="Using the repoze.who LDAP plugins in your WSGI Application"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="repoze.who.plugins.ldap - LDAP Authentication for WSGI Applications"
+             >previous</a> |</li>
+        <li><a href="index.html">repoze.who.plugins.ldap v1.1a1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2008-2010, Gustavo Narea.
+      Last updated on Jun 03, 2010.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0b2.
+    </div>
+  </body>
+</html>

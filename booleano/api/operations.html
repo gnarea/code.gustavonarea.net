@@ -1,0 +1,1238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>booleano.operations – Boolean Operation Nodes &mdash; Booleano v1.0a1 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0a1',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Booleano v1.0a1 documentation" href="../index.html" />
+    <link rel="up" title="booleano API documentation" href="index.html" />
+    <link rel="next" title="booleano.exc – Exceptions raised by Booleano" href="exceptions.html" />
+    <link rel="prev" title="booleano.parser – Boolean expressions parser" href="parser.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="exceptions.html" title="booleano.exc – Exceptions raised by Booleano"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="parser.html" title="booleano.parser – Boolean expressions parser"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Booleano v1.0a1 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U"><tt class="docutils literal docutils literal docutils literal"><span class="pre">booleano</span></tt> API documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-booleano.operations">
+<h1><tt class="xref docutils literal"><span class="pre">booleano.operations</span></tt> &#8211; Boolean Operation Nodes<a class="headerlink" href="#module-booleano.operations" title="Permalink to this headline">¶</a></h1>
+<p>Boolean operation nodes and utilities.</p>
+<p>In other words, this package contains the elements of the parse trees.</p>
+<p>Once parsed, the binary expressions are turned into the relevant operation
+using the classes provided by this package.</p>
+<dl class="class">
+<dt id="booleano.operations.OperationNode">
+<em class="property">class </em><tt class="descclassname">booleano.operations.</tt><tt class="descname">OperationNode</tt><a class="headerlink" href="#booleano.operations.OperationNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for the individual elements available in a boolean operation
+(i.e., operands and operations).</p>
+<p>It can also be seen as the base class for each node in the parse trees.</p>
+<dl class="method">
+<dt id="booleano.operations.OperationNode.__call__">
+<tt class="descname">__call__</tt><big>(</big><em>context</em><big>)</big><a class="headerlink" href="#booleano.operations.OperationNode.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate the operation, by passing the <tt class="docutils literal"><span class="pre">context</span></tt> to the inner
+operands/operators.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameter:</th><td class="field-body"><em>context</em> (object) &#8211; The evaluation context.</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body">The logical value of the operation node.</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="booleano.operations.OperationNode.is_branch">
+<tt class="descname">is_branch</tt><big>(</big><big>)</big><a class="headerlink" href="#booleano.operations.OperationNode.is_branch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if this is a branch node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+<p>Branch nodes are those that contain other nodes (operands or operators):
+All the operators, plus <a title="booleano.operations.Set" class="reference internal" href="#booleano.operations.Set"><tt class="xref docutils literal"><span class="pre">Set</span></tt></a>, <a title="booleano.operations.Function" class="reference internal" href="#booleano.operations.Function"><tt class="xref docutils literal"><span class="pre">Function</span></tt></a> and
+<a title="booleano.operations.PlaceholderFunction" class="reference internal" href="#booleano.operations.PlaceholderFunction"><tt class="xref docutils literal"><span class="pre">PlaceholderFunction</span></tt></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="booleano.operations.OperationNode.is_leaf">
+<tt class="descname">is_leaf</tt><big>(</big><big>)</big><a class="headerlink" href="#booleano.operations.OperationNode.is_leaf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if this is a leaf node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+<p>Leaf nodes are those that don&#8217;t contain other nodes (operands or
+operators): <a title="booleano.operations.String" class="reference internal" href="#booleano.operations.String"><tt class="xref docutils literal"><span class="pre">String</span></tt></a>, <a title="booleano.operations.Number" class="reference internal" href="#booleano.operations.Number"><tt class="xref docutils literal"><span class="pre">Number</span></tt></a>, <a title="booleano.operations.Variable" class="reference internal" href="#booleano.operations.Variable"><tt class="xref docutils literal"><span class="pre">Variable</span></tt></a> and
+<a title="booleano.operations.PlaceholderVariable" class="reference internal" href="#booleano.operations.PlaceholderVariable"><tt class="xref docutils literal"><span class="pre">PlaceholderVariable</span></tt></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="booleano.operations.OperationNode.is_operand">
+<tt class="descname">is_operand</tt><big>(</big><big>)</big><a class="headerlink" href="#booleano.operations.OperationNode.is_operand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if this node is an operand.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="booleano.operations.OperationNode.is_operator">
+<tt class="descname">is_operator</tt><big>(</big><big>)</big><a class="headerlink" href="#booleano.operations.OperationNode.is_operator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if this node is an operation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="operands">
+<h2>Operands<a class="headerlink" href="#operands" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="booleano.operations.operands.Operand">
+<em class="property">class </em><tt class="descclassname">booleano.operations.operands.</tt><tt class="descname">Operand</tt><a class="headerlink" href="#booleano.operations.operands.Operand" title="Permalink to this definition">¶</a></dt>
+<dd>Base class for operands.</dd></dl>
+
+<p class="graphviz">
+<img src="../_images/inheritance-d6f8933ac3531b87e8a6c4576cd95b74570a1164.png" alt="digraph inheritance1f1cd75e5c {
+rankdir=LR;
+size=&quot;8.0, 12.0&quot;;
+  &quot;String&quot; [shape=box,style=&quot;setlinewidth(0.5)&quot;,fontsize=10,fontname=Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans,height=0.25];
+  &quot;Constant&quot; -&gt; &quot;String&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;Number&quot; [shape=box,style=&quot;setlinewidth(0.5)&quot;,fontsize=10,fontname=Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans,height=0.25];
+  &quot;Constant&quot; -&gt; &quot;Number&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;Class&quot; [style=&quot;setlinewidth(0.5)&quot;,URL=&quot;#booleano.operations.operands.classes.Class&quot;,fontname=Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans,height=0.25,shape=box,fontsize=10];
+  &quot;Operand&quot; -&gt; &quot;Class&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;PlaceholderVariable&quot; [shape=box,style=&quot;setlinewidth(0.5)&quot;,fontsize=10,fontname=Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans,height=0.25];
+  &quot;PlaceholderInstance&quot; -&gt; &quot;PlaceholderVariable&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;Variable&quot; [shape=box,style=&quot;setlinewidth(0.5)&quot;,fontsize=10,fontname=Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans,height=0.25];
+  &quot;Class&quot; -&gt; &quot;Variable&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;OperationNode&quot; [style=&quot;setlinewidth(0.5)&quot;,URL=&quot;#booleano.operations.OperationNode&quot;,fontname=Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans,height=0.25,shape=box,fontsize=10];
+  &quot;Constant&quot; [style=&quot;setlinewidth(0.5)&quot;,URL=&quot;#booleano.operations.operands.constants.Constant&quot;,fontname=Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans,height=0.25,shape=box,fontsize=10];
+  &quot;Operand&quot; -&gt; &quot;Constant&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;PlaceholderInstance&quot; [style=&quot;setlinewidth(0.5)&quot;,URL=&quot;#booleano.operations.operands.placeholders.PlaceholderInstance&quot;,fontname=Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans,height=0.25,shape=box,fontsize=10];
+  &quot;Operand&quot; -&gt; &quot;PlaceholderInstance&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;Set&quot; [shape=box,style=&quot;setlinewidth(0.5)&quot;,fontsize=10,fontname=Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans,height=0.25];
+  &quot;Constant&quot; -&gt; &quot;Set&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;Operand&quot; [style=&quot;setlinewidth(0.5)&quot;,URL=&quot;#booleano.operations.operands.Operand&quot;,fontname=Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans,height=0.25,shape=box,fontsize=10];
+  &quot;OperationNode&quot; -&gt; &quot;Operand&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;PlaceholderFunction&quot; [shape=box,style=&quot;setlinewidth(0.5)&quot;,fontsize=10,fontname=Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans,height=0.25];
+  &quot;PlaceholderInstance&quot; -&gt; &quot;PlaceholderFunction&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;Function&quot; [shape=box,style=&quot;setlinewidth(0.5)&quot;,fontsize=10,fontname=Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans,height=0.25];
+  &quot;Class&quot; -&gt; &quot;Function&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+}" usemap="#inheritance1f1cd75e5c" class="inheritance"/>
+<map id="inheritance1f1cd75e5c" name="inheritance1f1cd75e5c">
+<area shape="rect" href="#booleano.operations.operands.constants.Constant" title="Constant" alt="" coords="333,81,413,108"/>
+<area shape="rect" href="#booleano.operations.operands.classes.Class" title="Class" alt="" coords="337,183,409,209"/>
+<area shape="rect" href="#booleano.operations.operands.Operand" title="Operand" alt="" coords="175,183,249,209"/>
+<area shape="rect" href="#booleano.operations.operands.placeholders.PlaceholderInstance" title="PlaceholderInstance" alt="" coords="299,259,448,285"/>
+<area shape="rect" href="#booleano.operations.OperationNode" title="OperationNode" alt="" coords="7,183,124,209"/>
+</map>
+</p>
+<div class="section" id="constants">
+<h3>Constants<a class="headerlink" href="#constants" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="booleano.operations.operands.constants.Constant">
+<em class="property">class </em><tt class="descclassname">booleano.operations.operands.constants.</tt><tt class="descname">Constant</tt><big>(</big><em>constant_value</em><big>)</big><a class="headerlink" href="#booleano.operations.operands.constants.Constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for constant operands.</p>
+<p>The only operation that is common to all the constants is equality (see
+<tt class="xref docutils literal"><span class="pre">equals()</span></tt>).</p>
+<p>Constants don&#8217;t rely on the context &#8211; they are constant!</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This class is available as the base for the built-in <a title="booleano.operations.String" class="reference internal" href="#booleano.operations.String"><tt class="xref docutils literal"><span class="pre">String</span></tt></a>,
+<a title="booleano.operations.Number" class="reference internal" href="#booleano.operations.Number"><tt class="xref docutils literal"><span class="pre">Number</span></tt></a> and <a title="booleano.operations.Set" class="reference internal" href="#booleano.operations.Set"><tt class="xref docutils literal"><span class="pre">Set</span></tt></a> classes. User-defined constants aren&#8217;t
+supported, but you can assign a name to a constant (see
+<a class="reference external" href="../manual/glossary.html#term-binding"><em class="xref">binding</em></a>).</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameter:</th><td class="field-body"><em>constant_value</em> (<a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a>) &#8211; The Python value represented by the Booleano
+constant.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="booleano.operations.String">
+<em class="property">class </em><tt class="descclassname">booleano.operations.</tt><tt class="descname">String</tt><big>(</big><em>string</em><big>)</big><a class="headerlink" href="#booleano.operations.String" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constant string.</p>
+<p>These constants only support equality operations.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><strong>Membership operations aren&#8217;t supported</strong></p>
+<p>Although both sets and strings are item collections, the former is 
+unordered and the later is ordered. If they were supported, there would
+some ambiguities to sort out, because users would expect the following
+operation results:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">&quot;ao&quot;</span> <span class="pre">⊂</span> <span class="pre">&quot;hola&quot;</span></tt> is false: If strings were also sets, then the 
+resulting operation would be <tt class="docutils literal"><span class="pre">{&quot;a&quot;,</span> <span class="pre">&quot;o&quot;}</span> <span class="pre">⊂</span> <span class="pre">{&quot;h&quot;,</span> <span class="pre">&quot;o&quot;,</span> <span class="pre">&quot;l&quot;,</span> <span class="pre">&quot;a&quot;}</span></tt>,
+which is true.</li>
+<li><tt class="docutils literal"><span class="pre">&quot;la&quot;</span> <span class="pre">∈</span> <span class="pre">&quot;hola&quot;</span></tt> is true: If strings were also sets, then the 
+resulting operation would be <tt class="docutils literal"><span class="pre">{&quot;l&quot;,</span> <span class="pre">&quot;a&quot;}</span> <span class="pre">∈</span> <span class="pre">{&quot;h&quot;,</span> <span class="pre">&quot;o&quot;,</span> <span class="pre">&quot;l&quot;,</span> <span class="pre">&quot;a&quot;}</span></tt>, 
+which would be an <em>invalid operation</em> because the first operand must 
+be an item, not a set. But if we make an exception and take the first 
+operand as an item, the resulting operation would be 
+<tt class="docutils literal"><span class="pre">&quot;la&quot;</span> <span class="pre">∈</span> <span class="pre">{&quot;h&quot;,</span> <span class="pre">&quot;o&quot;,</span> <span class="pre">&quot;l&quot;,</span> <span class="pre">&quot;a&quot;}</span></tt>, which is not true.</li>
+</ul>
+<p>The solution to the problems above would involve some magic which
+contradicts the definition of a set: Take the second operand as an 
+<em>ordered collection</em>. But it&#8217;d just cause more trouble, because both
+operations would be equivalent!</p>
+<p>Also, there would be other issues to take into account (or not), like
+case-sensitivity.</p>
+<p class="last">Therefore, if this functionality is needed, developers should create
+functions to handle it.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameter:</th><td class="field-body"><em>string</em> (<a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#basestring"><tt class="xref docutils literal"><span class="pre">basestring</span></tt></a>) &#8211; The Python string to be represented by this Booleano
+string.</td>
+</tr>
+</tbody>
+</table>
+<p><tt class="docutils literal"><span class="pre">string</span></tt> will be converted to <a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#unicode"><tt class="xref docutils literal"><span class="pre">unicode</span></tt></a>, so it doesn&#8217;t
+have to be a <a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#basestring"><tt class="xref docutils literal"><span class="pre">basestring</span></tt></a> initially.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="booleano.operations.Number">
+<em class="property">class </em><tt class="descclassname">booleano.operations.</tt><tt class="descname">Number</tt><big>(</big><em>number</em><big>)</big><a class="headerlink" href="#booleano.operations.Number" title="Permalink to this definition">¶</a></dt>
+<dd><p>Numeric constant.</p>
+<p>These constants support inequality operations; see <tt class="xref docutils literal"><span class="pre">greater_than()</span></tt>
+and <tt class="xref docutils literal"><span class="pre">less_than()</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameter:</th><td class="field-body"><em>number</em> (<a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a>) &#8211; The number to be represented, as a Python object.</td>
+</tr>
+</tbody>
+</table>
+<p><tt class="docutils literal"><span class="pre">number</span></tt> is converted into a <a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#float"><tt class="xref docutils literal"><span class="pre">float</span></tt></a> internally, so it can
+be an <a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#basestring"><tt class="xref docutils literal"><span class="pre">string</span></tt></a> initially.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="booleano.operations.Set">
+<em class="property">class </em><tt class="descclassname">booleano.operations.</tt><tt class="descname">Set</tt><big>(</big><em>*items</em><big>)</big><a class="headerlink" href="#booleano.operations.Set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constant sets.</p>
+<p>These constants support membership operations; see <tt class="xref docutils literal"><span class="pre">contains()</span></tt> and
+<tt class="xref docutils literal"><span class="pre">is_subset()</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name" colspan="2">Raises <a title="booleano.exc.InvalidOperationError" class="reference external" href="exceptions.html#booleano.exc.InvalidOperationError">booleano.exc.InvalidOperationError</a>:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">If at least one of the 
+<tt class="docutils literal"><span class="pre">items</span></tt> is not an operand.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h3>
+<p>Note we&#8217;re talking about <strong>Booleano classes</strong>, not Python classes. These are
+used in <em class="xref">evaluable parsing</em>.</p>
+<dl class="class">
+<dt id="booleano.operations.operands.classes.Class">
+<em class="property">class </em><tt class="descclassname">booleano.operations.operands.classes.</tt><tt class="descname">Class</tt><a class="headerlink" href="#booleano.operations.operands.classes.Class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for Booleano&#8217;s anonymous classes.</p>
+<p>The classes are anonymous because the have no notion of binding. From the
+Wikipedia:</p>
+<blockquote>
+In most languages, a class is bound to a name or identifier upon
+definition. However, some languages allow classes to be defined without
+names. Such a class is called an anonymous class (analogous to named vs.
+anonymous functions).</blockquote>
+</dd></dl>
+
+<dl class="class">
+<dt id="booleano.operations.Variable">
+<em class="property">class </em><tt class="descclassname">booleano.operations.</tt><tt class="descname">Variable</tt><a class="headerlink" href="#booleano.operations.Variable" title="Permalink to this definition">¶</a></dt>
+<dd>Developer-defined variable.</dd></dl>
+
+<dl class="class">
+<dt id="booleano.operations.Function">
+<em class="property">class </em><tt class="descclassname">booleano.operations.</tt><tt class="descname">Function</tt><big>(</big><em>*arguments</em><big>)</big><a class="headerlink" href="#booleano.operations.Function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for <strong>calls</strong> of developer-defined, n-ary functions.</p>
+<p>Instances of this Python class represent calls of the function, not the
+function itself.</p>
+<p>Subclasses must override <a title="booleano.operations.Function.check_arguments" class="reference internal" href="#booleano.operations.Function.check_arguments"><tt class="xref docutils literal"><span class="pre">check_arguments()</span></tt></a> to verify the validity of
+the arguments, or to do nothing if it&#8217;s not necessary. They must also
+define <a title="booleano.operations.Function.required_arguments" class="reference internal" href="#booleano.operations.Function.required_arguments"><tt class="xref docutils literal"><span class="pre">required_arguments</span></tt></a> and <a title="booleano.operations.Function.optional_arguments" class="reference internal" href="#booleano.operations.Function.optional_arguments"><tt class="xref docutils literal"><span class="pre">optional_arguments</span></tt></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name" colspan="2">Raises <a title="booleano.exc.BadCallError" class="reference external" href="exceptions.html#booleano.exc.BadCallError">booleano.exc.BadCallError</a>:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">If <a title="booleano.operations.Function.check_arguments" class="reference internal" href="#booleano.operations.Function.check_arguments"><tt class="xref docutils literal"><span class="pre">check_arguments()</span></tt></a> finds 
+that the <tt class="docutils literal"><span class="pre">arguments</span></tt> are invalid, or if few arguments are passed,
+or if too much arguments are passed.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="booleano.operations.Function.check_arguments">
+<tt class="descname">check_arguments</tt><big>(</big><big>)</big><a class="headerlink" href="#booleano.operations.Function.check_arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if all the arguments are correct.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name" colspan="2">Raises <a title="booleano.exc.BadCallError" class="reference external" href="exceptions.html#booleano.exc.BadCallError">booleano.exc.BadCallError</a>:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">If at least one of the arguments are
+incorrect.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>This method must be overridden in subclasses</strong>.</p>
+<p>The arguments dictionary will be available in the <tt class="xref docutils literal"><span class="pre">arguments</span></tt>
+attribute. If any of them is wrong, this method must raise a
+<tt class="xref docutils literal"><span class="pre">BadCallError</span></tt> exception.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="booleano.operations.Function.check_equivalence">
+<tt class="descname">check_equivalence</tt><big>(</big><em>node</em><big>)</big><a class="headerlink" href="#booleano.operations.Function.check_equivalence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make sure function <tt class="docutils literal"><span class="pre">node</span></tt> and this function are equivalent.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameter:</th><td class="field-body"><em>node</em> (Function) &#8211; The other function which may be equivalent to this one.</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">Raises AssertionError:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">If <tt class="docutils literal"><span class="pre">node</span></tt> is not a function or if it&#8217;s a
+function but doesn&#8217;t have the same arguments as this one OR doesn&#8217;t
+have the same names as this one.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="booleano.operations.Function.all_args">
+<tt class="descname">all_args</tt><a class="headerlink" href="#booleano.operations.Function.all_args" title="Permalink to this definition">¶</a></dt>
+<dd><p>The names of all the arguments, required and optional.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Type:</th><td class="field-body">tuple</td>
+</tr>
+</tbody>
+</table>
+<p>This is set automatically when the class is defined.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="booleano.operations.Function.arity">
+<tt class="descname">arity</tt><a class="headerlink" href="#booleano.operations.Function.arity" title="Permalink to this definition">¶</a></dt>
+<dd><p>The arity of the function (i.e., the sum of the amount of the required
+arguments and the amount of optional arguments).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+<p>This is set automatically when the class is defined.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="booleano.operations.Function.optional_arguments">
+<tt class="descname">optional_arguments</tt><a class="headerlink" href="#booleano.operations.Function.optional_arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>The optional arguments along with their default values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+<p>This is a dictionary whose keys are the argument names and the items
+are their respective default values.</p>
+<p>For example, if you have a binary function whose arguments are both
+optional (<tt class="docutils literal"><span class="pre">&quot;name&quot;</span></tt> and <tt class="docutils literal"><span class="pre">&quot;address&quot;</span></tt>), your function should be
+defined as:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">booleano.operations</span> <span class="kn">import</span> <span class="n">String</span><span class="p">,</span> <span class="n">Number</span><span class="p">,</span> <span class="n">Function</span>
+
+<span class="k">class</span> <span class="nc">MyFunction</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
+
+    <span class="c"># (...)</span>
+
+    <span class="n">optional_arguments</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">&#39;id&#39;</span><span class="p">:</span> <span class="n">Number</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span>
+        <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="n">String</span><span class="p">(</span><span class="s">&quot;Gustavo&quot;</span><span class="p">),</span>
+        <span class="s">&#39;address&#39;</span><span class="p">:</span> <span class="n">String</span><span class="p">(</span><span class="s">&quot;Somewhere in Madrid&quot;</span><span class="p">),</span>
+        <span class="p">}</span>
+
+    <span class="c"># (...)</span>
+</pre></div>
+</div>
+<p>Then when it&#8217;s called without these arguments, their default values
+will be taken.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="booleano.operations.Function.required_arguments">
+<tt class="descname">required_arguments</tt><a class="headerlink" href="#booleano.operations.Function.required_arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>The names of the required arguments.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Type:</th><td class="field-body">tuple</td>
+</tr>
+</tbody>
+</table>
+<p>For example, if you have a binary function whose required arguments
+are <tt class="docutils literal"><span class="pre">&quot;name&quot;</span></tt> and <tt class="docutils literal"><span class="pre">&quot;address&quot;</span></tt>, your function should be defined as:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">booleano.operations</span> <span class="kn">import</span> <span class="n">Function</span>
+
+<span class="k">class</span> <span class="nc">MyFunction</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
+
+    <span class="c"># (...)</span>
+
+    <span class="n">required_arguments</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">,</span> <span class="s">&quot;address&quot;</span><span class="p">)</span>
+
+    <span class="c"># (...)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="placeholder-instances">
+<h3>Placeholder instances<a class="headerlink" href="#placeholder-instances" title="Permalink to this headline">¶</a></h3>
+<p>Note we&#8217;re talking about <strong>placeholders for instances of Booleano classes</strong>,
+not Python class instances. These are used in <em class="xref">convertible parsing</em>.</p>
+<dl class="class">
+<dt id="booleano.operations.operands.placeholders.PlaceholderInstance">
+<em class="property">class </em><tt class="descclassname">booleano.operations.operands.placeholders.</tt><tt class="descname">PlaceholderInstance</tt><big>(</big><em>name</em>, <em>namespace_parts=None</em><big>)</big><a class="headerlink" href="#booleano.operations.operands.placeholders.PlaceholderInstance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for placeholders of Booleano class instances.</p>
+<p>Initially, placeholder operands support all the operations. It&#8217;s up to the
+converter to verify if the instance is used correctly.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>name</em> (basestring) &#8211; The name for this placeholder.</li>
+<li><em>namespace_parts</em> (tuple) &#8211; The identifiers in the namespace that contains
+the placeholder.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="booleano.operations.PlaceholderVariable">
+<em class="property">class </em><tt class="descclassname">booleano.operations.</tt><tt class="descname">PlaceholderVariable</tt><big>(</big><em>name</em>, <em>namespace_parts=None</em><big>)</big><a class="headerlink" href="#booleano.operations.PlaceholderVariable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Placeholder variable.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>name</em> (basestring) &#8211; The name for this placeholder.</li>
+<li><em>namespace_parts</em> (tuple) &#8211; The identifiers in the namespace that contains
+the placeholder.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="booleano.operations.PlaceholderFunction">
+<em class="property">class </em><tt class="descclassname">booleano.operations.</tt><tt class="descname">PlaceholderFunction</tt><big>(</big><em>function_name</em>, <em>namespace_parts=None</em>, <em>*arguments</em><big>)</big><a class="headerlink" href="#booleano.operations.PlaceholderFunction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Placeholder for a function call.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>function_name</em> (basestring) &#8211; The name of the function to be represented.</li>
+<li><em>namespace_parts</em> (tuple) &#8211; The identifiers in the namespace that contains
+the placeholder function.</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">Raises BadCallError:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body"><p class="first last">If one of the <tt class="docutils literal"><span class="pre">arguments</span></tt> is not an
+<tt class="xref docutils literal"><span class="pre">Operand</span></tt>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="operators">
+<h2>Operators<a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="logical-connectives">
+<h3>Logical connectives<a class="headerlink" href="#logical-connectives" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="booleano.operations.Not">
+<em class="property">class </em><tt class="descclassname">booleano.operations.</tt><tt class="descname">Not</tt><big>(</big><em>operand</em><big>)</big><a class="headerlink" href="#booleano.operations.Not" title="Permalink to this definition">¶</a></dt>
+<dd><p>The logical negation (<tt class="docutils literal"><span class="pre">~</span></tt>).</p>
+<p>Negate the boolean representation of an operand.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name" colspan="2">Raises <a title="booleano.exc.InvalidOperationError" class="reference external" href="exceptions.html#booleano.exc.InvalidOperationError">booleano.exc.InvalidOperationError</a>:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">If <tt class="docutils literal"><span class="pre">operand</span></tt> doesn&#8217;t have
+a logical value.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="booleano.operations.And">
+<em class="property">class </em><tt class="descclassname">booleano.operations.</tt><tt class="descname">And</tt><big>(</big><em>left_operand</em>, <em>right_operand</em><big>)</big><a class="headerlink" href="#booleano.operations.And" title="Permalink to this definition">¶</a></dt>
+<dd><p>The logical conjunction (<tt class="docutils literal"><span class="pre">AND</span></tt>).</p>
+<p>Connective that checks if two operations evaluate to <tt class="xref docutils literal"><span class="pre">True</span></tt>.</p>
+<p>With this binary operator, the operands can be actual operands or
+operations.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name" colspan="2">Raises <a title="booleano.exc.InvalidOperationError" class="reference external" href="exceptions.html#booleano.exc.InvalidOperationError">booleano.exc.InvalidOperationError</a>:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">If <tt class="docutils literal"><span class="pre">left_operand</span></tt> or 
+<tt class="docutils literal"><span class="pre">right_operand</span></tt> doesn&#8217;t have logical values.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="booleano.operations.Xor">
+<em class="property">class </em><tt class="descclassname">booleano.operations.</tt><tt class="descname">Xor</tt><big>(</big><em>left_operand</em>, <em>right_operand</em><big>)</big><a class="headerlink" href="#booleano.operations.Xor" title="Permalink to this definition">¶</a></dt>
+<dd><p>The logical exclusive disjunction (<tt class="docutils literal"><span class="pre">XOR</span></tt>).</p>
+<p>Connective that checks if only one, out of two operations, evaluate to
+<tt class="xref docutils literal"><span class="pre">True</span></tt>.</p>
+<p>With this binary operator, the operands can be actual operands or
+operations.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name" colspan="2">Raises <a title="booleano.exc.InvalidOperationError" class="reference external" href="exceptions.html#booleano.exc.InvalidOperationError">booleano.exc.InvalidOperationError</a>:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">If <tt class="docutils literal"><span class="pre">left_operand</span></tt> or 
+<tt class="docutils literal"><span class="pre">right_operand</span></tt> doesn&#8217;t have logical values.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="booleano.operations.Or">
+<em class="property">class </em><tt class="descclassname">booleano.operations.</tt><tt class="descname">Or</tt><big>(</big><em>left_operand</em>, <em>right_operand</em><big>)</big><a class="headerlink" href="#booleano.operations.Or" title="Permalink to this definition">¶</a></dt>
+<dd><p>The logical inclusive disjunction (<tt class="docutils literal"><span class="pre">OR</span></tt>).</p>
+<p>Connective that check if at least one, out of two operations, evaluate to
+<tt class="xref docutils literal"><span class="pre">True</span></tt>.</p>
+<p>With this binary operator, the operands can be actual operands or
+operations.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name" colspan="2">Raises <a title="booleano.exc.InvalidOperationError" class="reference external" href="exceptions.html#booleano.exc.InvalidOperationError">booleano.exc.InvalidOperationError</a>:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">If <tt class="docutils literal"><span class="pre">left_operand</span></tt> or 
+<tt class="docutils literal"><span class="pre">right_operand</span></tt> doesn&#8217;t have logical values.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="relational-operators">
+<h3>Relational operators<a class="headerlink" href="#relational-operators" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="booleano.operations.Equal">
+<em class="property">class </em><tt class="descclassname">booleano.operations.</tt><tt class="descname">Equal</tt><big>(</big><em>left_operand</em>, <em>right_operand</em><big>)</big><a class="headerlink" href="#booleano.operations.Equal" title="Permalink to this definition">¶</a></dt>
+<dd><p>The equality operator (<tt class="docutils literal"><span class="pre">==</span></tt>).</p>
+<p>Checks that two operands are equivalent.</p>
+<p>For example: <tt class="docutils literal"><span class="pre">3</span> <span class="pre">==</span> <span class="pre">3</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>left_operand</em> (<a title="booleano.operations.operands.Operand" class="reference internal" href="#booleano.operations.operands.Operand"><tt class="xref docutils literal"><span class="pre">booleano.operations.operands.Operand</span></tt></a>) &#8211; The left-hand operand handled by this operator.</li>
+<li><em>right_operand</em> (<a title="booleano.operations.operands.Operand" class="reference internal" href="#booleano.operations.operands.Operand"><tt class="xref docutils literal"><span class="pre">booleano.operations.operands.Operand</span></tt></a>) &#8211; The right-hand operand handled by this operator.</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">Raises <a title="booleano.exc.InvalidOperationError" class="reference external" href="exceptions.html#booleano.exc.InvalidOperationError">booleano.exc.InvalidOperationError</a>:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body"><p class="first last">If the master operand
+between <tt class="docutils literal"><span class="pre">left_operand</span></tt> or <tt class="docutils literal"><span class="pre">right_operand</span></tt> doesn&#8217;t support
+equality operations.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="booleano.operations.NotEqual">
+<em class="property">class </em><tt class="descclassname">booleano.operations.</tt><tt class="descname">NotEqual</tt><big>(</big><em>left_operand</em>, <em>right_operand</em><big>)</big><a class="headerlink" href="#booleano.operations.NotEqual" title="Permalink to this definition">¶</a></dt>
+<dd><p>The &#8220;not equal to&#8221; operator (<tt class="docutils literal"><span class="pre">!=</span></tt>).</p>
+<p>Checks that two operands are not equivalent.</p>
+<p>For example: <tt class="docutils literal"><span class="pre">3</span> <span class="pre">!=</span> <span class="pre">2</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>left_operand</em> (<a title="booleano.operations.operands.Operand" class="reference internal" href="#booleano.operations.operands.Operand"><tt class="xref docutils literal"><span class="pre">booleano.operations.operands.Operand</span></tt></a>) &#8211; The left-hand operand handled by this operator.</li>
+<li><em>right_operand</em> (<a title="booleano.operations.operands.Operand" class="reference internal" href="#booleano.operations.operands.Operand"><tt class="xref docutils literal"><span class="pre">booleano.operations.operands.Operand</span></tt></a>) &#8211; The right-hand operand handled by this operator.</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">Raises <a title="booleano.exc.InvalidOperationError" class="reference external" href="exceptions.html#booleano.exc.InvalidOperationError">booleano.exc.InvalidOperationError</a>:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body"><p class="first last">If the master operand
+between <tt class="docutils literal"><span class="pre">left_operand</span></tt> or <tt class="docutils literal"><span class="pre">right_operand</span></tt> doesn&#8217;t support
+equality operations.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="booleano.operations.LessThan">
+<em class="property">class </em><tt class="descclassname">booleano.operations.</tt><tt class="descname">LessThan</tt><big>(</big><em>left_operand</em>, <em>right_operand</em><big>)</big><a class="headerlink" href="#booleano.operations.LessThan" title="Permalink to this definition">¶</a></dt>
+<dd><p>The &#8220;less than&#8221; operator (<tt class="docutils literal"><span class="pre">&lt;</span></tt>).</p>
+<p>For example: <tt class="docutils literal"><span class="pre">2</span> <span class="pre">&lt;</span> <span class="pre">3</span></tt>.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="booleano.operations.GreaterThan">
+<em class="property">class </em><tt class="descclassname">booleano.operations.</tt><tt class="descname">GreaterThan</tt><big>(</big><em>left_operand</em>, <em>right_operand</em><big>)</big><a class="headerlink" href="#booleano.operations.GreaterThan" title="Permalink to this definition">¶</a></dt>
+<dd><p>The &#8220;greater than&#8221; operator (<tt class="docutils literal"><span class="pre">&gt;</span></tt>).</p>
+<p>For example: <tt class="docutils literal"><span class="pre">3</span> <span class="pre">&gt;</span> <span class="pre">2</span></tt>.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="booleano.operations.LessEqual">
+<em class="property">class </em><tt class="descclassname">booleano.operations.</tt><tt class="descname">LessEqual</tt><big>(</big><em>left_operand</em>, <em>right_operand</em><big>)</big><a class="headerlink" href="#booleano.operations.LessEqual" title="Permalink to this definition">¶</a></dt>
+<dd><p>The &#8220;less than or equal to&#8221; operator (<tt class="docutils literal"><span class="pre">&lt;=</span></tt>).</p>
+<p>For example: <tt class="docutils literal"><span class="pre">2</span> <span class="pre">&lt;=</span> <span class="pre">3</span></tt>.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="booleano.operations.GreaterEqual">
+<em class="property">class </em><tt class="descclassname">booleano.operations.</tt><tt class="descname">GreaterEqual</tt><big>(</big><em>left_operand</em>, <em>right_operand</em><big>)</big><a class="headerlink" href="#booleano.operations.GreaterEqual" title="Permalink to this definition">¶</a></dt>
+<dd><p>The &#8220;greater than or equal to&#8221; operator (<tt class="docutils literal"><span class="pre">&gt;=</span></tt>).</p>
+<p>For example: <tt class="docutils literal"><span class="pre">2</span> <span class="pre">&gt;=</span> <span class="pre">2</span></tt>.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="membership-operators">
+<h3>Membership operators<a class="headerlink" href="#membership-operators" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="booleano.operations.BelongsTo">
+<em class="property">class </em><tt class="descclassname">booleano.operations.</tt><tt class="descname">BelongsTo</tt><big>(</big><em>left_operand</em>, <em>right_operand</em><big>)</big><a class="headerlink" href="#booleano.operations.BelongsTo" title="Permalink to this definition">¶</a></dt>
+<dd><p>The &#8220;belongs to&#8221; operator (<tt class="docutils literal"><span class="pre">∈</span></tt>).</p>
+<p>For example: <tt class="docutils literal"><span class="pre">&quot;valencia&quot;</span> <span class="pre">∈</span> <span class="pre">{&quot;caracas&quot;,</span> <span class="pre">&quot;maracay&quot;,</span> <span class="pre">&quot;valencia&quot;}</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name" colspan="2">Raises <a title="booleano.exc.InvalidOperationError" class="reference external" href="exceptions.html#booleano.exc.InvalidOperationError">booleano.exc.InvalidOperationError</a>:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">If <tt class="docutils literal"><span class="pre">right_operand</span></tt>
+doesn&#8217;t support membership operations.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="booleano.operations.IsSubset">
+<em class="property">class </em><tt class="descclassname">booleano.operations.</tt><tt class="descname">IsSubset</tt><big>(</big><em>left_operand</em>, <em>right_operand</em><big>)</big><a class="headerlink" href="#booleano.operations.IsSubset" title="Permalink to this definition">¶</a></dt>
+<dd><p>The &#8220;is a subset of&#8221; operator (<tt class="docutils literal"><span class="pre">⊂</span></tt>).</p>
+<p>For example: <tt class="docutils literal"><span class="pre">{&quot;valencia&quot;,</span> <span class="pre">&quot;aragua&quot;}</span> <span class="pre">⊂</span> <span class="pre">{&quot;caracas&quot;,</span> <span class="pre">&quot;aragua&quot;,</span> <span class="pre">&quot;valencia&quot;}</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name" colspan="2">Raises <a title="booleano.exc.InvalidOperationError" class="reference external" href="exceptions.html#booleano.exc.InvalidOperationError">booleano.exc.InvalidOperationError</a>:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">If <tt class="docutils literal"><span class="pre">right_operand</span></tt>
+doesn&#8217;t support membership operations.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-booleano.operations.converters">
+<h2>Parse tree converters<a class="headerlink" href="#module-booleano.operations.converters" title="Permalink to this headline">¶</a></h2>
+<p>Converters for Booleano parse tree structures (the convertible, not the
+evaluable ones).</p>
+<dl class="class">
+<dt id="booleano.operations.converters.BaseConverter">
+<em class="property">class </em><tt class="descclassname">booleano.operations.converters.</tt><tt class="descname">BaseConverter</tt><a class="headerlink" href="#booleano.operations.converters.BaseConverter" title="Permalink to this definition">¶</a></dt>
+<dd><p>The base class for converters.</p>
+<p>All the methods of this class are abstract, except for <a title="booleano.operations.converters.BaseConverter.__call__" class="reference internal" href="#booleano.operations.converters.BaseConverter.__call__"><tt class="xref docutils literal"><span class="pre">__call__()</span></tt></a>
+and <a title="booleano.operations.converters.BaseConverter.convert" class="reference internal" href="#booleano.operations.converters.BaseConverter.convert"><tt class="xref docutils literal"><span class="pre">convert()</span></tt></a>.</p>
+<dl class="method">
+<dt id="booleano.operations.converters.BaseConverter.__call__">
+<tt class="descname">__call__</tt><big>(</big><em>root_node</em><big>)</big><a class="headerlink" href="#booleano.operations.converters.BaseConverter.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert <tt class="docutils literal"><span class="pre">root_node</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameter:</th><td class="field-body"><em>root_node</em> (<a title="booleano.operations.OperationNode" class="reference internal" href="#booleano.operations.OperationNode"><tt class="xref docutils literal"><span class="pre">booleano.operations.OperationNode</span></tt></a>) &#8211; The root of the tree to be converted.</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body">The tree converted.</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">Raises <a title="booleano.exc.ConversionError" class="reference external" href="exceptions.html#booleano.exc.ConversionError">booleano.exc.ConversionError</a>:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">If the type of <tt class="docutils literal"><span class="pre">root_node</span></tt> is
+unknown.</td>
+</tr>
+</tbody>
+</table>
+<p>If <tt class="docutils literal"><span class="pre">node</span></tt> is a branch, its children will be converted first.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="booleano.operations.converters.BaseConverter.convert">
+<tt class="descname">convert</tt><big>(</big><em>node</em><big>)</big><a class="headerlink" href="#booleano.operations.converters.BaseConverter.convert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert <tt class="docutils literal"><span class="pre">node</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameter:</th><td class="field-body"><em>node</em> (<a title="booleano.operations.OperationNode" class="reference internal" href="#booleano.operations.OperationNode"><tt class="xref docutils literal"><span class="pre">booleano.operations.OperationNode</span></tt></a>) &#8211; The node to be converted.</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body">The node converted.</td>
+</tr>
+</tbody>
+</table>
+<p>If <tt class="docutils literal"><span class="pre">node</span></tt> is a branch, its children will be converted first.</p>
+<p>This is the method in charge of calling the right conversion method for
+the type of <tt class="docutils literal"><span class="pre">node</span></tt> and <strong>it should not be called directly</strong> (use
+<a title="booleano.operations.converters.BaseConverter.__call__" class="reference internal" href="#booleano.operations.converters.BaseConverter.__call__"><tt class="xref docutils literal"><span class="pre">__call__()</span></tt></a> instead).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="booleano.operations.converters.BaseConverter.convert_and">
+<tt class="descname">convert_and</tt><big>(</big><em>master_operand</em>, <em>slave_operand</em><big>)</big><a class="headerlink" href="#booleano.operations.converters.BaseConverter.convert_and" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert AND connective whose left-hand operand is <tt class="docutils literal"><span class="pre">master_operand</span></tt>
+and right-hand operand is <tt class="docutils literal"><span class="pre">slave_operand</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>master_operand</em> (<a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a>) &#8211; The left-hand operand, already converted.</li>
+<li><em>slave_operand</em> (<a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a>) &#8211; The right-hand operand, already converted.</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="booleano.operations.converters.BaseConverter.convert_belongs_to">
+<tt class="descname">convert_belongs_to</tt><big>(</big><em>master_operand</em>, <em>slave_operand</em><big>)</big><a class="headerlink" href="#booleano.operations.converters.BaseConverter.convert_belongs_to" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert &#8220;belongs to&#8221; operation where the set is 
+<tt class="docutils literal"><span class="pre">master_operand</span></tt> and the element is <tt class="docutils literal"><span class="pre">slave_operand</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>master_operand</em> (<a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a>) &#8211; The set already converted.</li>
+<li><em>slave_operand</em> (<a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a>) &#8211; The element already converted.</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="booleano.operations.converters.BaseConverter.convert_equal">
+<tt class="descname">convert_equal</tt><big>(</big><em>master_operand</em>, <em>slave_operand</em><big>)</big><a class="headerlink" href="#booleano.operations.converters.BaseConverter.convert_equal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert equality operation whose left-hand operand is <tt class="docutils literal"><span class="pre">master_operand</span></tt>
+and right-hand operand is <tt class="docutils literal"><span class="pre">slave_operand</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>master_operand</em> (<a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a>) &#8211; The left-hand operand, already converted.</li>
+<li><em>slave_operand</em> (<a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a>) &#8211; The right-hand operand, already converted.</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="booleano.operations.converters.BaseConverter.convert_function">
+<tt class="descname">convert_function</tt><big>(</big><em>name</em>, <em>namespace_parts</em>, <em>*arguments</em><big>)</big><a class="headerlink" href="#booleano.operations.converters.BaseConverter.convert_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the function call to <tt class="docutils literal"><span class="pre">name</span></tt> using the additional positional
+arguments as the arguments of the call.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>name</em> (<a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#basestring"><tt class="xref docutils literal"><span class="pre">basestring</span></tt></a>) &#8211; The name of the function being called.</li>
+<li><em>namespace_parts</em> (<a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#list"><tt class="xref docutils literal"><span class="pre">list</span></tt></a>) &#8211; The namespace of the function (if any),
+represented by the identifiers that make it up.</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The arguments will be received converted.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="booleano.operations.converters.BaseConverter.convert_greater_equal">
+<tt class="descname">convert_greater_equal</tt><big>(</big><em>master_operand</em>, <em>slave_operand</em><big>)</big><a class="headerlink" href="#booleano.operations.converters.BaseConverter.convert_greater_equal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert &#8220;greater than or equal to&#8221; operation whose left-hand operand is 
+<tt class="docutils literal"><span class="pre">master_operand</span></tt> and right-hand operand is <tt class="docutils literal"><span class="pre">slave_operand</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>master_operand</em> (<a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a>) &#8211; The left-hand operand, already converted.</li>
+<li><em>slave_operand</em> (<a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a>) &#8211; The right-hand operand, already converted.</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="booleano.operations.converters.BaseConverter.convert_greater_than">
+<tt class="descname">convert_greater_than</tt><big>(</big><em>master_operand</em>, <em>slave_operand</em><big>)</big><a class="headerlink" href="#booleano.operations.converters.BaseConverter.convert_greater_than" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert &#8220;greater than&#8221; operation whose left-hand operand is 
+<tt class="docutils literal"><span class="pre">master_operand</span></tt> and right-hand operand is <tt class="docutils literal"><span class="pre">slave_operand</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>master_operand</em> (<a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a>) &#8211; The left-hand operand, already converted.</li>
+<li><em>slave_operand</em> (<a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a>) &#8211; The right-hand operand, already converted.</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="booleano.operations.converters.BaseConverter.convert_is_subset">
+<tt class="descname">convert_is_subset</tt><big>(</big><em>master_operand</em>, <em>slave_operand</em><big>)</big><a class="headerlink" href="#booleano.operations.converters.BaseConverter.convert_is_subset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert &#8220;is subset of&#8221; operation where the superset is 
+<tt class="docutils literal"><span class="pre">master_operand</span></tt> and the subset is <tt class="docutils literal"><span class="pre">slave_operand</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>master_operand</em> (<a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a>) &#8211; The superset already converted.</li>
+<li><em>slave_operand</em> (<a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a>) &#8211; The subset already converted.</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="booleano.operations.converters.BaseConverter.convert_less_equal">
+<tt class="descname">convert_less_equal</tt><big>(</big><em>master_operand</em>, <em>slave_operand</em><big>)</big><a class="headerlink" href="#booleano.operations.converters.BaseConverter.convert_less_equal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert &#8220;less than or equal to&#8221; operation whose left-hand operand is 
+<tt class="docutils literal"><span class="pre">master_operand</span></tt> and right-hand operand is <tt class="docutils literal"><span class="pre">slave_operand</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>master_operand</em> (<a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a>) &#8211; The left-hand operand, already converted.</li>
+<li><em>slave_operand</em> (<a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a>) &#8211; The right-hand operand, already converted.</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="booleano.operations.converters.BaseConverter.convert_less_than">
+<tt class="descname">convert_less_than</tt><big>(</big><em>master_operand</em>, <em>slave_operand</em><big>)</big><a class="headerlink" href="#booleano.operations.converters.BaseConverter.convert_less_than" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert &#8220;less than&#8221; operation whose left-hand operand is 
+<tt class="docutils literal"><span class="pre">master_operand</span></tt> and right-hand operand is <tt class="docutils literal"><span class="pre">slave_operand</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>master_operand</em> (<a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a>) &#8211; The left-hand operand, already converted.</li>
+<li><em>slave_operand</em> (<a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a>) &#8211; The right-hand operand, already converted.</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="booleano.operations.converters.BaseConverter.convert_not">
+<tt class="descname">convert_not</tt><big>(</big><em>operand</em><big>)</big><a class="headerlink" href="#booleano.operations.converters.BaseConverter.convert_not" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert negation function whose argument is <tt class="docutils literal"><span class="pre">operand</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameter:</th><td class="field-body"><em>operand</em> (<a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a>) &#8211; The argument already converted.</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="booleano.operations.converters.BaseConverter.convert_not_equal">
+<tt class="descname">convert_not_equal</tt><big>(</big><em>master_operand</em>, <em>slave_operand</em><big>)</big><a class="headerlink" href="#booleano.operations.converters.BaseConverter.convert_not_equal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert &#8220;not equal to&#8221; operation whose left-hand operand is 
+<tt class="docutils literal"><span class="pre">master_operand</span></tt> and right-hand operand is <tt class="docutils literal"><span class="pre">slave_operand</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>master_operand</em> (<a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a>) &#8211; The left-hand operand, already converted.</li>
+<li><em>slave_operand</em> (<a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a>) &#8211; The right-hand operand, already converted.</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="booleano.operations.converters.BaseConverter.convert_number">
+<tt class="descname">convert_number</tt><big>(</big><em>number</em><big>)</big><a class="headerlink" href="#booleano.operations.converters.BaseConverter.convert_number" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the literal number <tt class="docutils literal"><span class="pre">number</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameter:</th><td class="field-body"><em>number</em> (<a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#float"><tt class="xref docutils literal"><span class="pre">float</span></tt></a>) &#8211; The literal number.</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="booleano.operations.converters.BaseConverter.convert_or">
+<tt class="descname">convert_or</tt><big>(</big><em>master_operand</em>, <em>slave_operand</em><big>)</big><a class="headerlink" href="#booleano.operations.converters.BaseConverter.convert_or" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert OR connective whose left-hand operand is <tt class="docutils literal"><span class="pre">master_operand</span></tt>
+and right-hand operand is <tt class="docutils literal"><span class="pre">slave_operand</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>master_operand</em> (<a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a>) &#8211; The left-hand operand, already converted.</li>
+<li><em>slave_operand</em> (<a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a>) &#8211; The right-hand operand, already converted.</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="booleano.operations.converters.BaseConverter.convert_set">
+<tt class="descname">convert_set</tt><big>(</big><em>*elements</em><big>)</big><a class="headerlink" href="#booleano.operations.converters.BaseConverter.convert_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the literal set with the <tt class="docutils literal"><span class="pre">elements</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="booleano.operations.converters.BaseConverter.convert_string">
+<tt class="descname">convert_string</tt><big>(</big><em>text</em><big>)</big><a class="headerlink" href="#booleano.operations.converters.BaseConverter.convert_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the literal string <tt class="docutils literal"><span class="pre">text</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameter:</th><td class="field-body"><em>text</em> (<a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#basestring"><tt class="xref docutils literal"><span class="pre">basestring</span></tt></a>) &#8211; The contents of the literal string.</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="booleano.operations.converters.BaseConverter.convert_variable">
+<tt class="descname">convert_variable</tt><big>(</big><em>name</em>, <em>namespace_parts</em><big>)</big><a class="headerlink" href="#booleano.operations.converters.BaseConverter.convert_variable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the variable called <tt class="docutils literal"><span class="pre">name</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>name</em> (<a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#basestring"><tt class="xref docutils literal"><span class="pre">basestring</span></tt></a>) &#8211; The name of the variable.</li>
+<li><em>namespace_parts</em> (<a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#list"><tt class="xref docutils literal"><span class="pre">list</span></tt></a>) &#8211; The namespace of the variable (if any),
+represented by the identifiers that make it up.</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="booleano.operations.converters.BaseConverter.convert_xor">
+<tt class="descname">convert_xor</tt><big>(</big><em>master_operand</em>, <em>slave_operand</em><big>)</big><a class="headerlink" href="#booleano.operations.converters.BaseConverter.convert_xor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert XOR connective whose left-hand operand is <tt class="docutils literal"><span class="pre">master_operand</span></tt>
+and right-hand operand is <tt class="docutils literal"><span class="pre">slave_operand</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>master_operand</em> (<a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a>) &#8211; The left-hand operand, already converted.</li>
+<li><em>slave_operand</em> (<a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a>) &#8211; The right-hand operand, already converted.</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/functions.html#object"><tt class="xref docutils literal"><span class="pre">object</span></tt></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href=""><tt class="docutils literal"><span class="pre">booleano.operations</span></tt> &#8211; Boolean Operation Nodes</a><ul>
+<li><a class="reference external" href="#operands">Operands</a><ul>
+<li><a class="reference external" href="#constants">Constants</a></li>
+<li><a class="reference external" href="#classes">Classes</a></li>
+<li><a class="reference external" href="#placeholder-instances">Placeholder instances</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#operators">Operators</a><ul>
+<li><a class="reference external" href="#logical-connectives">Logical connectives</a></li>
+<li><a class="reference external" href="#relational-operators">Relational operators</a></li>
+<li><a class="reference external" href="#membership-operators">Membership operators</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#module-booleano.operations.converters">Parse tree converters</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="parser.html"
+                                  title="previous chapter"><tt class="docutils literal docutils literal"><span class="pre">booleano.parser</span></tt> &#8211; Boolean expressions parser</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="exceptions.html"
+                                  title="next chapter"><tt class="docutils literal docutils literal docutils literal"><span class="pre">booleano.exc</span></tt> &#8211; Exceptions raised by Booleano</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/api/operations.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="exceptions.html" title="booleano.exc – Exceptions raised by Booleano"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="parser.html" title="booleano.parser – Boolean expressions parser"
+             >previous</a> |</li>
+        <li><a href="../index.html">Booleano v1.0a1 documentation</a> &raquo;</li>
+          <li><a href="index.html" ><tt class="docutils literal docutils literal docutils literal"><span class="pre">booleano</span></tt> API documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009, Gustavo Narea.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.3.
+    </div>
+  </body>
+</html>

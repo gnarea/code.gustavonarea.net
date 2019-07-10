@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>repoze.who.plugins.tests.test_cookie</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="repoze.who.plugins.ldap-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://code.gustavonarea.net/repoze.who.plugins.ldap/">repoze.who LDAP plugin</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="repoze-module.html">Package&nbsp;repoze</a> ::
+        <a href="repoze.who-module.html">Package&nbsp;who</a> ::
+        <a href="repoze.who.plugins-module.html">Package&nbsp;plugins</a> ::
+        <a href="repoze.who.plugins.tests-module.html">Package&nbsp;tests</a> ::
+        Module&nbsp;test_cookie
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="repoze.who.plugins.tests.test_cookie-module.html">Module repoze.who.plugins.tests.test_cookie</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">unittest</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"> </tt>
+<a name="TestInsecureCookiePlugin"></a><div id="TestInsecureCookiePlugin-def"><a name="L3"></a><tt class="py-lineno"> 3</tt> <a class="py-toggle" href="#" id="TestInsecureCookiePlugin-toggle" onclick="return toggle('TestInsecureCookiePlugin');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="repoze.who.plugins.tests.test_cookie.TestInsecureCookiePlugin-class.html">TestInsecureCookiePlugin</a><tt class="py-op">(</tt><tt class="py-base-class">unittest</tt><tt class="py-op">.</tt><tt class="py-base-class">TestCase</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TestInsecureCookiePlugin-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="TestInsecureCookiePlugin-expanded"><a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"> </tt>
+<a name="TestInsecureCookiePlugin._getTargetClass"></a><div id="TestInsecureCookiePlugin._getTargetClass-def"><a name="L5"></a><tt class="py-lineno"> 5</tt> <a class="py-toggle" href="#" id="TestInsecureCookiePlugin._getTargetClass-toggle" onclick="return toggle('TestInsecureCookiePlugin._getTargetClass');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.plugins.tests.test_cookie.TestInsecureCookiePlugin-class.html#_getTargetClass">_getTargetClass</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TestInsecureCookiePlugin._getTargetClass-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="TestInsecureCookiePlugin._getTargetClass-expanded"><a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line">        <tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package repoze=repoze-module.html"><a title="repoze" class="py-name" href="#" onclick="return doclink('link-0', 'repoze', 'link-0');">repoze</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package repoze.who=repoze.who-module.html"><a title="repoze.who" class="py-name" href="#" onclick="return doclink('link-1', 'who', 'link-1');">who</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Package repoze.who.plugins=repoze.who.plugins-module.html,Module repoze.who.plugins.ldap.plugins=repoze.who.plugins.ldap.plugins-module.html"><a title="repoze.who.plugins
+repoze.who.plugins.ldap.plugins" class="py-name" href="#" onclick="return doclink('link-2', 'plugins', 'link-2');">plugins</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Module repoze.who.plugins.cookie=repoze.who.plugins.cookie-module.html"><a title="repoze.who.plugins.cookie" class="py-name" href="#" onclick="return doclink('link-3', 'cookie', 'link-3');">cookie</a></tt> <tt class="py-keyword">import</tt> <tt id="link-4" class="py-name" targets="Class repoze.who.plugins.cookie.InsecureCookiePlugin=repoze.who.plugins.cookie.InsecureCookiePlugin-class.html"><a title="repoze.who.plugins.cookie.InsecureCookiePlugin" class="py-name" href="#" onclick="return doclink('link-4', 'InsecureCookiePlugin', 'link-4');">InsecureCookiePlugin</a></tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-5" class="py-name"><a title="repoze.who.plugins.cookie.InsecureCookiePlugin" class="py-name" href="#" onclick="return doclink('link-5', 'InsecureCookiePlugin', 'link-4');">InsecureCookiePlugin</a></tt> </tt>
+</div><a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"> </tt>
+<a name="TestInsecureCookiePlugin._makeOne"></a><div id="TestInsecureCookiePlugin._makeOne-def"><a name="L9"></a><tt class="py-lineno"> 9</tt> <a class="py-toggle" href="#" id="TestInsecureCookiePlugin._makeOne-toggle" onclick="return toggle('TestInsecureCookiePlugin._makeOne');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.plugins.tests.test_cookie.TestInsecureCookiePlugin-class.html#_makeOne">_makeOne</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">arg</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kw</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TestInsecureCookiePlugin._makeOne-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="TestInsecureCookiePlugin._makeOne-expanded"><a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line">        <tt class="py-name">plugin</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Method repoze.who.plugins.tests.test_authtkt.TestAuthTktCookiePlugin._getTargetClass()=repoze.who.plugins.tests.test_authtkt.TestAuthTktCookiePlugin-class.html#_getTargetClass,Method repoze.who.plugins.tests.test_basicauth.TestBasicAuthPlugin._getTargetClass()=repoze.who.plugins.tests.test_basicauth.TestBasicAuthPlugin-class.html#_getTargetClass,Method repoze.who.plugins.tests.test_cookie.TestInsecureCookiePlugin._getTargetClass()=repoze.who.plugins.tests.test_cookie.TestInsecureCookiePlugin-class.html#_getTargetClass,Method repoze.who.plugins.tests.test_form.TestFormPlugin._getTargetClass()=repoze.who.plugins.tests.test_form.TestFormPlugin-class.html#_getTargetClass,Method repoze.who.plugins.tests.test_form.TestRedirectingFormPlugin._getTargetClass()=repoze.who.plugins.tests.test_form.TestRedirectingFormPlugin-class.html#_getTargetClass,Method repoze.who.plugins.tests.test_htpasswd.TestHTPasswdPlugin._getTargetClass()=repoze.who.plugins.tests.test_htpasswd.TestHTPasswdPlugin-class.html#_getTargetClass,Method repoze.who.plugins.tests.test_sql.TestSQLAuthenticatorPlugin._getTargetClass()=repoze.who.plugins.tests.test_sql.TestSQLAuthenticatorPlugin-class.html#_getTargetClass,Method repoze.who.plugins.tests.test_sql.TestSQLMetadataProviderPlugin._getTargetClass()=repoze.who.plugins.tests.test_sql.TestSQLMetadataProviderPlugin-class.html#_getTargetClass,Method repoze.who.tests.test_config.TestWhoConfig._getTargetClass()=repoze.who.tests.test_config.TestWhoConfig-class.html#_getTargetClass,Method repoze.who.tests.test_middleware.TestIdentityDict._getTargetClass()=repoze.who.tests.test_middleware.TestIdentityDict-class.html#_getTargetClass,Method repoze.who.tests.test_middleware.TestMiddleware._getTargetClass()=repoze.who.tests.test_middleware.TestMiddleware-class.html#_getTargetClass,Method repoze.who.tests.test_middleware.TestStartResponseWrapper._getTargetClass()=repoze.who.tests.test_middleware.TestStartResponseWrapper-class.html#_getTargetClass,Method repoze.who.tests.test_restrict.PredicateRestrictionTests._getTargetClass()=repoze.who.tests.test_restrict.PredicateRestrictionTests-class.html#_getTargetClass"><a title="repoze.who.plugins.tests.test_authtkt.TestAuthTktCookiePlugin._getTargetClass
+repoze.who.plugins.tests.test_basicauth.TestBasicAuthPlugin._getTargetClass
+repoze.who.plugins.tests.test_cookie.TestInsecureCookiePlugin._getTargetClass
+repoze.who.plugins.tests.test_form.TestFormPlugin._getTargetClass
+repoze.who.plugins.tests.test_form.TestRedirectingFormPlugin._getTargetClass
+repoze.who.plugins.tests.test_htpasswd.TestHTPasswdPlugin._getTargetClass
+repoze.who.plugins.tests.test_sql.TestSQLAuthenticatorPlugin._getTargetClass
+repoze.who.plugins.tests.test_sql.TestSQLMetadataProviderPlugin._getTargetClass
+repoze.who.tests.test_config.TestWhoConfig._getTargetClass
+repoze.who.tests.test_middleware.TestIdentityDict._getTargetClass
+repoze.who.tests.test_middleware.TestMiddleware._getTargetClass
+repoze.who.tests.test_middleware.TestStartResponseWrapper._getTargetClass
+repoze.who.tests.test_restrict.PredicateRestrictionTests._getTargetClass" class="py-name" href="#" onclick="return doclink('link-6', '_getTargetClass', 'link-6');">_getTargetClass</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">(</tt><tt class="py-op">*</tt><tt class="py-name">arg</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kw</tt><tt class="py-op">)</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">plugin</tt> </tt>
+</div><a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"> </tt>
+<a name="TestInsecureCookiePlugin._makeEnviron"></a><div id="TestInsecureCookiePlugin._makeEnviron-def"><a name="L13"></a><tt class="py-lineno">13</tt> <a class="py-toggle" href="#" id="TestInsecureCookiePlugin._makeEnviron-toggle" onclick="return toggle('TestInsecureCookiePlugin._makeEnviron');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.plugins.tests.test_cookie.TestInsecureCookiePlugin-class.html#_makeEnviron">_makeEnviron</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">kw</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TestInsecureCookiePlugin._makeEnviron-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="TestInsecureCookiePlugin._makeEnviron-expanded"><a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">        <tt id="link-7" class="py-name" targets="Variable repoze.who.tests.test_config.DummyApp.environ=repoze.who.tests.test_config.DummyApp-class.html#environ,Variable repoze.who.tests.test_middleware.DummyApp.environ=repoze.who.tests.test_middleware.DummyApp-class.html#environ,Variable repoze.who.tests.test_restrict.DummyApp.environ=repoze.who.tests.test_restrict.DummyApp-class.html#environ"><a title="repoze.who.tests.test_config.DummyApp.environ
+repoze.who.tests.test_middleware.DummyApp.environ
+repoze.who.tests.test_restrict.DummyApp.environ" class="py-name" href="#" onclick="return doclink('link-7', 'environ', 'link-7');">environ</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">        <tt id="link-8" class="py-name"><a title="repoze.who.tests.test_config.DummyApp.environ
+repoze.who.tests.test_middleware.DummyApp.environ
+repoze.who.tests.test_restrict.DummyApp.environ" class="py-name" href="#" onclick="return doclink('link-8', 'environ', 'link-7');">environ</a></tt><tt class="py-op">[</tt><tt class="py-string">'wsgi.version'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">,</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">kw</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">            <tt id="link-9" class="py-name"><a title="repoze.who.tests.test_config.DummyApp.environ
+repoze.who.tests.test_middleware.DummyApp.environ
+repoze.who.tests.test_restrict.DummyApp.environ" class="py-name" href="#" onclick="return doclink('link-9', 'environ', 'link-7');">environ</a></tt><tt class="py-op">.</tt><tt class="py-name">update</tt><tt class="py-op">(</tt><tt class="py-name">kw</tt><tt class="py-op">)</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-10" class="py-name"><a title="repoze.who.tests.test_config.DummyApp.environ
+repoze.who.tests.test_middleware.DummyApp.environ
+repoze.who.tests.test_restrict.DummyApp.environ" class="py-name" href="#" onclick="return doclink('link-10', 'environ', 'link-7');">environ</a></tt> </tt>
+</div><a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"> </tt>
+<a name="TestInsecureCookiePlugin.test_implements"></a><div id="TestInsecureCookiePlugin.test_implements-def"><a name="L20"></a><tt class="py-lineno">20</tt> <a class="py-toggle" href="#" id="TestInsecureCookiePlugin.test_implements-toggle" onclick="return toggle('TestInsecureCookiePlugin.test_implements');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.plugins.tests.test_cookie.TestInsecureCookiePlugin-class.html#test_implements">test_implements</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TestInsecureCookiePlugin.test_implements-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="TestInsecureCookiePlugin.test_implements-expanded"><a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">        <tt class="py-keyword">from</tt> <tt class="py-name">zope</tt><tt class="py-op">.</tt><tt class="py-name">interface</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Function repoze.who.middleware.verify()=repoze.who.middleware-module.html#verify"><a title="repoze.who.middleware.verify" class="py-name" href="#" onclick="return doclink('link-11', 'verify', 'link-11');">verify</a></tt> <tt class="py-keyword">import</tt> <tt class="py-name">verifyClass</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">        <tt class="py-keyword">from</tt> <tt id="link-12" class="py-name"><a title="repoze" class="py-name" href="#" onclick="return doclink('link-12', 'repoze', 'link-0');">repoze</a></tt><tt class="py-op">.</tt><tt id="link-13" class="py-name"><a title="repoze.who" class="py-name" href="#" onclick="return doclink('link-13', 'who', 'link-1');">who</a></tt><tt class="py-op">.</tt><tt id="link-14" class="py-name" targets="Module repoze.who.interfaces=repoze.who.interfaces-module.html"><a title="repoze.who.interfaces" class="py-name" href="#" onclick="return doclink('link-14', 'interfaces', 'link-14');">interfaces</a></tt> <tt class="py-keyword">import</tt> <tt id="link-15" class="py-name" targets="Class repoze.who.interfaces.IIdentifier=repoze.who.interfaces.IIdentifier-class.html"><a title="repoze.who.interfaces.IIdentifier" class="py-name" href="#" onclick="return doclink('link-15', 'IIdentifier', 'link-15');">IIdentifier</a></tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">        <tt class="py-name">klass</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name"><a title="repoze.who.plugins.tests.test_authtkt.TestAuthTktCookiePlugin._getTargetClass
+repoze.who.plugins.tests.test_basicauth.TestBasicAuthPlugin._getTargetClass
+repoze.who.plugins.tests.test_cookie.TestInsecureCookiePlugin._getTargetClass
+repoze.who.plugins.tests.test_form.TestFormPlugin._getTargetClass
+repoze.who.plugins.tests.test_form.TestRedirectingFormPlugin._getTargetClass
+repoze.who.plugins.tests.test_htpasswd.TestHTPasswdPlugin._getTargetClass
+repoze.who.plugins.tests.test_sql.TestSQLAuthenticatorPlugin._getTargetClass
+repoze.who.plugins.tests.test_sql.TestSQLMetadataProviderPlugin._getTargetClass
+repoze.who.tests.test_config.TestWhoConfig._getTargetClass
+repoze.who.tests.test_middleware.TestIdentityDict._getTargetClass
+repoze.who.tests.test_middleware.TestMiddleware._getTargetClass
+repoze.who.tests.test_middleware.TestStartResponseWrapper._getTargetClass
+repoze.who.tests.test_restrict.PredicateRestrictionTests._getTargetClass" class="py-name" href="#" onclick="return doclink('link-16', '_getTargetClass', 'link-6');">_getTargetClass</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">        <tt class="py-name">verifyClass</tt><tt class="py-op">(</tt><tt id="link-17" class="py-name"><a title="repoze.who.interfaces.IIdentifier" class="py-name" href="#" onclick="return doclink('link-17', 'IIdentifier', 'link-15');">IIdentifier</a></tt><tt class="py-op">,</tt> <tt class="py-name">klass</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"> </tt>
+<a name="TestInsecureCookiePlugin.test_identify_nocookies"></a><div id="TestInsecureCookiePlugin.test_identify_nocookies-def"><a name="L26"></a><tt class="py-lineno">26</tt> <a class="py-toggle" href="#" id="TestInsecureCookiePlugin.test_identify_nocookies-toggle" onclick="return toggle('TestInsecureCookiePlugin.test_identify_nocookies');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.plugins.tests.test_cookie.TestInsecureCookiePlugin-class.html#test_identify_nocookies">test_identify_nocookies</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TestInsecureCookiePlugin.test_identify_nocookies-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="TestInsecureCookiePlugin.test_identify_nocookies-expanded"><a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">        <tt class="py-name">plugin</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name" targets="Method repoze.who.plugins.tests.test_authtkt.TestAuthTktCookiePlugin._makeOne()=repoze.who.plugins.tests.test_authtkt.TestAuthTktCookiePlugin-class.html#_makeOne,Method repoze.who.plugins.tests.test_basicauth.TestBasicAuthPlugin._makeOne()=repoze.who.plugins.tests.test_basicauth.TestBasicAuthPlugin-class.html#_makeOne,Method repoze.who.plugins.tests.test_cookie.TestInsecureCookiePlugin._makeOne()=repoze.who.plugins.tests.test_cookie.TestInsecureCookiePlugin-class.html#_makeOne,Method repoze.who.plugins.tests.test_form.TestFormPlugin._makeOne()=repoze.who.plugins.tests.test_form.TestFormPlugin-class.html#_makeOne,Method repoze.who.plugins.tests.test_form.TestRedirectingFormPlugin._makeOne()=repoze.who.plugins.tests.test_form.TestRedirectingFormPlugin-class.html#_makeOne,Method repoze.who.plugins.tests.test_htpasswd.TestHTPasswdPlugin._makeOne()=repoze.who.plugins.tests.test_htpasswd.TestHTPasswdPlugin-class.html#_makeOne,Method repoze.who.plugins.tests.test_sql.TestSQLAuthenticatorPlugin._makeOne()=repoze.who.plugins.tests.test_sql.TestSQLAuthenticatorPlugin-class.html#_makeOne,Method repoze.who.plugins.tests.test_sql.TestSQLMetadataProviderPlugin._makeOne()=repoze.who.plugins.tests.test_sql.TestSQLMetadataProviderPlugin-class.html#_makeOne,Method repoze.who.tests.test_config.TestWhoConfig._makeOne()=repoze.who.tests.test_config.TestWhoConfig-class.html#_makeOne,Method repoze.who.tests.test_middleware.TestIdentityDict._makeOne()=repoze.who.tests.test_middleware.TestIdentityDict-class.html#_makeOne,Method repoze.who.tests.test_middleware.TestMiddleware._makeOne()=repoze.who.tests.test_middleware.TestMiddleware-class.html#_makeOne,Method repoze.who.tests.test_middleware.TestStartResponseWrapper._makeOne()=repoze.who.tests.test_middleware.TestStartResponseWrapper-class.html#_makeOne,Method repoze.who.tests.test_restrict.PredicateRestrictionTests._makeOne()=repoze.who.tests.test_restrict.PredicateRestrictionTests-class.html#_makeOne"><a title="repoze.who.plugins.tests.test_authtkt.TestAuthTktCookiePlugin._makeOne
+repoze.who.plugins.tests.test_basicauth.TestBasicAuthPlugin._makeOne
+repoze.who.plugins.tests.test_cookie.TestInsecureCookiePlugin._makeOne
+repoze.who.plugins.tests.test_form.TestFormPlugin._makeOne
+repoze.who.plugins.tests.test_form.TestRedirectingFormPlugin._makeOne
+repoze.who.plugins.tests.test_htpasswd.TestHTPasswdPlugin._makeOne
+repoze.who.plugins.tests.test_sql.TestSQLAuthenticatorPlugin._makeOne
+repoze.who.plugins.tests.test_sql.TestSQLMetadataProviderPlugin._makeOne
+repoze.who.tests.test_config.TestWhoConfig._makeOne
+repoze.who.tests.test_middleware.TestIdentityDict._makeOne
+repoze.who.tests.test_middleware.TestMiddleware._makeOne
+repoze.who.tests.test_middleware.TestStartResponseWrapper._makeOne
+repoze.who.tests.test_restrict.PredicateRestrictionTests._makeOne" class="py-name" href="#" onclick="return doclink('link-18', '_makeOne', 'link-18');">_makeOne</a></tt><tt class="py-op">(</tt><tt class="py-string">'oatmeal'</tt><tt class="py-op">)</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">        <tt id="link-19" class="py-name"><a title="repoze.who.tests.test_config.DummyApp.environ
+repoze.who.tests.test_middleware.DummyApp.environ
+repoze.who.tests.test_restrict.DummyApp.environ" class="py-name" href="#" onclick="return doclink('link-19', 'environ', 'link-7');">environ</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name" targets="Method repoze.who.plugins.ldap.tests.Base._makeEnviron()=repoze.who.plugins.ldap.tests.Base-class.html#_makeEnviron,Method repoze.who.plugins.tests.test_authtkt.TestAuthTktCookiePlugin._makeEnviron()=repoze.who.plugins.tests.test_authtkt.TestAuthTktCookiePlugin-class.html#_makeEnviron,Method repoze.who.plugins.tests.test_basicauth.TestBasicAuthPlugin._makeEnviron()=repoze.who.plugins.tests.test_basicauth.TestBasicAuthPlugin-class.html#_makeEnviron,Method repoze.who.plugins.tests.test_cookie.TestInsecureCookiePlugin._makeEnviron()=repoze.who.plugins.tests.test_cookie.TestInsecureCookiePlugin-class.html#_makeEnviron,Method repoze.who.plugins.tests.test_form.TestFormPlugin._makeEnviron()=repoze.who.plugins.tests.test_form.TestFormPlugin-class.html#_makeEnviron,Method repoze.who.plugins.tests.test_form.TestRedirectingFormPlugin._makeEnviron()=repoze.who.plugins.tests.test_form.TestRedirectingFormPlugin-class.html#_makeEnviron,Method repoze.who.plugins.tests.test_htpasswd.TestHTPasswdPlugin._makeEnviron()=repoze.who.plugins.tests.test_htpasswd.TestHTPasswdPlugin-class.html#_makeEnviron,Method repoze.who.plugins.tests.test_sql.TestSQLAuthenticatorPlugin._makeEnviron()=repoze.who.plugins.tests.test_sql.TestSQLAuthenticatorPlugin-class.html#_makeEnviron,Method repoze.who.tests.test_classifiers.TestDefaultChallengeDecider._makeEnviron()=repoze.who.tests.test_classifiers.TestDefaultChallengeDecider-class.html#_makeEnviron,Method repoze.who.tests.test_classifiers.TestDefaultRequestClassifier._makeEnviron()=repoze.who.tests.test_classifiers.TestDefaultRequestClassifier-class.html#_makeEnviron,Method repoze.who.tests.test_classifiers.TestPassthroughChallengeDecider._makeEnviron()=repoze.who.tests.test_classifiers.TestPassthroughChallengeDecider-class.html#_makeEnviron,Method repoze.who.tests.test_middleware.TestMiddleware._makeEnviron()=repoze.who.tests.test_middleware.TestMiddleware-class.html#_makeEnviron"><a title="repoze.who.plugins.ldap.tests.Base._makeEnviron
+repoze.who.plugins.tests.test_authtkt.TestAuthTktCookiePlugin._makeEnviron
+repoze.who.plugins.tests.test_basicauth.TestBasicAuthPlugin._makeEnviron
+repoze.who.plugins.tests.test_cookie.TestInsecureCookiePlugin._makeEnviron
+repoze.who.plugins.tests.test_form.TestFormPlugin._makeEnviron
+repoze.who.plugins.tests.test_form.TestRedirectingFormPlugin._makeEnviron
+repoze.who.plugins.tests.test_htpasswd.TestHTPasswdPlugin._makeEnviron
+repoze.who.plugins.tests.test_sql.TestSQLAuthenticatorPlugin._makeEnviron
+repoze.who.tests.test_classifiers.TestDefaultChallengeDecider._makeEnviron
+repoze.who.tests.test_classifiers.TestDefaultRequestClassifier._makeEnviron
+repoze.who.tests.test_classifiers.TestPassthroughChallengeDecider._makeEnviron
+repoze.who.tests.test_middleware.TestMiddleware._makeEnviron" class="py-name" href="#" onclick="return doclink('link-20', '_makeEnviron', 'link-20');">_makeEnviron</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">        <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt class="py-name">plugin</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name" targets="Method repoze.who.interfaces.IIdentifier.identify()=repoze.who.interfaces.IIdentifier-class.html#identify,Method repoze.who.middleware.PluggableAuthenticationMiddleware.identify()=repoze.who.middleware.PluggableAuthenticationMiddleware-class.html#identify,Method repoze.who.plugins.auth_tkt.AuthTktCookiePlugin.identify()=repoze.who.plugins.auth_tkt.AuthTktCookiePlugin-class.html#identify,Method repoze.who.plugins.basicauth.BasicAuthPlugin.identify()=repoze.who.plugins.basicauth.BasicAuthPlugin-class.html#identify,Method repoze.who.plugins.cookie.InsecureCookiePlugin.identify()=repoze.who.plugins.cookie.InsecureCookiePlugin-class.html#identify,Method repoze.who.plugins.form.FormPlugin.identify()=repoze.who.plugins.form.FormPlugin-class.html#identify,Method repoze.who.plugins.form.RedirectingFormPlugin.identify()=repoze.who.plugins.form.RedirectingFormPlugin-class.html#identify,Method repoze.who.plugins.tests.test_form.DummyIdentifier.identify()=repoze.who.plugins.tests.test_form.DummyIdentifier-class.html#identify,Method repoze.who.tests.test_middleware.DummyIdentifier.identify()=repoze.who.tests.test_middleware.DummyIdentifier-class.html#identify,Method repoze.who.tests.test_middleware.DummyNoResultsIdentifier.identify()=repoze.who.tests.test_middleware.DummyNoResultsIdentifier-class.html#identify"><a title="repoze.who.interfaces.IIdentifier.identify
+repoze.who.middleware.PluggableAuthenticationMiddleware.identify
+repoze.who.plugins.auth_tkt.AuthTktCookiePlugin.identify
+repoze.who.plugins.basicauth.BasicAuthPlugin.identify
+repoze.who.plugins.cookie.InsecureCookiePlugin.identify
+repoze.who.plugins.form.FormPlugin.identify
+repoze.who.plugins.form.RedirectingFormPlugin.identify
+repoze.who.plugins.tests.test_form.DummyIdentifier.identify
+repoze.who.tests.test_middleware.DummyIdentifier.identify
+repoze.who.tests.test_middleware.DummyNoResultsIdentifier.identify" class="py-name" href="#" onclick="return doclink('link-21', 'identify', 'link-21');">identify</a></tt><tt class="py-op">(</tt><tt id="link-22" class="py-name"><a title="repoze.who.tests.test_config.DummyApp.environ
+repoze.who.tests.test_middleware.DummyApp.environ
+repoze.who.tests.test_restrict.DummyApp.environ" class="py-name" href="#" onclick="return doclink('link-22', 'environ', 'link-7');">environ</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt class="py-name">result</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">         </tt>
+<a name="TestInsecureCookiePlugin.test_identify_badcookies"></a><div id="TestInsecureCookiePlugin.test_identify_badcookies-def"><a name="L32"></a><tt class="py-lineno">32</tt> <a class="py-toggle" href="#" id="TestInsecureCookiePlugin.test_identify_badcookies-toggle" onclick="return toggle('TestInsecureCookiePlugin.test_identify_badcookies');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.plugins.tests.test_cookie.TestInsecureCookiePlugin-class.html#test_identify_badcookies">test_identify_badcookies</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TestInsecureCookiePlugin.test_identify_badcookies-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="TestInsecureCookiePlugin.test_identify_badcookies-expanded"><a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">        <tt class="py-name">plugin</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="repoze.who.plugins.tests.test_authtkt.TestAuthTktCookiePlugin._makeOne
+repoze.who.plugins.tests.test_basicauth.TestBasicAuthPlugin._makeOne
+repoze.who.plugins.tests.test_cookie.TestInsecureCookiePlugin._makeOne
+repoze.who.plugins.tests.test_form.TestFormPlugin._makeOne
+repoze.who.plugins.tests.test_form.TestRedirectingFormPlugin._makeOne
+repoze.who.plugins.tests.test_htpasswd.TestHTPasswdPlugin._makeOne
+repoze.who.plugins.tests.test_sql.TestSQLAuthenticatorPlugin._makeOne
+repoze.who.plugins.tests.test_sql.TestSQLMetadataProviderPlugin._makeOne
+repoze.who.tests.test_config.TestWhoConfig._makeOne
+repoze.who.tests.test_middleware.TestIdentityDict._makeOne
+repoze.who.tests.test_middleware.TestMiddleware._makeOne
+repoze.who.tests.test_middleware.TestStartResponseWrapper._makeOne
+repoze.who.tests.test_restrict.PredicateRestrictionTests._makeOne" class="py-name" href="#" onclick="return doclink('link-23', '_makeOne', 'link-18');">_makeOne</a></tt><tt class="py-op">(</tt><tt class="py-string">'oatmeal'</tt><tt class="py-op">)</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">        <tt id="link-24" class="py-name"><a title="repoze.who.tests.test_config.DummyApp.environ
+repoze.who.tests.test_middleware.DummyApp.environ
+repoze.who.tests.test_restrict.DummyApp.environ" class="py-name" href="#" onclick="return doclink('link-24', 'environ', 'link-7');">environ</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name"><a title="repoze.who.plugins.ldap.tests.Base._makeEnviron
+repoze.who.plugins.tests.test_authtkt.TestAuthTktCookiePlugin._makeEnviron
+repoze.who.plugins.tests.test_basicauth.TestBasicAuthPlugin._makeEnviron
+repoze.who.plugins.tests.test_cookie.TestInsecureCookiePlugin._makeEnviron
+repoze.who.plugins.tests.test_form.TestFormPlugin._makeEnviron
+repoze.who.plugins.tests.test_form.TestRedirectingFormPlugin._makeEnviron
+repoze.who.plugins.tests.test_htpasswd.TestHTPasswdPlugin._makeEnviron
+repoze.who.plugins.tests.test_sql.TestSQLAuthenticatorPlugin._makeEnviron
+repoze.who.tests.test_classifiers.TestDefaultChallengeDecider._makeEnviron
+repoze.who.tests.test_classifiers.TestDefaultRequestClassifier._makeEnviron
+repoze.who.tests.test_classifiers.TestPassthroughChallengeDecider._makeEnviron
+repoze.who.tests.test_middleware.TestMiddleware._makeEnviron" class="py-name" href="#" onclick="return doclink('link-25', '_makeEnviron', 'link-20');">_makeEnviron</a></tt><tt class="py-op">(</tt><tt class="py-op">{</tt><tt class="py-string">'HTTP_COOKIE'</tt><tt class="py-op">:</tt><tt class="py-string">'oatmeal=a'</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">        <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt class="py-name">plugin</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="repoze.who.interfaces.IIdentifier.identify
+repoze.who.middleware.PluggableAuthenticationMiddleware.identify
+repoze.who.plugins.auth_tkt.AuthTktCookiePlugin.identify
+repoze.who.plugins.basicauth.BasicAuthPlugin.identify
+repoze.who.plugins.cookie.InsecureCookiePlugin.identify
+repoze.who.plugins.form.FormPlugin.identify
+repoze.who.plugins.form.RedirectingFormPlugin.identify
+repoze.who.plugins.tests.test_form.DummyIdentifier.identify
+repoze.who.tests.test_middleware.DummyIdentifier.identify
+repoze.who.tests.test_middleware.DummyNoResultsIdentifier.identify" class="py-name" href="#" onclick="return doclink('link-26', 'identify', 'link-21');">identify</a></tt><tt class="py-op">(</tt><tt id="link-27" class="py-name"><a title="repoze.who.tests.test_config.DummyApp.environ
+repoze.who.tests.test_middleware.DummyApp.environ
+repoze.who.tests.test_restrict.DummyApp.environ" class="py-name" href="#" onclick="return doclink('link-27', 'environ', 'link-7');">environ</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt class="py-name">result</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">         </tt>
+<a name="TestInsecureCookiePlugin.test_identify_badcookies_binascci_but_not_splittable"></a><div id="TestInsecureCookiePlugin.test_identify_badcookies_binascci_but_not_splittable-def"><a name="L38"></a><tt class="py-lineno">38</tt> <a class="py-toggle" href="#" id="TestInsecureCookiePlugin.test_identify_badcookies_binascci_but_not_splittable-toggle" onclick="return toggle('TestInsecureCookiePlugin.test_identify_badcookies_binascci_but_not_splittable');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.plugins.tests.test_cookie.TestInsecureCookiePlugin-class.html#test_identify_badcookies_binascci_but_not_splittable">test_identify_badcookies_binascci_but_not_splittable</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TestInsecureCookiePlugin.test_identify_badcookies_binascci_but_not_splittable-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="TestInsecureCookiePlugin.test_identify_badcookies_binascci_but_not_splittable-expanded"><a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">        <tt class="py-name">plugin</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-28" class="py-name"><a title="repoze.who.plugins.tests.test_authtkt.TestAuthTktCookiePlugin._makeOne
+repoze.who.plugins.tests.test_basicauth.TestBasicAuthPlugin._makeOne
+repoze.who.plugins.tests.test_cookie.TestInsecureCookiePlugin._makeOne
+repoze.who.plugins.tests.test_form.TestFormPlugin._makeOne
+repoze.who.plugins.tests.test_form.TestRedirectingFormPlugin._makeOne
+repoze.who.plugins.tests.test_htpasswd.TestHTPasswdPlugin._makeOne
+repoze.who.plugins.tests.test_sql.TestSQLAuthenticatorPlugin._makeOne
+repoze.who.plugins.tests.test_sql.TestSQLMetadataProviderPlugin._makeOne
+repoze.who.tests.test_config.TestWhoConfig._makeOne
+repoze.who.tests.test_middleware.TestIdentityDict._makeOne
+repoze.who.tests.test_middleware.TestMiddleware._makeOne
+repoze.who.tests.test_middleware.TestStartResponseWrapper._makeOne
+repoze.who.tests.test_restrict.PredicateRestrictionTests._makeOne" class="py-name" href="#" onclick="return doclink('link-28', '_makeOne', 'link-18');">_makeOne</a></tt><tt class="py-op">(</tt><tt class="py-string">'oatmeal'</tt><tt class="py-op">)</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">        <tt class="py-name">auth</tt> <tt class="py-op">=</tt> <tt class="py-string">'bogus'</tt><tt class="py-op">.</tt><tt class="py-name">encode</tt><tt class="py-op">(</tt><tt class="py-string">'base64'</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">rstrip</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">        <tt id="link-29" class="py-name"><a title="repoze.who.tests.test_config.DummyApp.environ
+repoze.who.tests.test_middleware.DummyApp.environ
+repoze.who.tests.test_restrict.DummyApp.environ" class="py-name" href="#" onclick="return doclink('link-29', 'environ', 'link-7');">environ</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-30" class="py-name"><a title="repoze.who.plugins.ldap.tests.Base._makeEnviron
+repoze.who.plugins.tests.test_authtkt.TestAuthTktCookiePlugin._makeEnviron
+repoze.who.plugins.tests.test_basicauth.TestBasicAuthPlugin._makeEnviron
+repoze.who.plugins.tests.test_cookie.TestInsecureCookiePlugin._makeEnviron
+repoze.who.plugins.tests.test_form.TestFormPlugin._makeEnviron
+repoze.who.plugins.tests.test_form.TestRedirectingFormPlugin._makeEnviron
+repoze.who.plugins.tests.test_htpasswd.TestHTPasswdPlugin._makeEnviron
+repoze.who.plugins.tests.test_sql.TestSQLAuthenticatorPlugin._makeEnviron
+repoze.who.tests.test_classifiers.TestDefaultChallengeDecider._makeEnviron
+repoze.who.tests.test_classifiers.TestDefaultRequestClassifier._makeEnviron
+repoze.who.tests.test_classifiers.TestPassthroughChallengeDecider._makeEnviron
+repoze.who.tests.test_middleware.TestMiddleware._makeEnviron" class="py-name" href="#" onclick="return doclink('link-30', '_makeEnviron', 'link-20');">_makeEnviron</a></tt><tt class="py-op">(</tt><tt class="py-op">{</tt><tt class="py-string">'HTTP_COOKIE'</tt><tt class="py-op">:</tt><tt class="py-string">'oatmeal=%s'</tt> <tt class="py-op">%</tt> <tt class="py-name">auth</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">        <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt class="py-name">plugin</tt><tt class="py-op">.</tt><tt id="link-31" class="py-name"><a title="repoze.who.interfaces.IIdentifier.identify
+repoze.who.middleware.PluggableAuthenticationMiddleware.identify
+repoze.who.plugins.auth_tkt.AuthTktCookiePlugin.identify
+repoze.who.plugins.basicauth.BasicAuthPlugin.identify
+repoze.who.plugins.cookie.InsecureCookiePlugin.identify
+repoze.who.plugins.form.FormPlugin.identify
+repoze.who.plugins.form.RedirectingFormPlugin.identify
+repoze.who.plugins.tests.test_form.DummyIdentifier.identify
+repoze.who.tests.test_middleware.DummyIdentifier.identify
+repoze.who.tests.test_middleware.DummyNoResultsIdentifier.identify" class="py-name" href="#" onclick="return doclink('link-31', 'identify', 'link-21');">identify</a></tt><tt class="py-op">(</tt><tt id="link-32" class="py-name"><a title="repoze.who.tests.test_config.DummyApp.environ
+repoze.who.tests.test_middleware.DummyApp.environ
+repoze.who.tests.test_restrict.DummyApp.environ" class="py-name" href="#" onclick="return doclink('link-32', 'environ', 'link-7');">environ</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt class="py-name">result</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"> </tt>
+<a name="TestInsecureCookiePlugin.test_identify_success"></a><div id="TestInsecureCookiePlugin.test_identify_success-def"><a name="L45"></a><tt class="py-lineno">45</tt> <a class="py-toggle" href="#" id="TestInsecureCookiePlugin.test_identify_success-toggle" onclick="return toggle('TestInsecureCookiePlugin.test_identify_success');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.plugins.tests.test_cookie.TestInsecureCookiePlugin-class.html#test_identify_success">test_identify_success</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TestInsecureCookiePlugin.test_identify_success-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="TestInsecureCookiePlugin.test_identify_success-expanded"><a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">        <tt class="py-name">plugin</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-33" class="py-name"><a title="repoze.who.plugins.tests.test_authtkt.TestAuthTktCookiePlugin._makeOne
+repoze.who.plugins.tests.test_basicauth.TestBasicAuthPlugin._makeOne
+repoze.who.plugins.tests.test_cookie.TestInsecureCookiePlugin._makeOne
+repoze.who.plugins.tests.test_form.TestFormPlugin._makeOne
+repoze.who.plugins.tests.test_form.TestRedirectingFormPlugin._makeOne
+repoze.who.plugins.tests.test_htpasswd.TestHTPasswdPlugin._makeOne
+repoze.who.plugins.tests.test_sql.TestSQLAuthenticatorPlugin._makeOne
+repoze.who.plugins.tests.test_sql.TestSQLMetadataProviderPlugin._makeOne
+repoze.who.tests.test_config.TestWhoConfig._makeOne
+repoze.who.tests.test_middleware.TestIdentityDict._makeOne
+repoze.who.tests.test_middleware.TestMiddleware._makeOne
+repoze.who.tests.test_middleware.TestStartResponseWrapper._makeOne
+repoze.who.tests.test_restrict.PredicateRestrictionTests._makeOne" class="py-name" href="#" onclick="return doclink('link-33', '_makeOne', 'link-18');">_makeOne</a></tt><tt class="py-op">(</tt><tt class="py-string">'oatmeal'</tt><tt class="py-op">)</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">        <tt class="py-name">auth</tt> <tt class="py-op">=</tt> <tt class="py-string">'foo:password'</tt><tt class="py-op">.</tt><tt class="py-name">encode</tt><tt class="py-op">(</tt><tt class="py-string">'base64'</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">rstrip</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">        <tt id="link-34" class="py-name"><a title="repoze.who.tests.test_config.DummyApp.environ
+repoze.who.tests.test_middleware.DummyApp.environ
+repoze.who.tests.test_restrict.DummyApp.environ" class="py-name" href="#" onclick="return doclink('link-34', 'environ', 'link-7');">environ</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-35" class="py-name"><a title="repoze.who.plugins.ldap.tests.Base._makeEnviron
+repoze.who.plugins.tests.test_authtkt.TestAuthTktCookiePlugin._makeEnviron
+repoze.who.plugins.tests.test_basicauth.TestBasicAuthPlugin._makeEnviron
+repoze.who.plugins.tests.test_cookie.TestInsecureCookiePlugin._makeEnviron
+repoze.who.plugins.tests.test_form.TestFormPlugin._makeEnviron
+repoze.who.plugins.tests.test_form.TestRedirectingFormPlugin._makeEnviron
+repoze.who.plugins.tests.test_htpasswd.TestHTPasswdPlugin._makeEnviron
+repoze.who.plugins.tests.test_sql.TestSQLAuthenticatorPlugin._makeEnviron
+repoze.who.tests.test_classifiers.TestDefaultChallengeDecider._makeEnviron
+repoze.who.tests.test_classifiers.TestDefaultRequestClassifier._makeEnviron
+repoze.who.tests.test_classifiers.TestPassthroughChallengeDecider._makeEnviron
+repoze.who.tests.test_middleware.TestMiddleware._makeEnviron" class="py-name" href="#" onclick="return doclink('link-35', '_makeEnviron', 'link-20');">_makeEnviron</a></tt><tt class="py-op">(</tt><tt class="py-op">{</tt><tt class="py-string">'HTTP_COOKIE'</tt><tt class="py-op">:</tt><tt class="py-string">'oatmeal=%s;'</tt> <tt class="py-op">%</tt> <tt class="py-name">auth</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">        <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt class="py-name">plugin</tt><tt class="py-op">.</tt><tt id="link-36" class="py-name"><a title="repoze.who.interfaces.IIdentifier.identify
+repoze.who.middleware.PluggableAuthenticationMiddleware.identify
+repoze.who.plugins.auth_tkt.AuthTktCookiePlugin.identify
+repoze.who.plugins.basicauth.BasicAuthPlugin.identify
+repoze.who.plugins.cookie.InsecureCookiePlugin.identify
+repoze.who.plugins.form.FormPlugin.identify
+repoze.who.plugins.form.RedirectingFormPlugin.identify
+repoze.who.plugins.tests.test_form.DummyIdentifier.identify
+repoze.who.tests.test_middleware.DummyIdentifier.identify
+repoze.who.tests.test_middleware.DummyNoResultsIdentifier.identify" class="py-name" href="#" onclick="return doclink('link-36', 'identify', 'link-21');">identify</a></tt><tt class="py-op">(</tt><tt id="link-37" class="py-name"><a title="repoze.who.tests.test_config.DummyApp.environ
+repoze.who.tests.test_middleware.DummyApp.environ
+repoze.who.tests.test_restrict.DummyApp.environ" class="py-name" href="#" onclick="return doclink('link-37', 'environ', 'link-7');">environ</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt class="py-name">result</tt><tt class="py-op">,</tt> <tt class="py-op">{</tt><tt class="py-string">'login'</tt><tt class="py-op">:</tt><tt class="py-string">'foo'</tt><tt class="py-op">,</tt> <tt class="py-string">'password'</tt><tt class="py-op">:</tt><tt class="py-string">'password'</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line"> </tt>
+<a name="TestInsecureCookiePlugin.test_remember_creds_same"></a><div id="TestInsecureCookiePlugin.test_remember_creds_same-def"><a name="L52"></a><tt class="py-lineno">52</tt> <a class="py-toggle" href="#" id="TestInsecureCookiePlugin.test_remember_creds_same-toggle" onclick="return toggle('TestInsecureCookiePlugin.test_remember_creds_same');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.plugins.tests.test_cookie.TestInsecureCookiePlugin-class.html#test_remember_creds_same">test_remember_creds_same</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TestInsecureCookiePlugin.test_remember_creds_same-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="TestInsecureCookiePlugin.test_remember_creds_same-expanded"><a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">        <tt class="py-name">plugin</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-38" class="py-name"><a title="repoze.who.plugins.tests.test_authtkt.TestAuthTktCookiePlugin._makeOne
+repoze.who.plugins.tests.test_basicauth.TestBasicAuthPlugin._makeOne
+repoze.who.plugins.tests.test_cookie.TestInsecureCookiePlugin._makeOne
+repoze.who.plugins.tests.test_form.TestFormPlugin._makeOne
+repoze.who.plugins.tests.test_form.TestRedirectingFormPlugin._makeOne
+repoze.who.plugins.tests.test_htpasswd.TestHTPasswdPlugin._makeOne
+repoze.who.plugins.tests.test_sql.TestSQLAuthenticatorPlugin._makeOne
+repoze.who.plugins.tests.test_sql.TestSQLMetadataProviderPlugin._makeOne
+repoze.who.tests.test_config.TestWhoConfig._makeOne
+repoze.who.tests.test_middleware.TestIdentityDict._makeOne
+repoze.who.tests.test_middleware.TestMiddleware._makeOne
+repoze.who.tests.test_middleware.TestStartResponseWrapper._makeOne
+repoze.who.tests.test_restrict.PredicateRestrictionTests._makeOne" class="py-name" href="#" onclick="return doclink('link-38', '_makeOne', 'link-18');">_makeOne</a></tt><tt class="py-op">(</tt><tt class="py-string">'oatmeal'</tt><tt class="py-op">)</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">        <tt class="py-name">creds</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-string">'login'</tt><tt class="py-op">:</tt><tt class="py-string">'foo'</tt><tt class="py-op">,</tt> <tt class="py-string">'password'</tt><tt class="py-op">:</tt><tt class="py-string">'password'</tt><tt class="py-op">}</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">        <tt class="py-name">auth</tt> <tt class="py-op">=</tt> <tt class="py-string">'foo:password'</tt><tt class="py-op">.</tt><tt class="py-name">encode</tt><tt class="py-op">(</tt><tt class="py-string">'base64'</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">rstrip</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">        <tt class="py-name">auth</tt> <tt class="py-op">=</tt> <tt class="py-string">'oatmeal=%s;'</tt> <tt class="py-op">%</tt> <tt class="py-name">auth</tt> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line">        <tt id="link-39" class="py-name"><a title="repoze.who.tests.test_config.DummyApp.environ
+repoze.who.tests.test_middleware.DummyApp.environ
+repoze.who.tests.test_restrict.DummyApp.environ" class="py-name" href="#" onclick="return doclink('link-39', 'environ', 'link-7');">environ</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-40" class="py-name"><a title="repoze.who.plugins.ldap.tests.Base._makeEnviron
+repoze.who.plugins.tests.test_authtkt.TestAuthTktCookiePlugin._makeEnviron
+repoze.who.plugins.tests.test_basicauth.TestBasicAuthPlugin._makeEnviron
+repoze.who.plugins.tests.test_cookie.TestInsecureCookiePlugin._makeEnviron
+repoze.who.plugins.tests.test_form.TestFormPlugin._makeEnviron
+repoze.who.plugins.tests.test_form.TestRedirectingFormPlugin._makeEnviron
+repoze.who.plugins.tests.test_htpasswd.TestHTPasswdPlugin._makeEnviron
+repoze.who.plugins.tests.test_sql.TestSQLAuthenticatorPlugin._makeEnviron
+repoze.who.tests.test_classifiers.TestDefaultChallengeDecider._makeEnviron
+repoze.who.tests.test_classifiers.TestDefaultRequestClassifier._makeEnviron
+repoze.who.tests.test_classifiers.TestPassthroughChallengeDecider._makeEnviron
+repoze.who.tests.test_middleware.TestMiddleware._makeEnviron" class="py-name" href="#" onclick="return doclink('link-40', '_makeEnviron', 'link-20');">_makeEnviron</a></tt><tt class="py-op">(</tt><tt class="py-op">{</tt><tt class="py-string">'HTTP_COOKIE'</tt><tt class="py-op">:</tt><tt class="py-name">auth</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line">        <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt class="py-name">plugin</tt><tt class="py-op">.</tt><tt id="link-41" class="py-name" targets="Method repoze.who.interfaces.IIdentifier.remember()=repoze.who.interfaces.IIdentifier-class.html#remember,Method repoze.who.plugins.auth_tkt.AuthTktCookiePlugin.remember()=repoze.who.plugins.auth_tkt.AuthTktCookiePlugin-class.html#remember,Method repoze.who.plugins.basicauth.BasicAuthPlugin.remember()=repoze.who.plugins.basicauth.BasicAuthPlugin-class.html#remember,Method repoze.who.plugins.cookie.InsecureCookiePlugin.remember()=repoze.who.plugins.cookie.InsecureCookiePlugin-class.html#remember,Method repoze.who.plugins.form.FormPluginBase.remember()=repoze.who.plugins.form.FormPluginBase-class.html#remember,Method repoze.who.plugins.tests.test_form.DummyIdentifier.remember()=repoze.who.plugins.tests.test_form.DummyIdentifier-class.html#remember,Method repoze.who.tests.test_middleware.DummyIdentifier.remember()=repoze.who.tests.test_middleware.DummyIdentifier-class.html#remember,Method repoze.who.tests.test_middleware.DummyNoResultsIdentifier.remember()=repoze.who.tests.test_middleware.DummyNoResultsIdentifier-class.html#remember"><a title="repoze.who.interfaces.IIdentifier.remember
+repoze.who.plugins.auth_tkt.AuthTktCookiePlugin.remember
+repoze.who.plugins.basicauth.BasicAuthPlugin.remember
+repoze.who.plugins.cookie.InsecureCookiePlugin.remember
+repoze.who.plugins.form.FormPluginBase.remember
+repoze.who.plugins.tests.test_form.DummyIdentifier.remember
+repoze.who.tests.test_middleware.DummyIdentifier.remember
+repoze.who.tests.test_middleware.DummyNoResultsIdentifier.remember" class="py-name" href="#" onclick="return doclink('link-41', 'remember', 'link-41');">remember</a></tt><tt class="py-op">(</tt><tt id="link-42" class="py-name"><a title="repoze.who.tests.test_config.DummyApp.environ
+repoze.who.tests.test_middleware.DummyApp.environ
+repoze.who.tests.test_restrict.DummyApp.environ" class="py-name" href="#" onclick="return doclink('link-42', 'environ', 'link-7');">environ</a></tt><tt class="py-op">,</tt> <tt class="py-name">creds</tt><tt class="py-op">)</tt> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt class="py-name">result</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line"> </tt>
+<a name="TestInsecureCookiePlugin.test_remember_creds_different"></a><div id="TestInsecureCookiePlugin.test_remember_creds_different-def"><a name="L61"></a><tt class="py-lineno">61</tt> <a class="py-toggle" href="#" id="TestInsecureCookiePlugin.test_remember_creds_different-toggle" onclick="return toggle('TestInsecureCookiePlugin.test_remember_creds_different');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.plugins.tests.test_cookie.TestInsecureCookiePlugin-class.html#test_remember_creds_different">test_remember_creds_different</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TestInsecureCookiePlugin.test_remember_creds_different-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="TestInsecureCookiePlugin.test_remember_creds_different-expanded"><a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line">        <tt class="py-name">plugin</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-43" class="py-name"><a title="repoze.who.plugins.tests.test_authtkt.TestAuthTktCookiePlugin._makeOne
+repoze.who.plugins.tests.test_basicauth.TestBasicAuthPlugin._makeOne
+repoze.who.plugins.tests.test_cookie.TestInsecureCookiePlugin._makeOne
+repoze.who.plugins.tests.test_form.TestFormPlugin._makeOne
+repoze.who.plugins.tests.test_form.TestRedirectingFormPlugin._makeOne
+repoze.who.plugins.tests.test_htpasswd.TestHTPasswdPlugin._makeOne
+repoze.who.plugins.tests.test_sql.TestSQLAuthenticatorPlugin._makeOne
+repoze.who.plugins.tests.test_sql.TestSQLMetadataProviderPlugin._makeOne
+repoze.who.tests.test_config.TestWhoConfig._makeOne
+repoze.who.tests.test_middleware.TestIdentityDict._makeOne
+repoze.who.tests.test_middleware.TestMiddleware._makeOne
+repoze.who.tests.test_middleware.TestStartResponseWrapper._makeOne
+repoze.who.tests.test_restrict.PredicateRestrictionTests._makeOne" class="py-name" href="#" onclick="return doclink('link-43', '_makeOne', 'link-18');">_makeOne</a></tt><tt class="py-op">(</tt><tt class="py-string">'oatmeal'</tt><tt class="py-op">)</tt> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line">        <tt class="py-name">creds</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-string">'login'</tt><tt class="py-op">:</tt><tt class="py-string">'bar'</tt><tt class="py-op">,</tt> <tt class="py-string">'password'</tt><tt class="py-op">:</tt><tt class="py-string">'password'</tt><tt class="py-op">}</tt> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line">        <tt class="py-name">auth</tt> <tt class="py-op">=</tt> <tt class="py-string">'foo:password'</tt><tt class="py-op">.</tt><tt class="py-name">encode</tt><tt class="py-op">(</tt><tt class="py-string">'base64'</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">rstrip</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line">        <tt class="py-name">creds_auth</tt> <tt class="py-op">=</tt> <tt class="py-string">'bar:password'</tt><tt class="py-op">.</tt><tt class="py-name">encode</tt><tt class="py-op">(</tt><tt class="py-string">'base64'</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">rstrip</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line">        <tt id="link-44" class="py-name"><a title="repoze.who.tests.test_config.DummyApp.environ
+repoze.who.tests.test_middleware.DummyApp.environ
+repoze.who.tests.test_restrict.DummyApp.environ" class="py-name" href="#" onclick="return doclink('link-44', 'environ', 'link-7');">environ</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-45" class="py-name"><a title="repoze.who.plugins.ldap.tests.Base._makeEnviron
+repoze.who.plugins.tests.test_authtkt.TestAuthTktCookiePlugin._makeEnviron
+repoze.who.plugins.tests.test_basicauth.TestBasicAuthPlugin._makeEnviron
+repoze.who.plugins.tests.test_cookie.TestInsecureCookiePlugin._makeEnviron
+repoze.who.plugins.tests.test_form.TestFormPlugin._makeEnviron
+repoze.who.plugins.tests.test_form.TestRedirectingFormPlugin._makeEnviron
+repoze.who.plugins.tests.test_htpasswd.TestHTPasswdPlugin._makeEnviron
+repoze.who.plugins.tests.test_sql.TestSQLAuthenticatorPlugin._makeEnviron
+repoze.who.tests.test_classifiers.TestDefaultChallengeDecider._makeEnviron
+repoze.who.tests.test_classifiers.TestDefaultRequestClassifier._makeEnviron
+repoze.who.tests.test_classifiers.TestPassthroughChallengeDecider._makeEnviron
+repoze.who.tests.test_middleware.TestMiddleware._makeEnviron" class="py-name" href="#" onclick="return doclink('link-45', '_makeEnviron', 'link-20');">_makeEnviron</a></tt><tt class="py-op">(</tt><tt class="py-op">{</tt><tt class="py-string">'HTTP_COOKIE'</tt><tt class="py-op">:</tt><tt class="py-string">'oatmeal=%s;'</tt> <tt class="py-op">%</tt> <tt class="py-name">auth</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line">        <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt class="py-name">plugin</tt><tt class="py-op">.</tt><tt id="link-46" class="py-name"><a title="repoze.who.interfaces.IIdentifier.remember
+repoze.who.plugins.auth_tkt.AuthTktCookiePlugin.remember
+repoze.who.plugins.basicauth.BasicAuthPlugin.remember
+repoze.who.plugins.cookie.InsecureCookiePlugin.remember
+repoze.who.plugins.form.FormPluginBase.remember
+repoze.who.plugins.tests.test_form.DummyIdentifier.remember
+repoze.who.tests.test_middleware.DummyIdentifier.remember
+repoze.who.tests.test_middleware.DummyNoResultsIdentifier.remember" class="py-name" href="#" onclick="return doclink('link-46', 'remember', 'link-41');">remember</a></tt><tt class="py-op">(</tt><tt id="link-47" class="py-name"><a title="repoze.who.tests.test_config.DummyApp.environ
+repoze.who.tests.test_middleware.DummyApp.environ
+repoze.who.tests.test_restrict.DummyApp.environ" class="py-name" href="#" onclick="return doclink('link-47', 'environ', 'link-7');">environ</a></tt><tt class="py-op">,</tt> <tt class="py-name">creds</tt><tt class="py-op">)</tt> </tt>
+<a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line">        <tt class="py-name">expected</tt> <tt class="py-op">=</tt> <tt class="py-string">'oatmeal=%s; Path=/;'</tt> <tt class="py-op">%</tt> <tt class="py-name">creds_auth</tt> </tt>
+<a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt class="py-name">result</tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-op">(</tt><tt class="py-string">'Set-Cookie'</tt><tt class="py-op">,</tt> <tt class="py-name">expected</tt><tt class="py-op">)</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line"> </tt>
+<a name="TestInsecureCookiePlugin.test_factory"></a><div id="TestInsecureCookiePlugin.test_factory-def"><a name="L71"></a><tt class="py-lineno">71</tt> <a class="py-toggle" href="#" id="TestInsecureCookiePlugin.test_factory-toggle" onclick="return toggle('TestInsecureCookiePlugin.test_factory');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.plugins.tests.test_cookie.TestInsecureCookiePlugin-class.html#test_factory">test_factory</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TestInsecureCookiePlugin.test_factory-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="TestInsecureCookiePlugin.test_factory-expanded"><a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line">        <tt class="py-keyword">from</tt> <tt id="link-48" class="py-name"><a title="repoze" class="py-name" href="#" onclick="return doclink('link-48', 'repoze', 'link-0');">repoze</a></tt><tt class="py-op">.</tt><tt id="link-49" class="py-name"><a title="repoze.who" class="py-name" href="#" onclick="return doclink('link-49', 'who', 'link-1');">who</a></tt><tt class="py-op">.</tt><tt id="link-50" class="py-name"><a title="repoze.who.plugins
+repoze.who.plugins.ldap.plugins" class="py-name" href="#" onclick="return doclink('link-50', 'plugins', 'link-2');">plugins</a></tt><tt class="py-op">.</tt><tt id="link-51" class="py-name"><a title="repoze.who.plugins.cookie" class="py-name" href="#" onclick="return doclink('link-51', 'cookie', 'link-3');">cookie</a></tt> <tt class="py-keyword">import</tt> <tt id="link-52" class="py-name" targets="Function repoze.who.plugins.auth_tkt.make_plugin()=repoze.who.plugins.auth_tkt-module.html#make_plugin,Function repoze.who.plugins.basicauth.make_plugin()=repoze.who.plugins.basicauth-module.html#make_plugin,Function repoze.who.plugins.cookie.make_plugin()=repoze.who.plugins.cookie-module.html#make_plugin,Function repoze.who.plugins.form.make_plugin()=repoze.who.plugins.form-module.html#make_plugin,Function repoze.who.plugins.htpasswd.make_plugin()=repoze.who.plugins.htpasswd-module.html#make_plugin"><a title="repoze.who.plugins.auth_tkt.make_plugin
+repoze.who.plugins.basicauth.make_plugin
+repoze.who.plugins.cookie.make_plugin
+repoze.who.plugins.form.make_plugin
+repoze.who.plugins.htpasswd.make_plugin" class="py-name" href="#" onclick="return doclink('link-52', 'make_plugin', 'link-52');">make_plugin</a></tt> </tt>
+<a name="L73"></a><tt class="py-lineno">73</tt>  <tt class="py-line">        <tt class="py-name">plugin</tt> <tt class="py-op">=</tt> <tt id="link-53" class="py-name"><a title="repoze.who.plugins.auth_tkt.make_plugin
+repoze.who.plugins.basicauth.make_plugin
+repoze.who.plugins.cookie.make_plugin
+repoze.who.plugins.form.make_plugin
+repoze.who.plugins.htpasswd.make_plugin" class="py-name" href="#" onclick="return doclink('link-53', 'make_plugin', 'link-52');">make_plugin</a></tt><tt class="py-op">(</tt><tt class="py-string">'foo'</tt><tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno">74</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt class="py-name">plugin</tt><tt class="py-op">.</tt><tt class="py-name">cookie_name</tt><tt class="py-op">,</tt> <tt class="py-string">'foo'</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L75"></a><tt class="py-lineno">75</tt>  <tt class="py-line"> </tt>
+<a name="TestInsecureCookiePlugin.test_forget"></a><div id="TestInsecureCookiePlugin.test_forget-def"><a name="L76"></a><tt class="py-lineno">76</tt> <a class="py-toggle" href="#" id="TestInsecureCookiePlugin.test_forget-toggle" onclick="return toggle('TestInsecureCookiePlugin.test_forget');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.plugins.tests.test_cookie.TestInsecureCookiePlugin-class.html#test_forget">test_forget</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TestInsecureCookiePlugin.test_forget-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="TestInsecureCookiePlugin.test_forget-expanded"><a name="L77"></a><tt class="py-lineno">77</tt>  <tt class="py-line">        <tt class="py-name">plugin</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-54" class="py-name"><a title="repoze.who.plugins.tests.test_authtkt.TestAuthTktCookiePlugin._makeOne
+repoze.who.plugins.tests.test_basicauth.TestBasicAuthPlugin._makeOne
+repoze.who.plugins.tests.test_cookie.TestInsecureCookiePlugin._makeOne
+repoze.who.plugins.tests.test_form.TestFormPlugin._makeOne
+repoze.who.plugins.tests.test_form.TestRedirectingFormPlugin._makeOne
+repoze.who.plugins.tests.test_htpasswd.TestHTPasswdPlugin._makeOne
+repoze.who.plugins.tests.test_sql.TestSQLAuthenticatorPlugin._makeOne
+repoze.who.plugins.tests.test_sql.TestSQLMetadataProviderPlugin._makeOne
+repoze.who.tests.test_config.TestWhoConfig._makeOne
+repoze.who.tests.test_middleware.TestIdentityDict._makeOne
+repoze.who.tests.test_middleware.TestMiddleware._makeOne
+repoze.who.tests.test_middleware.TestStartResponseWrapper._makeOne
+repoze.who.tests.test_restrict.PredicateRestrictionTests._makeOne" class="py-name" href="#" onclick="return doclink('link-54', '_makeOne', 'link-18');">_makeOne</a></tt><tt class="py-op">(</tt><tt class="py-string">'oatmeal'</tt><tt class="py-op">)</tt> </tt>
+<a name="L78"></a><tt class="py-lineno">78</tt>  <tt class="py-line">        <tt class="py-name">headers</tt> <tt class="py-op">=</tt> <tt class="py-name">plugin</tt><tt class="py-op">.</tt><tt id="link-55" class="py-name" targets="Method repoze.who.interfaces.IIdentifier.forget()=repoze.who.interfaces.IIdentifier-class.html#forget,Method repoze.who.plugins.auth_tkt.AuthTktCookiePlugin.forget()=repoze.who.plugins.auth_tkt.AuthTktCookiePlugin-class.html#forget,Method repoze.who.plugins.basicauth.BasicAuthPlugin.forget()=repoze.who.plugins.basicauth.BasicAuthPlugin-class.html#forget,Method repoze.who.plugins.cookie.InsecureCookiePlugin.forget()=repoze.who.plugins.cookie.InsecureCookiePlugin-class.html#forget,Method repoze.who.plugins.form.FormPluginBase.forget()=repoze.who.plugins.form.FormPluginBase-class.html#forget,Method repoze.who.plugins.tests.test_form.DummyIdentifier.forget()=repoze.who.plugins.tests.test_form.DummyIdentifier-class.html#forget,Method repoze.who.tests.test_middleware.DummyIdentifier.forget()=repoze.who.tests.test_middleware.DummyIdentifier-class.html#forget,Method repoze.who.tests.test_middleware.DummyNoResultsIdentifier.forget()=repoze.who.tests.test_middleware.DummyNoResultsIdentifier-class.html#forget"><a title="repoze.who.interfaces.IIdentifier.forget
+repoze.who.plugins.auth_tkt.AuthTktCookiePlugin.forget
+repoze.who.plugins.basicauth.BasicAuthPlugin.forget
+repoze.who.plugins.cookie.InsecureCookiePlugin.forget
+repoze.who.plugins.form.FormPluginBase.forget
+repoze.who.plugins.tests.test_form.DummyIdentifier.forget
+repoze.who.tests.test_middleware.DummyIdentifier.forget
+repoze.who.tests.test_middleware.DummyNoResultsIdentifier.forget" class="py-name" href="#" onclick="return doclink('link-55', 'forget', 'link-55');">forget</a></tt><tt class="py-op">(</tt><tt class="py-op">{</tt><tt class="py-op">}</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L79"></a><tt class="py-lineno">79</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">headers</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L80"></a><tt class="py-lineno">80</tt>  <tt class="py-line">        <tt class="py-name">header</tt> <tt class="py-op">=</tt> <tt class="py-name">headers</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L81"></a><tt class="py-lineno">81</tt>  <tt class="py-line">        <tt class="py-name">name</tt><tt class="py-op">,</tt> <tt class="py-name">value</tt> <tt class="py-op">=</tt> <tt class="py-name">header</tt> </tt>
+<a name="L82"></a><tt class="py-lineno">82</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt class="py-name">name</tt><tt class="py-op">,</tt> <tt class="py-string">'Set-Cookie'</tt><tt class="py-op">)</tt> </tt>
+<a name="L83"></a><tt class="py-lineno">83</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">assertEqual</tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">,</tt> </tt>
+<a name="L84"></a><tt class="py-lineno">84</tt>  <tt class="py-line">            <tt class="py-string">'oatmeal=""; Path=/; Expires=Sun, 10-May-1971 11:59:00 GMT'</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L85"></a><tt class="py-lineno">85</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="repoze.who.plugins.ldap-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://code.gustavonarea.net/repoze.who.plugins.ldap/">repoze.who LDAP plugin</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Jun  3 10:41:59 2010
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

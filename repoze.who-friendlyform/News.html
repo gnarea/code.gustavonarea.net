@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>repoze.who-friendlyform releases &mdash; Collection of repoze.who friendly form plugins v1.0.6 documentation</title>
+    <link rel="stylesheet" href="_static/repoze.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0.6',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Collection of repoze.who friendly form plugins v1.0.6 documentation" href="index.html" />
+    <link rel="prev" title="Collection of repoze.who friendly form plugins" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Collection of repoze.who friendly form plugins"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Collection of repoze.who friendly form plugins v1.0.6 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="repoze-who-friendlyform-releases">
+<h1><strong>repoze.who-friendlyform</strong> releases<a class="headerlink" href="#repoze-who-friendlyform-releases" title="Permalink to this headline">¶</a></h1>
+<p>This document describes the releases of <a title="Developer-friendly repoze.who form plugins" class="reference external" href="index.html#module-repoze.who.plugins.friendlyform"><tt class="xref docutils literal"><span class="pre">repoze.who.plugins.friendlyform</span></tt></a>.</p>
+<div class="section" id="version-1-0-6-2010-04-28">
+<span id="id1"></span><h2>Version 1.0.6 (2010-04-28)<a class="headerlink" href="#version-1-0-6-2010-04-28" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Restricted the plugin to identify and challenge to browser requests only. So
+it won&#8217;t come into play if the client is a Subversion client, for example.</li>
+</ul>
+</div>
+<div class="section" id="version-1-0-5-2010-04-22">
+<span id="id2"></span><h2>Version 1.0.5 (2010-04-22)<a class="headerlink" href="#version-1-0-5-2010-04-22" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Made the plugin return <tt class="xref docutils literal"><span class="pre">str</span></tt> instead of <tt class="xref docutils literal"><span class="pre">unicode</span></tt> when the request
+is made using ASCII.</li>
+<li>Added sample code to the documentation on how to use
+<a title="repoze.who.plugins.friendlyform.FriendlyFormPlugin" class="reference external" href="index.html#repoze.who.plugins.friendlyform.FriendlyFormPlugin"><tt class="xref docutils literal"><span class="pre">FriendlyFormPlugin</span></tt></a>, as suggested by
+Ian Stevens.</li>
+</ul>
+</div>
+<div class="section" id="version-1-0-1-2010-01-29">
+<span id="id3"></span><h2>Version 1.0.1 (2010-01-29)<a class="headerlink" href="#version-1-0-1-2010-01-29" title="Permalink to this headline">¶</a></h2>
+<p>Added the ability to set another default character encoding for the credentials
+in <a title="repoze.who.plugins.friendlyform.FriendlyFormPlugin" class="reference external" href="index.html#repoze.who.plugins.friendlyform.FriendlyFormPlugin"><tt class="xref docutils literal"><span class="pre">FriendlyFormPlugin</span></tt></a>.</p>
+<p>Although ISO-8859-1 (aka &#8220;Latin-1&#8221;) is the official default charset according to
+the HTTP 1.1 specification (the one to be used when no encoding is explicitly
+mentioned in the request), browsers (e.g., Firefox) don&#8217;t set it even when
+they use other encodings like UTF-8.</p>
+<p>So, if you use a charset other than Latin-1, you should let the plugin know.</p>
+<p>This has been <a class="reference external" href="http://trac.turbogears.org/ticket/2438#comment:6">reported by Christoph Zwerschke</a>.</p>
+</div>
+<div class="section" id="version-1-0-final-2010-01-28">
+<span id="id4"></span><h2>Version 1.0 Final (2010-01-28)<a class="headerlink" href="#version-1-0-final-2010-01-28" title="Permalink to this headline">¶</a></h2>
+<p>Christoph Zwerschke made the
+<a title="repoze.who.plugins.friendlyform.FriendlyFormPlugin" class="reference external" href="index.html#repoze.who.plugins.friendlyform.FriendlyFormPlugin"><tt class="xref docutils literal"><span class="pre">FriendlyFormPlugin</span></tt></a> support non-ASCII
+credentials. Thank you Christoph!</p>
+<p>It made no sense to do a release candidate because this has been the only bug
+over the last year. Hence the &#8220;final&#8221; release.</p>
+</div>
+<div class="section" id="version-1-0b3-2009-03-02">
+<span id="b3"></span><h2>Version 1.0b3 (2009-03-02)<a class="headerlink" href="#version-1-0b3-2009-03-02" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Specified the required version of <a title="(in repoze.who v1.0.10)" class="reference external" href="http://static.repoze.org/whodocs/index.html#module-repoze.who"><tt class="xref docutils literal"><span class="pre">repoze.who</span></tt></a>, otherwise the buggy
+setuptools won&#8217;t install it.</li>
+</ul>
+</div>
+<div class="section" id="version-1-0b2-2009-02-20">
+<span id="b2"></span><h2>Version 1.0b2 (2009-02-20)<a class="headerlink" href="#version-1-0b2-2009-02-20" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Forced the login counter name in the query string to be <tt class="docutils literal"><span class="pre">'__logins'</span></tt> even
+when <tt class="docutils literal"><span class="pre">login_counter_name</span></tt> is passed as <tt class="xref docutils literal"><span class="pre">None</span></tt> to
+<a title="repoze.who.plugins.friendlyform.FriendlyFormPlugin.__init__" class="reference external" href="index.html#repoze.who.plugins.friendlyform.FriendlyFormPlugin.__init__"><tt class="xref docutils literal"><span class="pre">repoze.who.plugins.friendlyform.FriendlyFormPlugin.__init__()</span></tt></a>. The
+previous behavior was causing some weird problems on TG2 applications.</li>
+</ul>
+</div>
+<div class="section" id="version-1-0b1-2009-02-17">
+<span id="b1"></span><h2>Version 1.0b1 (2009-02-17)<a class="headerlink" href="#version-1-0b1-2009-02-17" title="Permalink to this headline">¶</a></h2>
+<p>This is the first release of <strong>repoze.who-friendlyform</strong> as an
+independent project. The initial form plugin,
+<a title="repoze.who.plugins.friendlyform.FriendlyFormPlugin" class="reference external" href="index.html#repoze.who.plugins.friendlyform.FriendlyFormPlugin"><tt class="xref docutils literal"><span class="pre">repoze.who.plugins.friendlyform.FriendlyFormPlugin</span></tt></a>, has been moved
+from <tt class="xref docutils literal"><span class="pre">repoze.what.plugins.quickstart.FriendlyRedirectingFormPlugin</span></tt>.</p>
+<p>This new version of <tt class="docutils literal"><span class="pre">FriendlyRedirectingFormPlugin</span></tt> doesn&#8217;t extends
+<a title="(in repoze.who v1.0.10)" class="reference external" href="http://static.repoze.org/whodocs/narr.html#repoze.who.plugins.form.RedirectingFormPlugin"><tt class="xref docutils literal"><span class="pre">RedirectingFormPlugin</span></tt></a>
+anymore. Instead, the relevant bits from the <tt class="docutils literal"><span class="pre">RedirectingFormPlugin</span></tt> have
+been copied over, as recommended by Chris McDonough.</p>
+<p>This new version of <tt class="docutils literal"><span class="pre">FriendlyRedirectingFormPlugin</span></tt> behaves exactly as the
+original one.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo_hi.gif" alt="Logo"/>
+            </a></p>
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href=""><strong>repoze.who-friendlyform</strong> releases</a><ul>
+<li><a class="reference external" href="#version-1-0-6-2010-04-28">Version 1.0.6 (2010-04-28)</a></li>
+<li><a class="reference external" href="#version-1-0-5-2010-04-22">Version 1.0.5 (2010-04-22)</a></li>
+<li><a class="reference external" href="#version-1-0-1-2010-01-29">Version 1.0.1 (2010-01-29)</a></li>
+<li><a class="reference external" href="#version-1-0-final-2010-01-28">Version 1.0 Final (2010-01-28)</a></li>
+<li><a class="reference external" href="#version-1-0b3-2009-03-02">Version 1.0b3 (2009-03-02)</a></li>
+<li><a class="reference external" href="#version-1-0b2-2009-02-20">Version 1.0b2 (2009-02-20)</a></li>
+<li><a class="reference external" href="#version-1-0b1-2009-02-17">Version 1.0b1 (2009-02-17)</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="index.html"
+                                  title="previous chapter">Collection of <tt class="docutils literal"><span class="pre">repoze.who</span></tt> friendly form plugins</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/News.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Collection of repoze.who friendly form plugins"
+             >previous</a> |</li>
+        <li><a href="index.html">Collection of repoze.who friendly form plugins v1.0.6 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009-2010, Gustavo Narea.
+      Last updated on Apr 28, 2010.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.3.
+    </div>
+  </body>
+</html>

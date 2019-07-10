@@ -1,0 +1,644 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>repoze.who.plugins.ldap.plugins</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="repoze.who.plugins.ldap-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://code.gustavonarea.net/repoze.who.plugins.ldap/">repoze.who LDAP plugin</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="repoze-module.html">Package&nbsp;repoze</a> ::
+        <a href="repoze.who-module.html">Package&nbsp;who</a> ::
+        <a href="repoze.who.plugins-module.html">Package&nbsp;plugins</a> ::
+        <a href="repoze.who.plugins.ldap-module.html">Package&nbsp;ldap</a> ::
+        Module&nbsp;plugins
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="repoze.who.plugins.ldap.plugins-module.html" onclick="show_private();">Module repoze.who.plugins.ldap.plugins</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment"># -*- coding: utf-8 -*-</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment"># repoze.who.plugins.ldap, LDAP authentication for WSGI applications.</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2010 by Gustavo Narea  &lt;http://gustavonarea.net/&gt; and</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-comment">#                       Lorenzo M. Catucci &lt;http://www.uniroma2.it/&gt;.</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2008 by Gustavo Narea &lt;http://gustavonarea.net/&gt;.</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-comment"># This file is part of repoze.who.plugins.ldap</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-comment"># &lt;http://code.gustavonarea.net/repoze.who.plugins.ldap/&gt;</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-comment"># This software is subject to the provisions of the BSD-like license at</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-comment"># http://www.repoze.org/LICENSE.txt.  A copy of the license should accompany</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-comment"># this distribution.  THIS SOFTWARE IS PROVIDED "AS IS" AND ANY AND ALL</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-comment"># EXPRESS OR IMPLIED WARRANTIES ARE DISCLAIMED, INCLUDING, BUT NOT LIMITED TO,</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-comment"># THE IMPLIED WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-comment"># FITNESS FOR A PARTICULAR PURPOSE.</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-docstring">"""LDAP plugins for repoze.who."""</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-name">__all__</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">'LDAPBaseAuthenticatorPlugin'</tt><tt class="py-op">,</tt> <tt class="py-string">'LDAPAuthenticatorPlugin'</tt><tt class="py-op">,</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">           <tt class="py-string">'LDAPSearchAuthenticatorPlugin'</tt><tt class="py-op">,</tt> <tt class="py-string">'LDAPAttributesPlugin'</tt><tt class="py-op">]</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">zope</tt><tt class="py-op">.</tt><tt class="py-name">interface</tt> <tt class="py-keyword">import</tt> <tt class="py-name">implements</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Package repoze.who.plugins.ldap=repoze.who.plugins.ldap-module.html"><a title="repoze.who.plugins.ldap" class="py-name" href="#" onclick="return doclink('link-0', 'ldap', 'link-0');">ldap</a></tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-1" class="py-name" targets="Package repoze=repoze-module.html"><a title="repoze" class="py-name" href="#" onclick="return doclink('link-1', 'repoze', 'link-1');">repoze</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Package repoze.who=repoze.who-module.html"><a title="repoze.who" class="py-name" href="#" onclick="return doclink('link-2', 'who', 'link-2');">who</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Module repoze.who.interfaces=repoze.who.interfaces-module.html"><a title="repoze.who.interfaces" class="py-name" href="#" onclick="return doclink('link-3', 'interfaces', 'link-3');">interfaces</a></tt> <tt class="py-keyword">import</tt> <tt id="link-4" class="py-name" targets="Class repoze.who.interfaces.IAuthenticator=repoze.who.interfaces.IAuthenticator-class.html"><a title="repoze.who.interfaces.IAuthenticator" class="py-name" href="#" onclick="return doclink('link-4', 'IAuthenticator', 'link-4');">IAuthenticator</a></tt><tt class="py-op">,</tt> <tt id="link-5" class="py-name" targets="Class repoze.who.interfaces.IMetadataProvider=repoze.who.interfaces.IMetadataProvider-class.html"><a title="repoze.who.interfaces.IMetadataProvider" class="py-name" href="#" onclick="return doclink('link-5', 'IMetadataProvider', 'link-5');">IMetadataProvider</a></tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">base64</tt> <tt class="py-keyword">import</tt> <tt class="py-name">b64encode</tt><tt class="py-op">,</tt> <tt class="py-name">b64decode</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">re</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-comment">#{ Authenticators</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"> </tt>
+<a name="LDAPBaseAuthenticatorPlugin"></a><div id="LDAPBaseAuthenticatorPlugin-def"><a name="L35"></a><tt class="py-lineno"> 35</tt> <a class="py-toggle" href="#" id="LDAPBaseAuthenticatorPlugin-toggle" onclick="return toggle('LDAPBaseAuthenticatorPlugin');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="repoze.who.plugins.ldap.plugins.LDAPBaseAuthenticatorPlugin-class.html">LDAPBaseAuthenticatorPlugin</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LDAPBaseAuthenticatorPlugin-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="LDAPBaseAuthenticatorPlugin-expanded"><a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">    <tt class="py-name">implements</tt><tt class="py-op">(</tt><tt id="link-6" class="py-name"><a title="repoze.who.interfaces.IAuthenticator" class="py-name" href="#" onclick="return doclink('link-6', 'IAuthenticator', 'link-4');">IAuthenticator</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"> </tt>
+<a name="LDAPBaseAuthenticatorPlugin.__init__"></a><div id="LDAPBaseAuthenticatorPlugin.__init__-def"><a name="L39"></a><tt class="py-lineno"> 39</tt> <a class="py-toggle" href="#" id="LDAPBaseAuthenticatorPlugin.__init__-toggle" onclick="return toggle('LDAPBaseAuthenticatorPlugin.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.plugins.ldap.plugins.LDAPBaseAuthenticatorPlugin-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">ldap_connection</tt><tt class="py-op">,</tt> <tt class="py-param">base_dn</tt><tt class="py-op">,</tt> <tt class="py-param">returned_id</tt><tt class="py-op">=</tt><tt class="py-string">'dn'</tt><tt class="py-op">,</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">                 <tt class="py-param">start_tls</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-param">bind_dn</tt><tt class="py-op">=</tt><tt class="py-string">''</tt><tt class="py-op">,</tt> <tt class="py-param">bind_pass</tt><tt class="py-op">=</tt><tt class="py-string">''</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LDAPBaseAuthenticatorPlugin.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="LDAPBaseAuthenticatorPlugin.__init__-expanded"><a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">        <tt class="py-docstring">"""Create an LDAP authentication plugin.</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"><tt class="py-docstring">        By passing an existing LDAPObject, you're free to use the LDAP</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"><tt class="py-docstring">        authentication method you want, the way you want.</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"><tt class="py-docstring">   </tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"><tt class="py-docstring">        This is an *abstract* class, which means it's useless in itself. You</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"><tt class="py-docstring">        can only use subclasses of this class that implement the L{_get_dn}</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"><tt class="py-docstring">        method (e.g., the built-in authenticators).</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"><tt class="py-docstring">        This plugin is compatible with any identifier plugin that defines the</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"><tt class="py-docstring">        C{login} and C{password} items in the I{identity} dictionary.</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"><tt class="py-docstring">        @param ldap_connection: An initialized LDAP connection.</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"><tt class="py-docstring">        @type ldap_connection: C{ldap.ldapobject.SimpleLDAPObject}</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"><tt class="py-docstring">        @param base_dn: The base for the I{Distinguished Name}. Something like</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"><tt class="py-docstring">            C{ou=employees,dc=example,dc=org}, to which will be prepended the</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"><tt class="py-docstring">            user id: C{uid=jsmith,ou=employees,dc=example,dc=org}.</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"><tt class="py-docstring">        @type base_dn: C{unicode}</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"><tt class="py-docstring">        @param returned_id: Should we return the full DN or just the</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"><tt class="py-docstring">            bare naming identifier value on successful authentication?</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"><tt class="py-docstring">        @type returned_id: C{str}, 'dn' or 'login'</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"><tt class="py-docstring">        @attention: While the DN is always unique, if you configure the</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"><tt class="py-docstring">            authenticator plugin to return the bare naming attribute,</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"><tt class="py-docstring">            you have to ensure its uniqueness in the DIT.</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"><tt class="py-docstring">        @param start_tls: Should we negotiate a TLS upgrade on the connection with</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"><tt class="py-docstring">            the directory server?</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"><tt class="py-docstring">        @type start_tls: C{bool}</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-docstring">        @param bind_dn: Operate as the bind_dn directory entry</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt class="py-docstring">        @type bind_dn: C{str}</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"><tt class="py-docstring">        @param bind_pass: The password for bind_dn directory entry</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt class="py-docstring">        @type bind_pass: C{str}</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"><tt class="py-docstring">        @raise ValueError: If at least one of the parameters is not defined.</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-7" class="py-name" targets="Variable repoze.who.plugins.ldap.tests.base_dn=repoze.who.plugins.ldap.tests-module.html#base_dn"><a title="repoze.who.plugins.ldap.tests.base_dn" class="py-name" href="#" onclick="return doclink('link-7', 'base_dn', 'link-7');">base_dn</a></tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">'A base Distinguished Name must be specified'</tt><tt class="py-op">)</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ldap_connection</tt> <tt class="py-op">=</tt> <tt id="link-8" class="py-name" targets="Function repoze.who.plugins.ldap.plugins.make_ldap_connection()=repoze.who.plugins.ldap.plugins-module.html#make_ldap_connection"><a title="repoze.who.plugins.ldap.plugins.make_ldap_connection" class="py-name" href="#" onclick="return doclink('link-8', 'make_ldap_connection', 'link-8');">make_ldap_connection</a></tt><tt class="py-op">(</tt><tt class="py-name">ldap_connection</tt><tt class="py-op">)</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">start_tls</tt><tt class="py-op">:</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">            <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ldap_connection</tt><tt class="py-op">.</tt><tt class="py-name">start_tls_s</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">            <tt class="py-keyword">except</tt><tt class="py-op">:</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">                <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">'Cannot upgrade the connection'</tt><tt class="py-op">)</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">bind_dn</tt> <tt class="py-op">=</tt> <tt class="py-name">bind_dn</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">bind_pass</tt> <tt class="py-op">=</tt> <tt class="py-name">bind_pass</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name"><a title="repoze.who.plugins.ldap.tests.base_dn" class="py-name" href="#" onclick="return doclink('link-9', 'base_dn', 'link-7');">base_dn</a></tt> <tt class="py-op">=</tt> <tt id="link-10" class="py-name"><a title="repoze.who.plugins.ldap.tests.base_dn" class="py-name" href="#" onclick="return doclink('link-10', 'base_dn', 'link-7');">base_dn</a></tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">returned_id</tt><tt class="py-op">.</tt><tt class="py-name">lower</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-string">'dn'</tt><tt class="py-op">:</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ret_style</tt> <tt class="py-op">=</tt> <tt class="py-string">'d'</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">returned_id</tt><tt class="py-op">.</tt><tt class="py-name">lower</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-string">'login'</tt><tt class="py-op">:</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ret_style</tt> <tt class="py-op">=</tt> <tt class="py-string">'l'</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">"The return style should be 'dn' or 'login'"</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"> </tt>
+<a name="LDAPBaseAuthenticatorPlugin._get_dn"></a><div id="LDAPBaseAuthenticatorPlugin._get_dn-def"><a name="L98"></a><tt class="py-lineno"> 98</tt> <a class="py-toggle" href="#" id="LDAPBaseAuthenticatorPlugin._get_dn-toggle" onclick="return toggle('LDAPBaseAuthenticatorPlugin._get_dn');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.plugins.ldap.plugins.LDAPBaseAuthenticatorPlugin-class.html#_get_dn">_get_dn</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">environ</tt><tt class="py-op">,</tt> <tt class="py-param">identity</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LDAPBaseAuthenticatorPlugin._get_dn-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="LDAPBaseAuthenticatorPlugin._get_dn-expanded"><a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"><tt class="py-docstring">        Return the user DN based on the environment and the identity.</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"><tt class="py-docstring">        Must be implemented in a subclass</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"><tt class="py-docstring">        @param environ: The WSGI environment.</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"><tt class="py-docstring">        @param identity: The identity dictionary.</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"><tt class="py-docstring">        @return: The Distinguished Name (DN)</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: C{unicode}</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"><tt class="py-docstring">        @raise ValueError: If the C{login} key is not in the I{identity} dict.</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">'Unimplemented'</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">    <tt class="py-comment"># IAuthenticatorPlugin</tt> </tt>
+<a name="LDAPBaseAuthenticatorPlugin.authenticate"></a><div id="LDAPBaseAuthenticatorPlugin.authenticate-def"><a name="L115"></a><tt class="py-lineno">115</tt> <a class="py-toggle" href="#" id="LDAPBaseAuthenticatorPlugin.authenticate-toggle" onclick="return toggle('LDAPBaseAuthenticatorPlugin.authenticate');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.plugins.ldap.plugins.LDAPBaseAuthenticatorPlugin-class.html#authenticate">authenticate</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">environ</tt><tt class="py-op">,</tt> <tt class="py-param">identity</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LDAPBaseAuthenticatorPlugin.authenticate-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="LDAPBaseAuthenticatorPlugin.authenticate-expanded"><a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">        <tt class="py-docstring">"""Return the naming identifier of the user to be authenticated.</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"><tt class="py-docstring">        @return: The naming identifier, if the credentials were valid.</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: C{unicode} or C{None}</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">         </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">            <tt class="py-name">dn</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Method repoze.who.plugins.ldap.plugins.LDAPAuthenticatorPlugin._get_dn()=repoze.who.plugins.ldap.plugins.LDAPAuthenticatorPlugin-class.html#_get_dn,Method repoze.who.plugins.ldap.plugins.LDAPBaseAuthenticatorPlugin._get_dn()=repoze.who.plugins.ldap.plugins.LDAPBaseAuthenticatorPlugin-class.html#_get_dn,Method repoze.who.plugins.ldap.plugins.LDAPSearchAuthenticatorPlugin._get_dn()=repoze.who.plugins.ldap.plugins.LDAPSearchAuthenticatorPlugin-class.html#_get_dn,Method repoze.who.plugins.ldap.tests.CustomLDAPAuthenticatorPlugin._get_dn()=repoze.who.plugins.ldap.tests.CustomLDAPAuthenticatorPlugin-class.html#_get_dn"><a title="repoze.who.plugins.ldap.plugins.LDAPAuthenticatorPlugin._get_dn
+repoze.who.plugins.ldap.plugins.LDAPBaseAuthenticatorPlugin._get_dn
+repoze.who.plugins.ldap.plugins.LDAPSearchAuthenticatorPlugin._get_dn
+repoze.who.plugins.ldap.tests.CustomLDAPAuthenticatorPlugin._get_dn" class="py-name" href="#" onclick="return doclink('link-11', '_get_dn', 'link-11');">_get_dn</a></tt><tt class="py-op">(</tt><tt id="link-12" class="py-name" targets="Variable repoze.who.tests.test_config.DummyApp.environ=repoze.who.tests.test_config.DummyApp-class.html#environ,Variable repoze.who.tests.test_middleware.DummyApp.environ=repoze.who.tests.test_middleware.DummyApp-class.html#environ,Variable repoze.who.tests.test_restrict.DummyApp.environ=repoze.who.tests.test_restrict.DummyApp-class.html#environ"><a title="repoze.who.tests.test_config.DummyApp.environ
+repoze.who.tests.test_middleware.DummyApp.environ
+repoze.who.tests.test_restrict.DummyApp.environ" class="py-name" href="#" onclick="return doclink('link-12', 'environ', 'link-12');">environ</a></tt><tt class="py-op">,</tt> <tt class="py-name">identity</tt><tt class="py-op">)</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">            <tt class="py-name">password</tt> <tt class="py-op">=</tt> <tt class="py-name">identity</tt><tt class="py-op">[</tt><tt class="py-string">'password'</tt><tt class="py-op">]</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-op">(</tt><tt class="py-name">KeyError</tt><tt class="py-op">,</tt> <tt class="py-name">TypeError</tt><tt class="py-op">,</tt> <tt class="py-name">ValueError</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">hasattr</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ldap_connection</tt><tt class="py-op">,</tt> <tt class="py-string">'simple_bind_s'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">            <tt id="link-13" class="py-name"><a title="repoze.who.tests.test_config.DummyApp.environ
+repoze.who.tests.test_middleware.DummyApp.environ
+repoze.who.tests.test_restrict.DummyApp.environ" class="py-name" href="#" onclick="return doclink('link-13', 'environ', 'link-12');">environ</a></tt><tt class="py-op">[</tt><tt class="py-string">'repoze.who.logger'</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">warn</tt><tt class="py-op">(</tt><tt class="py-string">'Cannot bind with the provided '</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">                                              <tt class="py-string">'LDAP connection object'</tt><tt class="py-op">)</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">         </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ldap_connection</tt><tt class="py-op">.</tt><tt class="py-name">simple_bind_s</tt><tt class="py-op">(</tt><tt class="py-name">dn</tt><tt class="py-op">,</tt> <tt class="py-name">password</tt><tt class="py-op">)</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">            <tt class="py-name">userdata</tt> <tt class="py-op">=</tt> <tt class="py-name">identity</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-string">'userdata'</tt><tt class="py-op">,</tt> <tt class="py-string">''</tt><tt class="py-op">)</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">            <tt class="py-comment"># The credentials are valid!</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ret_style</tt> <tt class="py-op">==</tt> <tt class="py-string">'d'</tt><tt class="py-op">:</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">dn</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">                <tt class="py-name">identity</tt><tt class="py-op">[</tt><tt class="py-string">'userdata'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">userdata</tt> <tt class="py-op">+</tt> <tt class="py-string">'&lt;dn:%s&gt;'</tt> <tt class="py-op">%</tt> <tt class="py-name">b64encode</tt><tt class="py-op">(</tt><tt class="py-name">dn</tt><tt class="py-op">)</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">identity</tt><tt class="py-op">[</tt><tt class="py-string">'login'</tt><tt class="py-op">]</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt id="link-14" class="py-name"><a title="repoze.who.plugins.ldap" class="py-name" href="#" onclick="return doclink('link-14', 'ldap', 'link-0');">ldap</a></tt><tt class="py-op">.</tt><tt class="py-name">LDAPError</tt><tt class="py-op">:</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+</div><a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line"> </tt>
+<a name="LDAPBaseAuthenticatorPlugin.__repr__"></a><div id="LDAPBaseAuthenticatorPlugin.__repr__-def"><a name="L146"></a><tt class="py-lineno">146</tt> <a class="py-toggle" href="#" id="LDAPBaseAuthenticatorPlugin.__repr__-toggle" onclick="return toggle('LDAPBaseAuthenticatorPlugin.__repr__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.plugins.ldap.plugins.LDAPBaseAuthenticatorPlugin-class.html#__repr__">__repr__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LDAPBaseAuthenticatorPlugin.__repr__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="LDAPBaseAuthenticatorPlugin.__repr__-expanded"><a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-string">'&lt;%s %s&gt;'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__class__</tt><tt class="py-op">.</tt><tt id="link-15" class="py-name" targets="Variable repoze.who.interfaces.IAuthenticator.__name__=repoze.who.interfaces.IAuthenticator-class.html#__name__,Variable repoze.who.interfaces.IChallengeDecider.__name__=repoze.who.interfaces.IChallengeDecider-class.html#__name__,Variable repoze.who.interfaces.IChallenger.__name__=repoze.who.interfaces.IChallenger-class.html#__name__,Variable repoze.who.interfaces.IIdentifier.__name__=repoze.who.interfaces.IIdentifier-class.html#__name__,Variable repoze.who.interfaces.IMetadataProvider.__name__=repoze.who.interfaces.IMetadataProvider-class.html#__name__,Variable repoze.who.interfaces.IPlugin.__name__=repoze.who.interfaces.IPlugin-class.html#__name__,Variable repoze.who.interfaces.IRequestClassifier.__name__=repoze.who.interfaces.IRequestClassifier-class.html#__name__"><a title="repoze.who.interfaces.IAuthenticator.__name__
+repoze.who.interfaces.IChallengeDecider.__name__
+repoze.who.interfaces.IChallenger.__name__
+repoze.who.interfaces.IIdentifier.__name__
+repoze.who.interfaces.IMetadataProvider.__name__
+repoze.who.interfaces.IPlugin.__name__
+repoze.who.interfaces.IRequestClassifier.__name__" class="py-name" href="#" onclick="return doclink('link-15', '__name__', 'link-15');">__name__</a></tt><tt class="py-op">,</tt> <tt class="py-name">id</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line"> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line"> </tt>
+<a name="LDAPAuthenticatorPlugin"></a><div id="LDAPAuthenticatorPlugin-def"><a name="L150"></a><tt class="py-lineno">150</tt> <a class="py-toggle" href="#" id="LDAPAuthenticatorPlugin-toggle" onclick="return toggle('LDAPAuthenticatorPlugin');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="repoze.who.plugins.ldap.plugins.LDAPAuthenticatorPlugin-class.html">LDAPAuthenticatorPlugin</a><tt class="py-op">(</tt><tt class="py-base-class">LDAPBaseAuthenticatorPlugin</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LDAPAuthenticatorPlugin-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="LDAPAuthenticatorPlugin-expanded"><a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line"> </tt>
+<a name="LDAPAuthenticatorPlugin.__init__"></a><div id="LDAPAuthenticatorPlugin.__init__-def"><a name="L152"></a><tt class="py-lineno">152</tt> <a class="py-toggle" href="#" id="LDAPAuthenticatorPlugin.__init__-toggle" onclick="return toggle('LDAPAuthenticatorPlugin.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.plugins.ldap.plugins.LDAPAuthenticatorPlugin-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">ldap_connection</tt><tt class="py-op">,</tt> <tt class="py-param">base_dn</tt><tt class="py-op">,</tt> <tt class="py-param">naming_attribute</tt><tt class="py-op">=</tt><tt class="py-string">'uid'</tt><tt class="py-op">,</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line">                 <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LDAPAuthenticatorPlugin.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="LDAPAuthenticatorPlugin.__init__-expanded"><a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line">        <tt class="py-docstring">"""Create an LDAP authentication plugin using pattern-determined DNs</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line"><tt class="py-docstring">        By passing an existing LDAPObject, you're free to use the LDAP</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line"><tt class="py-docstring">        authentication method you want, the way you want.</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line"><tt class="py-docstring">        This plugin is compatible with any identifier plugin that defines the</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line"><tt class="py-docstring">        C{login} and C{password} items in the I{identity} dictionary.</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line"><tt class="py-docstring">        @param ldap_connection: An initialized LDAP connection.</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line"><tt class="py-docstring">        @type ldap_connection: C{ldap.ldapobject.SimpleLDAPObject}</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line"><tt class="py-docstring">        @param base_dn: The base for the I{Distinguished Name}. Something like</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line"><tt class="py-docstring">            C{ou=employees,dc=example,dc=org}, to which will be prepended the</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line"><tt class="py-docstring">            user id: C{uid=jsmith,ou=employees,dc=example,dc=org}.</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line"><tt class="py-docstring">        @type base_dn: C{unicode}</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line"><tt class="py-docstring">        @param naming_attribute: The naming attribute for directory entries,</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line"><tt class="py-docstring">            C{uid} by default.</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line"><tt class="py-docstring">        @type naming_attribute: C{unicode}</tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line"><tt class="py-docstring">        @raise ValueError: If at least one of the parameters is not defined.</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line"><tt class="py-docstring">        The following parameters are inherited from </tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line"><tt class="py-docstring">        L{LDAPBaseAuthenticatorPlugin.__init__}</tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line"><tt class="py-docstring">        @param base_dn: The base for the I{Distinguished Name}. Something like</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line"><tt class="py-docstring">            C{ou=employees,dc=example,dc=org}, to which will be prepended the</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line"><tt class="py-docstring">            user id: C{uid=jsmith,ou=employees,dc=example,dc=org}.</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line"><tt class="py-docstring">        @param returned_id: Should we return full Directory Names or just the</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line"><tt class="py-docstring">            bare naming identifier on successful authentication?</tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line"><tt class="py-docstring">        @param start_tls: Should we negotiate a TLS upgrade on the connection with</tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line"><tt class="py-docstring">            the directory server?</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line"><tt class="py-docstring">        @param bind_dn: Operate as the bind_dn directory entry</tt> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line"><tt class="py-docstring">        @param bind_pass: The password for bind_dn directory entry</tt> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line">        <tt id="link-16" class="py-name" targets="Class repoze.who.plugins.ldap.plugins.LDAPBaseAuthenticatorPlugin=repoze.who.plugins.ldap.plugins.LDAPBaseAuthenticatorPlugin-class.html"><a title="repoze.who.plugins.ldap.plugins.LDAPBaseAuthenticatorPlugin" class="py-name" href="#" onclick="return doclink('link-16', 'LDAPBaseAuthenticatorPlugin', 'link-16');">LDAPBaseAuthenticatorPlugin</a></tt><tt class="py-op">.</tt><tt id="link-17" class="py-name" targets="Method repoze.who.config.WhoConfig.__init__()=repoze.who.config.WhoConfig-class.html#__init__,Method repoze.who.middleware.PluggableAuthenticationMiddleware.__init__()=repoze.who.middleware.PluggableAuthenticationMiddleware-class.html#__init__,Method repoze.who.middleware.StartResponseWrapper.__init__()=repoze.who.middleware.StartResponseWrapper-class.html#__init__,Method repoze.who.plugins.auth_tkt.AuthTktCookiePlugin.__init__()=repoze.who.plugins.auth_tkt.AuthTktCookiePlugin-class.html#__init__,Method repoze.who.plugins.basicauth.BasicAuthPlugin.__init__()=repoze.who.plugins.basicauth.BasicAuthPlugin-class.html#__init__,Method repoze.who.plugins.cookie.InsecureCookiePlugin.__init__()=repoze.who.plugins.cookie.InsecureCookiePlugin-class.html#__init__,Method repoze.who.plugins.form.FormPlugin.__init__()=repoze.who.plugins.form.FormPlugin-class.html#__init__,Method repoze.who.plugins.form.RedirectingFormPlugin.__init__()=repoze.who.plugins.form.RedirectingFormPlugin-class.html#__init__,Method repoze.who.plugins.htpasswd.HTPasswdPlugin.__init__()=repoze.who.plugins.htpasswd.HTPasswdPlugin-class.html#__init__,Method repoze.who.plugins.ldap.plugins.LDAPAttributesPlugin.__init__()=repoze.who.plugins.ldap.plugins.LDAPAttributesPlugin-class.html#__init__,Method repoze.who.plugins.ldap.plugins.LDAPAuthenticatorPlugin.__init__()=repoze.who.plugins.ldap.plugins.LDAPAuthenticatorPlugin-class.html#__init__,Method repoze.who.plugins.ldap.plugins.LDAPBaseAuthenticatorPlugin.__init__()=repoze.who.plugins.ldap.plugins.LDAPBaseAuthenticatorPlugin-class.html#__init__,Method repoze.who.plugins.ldap.plugins.LDAPSearchAuthenticatorPlugin.__init__()=repoze.who.plugins.ldap.plugins.LDAPSearchAuthenticatorPlugin-class.html#__init__,Method repoze.who.plugins.sql.SQLAuthenticatorPlugin.__init__()=repoze.who.plugins.sql.SQLAuthenticatorPlugin-class.html#__init__,Method repoze.who.plugins.sql.SQLMetadataProviderPlugin.__init__()=repoze.who.plugins.sql.SQLMetadataProviderPlugin-class.html#__init__,Method repoze.who.plugins.tests.test_form.DummyIdentifier.__init__()=repoze.who.plugins.tests.test_form.DummyIdentifier-class.html#__init__,Method repoze.who.plugins.tests.test_sql.DummyConnectionFactory.__init__()=repoze.who.plugins.tests.test_sql.DummyConnectionFactory-class.html#__init__,Method repoze.who.restrict.PredicateRestriction.__init__()=repoze.who.restrict.PredicateRestriction-class.html#__init__,Method repoze.who.tests.test_config.DummyPlugin.__init__()=repoze.who.tests.test_config.DummyPlugin-class.html#__init__,Method repoze.who.tests.test_middleware.DummyAuthenticator.__init__()=repoze.who.tests.test_middleware.DummyAuthenticator-class.html#__init__,Method repoze.who.tests.test_middleware.DummyChallenger.__init__()=repoze.who.tests.test_middleware.DummyChallenger-class.html#__init__,Method repoze.who.tests.test_middleware.DummyGeneratorApp.__init__()=repoze.who.tests.test_middleware.DummyGeneratorApp-class.html#__init__,Method repoze.who.tests.test_middleware.DummyIdentifier.__init__()=repoze.who.tests.test_middleware.DummyIdentifier-class.html#__init__,Method repoze.who.tests.test_middleware.DummyIdentityResetApp.__init__()=repoze.who.tests.test_middleware.DummyIdentityResetApp-class.html#__init__,Method repoze.who.tests.test_middleware.DummyMDProvider.__init__()=repoze.who.tests.test_middleware.DummyMDProvider-class.html#__init__,Method repoze.who.tests.test_middleware.DummyWorkingApp.__init__()=repoze.who.tests.test_middleware.DummyWorkingApp-class.html#__init__,Method repoze.who.tests.test_restrict.DummyPredicate.__init__()=repoze.who.tests.test_restrict.DummyPredicate-class.html#__init__"><a title="repoze.who.config.WhoConfig.__init__
+repoze.who.middleware.PluggableAuthenticationMiddleware.__init__
+repoze.who.middleware.StartResponseWrapper.__init__
+repoze.who.plugins.auth_tkt.AuthTktCookiePlugin.__init__
+repoze.who.plugins.basicauth.BasicAuthPlugin.__init__
+repoze.who.plugins.cookie.InsecureCookiePlugin.__init__
+repoze.who.plugins.form.FormPlugin.__init__
+repoze.who.plugins.form.RedirectingFormPlugin.__init__
+repoze.who.plugins.htpasswd.HTPasswdPlugin.__init__
+repoze.who.plugins.ldap.plugins.LDAPAttributesPlugin.__init__
+repoze.who.plugins.ldap.plugins.LDAPAuthenticatorPlugin.__init__
+repoze.who.plugins.ldap.plugins.LDAPBaseAuthenticatorPlugin.__init__
+repoze.who.plugins.ldap.plugins.LDAPSearchAuthenticatorPlugin.__init__
+repoze.who.plugins.sql.SQLAuthenticatorPlugin.__init__
+repoze.who.plugins.sql.SQLMetadataProviderPlugin.__init__
+repoze.who.plugins.tests.test_form.DummyIdentifier.__init__
+repoze.who.plugins.tests.test_sql.DummyConnectionFactory.__init__
+repoze.who.restrict.PredicateRestriction.__init__
+repoze.who.tests.test_config.DummyPlugin.__init__
+repoze.who.tests.test_middleware.DummyAuthenticator.__init__
+repoze.who.tests.test_middleware.DummyChallenger.__init__
+repoze.who.tests.test_middleware.DummyGeneratorApp.__init__
+repoze.who.tests.test_middleware.DummyIdentifier.__init__
+repoze.who.tests.test_middleware.DummyIdentityResetApp.__init__
+repoze.who.tests.test_middleware.DummyMDProvider.__init__
+repoze.who.tests.test_middleware.DummyWorkingApp.__init__
+repoze.who.tests.test_restrict.DummyPredicate.__init__" class="py-name" href="#" onclick="return doclink('link-17', '__init__', 'link-17');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">ldap_connection</tt><tt class="py-op">,</tt> <tt id="link-18" class="py-name"><a title="repoze.who.plugins.ldap.tests.base_dn" class="py-name" href="#" onclick="return doclink('link-18', 'base_dn', 'link-7');">base_dn</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line">                                             <tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">naming_pattern</tt> <tt class="py-op">=</tt> <tt class="py-string">u'%s=%%s,%%s'</tt> <tt class="py-op">%</tt> <tt class="py-name">naming_attribute</tt> </tt>
+</div><a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line"> </tt>
+<a name="LDAPAuthenticatorPlugin._get_dn"></a><div id="LDAPAuthenticatorPlugin._get_dn-def"><a name="L192"></a><tt class="py-lineno">192</tt> <a class="py-toggle" href="#" id="LDAPAuthenticatorPlugin._get_dn-toggle" onclick="return toggle('LDAPAuthenticatorPlugin._get_dn');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.plugins.ldap.plugins.LDAPAuthenticatorPlugin-class.html#_get_dn">_get_dn</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">environ</tt><tt class="py-op">,</tt> <tt class="py-param">identity</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LDAPAuthenticatorPlugin._get_dn-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="LDAPAuthenticatorPlugin._get_dn-expanded"><a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line"><tt class="py-docstring">        Return the user naming identifier based on the environment and the</tt> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line"><tt class="py-docstring">        identity.</tt> </tt>
+<a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line"><tt class="py-docstring">        If the C{login} item of the identity is C{rms} and the base DN is</tt> </tt>
+<a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line"><tt class="py-docstring">        C{ou=developers,dc=gnu,dc=org}, the resulting DN will be:</tt> </tt>
+<a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line"><tt class="py-docstring">        C{uid=rms,ou=developers,dc=gnu,dc=org}</tt> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line"><tt class="py-docstring">        @param environ: The WSGI environment.</tt> </tt>
+<a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line"><tt class="py-docstring">        @param identity: The identity dictionary.</tt> </tt>
+<a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line"><tt class="py-docstring">        @return: The Distinguished Name (DN)</tt> </tt>
+<a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: C{unicode}</tt> </tt>
+<a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line"><tt class="py-docstring">        @raise ValueError: If the C{login} key is not in the I{identity} dict.</tt> </tt>
+<a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L207"></a><tt class="py-lineno">207</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line"> </tt>
+<a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">bind_dn</tt><tt class="py-op">:</tt> </tt>
+<a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line">            <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L211"></a><tt class="py-lineno">211</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ldap_connection</tt><tt class="py-op">.</tt><tt class="py-name">bind_s</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">bind_dn</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">bind_password</tt><tt class="py-op">)</tt> </tt>
+<a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line">            <tt class="py-keyword">except</tt> <tt id="link-19" class="py-name"><a title="repoze.who.plugins.ldap" class="py-name" href="#" onclick="return doclink('link-19', 'ldap', 'link-0');">ldap</a></tt><tt class="py-op">.</tt><tt class="py-name">LDAPError</tt><tt class="py-op">:</tt> </tt>
+<a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line">                <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">"Couldn't bind with supplied credentials"</tt><tt class="py-op">)</tt> </tt>
+<a name="L214"></a><tt class="py-lineno">214</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">naming_pattern</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt> <tt class="py-name">identity</tt><tt class="py-op">[</tt><tt class="py-string">'login'</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name"><a title="repoze.who.plugins.ldap.tests.base_dn" class="py-name" href="#" onclick="return doclink('link-20', 'base_dn', 'link-7');">base_dn</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L216"></a><tt class="py-lineno">216</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-op">(</tt><tt class="py-name">KeyError</tt><tt class="py-op">,</tt> <tt class="py-name">TypeError</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L217"></a><tt class="py-lineno">217</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt> </tt>
+</div></div><a name="L218"></a><tt class="py-lineno">218</tt>  <tt class="py-line"> </tt>
+<a name="L219"></a><tt class="py-lineno">219</tt>  <tt class="py-line"> </tt>
+<a name="LDAPSearchAuthenticatorPlugin"></a><div id="LDAPSearchAuthenticatorPlugin-def"><a name="L220"></a><tt class="py-lineno">220</tt> <a class="py-toggle" href="#" id="LDAPSearchAuthenticatorPlugin-toggle" onclick="return toggle('LDAPSearchAuthenticatorPlugin');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="repoze.who.plugins.ldap.plugins.LDAPSearchAuthenticatorPlugin-class.html">LDAPSearchAuthenticatorPlugin</a><tt class="py-op">(</tt><tt class="py-base-class">LDAPBaseAuthenticatorPlugin</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LDAPSearchAuthenticatorPlugin-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="LDAPSearchAuthenticatorPlugin-expanded"><a name="L221"></a><tt class="py-lineno">221</tt>  <tt class="py-line"> </tt>
+<a name="LDAPSearchAuthenticatorPlugin.__init__"></a><div id="LDAPSearchAuthenticatorPlugin.__init__-def"><a name="L222"></a><tt class="py-lineno">222</tt> <a class="py-toggle" href="#" id="LDAPSearchAuthenticatorPlugin.__init__-toggle" onclick="return toggle('LDAPSearchAuthenticatorPlugin.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.plugins.ldap.plugins.LDAPSearchAuthenticatorPlugin-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">ldap_connection</tt><tt class="py-op">,</tt> <tt class="py-param">base_dn</tt><tt class="py-op">,</tt> <tt class="py-param">naming_attribute</tt><tt class="py-op">=</tt><tt class="py-string">'uid'</tt><tt class="py-op">,</tt> </tt>
+<a name="L223"></a><tt class="py-lineno">223</tt>  <tt class="py-line">                 <tt class="py-param">search_scope</tt><tt class="py-op">=</tt><tt class="py-string">'subtree'</tt><tt class="py-op">,</tt> <tt class="py-param">restrict</tt><tt class="py-op">=</tt><tt class="py-string">''</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LDAPSearchAuthenticatorPlugin.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="LDAPSearchAuthenticatorPlugin.__init__-expanded"><a name="L224"></a><tt class="py-lineno">224</tt>  <tt class="py-line">        <tt class="py-docstring">"""Create an LDAP authentication plugin determining the DN via LDAP searches.</tt> </tt>
+<a name="L225"></a><tt class="py-lineno">225</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L226"></a><tt class="py-lineno">226</tt>  <tt class="py-line"><tt class="py-docstring">        By passing an existing LDAPObject, you're free to use the LDAP</tt> </tt>
+<a name="L227"></a><tt class="py-lineno">227</tt>  <tt class="py-line"><tt class="py-docstring">        authentication method you want, the way you want.</tt> </tt>
+<a name="L228"></a><tt class="py-lineno">228</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L229"></a><tt class="py-lineno">229</tt>  <tt class="py-line"><tt class="py-docstring">        This plugin is compatible with any identifier plugin that defines the</tt> </tt>
+<a name="L230"></a><tt class="py-lineno">230</tt>  <tt class="py-line"><tt class="py-docstring">        C{login} and C{password} items in the I{identity} dictionary.</tt> </tt>
+<a name="L231"></a><tt class="py-lineno">231</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L232"></a><tt class="py-lineno">232</tt>  <tt class="py-line"><tt class="py-docstring">        @param ldap_connection: An initialized LDAP connection.</tt> </tt>
+<a name="L233"></a><tt class="py-lineno">233</tt>  <tt class="py-line"><tt class="py-docstring">        @type ldap_connection: C{ldap.ldapobject.SimpleLDAPObject}</tt> </tt>
+<a name="L234"></a><tt class="py-lineno">234</tt>  <tt class="py-line"><tt class="py-docstring">        @param base_dn: The base for the I{Distinguished Name}. Something like</tt> </tt>
+<a name="L235"></a><tt class="py-lineno">235</tt>  <tt class="py-line"><tt class="py-docstring">            C{ou=employees,dc=example,dc=org}, to which will be prepended the</tt> </tt>
+<a name="L236"></a><tt class="py-lineno">236</tt>  <tt class="py-line"><tt class="py-docstring">            user id: C{uid=jsmith,ou=employees,dc=example,dc=org}.</tt> </tt>
+<a name="L237"></a><tt class="py-lineno">237</tt>  <tt class="py-line"><tt class="py-docstring">        @type base_dn: C{unicode}</tt> </tt>
+<a name="L238"></a><tt class="py-lineno">238</tt>  <tt class="py-line"><tt class="py-docstring">        @param naming_attribute: The naming attribute for directory entries,</tt> </tt>
+<a name="L239"></a><tt class="py-lineno">239</tt>  <tt class="py-line"><tt class="py-docstring">            C{uid} by default.</tt> </tt>
+<a name="L240"></a><tt class="py-lineno">240</tt>  <tt class="py-line"><tt class="py-docstring">        @type naming_attribute: C{unicode}</tt> </tt>
+<a name="L241"></a><tt class="py-lineno">241</tt>  <tt class="py-line"><tt class="py-docstring">        @param search_scope: Scope for ldap searches</tt> </tt>
+<a name="L242"></a><tt class="py-lineno">242</tt>  <tt class="py-line"><tt class="py-docstring">        @type search_scope: C{str}, 'subtree' or 'onelevel', possibly</tt> </tt>
+<a name="L243"></a><tt class="py-lineno">243</tt>  <tt class="py-line"><tt class="py-docstring">            abbreviated to at least the first three characters</tt> </tt>
+<a name="L244"></a><tt class="py-lineno">244</tt>  <tt class="py-line"><tt class="py-docstring">        @param restrict: An ldap filter which will be ANDed to the search filter</tt> </tt>
+<a name="L245"></a><tt class="py-lineno">245</tt>  <tt class="py-line"><tt class="py-docstring">            while searching for entries matching the naming attribute</tt> </tt>
+<a name="L246"></a><tt class="py-lineno">246</tt>  <tt class="py-line"><tt class="py-docstring">        @type restrict: C{unicode}</tt> </tt>
+<a name="L247"></a><tt class="py-lineno">247</tt>  <tt class="py-line"><tt class="py-docstring">        @attention: restrict will be interpolated into the search string as a</tt> </tt>
+<a name="L248"></a><tt class="py-lineno">248</tt>  <tt class="py-line"><tt class="py-docstring">            bare string like in "(&amp;%s(identifier=login))". It must be correctly</tt> </tt>
+<a name="L249"></a><tt class="py-lineno">249</tt>  <tt class="py-line"><tt class="py-docstring">            parenthesised for such usage as in restrict = "(objectClass=*)". </tt> </tt>
+<a name="L250"></a><tt class="py-lineno">250</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L251"></a><tt class="py-lineno">251</tt>  <tt class="py-line"><tt class="py-docstring">        @raise ValueError: If at least one of the parameters is not defined.</tt> </tt>
+<a name="L252"></a><tt class="py-lineno">252</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L253"></a><tt class="py-lineno">253</tt>  <tt class="py-line"><tt class="py-docstring">        The following parameters are inherited from </tt> </tt>
+<a name="L254"></a><tt class="py-lineno">254</tt>  <tt class="py-line"><tt class="py-docstring">        L{LDAPBaseAuthenticatorPlugin.__init__}</tt> </tt>
+<a name="L255"></a><tt class="py-lineno">255</tt>  <tt class="py-line"><tt class="py-docstring">        @param base_dn: The base for the I{Distinguished Name}. Something like</tt> </tt>
+<a name="L256"></a><tt class="py-lineno">256</tt>  <tt class="py-line"><tt class="py-docstring">            C{ou=employees,dc=example,dc=org}, to which will be prepended the</tt> </tt>
+<a name="L257"></a><tt class="py-lineno">257</tt>  <tt class="py-line"><tt class="py-docstring">            user id: C{uid=jsmith,ou=employees,dc=example,dc=org}.</tt> </tt>
+<a name="L258"></a><tt class="py-lineno">258</tt>  <tt class="py-line"><tt class="py-docstring">        @param returned_id: Should we return full Directory Names or just the</tt> </tt>
+<a name="L259"></a><tt class="py-lineno">259</tt>  <tt class="py-line"><tt class="py-docstring">            bare naming identifier on successful authentication?</tt> </tt>
+<a name="L260"></a><tt class="py-lineno">260</tt>  <tt class="py-line"><tt class="py-docstring">        @param start_tls: Should we negotiate a TLS upgrade on the connection</tt> </tt>
+<a name="L261"></a><tt class="py-lineno">261</tt>  <tt class="py-line"><tt class="py-docstring">            with the directory server?</tt> </tt>
+<a name="L262"></a><tt class="py-lineno">262</tt>  <tt class="py-line"><tt class="py-docstring">        @param bind_dn: Operate as the bind_dn directory entry</tt> </tt>
+<a name="L263"></a><tt class="py-lineno">263</tt>  <tt class="py-line"><tt class="py-docstring">        @param bind_pass: The password for bind_dn directory entry</tt> </tt>
+<a name="L264"></a><tt class="py-lineno">264</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L265"></a><tt class="py-lineno">265</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L266"></a><tt class="py-lineno">266</tt>  <tt class="py-line">        <tt id="link-21" class="py-name"><a title="repoze.who.plugins.ldap.plugins.LDAPBaseAuthenticatorPlugin" class="py-name" href="#" onclick="return doclink('link-21', 'LDAPBaseAuthenticatorPlugin', 'link-16');">LDAPBaseAuthenticatorPlugin</a></tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="repoze.who.config.WhoConfig.__init__
+repoze.who.middleware.PluggableAuthenticationMiddleware.__init__
+repoze.who.middleware.StartResponseWrapper.__init__
+repoze.who.plugins.auth_tkt.AuthTktCookiePlugin.__init__
+repoze.who.plugins.basicauth.BasicAuthPlugin.__init__
+repoze.who.plugins.cookie.InsecureCookiePlugin.__init__
+repoze.who.plugins.form.FormPlugin.__init__
+repoze.who.plugins.form.RedirectingFormPlugin.__init__
+repoze.who.plugins.htpasswd.HTPasswdPlugin.__init__
+repoze.who.plugins.ldap.plugins.LDAPAttributesPlugin.__init__
+repoze.who.plugins.ldap.plugins.LDAPAuthenticatorPlugin.__init__
+repoze.who.plugins.ldap.plugins.LDAPBaseAuthenticatorPlugin.__init__
+repoze.who.plugins.ldap.plugins.LDAPSearchAuthenticatorPlugin.__init__
+repoze.who.plugins.sql.SQLAuthenticatorPlugin.__init__
+repoze.who.plugins.sql.SQLMetadataProviderPlugin.__init__
+repoze.who.plugins.tests.test_form.DummyIdentifier.__init__
+repoze.who.plugins.tests.test_sql.DummyConnectionFactory.__init__
+repoze.who.restrict.PredicateRestriction.__init__
+repoze.who.tests.test_config.DummyPlugin.__init__
+repoze.who.tests.test_middleware.DummyAuthenticator.__init__
+repoze.who.tests.test_middleware.DummyChallenger.__init__
+repoze.who.tests.test_middleware.DummyGeneratorApp.__init__
+repoze.who.tests.test_middleware.DummyIdentifier.__init__
+repoze.who.tests.test_middleware.DummyIdentityResetApp.__init__
+repoze.who.tests.test_middleware.DummyMDProvider.__init__
+repoze.who.tests.test_middleware.DummyWorkingApp.__init__
+repoze.who.tests.test_restrict.DummyPredicate.__init__" class="py-name" href="#" onclick="return doclink('link-22', '__init__', 'link-17');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">ldap_connection</tt><tt class="py-op">,</tt> <tt id="link-23" class="py-name"><a title="repoze.who.plugins.ldap.tests.base_dn" class="py-name" href="#" onclick="return doclink('link-23', 'base_dn', 'link-7');">base_dn</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L267"></a><tt class="py-lineno">267</tt>  <tt class="py-line">                                             <tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+<a name="L268"></a><tt class="py-lineno">268</tt>  <tt class="py-line"> </tt>
+<a name="L269"></a><tt class="py-lineno">269</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">search_scope</tt><tt class="py-op">[</tt><tt class="py-op">:</tt><tt class="py-number">3</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">lower</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-string">'sub'</tt><tt class="py-op">:</tt> </tt>
+<a name="L270"></a><tt class="py-lineno">270</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">search_scope</tt> <tt class="py-op">=</tt> <tt id="link-24" class="py-name"><a title="repoze.who.plugins.ldap" class="py-name" href="#" onclick="return doclink('link-24', 'ldap', 'link-0');">ldap</a></tt><tt class="py-op">.</tt><tt class="py-name">SCOPE_SUBTREE</tt> </tt>
+<a name="L271"></a><tt class="py-lineno">271</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">search_scope</tt><tt class="py-op">[</tt><tt class="py-op">:</tt><tt class="py-number">3</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">lower</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-string">'one'</tt><tt class="py-op">:</tt> </tt>
+<a name="L272"></a><tt class="py-lineno">272</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">search_scope</tt> <tt class="py-op">=</tt> <tt id="link-25" class="py-name"><a title="repoze.who.plugins.ldap" class="py-name" href="#" onclick="return doclink('link-25', 'ldap', 'link-0');">ldap</a></tt><tt class="py-op">.</tt><tt class="py-name">SCOPE_ONELEVEL</tt> </tt>
+<a name="L273"></a><tt class="py-lineno">273</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L274"></a><tt class="py-lineno">274</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">"The search scope should be 'one[level]' or 'sub[tree]'"</tt><tt class="py-op">)</tt> </tt>
+<a name="L275"></a><tt class="py-lineno">275</tt>  <tt class="py-line"> </tt>
+<a name="L276"></a><tt class="py-lineno">276</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-26" class="py-name" targets="Module repoze.who.restrict=repoze.who.restrict-module.html"><a title="repoze.who.restrict" class="py-name" href="#" onclick="return doclink('link-26', 'restrict', 'link-26');">restrict</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L277"></a><tt class="py-lineno">277</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">search_pattern</tt> <tt class="py-op">=</tt> <tt class="py-string">u'(&amp;%s(%s=%%s))'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt id="link-27" class="py-name"><a title="repoze.who.restrict" class="py-name" href="#" onclick="return doclink('link-27', 'restrict', 'link-26');">restrict</a></tt><tt class="py-op">,</tt><tt class="py-name">naming_attribute</tt><tt class="py-op">)</tt> </tt>
+<a name="L278"></a><tt class="py-lineno">278</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L279"></a><tt class="py-lineno">279</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">search_pattern</tt> <tt class="py-op">=</tt> <tt class="py-string">u'(%s=%%s)'</tt> <tt class="py-op">%</tt> <tt class="py-name">naming_attribute</tt> </tt>
+</div><a name="L280"></a><tt class="py-lineno">280</tt>  <tt class="py-line"> </tt>
+<a name="LDAPSearchAuthenticatorPlugin._get_dn"></a><div id="LDAPSearchAuthenticatorPlugin._get_dn-def"><a name="L281"></a><tt class="py-lineno">281</tt> <a class="py-toggle" href="#" id="LDAPSearchAuthenticatorPlugin._get_dn-toggle" onclick="return toggle('LDAPSearchAuthenticatorPlugin._get_dn');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.plugins.ldap.plugins.LDAPSearchAuthenticatorPlugin-class.html#_get_dn">_get_dn</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">environ</tt><tt class="py-op">,</tt> <tt class="py-param">identity</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LDAPSearchAuthenticatorPlugin._get_dn-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="LDAPSearchAuthenticatorPlugin._get_dn-expanded"><a name="L282"></a><tt class="py-lineno">282</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L283"></a><tt class="py-lineno">283</tt>  <tt class="py-line"><tt class="py-docstring">        Return the DN based on the environment and the identity.</tt> </tt>
+<a name="L284"></a><tt class="py-lineno">284</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L285"></a><tt class="py-lineno">285</tt>  <tt class="py-line"><tt class="py-docstring">        Searches the directory entry with naming attribute matching the</tt> </tt>
+<a name="L286"></a><tt class="py-lineno">286</tt>  <tt class="py-line"><tt class="py-docstring">        C{login} item of the identity.</tt> </tt>
+<a name="L287"></a><tt class="py-lineno">287</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L288"></a><tt class="py-lineno">288</tt>  <tt class="py-line"><tt class="py-docstring">        If the C{login} item of the identity is C{rms}, the naming attribute is</tt> </tt>
+<a name="L289"></a><tt class="py-lineno">289</tt>  <tt class="py-line"><tt class="py-docstring">        C{uid} and the base DN is C{dc=gnu,dc=org}, we'll ask the server</tt> </tt>
+<a name="L290"></a><tt class="py-lineno">290</tt>  <tt class="py-line"><tt class="py-docstring">        to search for C{uid = rms} beneath the search base, hopefully </tt> </tt>
+<a name="L291"></a><tt class="py-lineno">291</tt>  <tt class="py-line"><tt class="py-docstring">        finding C{uid=rms,ou=developers,dc=gnu,dc=org}.</tt> </tt>
+<a name="L292"></a><tt class="py-lineno">292</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L293"></a><tt class="py-lineno">293</tt>  <tt class="py-line"><tt class="py-docstring">        @param environ: The WSGI environment.</tt> </tt>
+<a name="L294"></a><tt class="py-lineno">294</tt>  <tt class="py-line"><tt class="py-docstring">        @param identity: The identity dictionary.</tt> </tt>
+<a name="L295"></a><tt class="py-lineno">295</tt>  <tt class="py-line"><tt class="py-docstring">        @return: The Distinguished Name (DN)</tt> </tt>
+<a name="L296"></a><tt class="py-lineno">296</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: C{unicode}</tt> </tt>
+<a name="L297"></a><tt class="py-lineno">297</tt>  <tt class="py-line"><tt class="py-docstring">        @raise ValueError: If the C{login} key is not in the I{identity} dict.</tt> </tt>
+<a name="L298"></a><tt class="py-lineno">298</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L299"></a><tt class="py-lineno">299</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L300"></a><tt class="py-lineno">300</tt>  <tt class="py-line"> </tt>
+<a name="L301"></a><tt class="py-lineno">301</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">bind_dn</tt><tt class="py-op">:</tt> </tt>
+<a name="L302"></a><tt class="py-lineno">302</tt>  <tt class="py-line">            <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L303"></a><tt class="py-lineno">303</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ldap_connection</tt><tt class="py-op">.</tt><tt class="py-name">bind_s</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">bind_dn</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">bind_password</tt><tt class="py-op">)</tt> </tt>
+<a name="L304"></a><tt class="py-lineno">304</tt>  <tt class="py-line">            <tt class="py-keyword">except</tt> <tt id="link-28" class="py-name"><a title="repoze.who.plugins.ldap" class="py-name" href="#" onclick="return doclink('link-28', 'ldap', 'link-0');">ldap</a></tt><tt class="py-op">.</tt><tt class="py-name">LDAPError</tt><tt class="py-op">:</tt> </tt>
+<a name="L305"></a><tt class="py-lineno">305</tt>  <tt class="py-line">                <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">"Couldn't bind with supplied credentials"</tt><tt class="py-op">)</tt> </tt>
+<a name="L306"></a><tt class="py-lineno">306</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L307"></a><tt class="py-lineno">307</tt>  <tt class="py-line">            <tt class="py-name">login_name</tt> <tt class="py-op">=</tt> <tt class="py-name">identity</tt><tt class="py-op">[</tt><tt class="py-string">'login'</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">replace</tt><tt class="py-op">(</tt><tt class="py-string">'*'</tt><tt class="py-op">,</tt><tt class="py-string">r'\*'</tt><tt class="py-op">)</tt> </tt>
+<a name="L308"></a><tt class="py-lineno">308</tt>  <tt class="py-line">            <tt class="py-name">srch</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">search_pattern</tt> <tt class="py-op">%</tt> <tt class="py-name">login_name</tt> </tt>
+<a name="L309"></a><tt class="py-lineno">309</tt>  <tt class="py-line">            <tt class="py-name">dn_list</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ldap_connection</tt><tt class="py-op">.</tt><tt class="py-name">search_s</tt><tt class="py-op">(</tt> </tt>
+<a name="L310"></a><tt class="py-lineno">310</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name"><a title="repoze.who.plugins.ldap.tests.base_dn" class="py-name" href="#" onclick="return doclink('link-29', 'base_dn', 'link-7');">base_dn</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L311"></a><tt class="py-lineno">311</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">search_scope</tt><tt class="py-op">,</tt> </tt>
+<a name="L312"></a><tt class="py-lineno">312</tt>  <tt class="py-line">                <tt class="py-name">srch</tt><tt class="py-op">,</tt> </tt>
+<a name="L313"></a><tt class="py-lineno">313</tt>  <tt class="py-line">                <tt class="py-op">)</tt> </tt>
+<a name="L314"></a><tt class="py-lineno">314</tt>  <tt class="py-line">             </tt>
+<a name="L315"></a><tt class="py-lineno">315</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">dn_list</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<a name="L316"></a><tt class="py-lineno">316</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">dn_list</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L317"></a><tt class="py-lineno">317</tt>  <tt class="py-line">            <tt class="py-keyword">elif</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">dn_list</tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<a name="L318"></a><tt class="py-lineno">318</tt>  <tt class="py-line">                <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">'Too many entries found for %s'</tt> <tt class="py-op">%</tt> <tt class="py-name">srch</tt><tt class="py-op">)</tt> </tt>
+<a name="L319"></a><tt class="py-lineno">319</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L320"></a><tt class="py-lineno">320</tt>  <tt class="py-line">                <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">'No entry found for %s'</tt> <tt class="py-op">%</tt><tt class="py-name">srch</tt><tt class="py-op">)</tt> </tt>
+<a name="L321"></a><tt class="py-lineno">321</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-op">(</tt><tt class="py-name">KeyError</tt><tt class="py-op">,</tt> <tt class="py-name">TypeError</tt><tt class="py-op">,</tt> <tt id="link-30" class="py-name"><a title="repoze.who.plugins.ldap" class="py-name" href="#" onclick="return doclink('link-30', 'ldap', 'link-0');">ldap</a></tt><tt class="py-op">.</tt><tt class="py-name">LDAPError</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L322"></a><tt class="py-lineno">322</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-comment"># ValueError</tt> </tt>
+</div></div><a name="L323"></a><tt class="py-lineno">323</tt>  <tt class="py-line"> </tt>
+<a name="L324"></a><tt class="py-lineno">324</tt>  <tt class="py-line"> </tt>
+<a name="L325"></a><tt class="py-lineno">325</tt>  <tt class="py-line"><tt class="py-comment">#{ Metadata providers</tt> </tt>
+<a name="L326"></a><tt class="py-lineno">326</tt>  <tt class="py-line"> </tt>
+<a name="L327"></a><tt class="py-lineno">327</tt>  <tt class="py-line"> </tt>
+<a name="LDAPAttributesPlugin"></a><div id="LDAPAttributesPlugin-def"><a name="L328"></a><tt class="py-lineno">328</tt> <a class="py-toggle" href="#" id="LDAPAttributesPlugin-toggle" onclick="return toggle('LDAPAttributesPlugin');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="repoze.who.plugins.ldap.plugins.LDAPAttributesPlugin-class.html">LDAPAttributesPlugin</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LDAPAttributesPlugin-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="LDAPAttributesPlugin-expanded"><a name="L329"></a><tt class="py-lineno">329</tt>  <tt class="py-line">    <tt class="py-docstring">"""Loads LDAP attributes of the authenticated user."""</tt> </tt>
+<a name="L330"></a><tt class="py-lineno">330</tt>  <tt class="py-line">     </tt>
+<a name="L331"></a><tt class="py-lineno">331</tt>  <tt class="py-line">    <tt class="py-name">implements</tt><tt class="py-op">(</tt><tt id="link-31" class="py-name"><a title="repoze.who.interfaces.IMetadataProvider" class="py-name" href="#" onclick="return doclink('link-31', 'IMetadataProvider', 'link-5');">IMetadataProvider</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L332"></a><tt class="py-lineno">332</tt>  <tt class="py-line"> </tt>
+<a name="L333"></a><tt class="py-lineno">333</tt>  <tt class="py-line">    <tt id="link-32" class="py-name" targets="Variable repoze.who.plugins.ldap.plugins.LDAPAttributesPlugin.dnrx=repoze.who.plugins.ldap.plugins.LDAPAttributesPlugin-class.html#dnrx"><a title="repoze.who.plugins.ldap.plugins.LDAPAttributesPlugin.dnrx" class="py-name" href="#" onclick="return doclink('link-32', 'dnrx', 'link-32');">dnrx</a></tt> <tt class="py-op">=</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">compile</tt><tt class="py-op">(</tt><tt class="py-string">'&lt;dn:(?P&lt;b64dn&gt;[A-Za-z0-9+/]+=*)&gt;'</tt><tt class="py-op">)</tt> </tt>
+<a name="L334"></a><tt class="py-lineno">334</tt>  <tt class="py-line">     </tt>
+<a name="LDAPAttributesPlugin.__init__"></a><div id="LDAPAttributesPlugin.__init__-def"><a name="L335"></a><tt class="py-lineno">335</tt> <a class="py-toggle" href="#" id="LDAPAttributesPlugin.__init__-toggle" onclick="return toggle('LDAPAttributesPlugin.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.plugins.ldap.plugins.LDAPAttributesPlugin-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">ldap_connection</tt><tt class="py-op">,</tt> <tt class="py-param">attributes</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L336"></a><tt class="py-lineno">336</tt>  <tt class="py-line">                 <tt class="py-param">filterstr</tt><tt class="py-op">=</tt><tt class="py-string">'(objectClass=*)'</tt><tt class="py-op">,</tt> <tt class="py-param">start_tls</tt><tt class="py-op">=</tt><tt class="py-string">''</tt><tt class="py-op">,</tt> </tt>
+<a name="L337"></a><tt class="py-lineno">337</tt>  <tt class="py-line">                 <tt class="py-param">bind_dn</tt><tt class="py-op">=</tt><tt class="py-string">''</tt><tt class="py-op">,</tt> <tt class="py-param">bind_pass</tt><tt class="py-op">=</tt><tt class="py-string">''</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LDAPAttributesPlugin.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="LDAPAttributesPlugin.__init__-expanded"><a name="L338"></a><tt class="py-lineno">338</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L339"></a><tt class="py-lineno">339</tt>  <tt class="py-line"><tt class="py-docstring">        Fetch LDAP attributes of the authenticated user.</tt> </tt>
+<a name="L340"></a><tt class="py-lineno">340</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L341"></a><tt class="py-lineno">341</tt>  <tt class="py-line"><tt class="py-docstring">        @param ldap_connection: The LDAP connection to use to fetch this data.</tt> </tt>
+<a name="L342"></a><tt class="py-lineno">342</tt>  <tt class="py-line"><tt class="py-docstring">        @type ldap_connection: C{ldap.ldapobject.SimpleLDAPObject} or C{str}</tt> </tt>
+<a name="L343"></a><tt class="py-lineno">343</tt>  <tt class="py-line"><tt class="py-docstring">        @param attributes: The authenticated user's LDAP attributes you want to</tt> </tt>
+<a name="L344"></a><tt class="py-lineno">344</tt>  <tt class="py-line"><tt class="py-docstring">            use in your application; an interable or a comma-separate list of</tt> </tt>
+<a name="L345"></a><tt class="py-lineno">345</tt>  <tt class="py-line"><tt class="py-docstring">            attributes in a string, or C{None} to fetch them all.</tt> </tt>
+<a name="L346"></a><tt class="py-lineno">346</tt>  <tt class="py-line"><tt class="py-docstring">        @type attributes: C{iterable} or C{str}</tt> </tt>
+<a name="L347"></a><tt class="py-lineno">347</tt>  <tt class="py-line"><tt class="py-docstring">        @param filterstr: A filter for the search, as documented in U{RFC4515</tt> </tt>
+<a name="L348"></a><tt class="py-lineno">348</tt>  <tt class="py-line"><tt class="py-docstring">            &lt;http://www.faqs.org/rfcs/rfc4515.html&gt;}; the results won't be</tt> </tt>
+<a name="L349"></a><tt class="py-lineno">349</tt>  <tt class="py-line"><tt class="py-docstring">            filtered unless you define this.</tt> </tt>
+<a name="L350"></a><tt class="py-lineno">350</tt>  <tt class="py-line"><tt class="py-docstring">        @type filterstr: C{str}</tt> </tt>
+<a name="L351"></a><tt class="py-lineno">351</tt>  <tt class="py-line"><tt class="py-docstring">        @param start_tls: Should we negotiate a TLS upgrade on the connection with</tt> </tt>
+<a name="L352"></a><tt class="py-lineno">352</tt>  <tt class="py-line"><tt class="py-docstring">            the directory server?</tt> </tt>
+<a name="L353"></a><tt class="py-lineno">353</tt>  <tt class="py-line"><tt class="py-docstring">        @type start_tls: C{str}</tt> </tt>
+<a name="L354"></a><tt class="py-lineno">354</tt>  <tt class="py-line"><tt class="py-docstring">        @param bind_dn: Operate as the bind_dn directory entry</tt> </tt>
+<a name="L355"></a><tt class="py-lineno">355</tt>  <tt class="py-line"><tt class="py-docstring">        @type bind_dn: C{str}</tt> </tt>
+<a name="L356"></a><tt class="py-lineno">356</tt>  <tt class="py-line"><tt class="py-docstring">        @param bind_pass: The password for bind_dn directory entry</tt> </tt>
+<a name="L357"></a><tt class="py-lineno">357</tt>  <tt class="py-line"><tt class="py-docstring">        @type bind_pass: C{str}</tt> </tt>
+<a name="L358"></a><tt class="py-lineno">358</tt>  <tt class="py-line"><tt class="py-docstring">        @raise ValueError: If L{make_ldap_connection} could not create a</tt> </tt>
+<a name="L359"></a><tt class="py-lineno">359</tt>  <tt class="py-line"><tt class="py-docstring">            connection from C{ldap_connection}, or if C{attributes} is not an</tt> </tt>
+<a name="L360"></a><tt class="py-lineno">360</tt>  <tt class="py-line"><tt class="py-docstring">            iterable.</tt> </tt>
+<a name="L361"></a><tt class="py-lineno">361</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L362"></a><tt class="py-lineno">362</tt>  <tt class="py-line"><tt class="py-docstring">        The following parameters are inherited from </tt> </tt>
+<a name="L363"></a><tt class="py-lineno">363</tt>  <tt class="py-line"><tt class="py-docstring">        L{LDAPBaseAuthenticatorPlugin.__init__}</tt> </tt>
+<a name="L364"></a><tt class="py-lineno">364</tt>  <tt class="py-line"><tt class="py-docstring">        @param base_dn: The base for the I{Distinguished Name}. Something like</tt> </tt>
+<a name="L365"></a><tt class="py-lineno">365</tt>  <tt class="py-line"><tt class="py-docstring">            C{ou=employees,dc=example,dc=org}, to which will be prepended the</tt> </tt>
+<a name="L366"></a><tt class="py-lineno">366</tt>  <tt class="py-line"><tt class="py-docstring">            user id: C{uid=jsmith,ou=employees,dc=example,dc=org}.</tt> </tt>
+<a name="L367"></a><tt class="py-lineno">367</tt>  <tt class="py-line"><tt class="py-docstring">        @param returned_id: Should we return full Directory Names or just the</tt> </tt>
+<a name="L368"></a><tt class="py-lineno">368</tt>  <tt class="py-line"><tt class="py-docstring">            naming attribute value on successful authentication?</tt> </tt>
+<a name="L369"></a><tt class="py-lineno">369</tt>  <tt class="py-line"><tt class="py-docstring">        @param start_tls: Should we negotiate a TLS upgrade on the connection with</tt> </tt>
+<a name="L370"></a><tt class="py-lineno">370</tt>  <tt class="py-line"><tt class="py-docstring">            the directory server?</tt> </tt>
+<a name="L371"></a><tt class="py-lineno">371</tt>  <tt class="py-line"><tt class="py-docstring">        @param bind_dn: Operate as the bind_dn directory entry</tt> </tt>
+<a name="L372"></a><tt class="py-lineno">372</tt>  <tt class="py-line"><tt class="py-docstring">        @param bind_pass: The password for bind_dn directory entry</tt> </tt>
+<a name="L373"></a><tt class="py-lineno">373</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L374"></a><tt class="py-lineno">374</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L375"></a><tt class="py-lineno">375</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">hasattr</tt><tt class="py-op">(</tt><tt class="py-name">attributes</tt><tt class="py-op">,</tt> <tt class="py-string">'split'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L376"></a><tt class="py-lineno">376</tt>  <tt class="py-line">            <tt class="py-name">attributes</tt> <tt class="py-op">=</tt> <tt class="py-name">attributes</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-string">','</tt><tt class="py-op">)</tt> </tt>
+<a name="L377"></a><tt class="py-lineno">377</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">hasattr</tt><tt class="py-op">(</tt><tt class="py-name">attributes</tt><tt class="py-op">,</tt> <tt class="py-string">'__iter__'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L378"></a><tt class="py-lineno">378</tt>  <tt class="py-line">            <tt class="py-comment"># Converted to list, just in case...</tt> </tt>
+<a name="L379"></a><tt class="py-lineno">379</tt>  <tt class="py-line">            <tt class="py-name">attributes</tt> <tt class="py-op">=</tt> <tt class="py-name">list</tt><tt class="py-op">(</tt><tt class="py-name">attributes</tt><tt class="py-op">)</tt> </tt>
+<a name="L380"></a><tt class="py-lineno">380</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">attributes</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L381"></a><tt class="py-lineno">381</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">'The needed LDAP attributes are not valid'</tt><tt class="py-op">)</tt> </tt>
+<a name="L382"></a><tt class="py-lineno">382</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ldap_connection</tt> <tt class="py-op">=</tt> <tt id="link-33" class="py-name"><a title="repoze.who.plugins.ldap.plugins.make_ldap_connection" class="py-name" href="#" onclick="return doclink('link-33', 'make_ldap_connection', 'link-8');">make_ldap_connection</a></tt><tt class="py-op">(</tt><tt class="py-name">ldap_connection</tt><tt class="py-op">)</tt> </tt>
+<a name="L383"></a><tt class="py-lineno">383</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">start_tls</tt><tt class="py-op">:</tt> </tt>
+<a name="L384"></a><tt class="py-lineno">384</tt>  <tt class="py-line">            <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L385"></a><tt class="py-lineno">385</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ldap_connection</tt><tt class="py-op">.</tt><tt class="py-name">start_tls_s</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L386"></a><tt class="py-lineno">386</tt>  <tt class="py-line">            <tt class="py-keyword">except</tt><tt class="py-op">:</tt> </tt>
+<a name="L387"></a><tt class="py-lineno">387</tt>  <tt class="py-line">                <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">'Cannot upgrade the connection'</tt><tt class="py-op">)</tt> </tt>
+<a name="L388"></a><tt class="py-lineno">388</tt>  <tt class="py-line"> </tt>
+<a name="L389"></a><tt class="py-lineno">389</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">bind_dn</tt>   <tt class="py-op">=</tt> <tt class="py-name">bind_dn</tt> </tt>
+<a name="L390"></a><tt class="py-lineno">390</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">bind_pass</tt> <tt class="py-op">=</tt> <tt class="py-name">bind_pass</tt> </tt>
+<a name="L391"></a><tt class="py-lineno">391</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">attributes</tt> <tt class="py-op">=</tt> <tt class="py-name">attributes</tt> </tt>
+<a name="L392"></a><tt class="py-lineno">392</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">filterstr</tt> <tt class="py-op">=</tt> <tt class="py-name">filterstr</tt> </tt>
+</div><a name="L393"></a><tt class="py-lineno">393</tt>  <tt class="py-line">     </tt>
+<a name="L394"></a><tt class="py-lineno">394</tt>  <tt class="py-line">    <tt class="py-comment"># IMetadataProvider</tt> </tt>
+<a name="LDAPAttributesPlugin.add_metadata"></a><div id="LDAPAttributesPlugin.add_metadata-def"><a name="L395"></a><tt class="py-lineno">395</tt> <a class="py-toggle" href="#" id="LDAPAttributesPlugin.add_metadata-toggle" onclick="return toggle('LDAPAttributesPlugin.add_metadata');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.plugins.ldap.plugins.LDAPAttributesPlugin-class.html#add_metadata">add_metadata</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">environ</tt><tt class="py-op">,</tt> <tt class="py-param">identity</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LDAPAttributesPlugin.add_metadata-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="LDAPAttributesPlugin.add_metadata-expanded"><a name="L396"></a><tt class="py-lineno">396</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L397"></a><tt class="py-lineno">397</tt>  <tt class="py-line"><tt class="py-docstring">        Add metadata about the authenticated user to the identity.</tt> </tt>
+<a name="L398"></a><tt class="py-lineno">398</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L399"></a><tt class="py-lineno">399</tt>  <tt class="py-line"><tt class="py-docstring">        It modifies the C{identity} dictionary to add the metadata.</tt> </tt>
+<a name="L400"></a><tt class="py-lineno">400</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L401"></a><tt class="py-lineno">401</tt>  <tt class="py-line"><tt class="py-docstring">        @param environ: The WSGI environment.</tt> </tt>
+<a name="L402"></a><tt class="py-lineno">402</tt>  <tt class="py-line"><tt class="py-docstring">        @param identity: The repoze.who's identity dictionary.</tt> </tt>
+<a name="L403"></a><tt class="py-lineno">403</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L404"></a><tt class="py-lineno">404</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L405"></a><tt class="py-lineno">405</tt>  <tt class="py-line">        <tt class="py-comment"># Search arguments:</tt> </tt>
+<a name="L406"></a><tt class="py-lineno">406</tt>  <tt class="py-line">        <tt class="py-name">dnmatch</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-34" class="py-name"><a title="repoze.who.plugins.ldap.plugins.LDAPAttributesPlugin.dnrx" class="py-name" href="#" onclick="return doclink('link-34', 'dnrx', 'link-32');">dnrx</a></tt><tt class="py-op">.</tt><tt class="py-name">match</tt><tt class="py-op">(</tt><tt class="py-name">identity</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-string">'userdata'</tt><tt class="py-op">,</tt><tt class="py-string">''</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L407"></a><tt class="py-lineno">407</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">dnmatch</tt><tt class="py-op">:</tt> </tt>
+<a name="L408"></a><tt class="py-lineno">408</tt>  <tt class="py-line">            <tt class="py-name">dn</tt> <tt class="py-op">=</tt> <tt class="py-name">b64decode</tt><tt class="py-op">(</tt><tt class="py-name">dnmatch</tt><tt class="py-op">.</tt><tt class="py-name">group</tt><tt class="py-op">(</tt><tt class="py-string">'b64dn'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L409"></a><tt class="py-lineno">409</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L410"></a><tt class="py-lineno">410</tt>  <tt class="py-line">            <tt class="py-name">dn</tt> <tt class="py-op">=</tt> <tt class="py-name">identity</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-string">'repoze.who.userid'</tt><tt class="py-op">)</tt> </tt>
+<a name="L411"></a><tt class="py-lineno">411</tt>  <tt class="py-line">        <tt class="py-name">args</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt> </tt>
+<a name="L412"></a><tt class="py-lineno">412</tt>  <tt class="py-line">            <tt class="py-name">dn</tt><tt class="py-op">,</tt> </tt>
+<a name="L413"></a><tt class="py-lineno">413</tt>  <tt class="py-line">            <tt id="link-35" class="py-name"><a title="repoze.who.plugins.ldap" class="py-name" href="#" onclick="return doclink('link-35', 'ldap', 'link-0');">ldap</a></tt><tt class="py-op">.</tt><tt class="py-name">SCOPE_BASE</tt><tt class="py-op">,</tt> </tt>
+<a name="L414"></a><tt class="py-lineno">414</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">filterstr</tt><tt class="py-op">,</tt> </tt>
+<a name="L415"></a><tt class="py-lineno">415</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">attributes</tt> </tt>
+<a name="L416"></a><tt class="py-lineno">416</tt>  <tt class="py-line">        <tt class="py-op">)</tt> </tt>
+<a name="L417"></a><tt class="py-lineno">417</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">bind_dn</tt><tt class="py-op">:</tt> </tt>
+<a name="L418"></a><tt class="py-lineno">418</tt>  <tt class="py-line">            <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L419"></a><tt class="py-lineno">419</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ldap_connection</tt><tt class="py-op">.</tt><tt class="py-name">bind_s</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">bind_dn</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">bind_pass</tt><tt class="py-op">)</tt> </tt>
+<a name="L420"></a><tt class="py-lineno">420</tt>  <tt class="py-line">            <tt class="py-keyword">except</tt> <tt id="link-36" class="py-name"><a title="repoze.who.plugins.ldap" class="py-name" href="#" onclick="return doclink('link-36', 'ldap', 'link-0');">ldap</a></tt><tt class="py-op">.</tt><tt class="py-name">LDAPError</tt><tt class="py-op">:</tt> </tt>
+<a name="L421"></a><tt class="py-lineno">421</tt>  <tt class="py-line">                <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">"Couldn't bind with supplied credentials"</tt><tt class="py-op">)</tt> </tt>
+<a name="L422"></a><tt class="py-lineno">422</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L423"></a><tt class="py-lineno">423</tt>  <tt class="py-line">            <tt class="py-name">attributes</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ldap_connection</tt><tt class="py-op">.</tt><tt class="py-name">search_s</tt><tt class="py-op">(</tt><tt class="py-op">*</tt><tt class="py-name">args</tt><tt class="py-op">)</tt> </tt>
+<a name="L424"></a><tt class="py-lineno">424</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt id="link-37" class="py-name"><a title="repoze.who.plugins.ldap" class="py-name" href="#" onclick="return doclink('link-37', 'ldap', 'link-0');">ldap</a></tt><tt class="py-op">.</tt><tt class="py-name">LDAPError</tt><tt class="py-op">,</tt> <tt class="py-name">msg</tt><tt class="py-op">:</tt> </tt>
+<a name="L425"></a><tt class="py-lineno">425</tt>  <tt class="py-line">            <tt id="link-38" class="py-name"><a title="repoze.who.tests.test_config.DummyApp.environ
+repoze.who.tests.test_middleware.DummyApp.environ
+repoze.who.tests.test_restrict.DummyApp.environ" class="py-name" href="#" onclick="return doclink('link-38', 'environ', 'link-12');">environ</a></tt><tt class="py-op">[</tt><tt class="py-string">'repoze.who.logger'</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">warn</tt><tt class="py-op">(</tt><tt class="py-string">'Cannot add metadata: %s'</tt> <tt class="py-op">%</tt> <tt class="py-name">msg</tt><tt class="py-op">)</tt> </tt>
+<a name="L426"></a><tt class="py-lineno">426</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">Exception</tt><tt class="py-op">(</tt><tt class="py-name">identity</tt><tt class="py-op">)</tt> </tt>
+<a name="L427"></a><tt class="py-lineno">427</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L428"></a><tt class="py-lineno">428</tt>  <tt class="py-line">            <tt class="py-name">identity</tt><tt class="py-op">.</tt><tt class="py-name">update</tt><tt class="py-op">(</tt><tt class="py-name">attributes</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L429"></a><tt class="py-lineno">429</tt>  <tt class="py-line"> </tt>
+<a name="L430"></a><tt class="py-lineno">430</tt>  <tt class="py-line"> </tt>
+<a name="L431"></a><tt class="py-lineno">431</tt>  <tt class="py-line"><tt class="py-comment">#{ Utilities</tt> </tt>
+<a name="L432"></a><tt class="py-lineno">432</tt>  <tt class="py-line"> </tt>
+<a name="L433"></a><tt class="py-lineno">433</tt>  <tt class="py-line"> </tt>
+<a name="make_ldap_connection"></a><div id="make_ldap_connection-def"><a name="L434"></a><tt class="py-lineno">434</tt> <a class="py-toggle" href="#" id="make_ldap_connection-toggle" onclick="return toggle('make_ldap_connection');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.plugins.ldap.plugins-module.html#make_ldap_connection">make_ldap_connection</a><tt class="py-op">(</tt><tt class="py-param">ldap_connection</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="make_ldap_connection-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="make_ldap_connection-expanded"><a name="L435"></a><tt class="py-lineno">435</tt>  <tt class="py-line">    <tt class="py-docstring">"""Return an LDAP connection object to the specified server.</tt> </tt>
+<a name="L436"></a><tt class="py-lineno">436</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L437"></a><tt class="py-lineno">437</tt>  <tt class="py-line"><tt class="py-docstring">    If the C{ldap_connection} is already an LDAP connection object, it will</tt> </tt>
+<a name="L438"></a><tt class="py-lineno">438</tt>  <tt class="py-line"><tt class="py-docstring">    be returned as is. If it's an LDAP URL, it will return an LDAP connection</tt> </tt>
+<a name="L439"></a><tt class="py-lineno">439</tt>  <tt class="py-line"><tt class="py-docstring">    to the LDAP server specified in the URL.</tt> </tt>
+<a name="L440"></a><tt class="py-lineno">440</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L441"></a><tt class="py-lineno">441</tt>  <tt class="py-line"><tt class="py-docstring">    @param ldap_connection: The LDAP connection object or the LDAP URL of the</tt> </tt>
+<a name="L442"></a><tt class="py-lineno">442</tt>  <tt class="py-line"><tt class="py-docstring">        server to be connected to.</tt> </tt>
+<a name="L443"></a><tt class="py-lineno">443</tt>  <tt class="py-line"><tt class="py-docstring">    @type ldap_connection: C{ldap.ldapobject.SimpleLDAPObject}, C{str} or</tt> </tt>
+<a name="L444"></a><tt class="py-lineno">444</tt>  <tt class="py-line"><tt class="py-docstring">        C{unicode}</tt> </tt>
+<a name="L445"></a><tt class="py-lineno">445</tt>  <tt class="py-line"><tt class="py-docstring">    @return: The LDAP connection object.</tt> </tt>
+<a name="L446"></a><tt class="py-lineno">446</tt>  <tt class="py-line"><tt class="py-docstring">    @rtype: C{ldap.ldapobject.SimpleLDAPObject}</tt> </tt>
+<a name="L447"></a><tt class="py-lineno">447</tt>  <tt class="py-line"><tt class="py-docstring">    @raise ValueError: If C{ldap_connection} is C{None}.</tt> </tt>
+<a name="L448"></a><tt class="py-lineno">448</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L449"></a><tt class="py-lineno">449</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L450"></a><tt class="py-lineno">450</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">ldap_connection</tt><tt class="py-op">,</tt> <tt class="py-name">str</tt><tt class="py-op">)</tt> <tt class="py-keyword">or</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">ldap_connection</tt><tt class="py-op">,</tt> <tt class="py-name">unicode</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L451"></a><tt class="py-lineno">451</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-39" class="py-name"><a title="repoze.who.plugins.ldap" class="py-name" href="#" onclick="return doclink('link-39', 'ldap', 'link-0');">ldap</a></tt><tt class="py-op">.</tt><tt class="py-name">initialize</tt><tt class="py-op">(</tt><tt class="py-name">ldap_connection</tt><tt class="py-op">)</tt> </tt>
+<a name="L452"></a><tt class="py-lineno">452</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt class="py-name">ldap_connection</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L453"></a><tt class="py-lineno">453</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">'An LDAP connection must be specified'</tt><tt class="py-op">)</tt> </tt>
+<a name="L454"></a><tt class="py-lineno">454</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">ldap_connection</tt> </tt>
+</div><a name="L455"></a><tt class="py-lineno">455</tt>  <tt class="py-line"> </tt>
+<a name="L456"></a><tt class="py-lineno">456</tt>  <tt class="py-line"> </tt>
+<a name="L457"></a><tt class="py-lineno">457</tt>  <tt class="py-line"><tt class="py-comment">#}</tt> </tt>
+<a name="L458"></a><tt class="py-lineno">458</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="repoze.who.plugins.ldap-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://code.gustavonarea.net/repoze.who.plugins.ldap/">repoze.who LDAP plugin</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Jun  3 10:41:59 2010
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

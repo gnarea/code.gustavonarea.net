@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>repoze.who.plugins.tests.fixtures.testapp</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="repoze.who.plugins.ldap-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://code.gustavonarea.net/repoze.who.plugins.ldap/">repoze.who LDAP plugin</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="repoze-module.html">Package&nbsp;repoze</a> ::
+        <a href="repoze.who-module.html">Package&nbsp;who</a> ::
+        <a href="repoze.who.plugins-module.html">Package&nbsp;plugins</a> ::
+        <a href="repoze.who.plugins.tests-module.html">Package&nbsp;tests</a> ::
+        <a href="repoze.who.plugins.tests.fixtures-module.html">Package&nbsp;fixtures</a> ::
+        Module&nbsp;testapp
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="repoze.who.plugins.tests.fixtures.testapp-module.html">Module repoze.who.plugins.tests.fixtures.testapp</a></h1>
+<pre class="py-src">
+<a name="tack_environ"></a><div id="tack_environ-def"><a name="L1"></a><tt class="py-lineno"> 1</tt> <a class="py-toggle" href="#" id="tack_environ-toggle" onclick="return toggle('tack_environ');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.plugins.tests.fixtures.testapp-module.html#tack_environ">tack_environ</a><tt class="py-op">(</tt><tt class="py-param">environ</tt><tt class="py-op">,</tt> <tt class="py-param">msg</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="tack_environ-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="tack_environ-expanded"><a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line">    <tt class="py-keyword">import</tt> <tt class="py-name">pprint</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line">    <tt class="py-name">penv</tt> <tt class="py-op">=</tt> <tt class="py-name">pprint</tt><tt class="py-op">.</tt><tt class="py-name">pformat</tt><tt class="py-op">(</tt><tt id="link-0" class="py-name" targets="Variable repoze.who.tests.test_config.DummyApp.environ=repoze.who.tests.test_config.DummyApp-class.html#environ,Variable repoze.who.tests.test_middleware.DummyApp.environ=repoze.who.tests.test_middleware.DummyApp-class.html#environ,Variable repoze.who.tests.test_restrict.DummyApp.environ=repoze.who.tests.test_restrict.DummyApp-class.html#environ"><a title="repoze.who.tests.test_config.DummyApp.environ
+repoze.who.tests.test_middleware.DummyApp.environ
+repoze.who.tests.test_restrict.DummyApp.environ" class="py-name" href="#" onclick="return doclink('link-0', 'environ', 'link-0');">environ</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">msg</tt> <tt class="py-op">+</tt> <tt class="py-string">'\n\n'</tt> <tt class="py-op">+</tt> <tt class="py-name">penv</tt> </tt>
+</div><a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"> </tt>
+<a name="deny"></a><div id="deny-def"><a name="L6"></a><tt class="py-lineno"> 6</tt> <a class="py-toggle" href="#" id="deny-toggle" onclick="return toggle('deny');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.plugins.tests.fixtures.testapp-module.html#deny">deny</a><tt class="py-op">(</tt><tt class="py-param">start_response</tt><tt class="py-op">,</tt> <tt class="py-param">environ</tt><tt class="py-op">,</tt> <tt class="py-param">msg</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="deny-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="deny-expanded"><a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line">    <tt class="py-name">ct</tt> <tt class="py-op">=</tt> <tt class="py-string">'text/plain'</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line">    <tt class="py-name">msg</tt> <tt class="py-op">=</tt> <tt id="link-1" class="py-name" targets="Function repoze.who.plugins.tests.fixtures.testapp.tack_environ()=repoze.who.plugins.tests.fixtures.testapp-module.html#tack_environ"><a title="repoze.who.plugins.tests.fixtures.testapp.tack_environ" class="py-name" href="#" onclick="return doclink('link-1', 'tack_environ', 'link-1');">tack_environ</a></tt><tt class="py-op">(</tt><tt id="link-2" class="py-name"><a title="repoze.who.tests.test_config.DummyApp.environ
+repoze.who.tests.test_middleware.DummyApp.environ
+repoze.who.tests.test_restrict.DummyApp.environ" class="py-name" href="#" onclick="return doclink('link-2', 'environ', 'link-0');">environ</a></tt><tt class="py-op">,</tt> <tt class="py-name">msg</tt><tt class="py-op">)</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line">    <tt class="py-name">cl</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">msg</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line">    <tt class="py-name">start_response</tt><tt class="py-op">(</tt><tt class="py-string">'401 Unauthorized'</tt><tt class="py-op">,</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">                   <tt class="py-op">[</tt> <tt class="py-op">(</tt><tt class="py-string">'Content-Type'</tt><tt class="py-op">,</tt> <tt class="py-name">ct</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">                   <tt class="py-op">(</tt><tt class="py-string">'Content-Length'</tt><tt class="py-op">,</tt> <tt class="py-name">cl</tt><tt class="py-op">)</tt> <tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">                   <tt class="py-op">)</tt> </tt>
+</div><a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"> </tt>
+<a name="allow"></a><div id="allow-def"><a name="L15"></a><tt class="py-lineno">15</tt> <a class="py-toggle" href="#" id="allow-toggle" onclick="return toggle('allow');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.plugins.tests.fixtures.testapp-module.html#allow">allow</a><tt class="py-op">(</tt><tt class="py-param">start_response</tt><tt class="py-op">,</tt> <tt class="py-param">environ</tt><tt class="py-op">,</tt> <tt class="py-param">msg</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="allow-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="allow-expanded"><a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">    <tt class="py-name">ct</tt> <tt class="py-op">=</tt> <tt class="py-string">'text/plain'</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">    <tt class="py-name">msg</tt> <tt class="py-op">=</tt> <tt id="link-3" class="py-name"><a title="repoze.who.plugins.tests.fixtures.testapp.tack_environ" class="py-name" href="#" onclick="return doclink('link-3', 'tack_environ', 'link-1');">tack_environ</a></tt><tt class="py-op">(</tt><tt id="link-4" class="py-name"><a title="repoze.who.tests.test_config.DummyApp.environ
+repoze.who.tests.test_middleware.DummyApp.environ
+repoze.who.tests.test_restrict.DummyApp.environ" class="py-name" href="#" onclick="return doclink('link-4', 'environ', 'link-0');">environ</a></tt><tt class="py-op">,</tt> <tt class="py-name">msg</tt><tt class="py-op">)</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">    <tt class="py-name">cl</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">msg</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">    <tt class="py-name">start_response</tt><tt class="py-op">(</tt><tt class="py-string">'200 OK'</tt><tt class="py-op">,</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">                   <tt class="py-op">[</tt> <tt class="py-op">(</tt><tt class="py-string">'Content-Type'</tt><tt class="py-op">,</tt> <tt class="py-name">ct</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">                   <tt class="py-op">(</tt><tt class="py-string">'Content-Length'</tt><tt class="py-op">,</tt> <tt class="py-name">cl</tt><tt class="py-op">)</tt> <tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">                   <tt class="py-op">)</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-op">[</tt><tt class="py-name">msg</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"> </tt>
+<a name="app"></a><div id="app-def"><a name="L25"></a><tt class="py-lineno">25</tt> <a class="py-toggle" href="#" id="app-toggle" onclick="return toggle('app');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.plugins.tests.fixtures.testapp-module.html#app">app</a><tt class="py-op">(</tt><tt class="py-param">environ</tt><tt class="py-op">,</tt> <tt class="py-param">start_response</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="app-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="app-expanded"><a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">    <tt class="py-name">path_info</tt> <tt class="py-op">=</tt> <tt id="link-5" class="py-name"><a title="repoze.who.tests.test_config.DummyApp.environ
+repoze.who.tests.test_middleware.DummyApp.environ
+repoze.who.tests.test_restrict.DummyApp.environ" class="py-name" href="#" onclick="return doclink('link-5', 'environ', 'link-0');">environ</a></tt><tt class="py-op">[</tt><tt class="py-string">'PATH_INFO'</tt><tt class="py-op">]</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">    <tt class="py-name">remote_user</tt> <tt class="py-op">=</tt> <tt id="link-6" class="py-name"><a title="repoze.who.tests.test_config.DummyApp.environ
+repoze.who.tests.test_middleware.DummyApp.environ
+repoze.who.tests.test_restrict.DummyApp.environ" class="py-name" href="#" onclick="return doclink('link-6', 'environ', 'link-0');">environ</a></tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-string">'REMOTE_USER'</tt><tt class="py-op">)</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">path_info</tt><tt class="py-op">.</tt><tt class="py-name">endswith</tt><tt class="py-op">(</tt><tt class="py-string">'/shared'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">remote_user</tt><tt class="py-op">:</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt id="link-7" class="py-name" targets="Function repoze.who.plugins.tests.fixtures.testapp.deny()=repoze.who.plugins.tests.fixtures.testapp-module.html#deny"><a title="repoze.who.plugins.tests.fixtures.testapp.deny" class="py-name" href="#" onclick="return doclink('link-7', 'deny', 'link-7');">deny</a></tt><tt class="py-op">(</tt><tt class="py-name">start_response</tt><tt class="py-op">,</tt> <tt id="link-8" class="py-name"><a title="repoze.who.tests.test_config.DummyApp.environ
+repoze.who.tests.test_middleware.DummyApp.environ
+repoze.who.tests.test_restrict.DummyApp.environ" class="py-name" href="#" onclick="return doclink('link-8', 'environ', 'link-0');">environ</a></tt><tt class="py-op">,</tt> <tt class="py-string">'You cant do that'</tt><tt class="py-op">)</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt id="link-9" class="py-name" targets="Function repoze.who.plugins.tests.fixtures.testapp.allow()=repoze.who.plugins.tests.fixtures.testapp-module.html#allow"><a title="repoze.who.plugins.tests.fixtures.testapp.allow" class="py-name" href="#" onclick="return doclink('link-9', 'allow', 'link-9');">allow</a></tt><tt class="py-op">(</tt><tt class="py-name">start_response</tt><tt class="py-op">,</tt> <tt id="link-10" class="py-name"><a title="repoze.who.tests.test_config.DummyApp.environ
+repoze.who.tests.test_middleware.DummyApp.environ
+repoze.who.tests.test_restrict.DummyApp.environ" class="py-name" href="#" onclick="return doclink('link-10', 'environ', 'link-0');">environ</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">                         <tt class="py-string">'Welcome to the shared area, %s'</tt> <tt class="py-op">%</tt> <tt class="py-name">remote_user</tt><tt class="py-op">)</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt class="py-name">path_info</tt><tt class="py-op">.</tt><tt class="py-name">endswith</tt><tt class="py-op">(</tt><tt class="py-string">'/admin'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">remote_user</tt> <tt class="py-op">!=</tt> <tt class="py-string">'admin'</tt><tt class="py-op">:</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt id="link-11" class="py-name"><a title="repoze.who.plugins.tests.fixtures.testapp.deny" class="py-name" href="#" onclick="return doclink('link-11', 'deny', 'link-7');">deny</a></tt><tt class="py-op">(</tt><tt class="py-name">start_response</tt><tt class="py-op">,</tt> <tt id="link-12" class="py-name"><a title="repoze.who.tests.test_config.DummyApp.environ
+repoze.who.tests.test_middleware.DummyApp.environ
+repoze.who.tests.test_restrict.DummyApp.environ" class="py-name" href="#" onclick="return doclink('link-12', 'environ', 'link-0');">environ</a></tt><tt class="py-op">,</tt> <tt class="py-string">'Only admin can do that'</tt><tt class="py-op">)</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt id="link-13" class="py-name"><a title="repoze.who.plugins.tests.fixtures.testapp.allow" class="py-name" href="#" onclick="return doclink('link-13', 'allow', 'link-9');">allow</a></tt><tt class="py-op">(</tt><tt class="py-name">start_response</tt><tt class="py-op">,</tt> <tt id="link-14" class="py-name"><a title="repoze.who.tests.test_config.DummyApp.environ
+repoze.who.tests.test_middleware.DummyApp.environ
+repoze.who.tests.test_restrict.DummyApp.environ" class="py-name" href="#" onclick="return doclink('link-14', 'environ', 'link-0');">environ</a></tt><tt class="py-op">,</tt> <tt class="py-string">'Hello, admin!'</tt><tt class="py-op">)</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt class="py-name">path_info</tt><tt class="py-op">.</tt><tt class="py-name">endswith</tt><tt class="py-op">(</tt><tt class="py-string">'/chris'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">remote_user</tt> <tt class="py-op">!=</tt> <tt class="py-string">'chris'</tt><tt class="py-op">:</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt id="link-15" class="py-name"><a title="repoze.who.plugins.tests.fixtures.testapp.deny" class="py-name" href="#" onclick="return doclink('link-15', 'deny', 'link-7');">deny</a></tt><tt class="py-op">(</tt><tt class="py-name">start_response</tt><tt class="py-op">,</tt> <tt id="link-16" class="py-name"><a title="repoze.who.tests.test_config.DummyApp.environ
+repoze.who.tests.test_middleware.DummyApp.environ
+repoze.who.tests.test_restrict.DummyApp.environ" class="py-name" href="#" onclick="return doclink('link-16', 'environ', 'link-0');">environ</a></tt><tt class="py-op">,</tt> <tt class="py-string">'Only chris can do that'</tt><tt class="py-op">)</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt id="link-17" class="py-name"><a title="repoze.who.plugins.tests.fixtures.testapp.allow" class="py-name" href="#" onclick="return doclink('link-17', 'allow', 'link-9');">allow</a></tt><tt class="py-op">(</tt><tt class="py-name">start_response</tt><tt class="py-op">,</tt> <tt id="link-18" class="py-name"><a title="repoze.who.tests.test_config.DummyApp.environ
+repoze.who.tests.test_middleware.DummyApp.environ
+repoze.who.tests.test_restrict.DummyApp.environ" class="py-name" href="#" onclick="return doclink('link-18', 'environ', 'link-0');">environ</a></tt><tt class="py-op">,</tt> <tt class="py-string">'Hello, chris!'</tt><tt class="py-op">)</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-19" class="py-name"><a title="repoze.who.plugins.tests.fixtures.testapp.allow" class="py-name" href="#" onclick="return doclink('link-19', 'allow', 'link-9');">allow</a></tt><tt class="py-op">(</tt><tt class="py-name">start_response</tt><tt class="py-op">,</tt> <tt id="link-20" class="py-name"><a title="repoze.who.tests.test_config.DummyApp.environ
+repoze.who.tests.test_middleware.DummyApp.environ
+repoze.who.tests.test_restrict.DummyApp.environ" class="py-name" href="#" onclick="return doclink('link-20', 'environ', 'link-0');">environ</a></tt><tt class="py-op">,</tt> <tt class="py-string">'Unprotected page'</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">     </tt>
+<a name="make_app"></a><div id="make_app-def"><a name="L47"></a><tt class="py-lineno">47</tt> <a class="py-toggle" href="#" id="make_app-toggle" onclick="return toggle('make_app');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.plugins.tests.fixtures.testapp-module.html#make_app">make_app</a><tt class="py-op">(</tt><tt class="py-param">global_config</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kw</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="make_app-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="make_app-expanded"><a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-21" class="py-name" targets="Function repoze.who.plugins.tests.fixtures.testapp.app()=repoze.who.plugins.tests.fixtures.testapp-module.html#app"><a title="repoze.who.plugins.tests.fixtures.testapp.app" class="py-name" href="#" onclick="return doclink('link-21', 'app', 'link-21');">app</a></tt> </tt>
+</div><a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="repoze.who.plugins.ldap-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://code.gustavonarea.net/repoze.who.plugins.ldap/">repoze.who LDAP plugin</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Jun  3 10:41:58 2010
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,263 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Test protected areas without authentication &mdash; repoze.who Test Utilities v1.0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/repoze.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="repoze.who Test Utilities v1.0.1 documentation" href="../index.html" />
+    <link rel="up" title="How to test protected areas in Web sites" href="index.html" />
+    <link rel="next" title="Test authentication independently" href="TestingAuthentication.html" />
+    <link rel="prev" title="Reconfigure repoze.who" href="Reconfiguring.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="TestingAuthentication.html" title="Test authentication independently"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Reconfiguring.html" title="Reconfigure repoze.who"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">repoze.who Test Utilities v1.0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">How to test protected areas in Web sites</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="test-protected-areas-without-authentication">
+<h1>Test protected areas without authentication<a class="headerlink" href="#test-protected-areas-without-authentication" title="Permalink to this headline">¶</a></h1>
+<p>Once your authentication middleware is prepared to skip authentication
+when explicitly requested, as described in the previous section, we&#8217;ll be ready
+to test the protected areas independently of the <a class="reference external" href="http://static.repoze.org/whodocs/index.html#module-repoze.who" title="(in repoze.who v1.0.10)"><tt class="xref py py-mod docutils literal"><span class="pre">repoze.who</span></tt></a>
+identifiers, authenticators and challengers used.</p>
+<div class="section" id="the-test-configuration">
+<h2>The test configuration<a class="headerlink" href="#the-test-configuration" title="Permalink to this headline">¶</a></h2>
+<p>If you don&#8217;t already have a test config file (often called <tt class="docutils literal"><span class="pre">test.ini</span></tt>),
+then you should create one. It&#8217;s not strictly necessary, but we&#8217;re going to
+use it in this HOWTO.</p>
+<p>In your <tt class="docutils literal"><span class="pre">test.ini</span></tt> file (or whatever you call it), let&#8217;s define a new
+application called <tt class="docutils literal"><span class="pre">main_without_authn</span></tt>, which will be the same <tt class="docutils literal"><span class="pre">main</span></tt>
+application but without authentication:</p>
+<div class="highlight-ini"><div class="highlight"><pre><span class="k">[DEFAULT]</span>
+<span class="c"># (...)</span>
+
+<span class="c"># Your main application:</span>
+<span class="k">[app:main]</span>
+<span class="na">use</span> <span class="o">=</span> <span class="s">config:main_configuration.ini</span>
+
+<span class="c"># Your main application without authentication:</span>
+<span class="k">[app:main_without_authn]</span>
+<span class="na">use</span> <span class="o">=</span> <span class="s">main</span>
+<span class="na">skip_authentication</span> <span class="o">=</span> <span class="s">True</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-base-test-case">
+<h2>The base test case<a class="headerlink" href="#the-base-test-case" title="Permalink to this headline">¶</a></h2>
+<p>Next, it&#8217;s time to create a base class for your test cases, which will set
+your application up without authentication (using the test configuration file
+we created above).</p>
+<p>If you&#8217;ve ever created one, you&#8217;ll notice this one is a little special (hint:
+see line #12):</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">unittest</span> <span class="kn">import</span> <span class="n">TestCase</span>
+
+<span class="kn">from</span> <span class="nn">paste.deploy</span> <span class="kn">import</span> <span class="n">loadapp</span>
+<span class="kn">from</span> <span class="nn">webtest</span> <span class="kn">import</span> <span class="n">TestApp</span>
+
+<span class="c"># Set the path to your configuration directory here:</span>
+<span class="n">conf_dir</span> <span class="o">=</span> <span class="s">&#39;/path/to/configuration/dir&#39;</span>
+
+<span class="k">class</span> <span class="nc">TestProtectedAreas</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">wsgiapp</span> <span class="o">=</span> <span class="n">loadapp</span><span class="p">(</span><span class="s">&#39;config:test.ini#main_without_authn&#39;</span><span class="p">,</span>
+                          <span class="n">relative_to</span><span class="o">=</span><span class="n">conf_dir</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">TestApp</span><span class="p">(</span><span class="n">wsgiapp</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>Say it&#8217;s defined in <tt class="docutils literal"><span class="pre">yourapplication.tests.base</span></tt>.</p>
+</div>
+<div class="section" id="a-sample-test-case">
+<h2>A sample test case<a class="headerlink" href="#a-sample-test-case" title="Permalink to this headline">¶</a></h2>
+<p>Finally we&#8217;re ready to create our first test case for a protected area!</p>
+<p>And all you have to do is extend <tt class="docutils literal"><span class="pre">TestProtectedAreas</span></tt> and test your
+application as you&#8217;d expect:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">yourapplication.tests.base</span> <span class="kn">import</span> <span class="n">TestProtectedAreas</span>
+
+<span class="k">class</span> <span class="nc">TestControlPanel</span><span class="p">(</span><span class="n">TestProtectedAreas</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Test case for the control panel at ``/panel``&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">test_index_as_admin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Administrators can access the panel&quot;&quot;&quot;</span>
+        <span class="n">environ</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;REMOTE_USER&#39;</span><span class="p">:</span> <span class="s">&#39;admin&#39;</span><span class="p">}</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;/panel/&#39;</span><span class="p">,</span> <span class="n">extra_environ</span><span class="o">=</span><span class="n">environ</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="s">&quot;some text&quot;</span> <span class="ow">in</span> <span class="n">resp</span><span class="o">.</span><span class="n">body</span>
+
+    <span class="k">def</span> <span class="nf">test_index_as_normal_user</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Regular users shouldn&#39;t access the panel&quot;&quot;&quot;</span>
+        <span class="n">environ</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;REMOTE_USER&#39;</span><span class="p">:</span> <span class="s">&#39;foobar&#39;</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;/panel/&#39;</span><span class="p">,</span> <span class="n">extra_environ</span><span class="o">=</span><span class="n">environ</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">403</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_index_as_anonymous</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Anonymous users must not access the panel&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;/panel/&#39;</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">401</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>Now some comments about the test case above:</p>
+<ol class="arabic simple">
+<li>Every time you need to forge authentication, you should do it the standard
+way: Setting the user name in <tt class="docutils literal"><span class="pre">environ['REMOTE_USER']</span></tt> (or whatever you
+use) and then pass the fake environment to <tt class="docutils literal"><span class="pre">webtest.TestApp</span></tt> instance when
+you make a request. See lines 8-9 and 14-15.</li>
+<li>If you want to act as an anonymous user, don&#8217;t set
+<tt class="docutils literal"><span class="pre">environ['REMOTE_USER']</span></tt>. See line 19.</li>
+<li>It&#8217;s highly recommended to set the HTTP status code you expect to get when
+you make a request. See lines 9, 15 and 19. Keep in mind the meaning of the
+200, 401 and 403 HTTP status codes:<ul>
+<li>200: Authorization was granted and the request was processed with no
+problems at all.</li>
+<li>401: Authorization was denied, but authenticating <em>could</em> help to gain
+access. This is used when the user is anonymous.</li>
+<li>403: Authorization was denied and authentication <em>won&#8217;t</em> help to gain
+access. This is mostly used when the user is <em>not</em> anonymous.</li>
+<li>When authorization to a given resource is denied to <em>everybody</em>
+(anonymous or authenticated), the 403 HTTP status code must be used.</li>
+</ul>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo_hi.gif" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Test protected areas without authentication</a><ul>
+<li><a class="reference internal" href="#the-test-configuration">The test configuration</a></li>
+<li><a class="reference internal" href="#the-base-test-case">The base test case</a></li>
+<li><a class="reference internal" href="#a-sample-test-case">A sample test case</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Reconfiguring.html"
+                        title="previous chapter">Reconfigure <tt class="docutils literal docutils literal"><span class="pre">repoze.who</span></tt></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="TestingAuthentication.html"
+                        title="next chapter">Test authentication independently</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/HowTo/TestingProtectedAreas.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="TestingAuthentication.html" title="Test authentication independently"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Reconfiguring.html" title="Reconfigure repoze.who"
+             >previous</a> |</li>
+        <li><a href="../index.html">repoze.who Test Utilities v1.0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" >How to test protected areas in Web sites</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009, The Repoze Project.
+      Last updated on Aug 17, 2010.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.2.
+    </div>
+  </body>
+</html>

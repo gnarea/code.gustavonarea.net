@@ -1,0 +1,265 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Reconfigure repoze.who &mdash; repoze.who Test Utilities v1.0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/repoze.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="repoze.who Test Utilities v1.0.1 documentation" href="../index.html" />
+    <link rel="up" title="How to test protected areas in Web sites" href="index.html" />
+    <link rel="next" title="Test protected areas without authentication" href="TestingProtectedAreas.html" />
+    <link rel="prev" title="How to test protected areas in Web sites" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="TestingProtectedAreas.html" title="Test protected areas without authentication"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="How to test protected areas in Web sites"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">repoze.who Test Utilities v1.0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">How to test protected areas in Web sites</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="reconfigure-repoze-who">
+<h1>Reconfigure <a class="reference external" href="http://static.repoze.org/whodocs/index.html#module-repoze.who" title="(in repoze.who v1.0.10)"><tt class="xref py py-mod docutils literal"><span class="pre">repoze.who</span></tt></a><a class="headerlink" href="#reconfigure-repoze-who" title="Permalink to this headline">¶</a></h1>
+<p>Now that you have <a class="reference external" href="http://static.repoze.org/whodocs/index.html#module-repoze.who" title="(in repoze.who v1.0.10)"><tt class="xref py py-mod docutils literal"><span class="pre">repoze.who</span></tt></a> working, it&#8217;s time to change its setup
+slightly in order for us to skip authentication while testing protected areas.</p>
+<p>The way to change it depends on the way you configure <a class="reference external" href="http://static.repoze.org/whodocs/index.html#module-repoze.who" title="(in repoze.who v1.0.10)"><tt class="xref py py-mod docutils literal"><span class="pre">repoze.who</span></tt></a>:</p>
+<div class="section" id="via-python-code">
+<h2>Via Python code<a class="headerlink" href="#via-python-code" title="Permalink to this headline">¶</a></h2>
+<p>If the PasteDeploy factory for your application looks like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">repoze.who.middleware</span> <span class="kn">import</span> <span class="n">PluggableAuthenticationMiddleware</span>
+
+<span class="k">def</span> <span class="nf">make_application</span><span class="p">(</span><span class="n">global_config</span><span class="p">,</span> <span class="o">**</span><span class="n">local_conf</span><span class="p">):</span>
+    <span class="c"># (...)</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">PluggableAuthenticationMiddleware</span><span class="p">(</span>
+        <span class="n">app</span><span class="p">,</span>
+        <span class="n">identifiers</span><span class="p">,</span>
+        <span class="n">authenticators</span><span class="p">,</span>
+        <span class="n">challengers</span><span class="p">,</span>
+        <span class="n">mdproviders</span><span class="p">,</span>
+        <span class="n">classifier</span><span class="p">,</span>
+        <span class="n">challenge_decider</span><span class="p">)</span>
+    <span class="c"># (...)</span>
+    <span class="k">return</span> <span class="n">app</span>
+</pre></div>
+</div>
+<p>You should replace
+<a class="reference external" href="http://static.repoze.org/whodocs/narr.html#repoze.who.middleware.PluggableAuthenticationMiddleware" title="(in repoze.who v1.0.10)"><tt class="xref py py-class docutils literal"><span class="pre">repoze.who.middleware.PluggableAuthenticationMiddleware</span></tt></a> with
+<a class="reference internal" href="../API.html#repoze.who.plugins.testutil.make_middleware" title="repoze.who.plugins.testutil.make_middleware"><tt class="xref py py-func docutils literal"><span class="pre">repoze.who.plugins.testutil.make_middleware()</span></tt></a>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">repoze.who.plugins.testutil</span> <span class="kn">import</span> <span class="n">make_middleware</span>
+
+<span class="k">def</span> <span class="nf">make_application</span><span class="p">(</span><span class="n">global_config</span><span class="p">,</span> <span class="o">**</span><span class="n">local_conf</span><span class="p">):</span>
+    <span class="c"># (...)</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">make_middleware</span><span class="p">(</span>
+        <span class="n">local_conf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;skip_authentication&#39;</span><span class="p">),</span>
+        <span class="n">app</span><span class="p">,</span>
+        <span class="n">identifiers</span><span class="p">,</span>
+        <span class="n">authenticators</span><span class="p">,</span>
+        <span class="n">challengers</span><span class="p">,</span>
+        <span class="n">mdproviders</span><span class="p">,</span>
+        <span class="n">classifier</span><span class="p">,</span>
+        <span class="n">challenge_decider</span><span class="p">)</span>
+    <span class="c"># (...)</span>
+    <span class="k">return</span> <span class="n">app</span>
+</pre></div>
+</div>
+<div class="admonition attention">
+<p class="first admonition-title">Attention</p>
+<p class="last">Note that <a class="reference internal" href="../API.html#repoze.who.plugins.testutil.make_middleware" title="repoze.who.plugins.testutil.make_middleware"><tt class="xref py py-func docutils literal"><span class="pre">repoze.who.plugins.testutil.make_middleware()</span></tt></a> receives one
+more argument, before <tt class="docutils literal"><span class="pre">app</span></tt>.</p>
+</div>
+<div class="section" id="via-repoze-what">
+<h3>Via <tt class="xref py py-mod docutils literal"><span class="pre">repoze.what</span></tt><a class="headerlink" href="#via-repoze-what" title="Permalink to this headline">¶</a></h3>
+<p>If you&#8217;re using <tt class="xref py py-mod docutils literal"><span class="pre">repoze.what</span></tt> using a code snippet like the one below,</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">repoze.what.middleware</span> <span class="kn">import</span> <span class="n">setup_auth</span>
+
+<span class="k">def</span> <span class="nf">make_application</span><span class="p">(</span><span class="n">global_config</span><span class="p">,</span> <span class="o">**</span><span class="n">local_conf</span><span class="p">):</span>
+    <span class="c"># (...)</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">setup_auth</span><span class="p">(</span>
+        <span class="n">app</span><span class="p">,</span>
+        <span class="n">groups</span><span class="p">,</span>
+        <span class="n">permissions</span><span class="p">,</span>
+        <span class="n">identifiers</span><span class="o">=</span><span class="n">identifiers</span><span class="p">,</span>
+        <span class="n">authenticators</span><span class="o">=</span><span class="n">authenticators</span><span class="p">,</span>
+        <span class="n">challengers</span><span class="o">=</span><span class="n">challengers</span><span class="p">)</span>
+    <span class="c"># (...)</span>
+</pre></div>
+</div>
+<p>Then you should add the <tt class="docutils literal"><span class="pre">skip_authentication</span></tt> keyword argument to
+<tt class="docutils literal"><span class="pre">setup_auth()</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">repoze.what.middleware</span> <span class="kn">import</span> <span class="n">setup_auth</span>
+
+<span class="k">def</span> <span class="nf">make_application</span><span class="p">(</span><span class="n">global_config</span><span class="p">,</span> <span class="o">**</span><span class="n">local_conf</span><span class="p">):</span>
+    <span class="c"># (...)</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">setup_auth</span><span class="p">(</span>
+        <span class="n">app</span><span class="p">,</span>
+        <span class="n">groups</span><span class="p">,</span>
+        <span class="n">permissions</span><span class="p">,</span>
+        <span class="n">identifiers</span><span class="o">=</span><span class="n">identifiers</span><span class="p">,</span>
+        <span class="n">authenticators</span><span class="o">=</span><span class="n">authenticators</span><span class="p">,</span>
+        <span class="n">challengers</span><span class="o">=</span><span class="n">challengers</span><span class="p">,</span>
+        <span class="n">skip_authentication</span><span class="o">=</span><span class="n">local_conf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;skip_authentication&#39;</span><span class="p">))</span>
+    <span class="c"># (...)</span>
+</pre></div>
+</div>
+<p>That&#8217;s it.</p>
+</div>
+</div>
+<div class="section" id="via-ini-file">
+<h2>Via .ini file<a class="headerlink" href="#via-ini-file" title="Permalink to this headline">¶</a></h2>
+<p>If the PasteDeploy factory for your application looks like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">repoze.who.config</span> <span class="kn">import</span> <span class="n">make_middleware_with_config</span>
+
+<span class="k">def</span> <span class="nf">make_application</span><span class="p">(</span><span class="n">global_config</span><span class="p">,</span> <span class="o">**</span><span class="n">local_conf</span><span class="p">):</span>
+    <span class="c"># (...)</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">make_middleware_with_config</span><span class="p">(</span>
+        <span class="n">app</span><span class="p">,</span>
+        <span class="n">global_conf</span><span class="p">,</span>
+        <span class="n">local_conf</span><span class="p">[</span><span class="s">&#39;who.config_file&#39;</span><span class="p">],</span>
+        <span class="n">local_conf</span><span class="p">[</span><span class="s">&#39;who.log_file&#39;</span><span class="p">],</span>
+        <span class="n">local_conf</span><span class="p">[</span><span class="s">&#39;who.log_level&#39;</span><span class="p">])</span>
+    <span class="c"># (...)</span>
+    <span class="k">return</span> <span class="n">app</span>
+</pre></div>
+</div>
+<p>You should replace
+<tt class="xref py py-class docutils literal"><span class="pre">repoze.who.config.make_middleware_with_config</span></tt> with
+<a class="reference internal" href="../API.html#repoze.who.plugins.testutil.make_middleware_with_config" title="repoze.who.plugins.testutil.make_middleware_with_config"><tt class="xref py py-func docutils literal"><span class="pre">repoze.who.plugins.testutil.make_middleware_with_config()</span></tt></a>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">repoze.who.plugins.testutil</span> <span class="kn">import</span> <span class="n">make_middleware_with_config</span>
+
+<span class="k">def</span> <span class="nf">make_application</span><span class="p">(</span><span class="n">global_config</span><span class="p">,</span> <span class="o">**</span><span class="n">local_conf</span><span class="p">):</span>
+    <span class="c"># (...)</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">make_middleware_with_config</span><span class="p">(</span>
+        <span class="n">app</span><span class="p">,</span>
+        <span class="n">global_conf</span><span class="p">,</span>
+        <span class="n">local_conf</span><span class="p">[</span><span class="s">&#39;who.config_file&#39;</span><span class="p">],</span>
+        <span class="n">local_conf</span><span class="p">[</span><span class="s">&#39;who.log_file&#39;</span><span class="p">],</span>
+        <span class="n">local_conf</span><span class="p">[</span><span class="s">&#39;who.log_level&#39;</span><span class="p">],</span>
+        <span class="n">skip_authentication</span><span class="o">=</span><span class="n">local_conf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;skip_authentication&#39;</span><span class="p">))</span>
+    <span class="c"># (...)</span>
+    <span class="k">return</span> <span class="n">app</span>
+</pre></div>
+</div>
+<div class="admonition attention">
+<p class="first admonition-title">Attention</p>
+<p class="last">Note that <a class="reference internal" href="../API.html#repoze.who.plugins.testutil.make_middleware_with_config" title="repoze.who.plugins.testutil.make_middleware_with_config"><tt class="xref py py-func docutils literal"><span class="pre">repoze.who.plugins.testutil.make_middleware_with_config()</span></tt></a>
+receives one more argument: <tt class="docutils literal"><span class="pre">skip_authentication</span></tt>.</p>
+</div>
+<hr class="docutils" />
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">You may want to run your application now to check that, so far, nothing
+seems to have changed.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo_hi.gif" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Reconfigure <tt class="docutils literal"><span class="pre">repoze.who</span></tt></a><ul>
+<li><a class="reference internal" href="#via-python-code">Via Python code</a><ul>
+<li><a class="reference internal" href="#via-repoze-what">Via <tt class="docutils literal"><span class="pre">repoze.what</span></tt></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#via-ini-file">Via .ini file</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">How to test protected areas in Web sites</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="TestingProtectedAreas.html"
+                        title="next chapter">Test protected areas without authentication</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/HowTo/Reconfiguring.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="TestingProtectedAreas.html" title="Test protected areas without authentication"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="How to test protected areas in Web sites"
+             >previous</a> |</li>
+        <li><a href="../index.html">repoze.who Test Utilities v1.0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" >How to test protected areas in Web sites</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009, The Repoze Project.
+      Last updated on Aug 17, 2010.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>booleano.exc – Exceptions raised by Booleano &mdash; Booleano v1.0a1 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0a1',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Booleano v1.0a1 documentation" href="../index.html" />
+    <link rel="up" title="booleano API documentation" href="index.html" />
+    <link rel="next" title="About Booleano" href="../about.html" />
+    <link rel="prev" title="booleano.operations – Boolean Operation Nodes" href="operations.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="../about.html" title="About Booleano"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="operations.html" title="booleano.operations – Boolean Operation Nodes"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Booleano v1.0a1 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U"><tt class="docutils literal"><span class="pre">booleano</span></tt> API documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-booleano.exc">
+<h1><tt class="xref docutils literal"><span class="pre">booleano.exc</span></tt> &#8211; Exceptions raised by Booleano<a class="headerlink" href="#module-booleano.exc" title="Permalink to this headline">¶</a></h1>
+<p>Exceptions raised by <a title="Boolean Expressions Interpreter" class="reference external" href="index.html#module-booleano"><tt class="xref docutils literal"><span class="pre">booleano</span></tt></a>.</p>
+<dl class="exception">
+<dt id="booleano.exc.BadCallError">
+<em class="property">exception </em><tt class="descclassname">booleano.exc.</tt><tt class="descname">BadCallError</tt><a class="headerlink" href="#booleano.exc.BadCallError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="booleano.exc.InvalidOperationError" class="reference internal" href="#booleano.exc.InvalidOperationError"><tt class="xref docutils literal"><span class="pre">booleano.exc.InvalidOperationError</span></tt></a></p>
+<p>Exception raised when a function is called with wrong parameters.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="booleano.exc.BadExpressionError">
+<em class="property">exception </em><tt class="descclassname">booleano.exc.</tt><tt class="descname">BadExpressionError</tt><a class="headerlink" href="#booleano.exc.BadExpressionError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="booleano.exc.ParsingException" class="reference internal" href="#booleano.exc.ParsingException"><tt class="xref docutils literal"><span class="pre">booleano.exc.ParsingException</span></tt></a></p>
+<p>Exception raised when a expression is not a valid boolean expression.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="booleano.exc.BadFunctionError">
+<em class="property">exception </em><tt class="descclassname">booleano.exc.</tt><tt class="descname">BadFunctionError</tt><a class="headerlink" href="#booleano.exc.BadFunctionError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="booleano.exc.BadOperandError" class="reference internal" href="#booleano.exc.BadOperandError"><tt class="xref docutils literal"><span class="pre">booleano.exc.BadOperandError</span></tt></a></p>
+<p>Exception raised when a function is defined incorrectly.</p>
+<p>Because it&#8217;s aimed at developers, its message doesn&#8217;t have to be
+translatable.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="booleano.exc.BadOperandError">
+<em class="property">exception </em><tt class="descclassname">booleano.exc.</tt><tt class="descname">BadOperandError</tt><a class="headerlink" href="#booleano.exc.BadOperandError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="booleano.exc.BooleanoException" class="reference internal" href="#booleano.exc.BooleanoException"><tt class="xref docutils literal"><span class="pre">booleano.exc.BooleanoException</span></tt></a></p>
+<p>Exception raised when an operand is defined incorrectly.</p>
+<p>Because it&#8217;s aimed at developers, its message doesn&#8217;t have to be
+translatable.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="booleano.exc.BooleanoException">
+<em class="property">exception </em><tt class="descclassname">booleano.exc.</tt><tt class="descname">BooleanoException</tt><a class="headerlink" href="#booleano.exc.BooleanoException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="(in Python v2.6)" class="reference external" href="http://docs.python.org/library/exceptions.html#exceptions.Exception"><tt class="xref docutils literal"><span class="pre">exceptions.Exception</span></tt></a></p>
+<p>Base class for the exceptions.</p>
+<p>It is never raised directly, but you can use it to handle any kind of
+exception raised by Booleano.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="booleano.exc.ConversionError">
+<em class="property">exception </em><tt class="descclassname">booleano.exc.</tt><tt class="descname">ConversionError</tt><a class="headerlink" href="#booleano.exc.ConversionError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="booleano.exc.BooleanoException" class="reference internal" href="#booleano.exc.BooleanoException"><tt class="xref docutils literal"><span class="pre">booleano.exc.BooleanoException</span></tt></a></p>
+<p>Exception raised when trying to convert a parse tree, but an invalid node
+was passed.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="booleano.exc.GrammarError">
+<em class="property">exception </em><tt class="descclassname">booleano.exc.</tt><tt class="descname">GrammarError</tt><a class="headerlink" href="#booleano.exc.GrammarError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="booleano.exc.ParsingException" class="reference internal" href="#booleano.exc.ParsingException"><tt class="xref docutils literal"><span class="pre">booleano.exc.ParsingException</span></tt></a></p>
+<p>Exception raised when a grammar is defined incorrectly, or an attempt is
+made to use it incorrectly.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="booleano.exc.InvalidOperationError">
+<em class="property">exception </em><tt class="descclassname">booleano.exc.</tt><tt class="descname">InvalidOperationError</tt><a class="headerlink" href="#booleano.exc.InvalidOperationError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="booleano.exc.BooleanoException" class="reference internal" href="#booleano.exc.BooleanoException"><tt class="xref docutils literal"><span class="pre">booleano.exc.BooleanoException</span></tt></a></p>
+<p>Exception raised when trying to apply an operation on an operand that
+doesn&#8217;t support it.</p>
+<p>This exception must only be used for static errors in the expressions, not
+runtime errors.</p>
+<p>For example: <tt class="docutils literal"><span class="pre">&quot;word&quot;</span> <span class="pre">&gt;</span> <span class="pre">10</span></tt>.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="booleano.exc.ParsingException">
+<em class="property">exception </em><tt class="descclassname">booleano.exc.</tt><tt class="descname">ParsingException</tt><a class="headerlink" href="#booleano.exc.ParsingException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="booleano.exc.BooleanoException" class="reference internal" href="#booleano.exc.BooleanoException"><tt class="xref docutils literal"><span class="pre">booleano.exc.BooleanoException</span></tt></a></p>
+<p>Base class for exceptions raised when parsing goes wrong.</p>
+<p>It is never raised directly, but you can use it to handle any kind of
+exception raised by the parser.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="booleano.exc.ScopeError">
+<em class="property">exception </em><tt class="descclassname">booleano.exc.</tt><tt class="descname">ScopeError</tt><a class="headerlink" href="#booleano.exc.ScopeError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a title="booleano.exc.ParsingException" class="reference internal" href="#booleano.exc.ParsingException"><tt class="xref docutils literal"><span class="pre">booleano.exc.ParsingException</span></tt></a></p>
+<p>Exception raised when a scope-related item is defined incorrectly.</p>
+</dd></dl>
+
+<div class="section" id="inheritance-diagram">
+<h2>Inheritance diagram<a class="headerlink" href="#inheritance-diagram" title="Permalink to this headline">¶</a></h2>
+<p class="graphviz">
+<img src="../_images/inheritance-a8dbcb5b207105db6fcbd7e151260b0629edabf5.png" alt="digraph inheritance66474143d3 {
+rankdir=LR;
+size=&quot;8.0, 12.0&quot;;
+  &quot;BooleanoException&quot; [style=&quot;setlinewidth(0.5)&quot;,URL=&quot;#booleano.exc.BooleanoException&quot;,fontname=Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans,height=0.25,shape=box,fontsize=10];
+  &quot;ConversionError&quot; [style=&quot;setlinewidth(0.5)&quot;,URL=&quot;#booleano.exc.ConversionError&quot;,fontname=Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans,height=0.25,shape=box,fontsize=10];
+  &quot;BooleanoException&quot; -&gt; &quot;ConversionError&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;BadFunctionError&quot; [style=&quot;setlinewidth(0.5)&quot;,URL=&quot;#booleano.exc.BadFunctionError&quot;,fontname=Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans,height=0.25,shape=box,fontsize=10];
+  &quot;BadOperandError&quot; -&gt; &quot;BadFunctionError&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;ScopeError&quot; [style=&quot;setlinewidth(0.5)&quot;,URL=&quot;#booleano.exc.ScopeError&quot;,fontname=Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans,height=0.25,shape=box,fontsize=10];
+  &quot;ParsingException&quot; -&gt; &quot;ScopeError&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;InvalidOperationError&quot; [style=&quot;setlinewidth(0.5)&quot;,URL=&quot;#booleano.exc.InvalidOperationError&quot;,fontname=Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans,height=0.25,shape=box,fontsize=10];
+  &quot;BooleanoException&quot; -&gt; &quot;InvalidOperationError&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;BadCallError&quot; [style=&quot;setlinewidth(0.5)&quot;,URL=&quot;#booleano.exc.BadCallError&quot;,fontname=Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans,height=0.25,shape=box,fontsize=10];
+  &quot;InvalidOperationError&quot; -&gt; &quot;BadCallError&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;BadOperandError&quot; [style=&quot;setlinewidth(0.5)&quot;,URL=&quot;#booleano.exc.BadOperandError&quot;,fontname=Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans,height=0.25,shape=box,fontsize=10];
+  &quot;BooleanoException&quot; -&gt; &quot;BadOperandError&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;BadExpressionError&quot; [style=&quot;setlinewidth(0.5)&quot;,URL=&quot;#booleano.exc.BadExpressionError&quot;,fontname=Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans,height=0.25,shape=box,fontsize=10];
+  &quot;ParsingException&quot; -&gt; &quot;BadExpressionError&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;GrammarError&quot; [style=&quot;setlinewidth(0.5)&quot;,URL=&quot;#booleano.exc.GrammarError&quot;,fontname=Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans,height=0.25,shape=box,fontsize=10];
+  &quot;ParsingException&quot; -&gt; &quot;GrammarError&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;ParsingException&quot; [style=&quot;setlinewidth(0.5)&quot;,URL=&quot;#booleano.exc.ParsingException&quot;,fontname=Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans,height=0.25,shape=box,fontsize=10];
+  &quot;BooleanoException&quot; -&gt; &quot;ParsingException&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+}" usemap="#inheritance66474143d3" class="inheritance"/>
+<map id="inheritance66474143d3" name="inheritance66474143d3">
+<area shape="rect" href="#booleano.exc.BooleanoException" title="BooleanoException" alt="" coords="5,81,149,108"/>
+<area shape="rect" href="#booleano.exc.ConversionError" title="ConversionError" alt="" coords="215,5,337,32"/>
+<area shape="rect" href="#booleano.exc.BadOperandError" title="BadOperandError" alt="" coords="211,56,341,83"/>
+<area shape="rect" href="#booleano.exc.ParsingException" title="ParsingException" alt="" coords="212,107,340,133"/>
+<area shape="rect" href="#booleano.exc.InvalidOperationError" title="InvalidOperationError" alt="" coords="199,183,353,209"/>
+<area shape="rect" href="#booleano.exc.BadFunctionError" title="BadFunctionError" alt="" coords="411,5,541,32"/>
+<area shape="rect" href="#booleano.exc.ScopeError" title="ScopeError" alt="" coords="431,56,521,83"/>
+<area shape="rect" href="#booleano.exc.BadExpressionError" title="BadExpressionError" alt="" coords="403,107,549,133"/>
+<area shape="rect" href="#booleano.exc.GrammarError" title="GrammarError" alt="" coords="419,157,533,184"/>
+<area shape="rect" href="#booleano.exc.BadCallError" title="BadCallError" alt="" coords="427,208,525,235"/>
+</map>
+</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href=""><tt class="docutils literal"><span class="pre">booleano.exc</span></tt> &#8211; Exceptions raised by Booleano</a><ul>
+<li><a class="reference external" href="#inheritance-diagram">Inheritance diagram</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="operations.html"
+                                  title="previous chapter"><tt class="docutils literal"><span class="pre">booleano.operations</span></tt> &#8211; Boolean Operation Nodes</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="../about.html"
+                                  title="next chapter">About Booleano</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/api/exceptions.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../about.html" title="About Booleano"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="operations.html" title="booleano.operations – Boolean Operation Nodes"
+             >previous</a> |</li>
+        <li><a href="../index.html">Booleano v1.0a1 documentation</a> &raquo;</li>
+          <li><a href="index.html" ><tt class="docutils literal"><span class="pre">booleano</span></tt> API documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009, Gustavo Narea.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.3.
+    </div>
+  </body>
+</html>

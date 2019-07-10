@@ -1,0 +1,374 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>repoze.who SQLAlchemy plugin &mdash; repoze.who SQLAlchemy plugin 1.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/repoze.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="repoze.who SQLAlchemy plugin 1.0.1 documentation" href="#" />
+    <link rel="next" title="repoze.who.plugins.sa releases" href="News.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="News.html" title="repoze.who.plugins.sa releases"
+             accesskey="N">next</a> |</li>
+        <li><a href="#">repoze.who SQLAlchemy plugin 1.0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-repoze.who.plugins.sa">
+<span id="repoze-who-sqlalchemy-plugin"></span><h1><a class="reference external" href="http://docs.repoze.org/who/1.0/index.html#module-repoze.who" title="(in repoze.who v1.0.18)"><tt class="xref py py-mod docutils literal"><span class="pre">repoze.who</span></tt></a> SQLAlchemy plugin<a class="headerlink" href="#module-repoze.who.plugins.sa" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">Gustavo Narea.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Latest version:</th><td class="field-body">1.0.1</td>
+</tr>
+</tbody>
+</table>
+<div class="topic">
+<p class="topic-title first">Overview</p>
+<p>The <a class="reference external" href="http://docs.repoze.org/who/1.0/index.html#module-repoze.who" title="(in repoze.who v1.0.18)"><tt class="xref py py-mod docutils literal"><span class="pre">repoze.who</span></tt></a> SQLAlchemy plugin provides an authenticator and
+a metadata provider plugins for SQLAlchemy or Elixir-based models.</p>
+</div>
+</div>
+<div class="section" id="how-to-install">
+<h1>How to install<a class="headerlink" href="#how-to-install" title="Permalink to this headline">¶</a></h1>
+<p>The minimum requirements <a class="reference external" href="http://docs.repoze.org/who/1.0/index.html#module-repoze.who" title="(in repoze.who v1.0.18)"><tt class="xref py py-mod docutils literal"><span class="pre">repoze.who</span></tt></a> and SQLAlchemy and you can
+install it all by running:</p>
+<div class="highlight-python"><pre>easy_install repoze.who.plugins.sa</pre>
+</div>
+<p>The development mainline is available at the following Git repository:</p>
+<div class="highlight-python"><pre>git://github.com/repoze/repoze.who-sqlalchemy.git</pre>
+</div>
+</div>
+<div class="section" id="authenticator">
+<h1>Authenticator<a class="headerlink" href="#authenticator" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="repoze.who.plugins.sa.SQLAlchemyAuthenticatorPlugin">
+<em class="property">class </em><tt class="descclassname">repoze.who.plugins.sa.</tt><tt class="descname">SQLAlchemyAuthenticatorPlugin</tt><big>(</big><em>user_class</em>, <em>dbsession</em><big>)</big><a class="headerlink" href="#repoze.who.plugins.sa.SQLAlchemyAuthenticatorPlugin" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="http://docs.repoze.org/who/1.0/index.html#module-repoze.who" title="(in repoze.who v1.0.18)"><tt class="xref py py-mod docutils literal"><span class="pre">repoze.who</span></tt></a> authenticator for SQLAlchemy models.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">repoze.who.plugins.sa</span> <span class="kn">import</span> <span class="n">SQLAlchemyAuthenticatorPlugin</span>
+<span class="kn">from</span> <span class="nn">yourcoolproject.model</span> <span class="kn">import</span> <span class="n">User</span><span class="p">,</span> <span class="n">DBSession</span>
+
+<span class="n">authenticator</span> <span class="o">=</span> <span class="n">SQLAlchemyAuthenticatorPlugin</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">DBSession</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This plugin assumes that the user name is kept in the <tt class="docutils literal"><span class="pre">user_name</span></tt>
+attribute of the users&#8217; class, as well as that such a class has a method
+that verifies the user&#8217;s password against the password provided through the
+login form (it receives the password to be verified as the only argument
+and such method is assumed to be called <tt class="docutils literal"><span class="pre">validate_password</span></tt>).</p>
+<p>If you don&#8217;t want to call the attributes above as <tt class="docutils literal"><span class="pre">user_name</span></tt> and/or
+<tt class="docutils literal"><span class="pre">validate_password</span></tt>, respectively, then you have to &#8220;translate&#8221; them as
+in the sample below:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># You have User.username instead of User.user_name:</span>
+<span class="n">authenticator</span><span class="o">.</span><span class="n">translations</span><span class="p">[</span><span class="s">&#39;user_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;username&#39;</span>
+
+<span class="c"># You have User.verify_password instead of User.validate_password:</span>
+<span class="n">authenticator</span><span class="o">.</span><span class="n">translations</span><span class="p">[</span><span class="s">&#39;validate_password&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;verify_password&#39;</span>
+</pre></div>
+</div>
+<p>If you would like to prevent <a class="reference external" href="http://en.wikipedia.org/wiki/Timing_attack">timing attacks</a>, you can provide a validation
+function through the <tt class="docutils literal"><span class="pre">dummy_validate_password</span></tt> translation, which
+should use the same algorithm as in <tt class="docutils literal"><span class="pre">validate_password</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">yourcoolproject</span> <span class="kn">import</span> <span class="n">validate_pass</span>
+<span class="n">authenticator</span><span class="o">.</span><span class="n">translations</span><span class="p">[</span><span class="s">&#39;dummy_validate_password&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">validate_pass</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you want to configure this authenticator from an <tt class="docutils literal"><span class="pre">ini</span></tt> file, use
+<a class="reference internal" href="#repoze.who.plugins.sa.make_sa_authenticator" title="repoze.who.plugins.sa.make_sa_authenticator"><tt class="xref py py-func docutils literal"><span class="pre">make_sa_authenticator()</span></tt></a>.</p>
+</div>
+<p class="versionadded">
+<span class="versionmodified">New in version 1.0.1: </span>Support for <tt class="docutils literal"><span class="pre">dummy_validate_password</span></tt> was added.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="repoze.who.plugins.sa.make_sa_authenticator">
+<tt class="descclassname">repoze.who.plugins.sa.</tt><tt class="descname">make_sa_authenticator</tt><big>(</big><em>user_class=None</em>, <em>dbsession=None</em>, <em>user_name_translation=None</em>, <em>validate_password_translation=None</em>, <em>dummy_validate_password_translation=None</em><big>)</big><a class="headerlink" href="#repoze.who.plugins.sa.make_sa_authenticator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure <a class="reference internal" href="#repoze.who.plugins.sa.SQLAlchemyAuthenticatorPlugin" title="repoze.who.plugins.sa.SQLAlchemyAuthenticatorPlugin"><tt class="xref py py-class docutils literal"><span class="pre">SQLAlchemyAuthenticatorPlugin</span></tt></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>user_class</strong> (<em>str</em>) &#8211; The SQLAlchemy/Elixir class for the users.</li>
+<li><strong>dbsession</strong> (<em>str</em>) &#8211; The SQLAlchemy/Elixir session.</li>
+<li><strong>user_name_translation</strong> (<em>str</em>) &#8211; The translation for <tt class="docutils literal"><span class="pre">user_name</span></tt>, if any.</li>
+<li><strong>validate_password_translation</strong> (<em>str</em>) &#8211; The translation for 
+<tt class="docutils literal"><span class="pre">validate_password</span></tt>, if any.</li>
+<li><strong>dummy_validate_password_translation</strong> (<em>function</em>) &#8211; The translation for
+<tt class="docutils literal"><span class="pre">dummy_validate_password</span></tt>, if any.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The authenticator.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">SQLAlchemyAuthenticatorPlugin</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example from an <tt class="docutils literal"><span class="pre">*.ini</span></tt> file:</p>
+<div class="highlight-python"><pre># ...
+[plugin:sa_auth]
+use = repoze.who.plugins.sa:make_sa_authenticator
+user_class = yourcoolproject.model:User
+dbsession = yourcoolproject.model:DBSession
+# ...</pre>
+</div>
+<p>Or, if you need translations:</p>
+<div class="highlight-python"><pre># ...
+[plugin:sa_auth]
+use = repoze.who.plugins.sa:make_sa_authenticator
+user_class = yourcoolproject.model:User
+dbsession = yourcoolproject.model:DBSession
+user_name_translation = username
+validate_password_translation = verify_password
+dummy_validate_password_translation = yourcoolproject.security:validate
+# ...</pre>
+</div>
+<p class="versionadded">
+<span class="versionmodified">New in version 1.0.1: </span>Support for <tt class="docutils literal"><span class="pre">dummy_validate_password_translation</span></tt> was added.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="metadata-provider">
+<h1>Metadata provider<a class="headerlink" href="#metadata-provider" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="repoze.who.plugins.sa.SQLAlchemyUserMDPlugin">
+<em class="property">class </em><tt class="descclassname">repoze.who.plugins.sa.</tt><tt class="descname">SQLAlchemyUserMDPlugin</tt><big>(</big><em>user_class</em>, <em>dbsession</em><big>)</big><a class="headerlink" href="#repoze.who.plugins.sa.SQLAlchemyUserMDPlugin" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="http://docs.repoze.org/who/1.0/index.html#module-repoze.who" title="(in repoze.who v1.0.18)"><tt class="xref py py-mod docutils literal"><span class="pre">repoze.who</span></tt></a> metadata provider that loads the SQLAlchemy-powered
+object for the current user.</p>
+<p>It loads the object into <tt class="docutils literal"><span class="pre">identity['user']</span></tt>.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">repoze.who.plugins.sa</span> <span class="kn">import</span> <span class="n">SQLAlchemyUserMDPlugin</span>
+<span class="kn">from</span> <span class="nn">yourcoolproject.model</span> <span class="kn">import</span> <span class="n">User</span><span class="p">,</span> <span class="n">DBSession</span>
+
+<span class="n">mdprovider</span> <span class="o">=</span> <span class="n">SQLAlchemyUserMDPlugin</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">DBSession</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This plugin assumes that the user name is kept in the <tt class="docutils literal"><span class="pre">user_name</span></tt>
+attribute of the users&#8217; class. If you don&#8217;t want to call the attribute
+above as <tt class="docutils literal"><span class="pre">user_name</span></tt>, then you have to &#8220;translate&#8221; it as in the sample 
+below:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># You have User.username instead of User.user_name:</span>
+<span class="n">mdprovider</span><span class="o">.</span><span class="n">translations</span><span class="p">[</span><span class="s">&#39;user_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;username&#39;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you want to configure this plugin from an <tt class="docutils literal"><span class="pre">ini</span></tt> file, use
+<a class="reference internal" href="#repoze.who.plugins.sa.make_sa_user_mdprovider" title="repoze.who.plugins.sa.make_sa_user_mdprovider"><tt class="xref py py-func docutils literal"><span class="pre">make_sa_user_mdprovider()</span></tt></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="repoze.who.plugins.sa.make_sa_user_mdprovider">
+<tt class="descclassname">repoze.who.plugins.sa.</tt><tt class="descname">make_sa_user_mdprovider</tt><big>(</big><em>user_class=None</em>, <em>dbsession=None</em>, <em>user_name_translation=None</em><big>)</big><a class="headerlink" href="#repoze.who.plugins.sa.make_sa_user_mdprovider" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure <a class="reference internal" href="#repoze.who.plugins.sa.SQLAlchemyUserMDPlugin" title="repoze.who.plugins.sa.SQLAlchemyUserMDPlugin"><tt class="xref py py-class docutils literal"><span class="pre">SQLAlchemyUserMDPlugin</span></tt></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>user_class</strong> (<em>str</em>) &#8211; The SQLAlchemy/Elixir class for the users.</li>
+<li><strong>dbsession</strong> (<em>str</em>) &#8211; The SQLAlchemy/Elixir session.</li>
+<li><strong>user_name_translation</strong> (<em>str</em>) &#8211; The translation for <tt class="docutils literal"><span class="pre">user_name</span></tt>, if any.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The metadata provider.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">SQLAlchemyUserMDPlugin</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example from an <tt class="docutils literal"><span class="pre">*.ini</span></tt> file:</p>
+<div class="highlight-python"><pre># ...
+[plugin:sa_md]
+use = repoze.who.plugins.sa:make_sa_user_mdprovider
+user_class = yourcoolproject.model:User
+dbsession = yourcoolproject.model:DBSession
+# ...</pre>
+</div>
+<p>Or, if you need translations:</p>
+<div class="highlight-python"><pre># ...
+[plugin:sa_md]
+use = repoze.who.plugins.sa:make_sa_user_mdprovider
+user_class = yourcoolproject.model:User
+dbsession = yourcoolproject.model:DBSession
+user_name_translation = username
+# ...</pre>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="miscellaneous">
+<h1>Miscellaneous<a class="headerlink" href="#miscellaneous" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="repoze.who.plugins.sa.SQLAlchemyUserChecker">
+<em class="property">class </em><tt class="descclassname">repoze.who.plugins.sa.</tt><tt class="descname">SQLAlchemyUserChecker</tt><big>(</big><em>user_class</em>, <em>dbsession</em><big>)</big><a class="headerlink" href="#repoze.who.plugins.sa.SQLAlchemyUserChecker" title="Permalink to this definition">¶</a></dt>
+<dd><p>User existence checker for
+<a class="reference external" href="http://docs.repoze.org/who/1.0/narr.html#repoze.who.plugins.auth_tkt.AuthTktCookiePlugin" title="(in repoze.who v1.0.18)"><tt class="xref py py-class docutils literal"><span class="pre">repoze.who.plugins.auth_tkt.AuthTktCookiePlugin</span></tt></a>.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">repoze.who.plugins.sa</span> <span class="kn">import</span> <span class="n">SQLAlchemyUserChecker</span>
+<span class="kn">from</span> <span class="nn">yourcoolproject.model</span> <span class="kn">import</span> <span class="n">User</span><span class="p">,</span> <span class="n">DBSession</span>
+
+<span class="n">checker</span> <span class="o">=</span> <span class="n">SQLAlchemyUserChecker</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">DBSession</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This plugin assumes that the user name is kept in the <tt class="docutils literal"><span class="pre">user_name</span></tt>
+attribute of the users&#8217; class. If you don&#8217;t want to call it that way, then
+you have to &#8220;translate&#8221; it as in the sample below:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># You have User.username instead of User.user_name:</span>
+<span class="n">checker</span><span class="o">.</span><span class="n">translations</span><span class="p">[</span><span class="s">&#39;user_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;username&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="how-to-get-help">
+<h1>How to get help?<a class="headerlink" href="#how-to-get-help" title="Permalink to this headline">¶</a></h1>
+<p>The prefered place to ask questions and request features is the
+<a class="reference external" href="http://lists.repoze.org/listinfo/repoze-dev">Repoze mailing list</a>.</p>
+<p>To report bugs, please go to <a class="reference external" href="https://github.com/repoze/repoze.who-sqlalchemy/issues">GitHub</a>.</p>
+</div>
+<div class="section" id="contents">
+<h1>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="News.html"><tt class="docutils literal"><span class="pre">repoze.who.plugins.sa</span></tt> releases</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="News.html#version-1-0-1-2011-11-23">Version 1.0.1 (2011-11-23)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="News.html#version-1-0-final-2011-05-02">Version 1.0 Final (2011-05-02)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="News.html#version-1-0rc2-2009-06-27">Version 1.0rc2 (2009-06-27)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="News.html#version-1-0rc1-2009-01-26">Version 1.0rc1 (2009-01-26)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="News.html#version-1-0b3-2009-01-08">Version 1.0b3 (2009-01-08)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="News.html#version-1-0b2-2008-12-18">Version 1.0b2 (2008-12-18)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="News.html#repoze-who-plugins-sqlalchemy-1-0b1-2008-12-18"><tt class="docutils literal"><span class="pre">repoze.who.plugins.sqlalchemy</span></tt> 1.0b1 (2008-12-18)</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
+<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="#">
+              <img class="logo" src="_static/logo_hi.gif" alt="Logo"/>
+            </a></p>
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><tt class="docutils literal"><span class="pre">repoze.who</span></tt> SQLAlchemy plugin</a></li>
+<li><a class="reference internal" href="#how-to-install">How to install</a></li>
+<li><a class="reference internal" href="#authenticator">Authenticator</a></li>
+<li><a class="reference internal" href="#metadata-provider">Metadata provider</a></li>
+<li><a class="reference internal" href="#miscellaneous">Miscellaneous</a></li>
+<li><a class="reference internal" href="#how-to-get-help">How to get help?</a></li>
+<li><a class="reference internal" href="#contents">Contents</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="News.html"
+                        title="next chapter"><tt class="docutils literal docutils literal"><span class="pre">repoze.who.plugins.sa</span></tt> releases</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="News.html" title="repoze.who.plugins.sa releases"
+             >next</a> |</li>
+        <li><a href="#">repoze.who SQLAlchemy plugin 1.0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2008, The Repoze Project.
+      Last updated on Nov 23, 2011.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,7 @@
+<map id="inheritance1f1cd75e5c" name="inheritance1f1cd75e5c">
+<area shape="rect" href="#booleano.operations.operands.constants.Constant" title="Constant" alt="" coords="333,81,413,108"/>
+<area shape="rect" href="#booleano.operations.operands.classes.Class" title="Class" alt="" coords="337,183,409,209"/>
+<area shape="rect" href="#booleano.operations.operands.Operand" title="Operand" alt="" coords="175,183,249,209"/>
+<area shape="rect" href="#booleano.operations.operands.placeholders.PlaceholderInstance" title="PlaceholderInstance" alt="" coords="299,259,448,285"/>
+<area shape="rect" href="#booleano.operations.OperationNode" title="OperationNode" alt="" coords="7,183,124,209"/>
+</map>

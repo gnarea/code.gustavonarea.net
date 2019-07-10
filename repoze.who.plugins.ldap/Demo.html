@@ -1,0 +1,200 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Trying the demo project &mdash; repoze.who.plugins.ldap v1.1a1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.1a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="repoze.who.plugins.ldap v1.1a1 documentation" href="index.html" />
+    <link rel="next" title="repoze.who.plugins.ldap Changelog" href="Changes.html" />
+    <link rel="prev" title="Using the repoze.who LDAP plugins in your WSGI Application" href="Using.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Changes.html" title="repoze.who.plugins.ldap Changelog"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Using.html" title="Using the repoze.who LDAP plugins in your WSGI Application"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">repoze.who.plugins.ldap v1.1a1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="trying-the-demo-project">
+<h1>Trying the demo project<a class="headerlink" href="#trying-the-demo-project" title="Permalink to this headline">¶</a></h1>
+<p><cite>repoze.who.plugins.ldap</cite> ships with a working <a class="reference external" href="http://turbogears.org/2.0/">TurboGears 2</a> project powered by this <cite>repoze.who</cite> plugin. It
+enables you to give it a try with your own LDAP server.</p>
+<div class="section" id="getting-the-source">
+<h2>Getting the source<a class="headerlink" href="#getting-the-source" title="Permalink to this headline">¶</a></h2>
+<p>This demo is included the the <em>demo/</em> subfolder of the project. If you installed
+the plugin directly, you may <a class="reference external" href="http://pypi.python.org/pypi/repoze.who.plugins.ldap/">get its source from the PYPI</a>.</p>
+<p>You may also get the latest source code from its Bazaar branch:</p>
+<div class="highlight-python"><pre>bzr branch lp:repoze.who.plugins.ldap</pre>
+</div>
+</div>
+<div class="section" id="installing-the-project">
+<h2>Installing the project<a class="headerlink" href="#installing-the-project" title="Permalink to this headline">¶</a></h2>
+<p>The project is powered by TurboGears 2, so you should <a class="reference external" href="http://www.turbogears.org/2.0/docs/main/DownloadInstall.html">install it</a> first.</p>
+<p>Once you&#8217;ve installed TurboGears, you will be ready to install the demo:</p>
+<div class="highlight-python"><pre>cd demo
+python setup.py develop</pre>
+</div>
+</div>
+<div class="section" id="configuring-the-demo">
+<h2>Configuring the demo<a class="headerlink" href="#configuring-the-demo" title="Permalink to this headline">¶</a></h2>
+<p>Open the <cite>who.ini</cite> file and set your LDAP URL and your base Distinguished Name,
+both found in the <cite>[plugin:ldap_auth]</cite> section.</p>
+<p>For example,</p>
+<div class="highlight-python"><pre>[plugin:ldap_auth]
+use = repoze.who.plugins.ldap:LDAPAuthenticatorPlugin
+ldap_connection = ldap://localhost
+base_dn = ou=people,dc=localhost</pre>
+</div>
+</div>
+<div class="section" id="running-the-application">
+<h2>Running the application<a class="headerlink" href="#running-the-application" title="Permalink to this headline">¶</a></h2>
+<p>You can run the application from the <em>demo/</em> folder:</p>
+<div class="highlight-python"><pre>paster serve development.ini</pre>
+</div>
+<p>Then go to <a class="reference external" href="http://localhost:8080/">http://localhost:8080/</a> to use it!</p>
+<img alt="_images/demo_screenshot_index.png" src="_images/demo_screenshot_index.png" />
+</div>
+<div class="section" id="trying-to-authenticate-via-ldap">
+<h2>Trying to authenticate via LDAP<a class="headerlink" href="#trying-to-authenticate-via-ldap" title="Permalink to this headline">¶</a></h2>
+<p>Now go to the &#8220;private&#8221; section <a class="reference external" href="http://localhost:8080/about">http://localhost:8080/about</a> and login with your
+credentials in the LDAP server you&#8217;re using.</p>
+<p>If you entered them correctly, you&#8217;ll access the page!</p>
+<img alt="_images/demo_screenshot_authenticated.png" src="_images/demo_screenshot_authenticated.png" />
+</div>
+<div class="section" id="how-it-works">
+<h2>How it works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
+<p>This demo configures <cite>repoze.who</cite> via an INI file (<cite>who.ini</cite>), which is loaded
+in <cite>demo/ldapauth/config/middleware.py</cite>.</p>
+<p>Then the login form is triggered when you try to access a private page as
+anonymous, as in the <cite>about</cite> action controller (found at
+<cite>ldapauth.controllers.root:RootController</cite>):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># ...</span>
+<span class="k">def</span> <span class="nf">about</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;repoze.who.identity&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">HTTPUnauthorized</span><span class="p">()</span>
+<span class="c"># ...</span>
+</pre></div>
+</div>
+<p>Once the user has been authenticated, you&#8217;ll be able to access her DN with the
+code below, for example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">pylons</span> <span class="kn">import</span> <span class="n">request</span>
+<span class="n">dn</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;repoze.who.identity&#39;</span><span class="p">][</span><span class="s">&#39;repoze.who.userid&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>This demo also features the <tt class="xref py py-class docutils literal"><span class="pre">LDAPAttributesPlugin</span></tt> metadata provider,
+which is used in the private page to show all the available LDAP attributes
+for your entry in the LDAP server you are using. Such metadata is loaded in:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">request</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;repoze.who.identity&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Trying the demo project</a><ul>
+<li><a class="reference internal" href="#getting-the-source">Getting the source</a></li>
+<li><a class="reference internal" href="#installing-the-project">Installing the project</a></li>
+<li><a class="reference internal" href="#configuring-the-demo">Configuring the demo</a></li>
+<li><a class="reference internal" href="#running-the-application">Running the application</a></li>
+<li><a class="reference internal" href="#trying-to-authenticate-via-ldap">Trying to authenticate via LDAP</a></li>
+<li><a class="reference internal" href="#how-it-works">How it works</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Using.html"
+                        title="previous chapter">Using the repoze.who LDAP plugins in your WSGI Application</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Changes.html"
+                        title="next chapter">repoze.who.plugins.ldap Changelog</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/Demo.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Changes.html" title="repoze.who.plugins.ldap Changelog"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Using.html" title="Using the repoze.who LDAP plugins in your WSGI Application"
+             >previous</a> |</li>
+        <li><a href="index.html">repoze.who.plugins.ldap v1.1a1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2008-2010, Gustavo Narea.
+      Last updated on Jun 03, 2010.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0b2.
+    </div>
+  </body>
+</html>

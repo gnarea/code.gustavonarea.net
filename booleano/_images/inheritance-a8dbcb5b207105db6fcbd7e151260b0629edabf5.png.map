@@ -1,0 +1,12 @@
+<map id="inheritance66474143d3" name="inheritance66474143d3">
+<area shape="rect" href="#booleano.exc.BooleanoException" title="BooleanoException" alt="" coords="5,81,149,108"/>
+<area shape="rect" href="#booleano.exc.ConversionError" title="ConversionError" alt="" coords="215,5,337,32"/>
+<area shape="rect" href="#booleano.exc.BadOperandError" title="BadOperandError" alt="" coords="211,56,341,83"/>
+<area shape="rect" href="#booleano.exc.ParsingException" title="ParsingException" alt="" coords="212,107,340,133"/>
+<area shape="rect" href="#booleano.exc.InvalidOperationError" title="InvalidOperationError" alt="" coords="199,183,353,209"/>
+<area shape="rect" href="#booleano.exc.BadFunctionError" title="BadFunctionError" alt="" coords="411,5,541,32"/>
+<area shape="rect" href="#booleano.exc.ScopeError" title="ScopeError" alt="" coords="431,56,521,83"/>
+<area shape="rect" href="#booleano.exc.BadExpressionError" title="BadExpressionError" alt="" coords="403,107,549,133"/>
+<area shape="rect" href="#booleano.exc.GrammarError" title="GrammarError" alt="" coords="419,157,533,184"/>
+<area shape="rect" href="#booleano.exc.BadCallError" title="BadCallError" alt="" coords="427,208,525,235"/>
+</map>

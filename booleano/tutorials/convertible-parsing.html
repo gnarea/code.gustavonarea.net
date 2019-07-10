@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Convertible Parsing Tutorial &mdash; Booleano v1.0a1 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0a1',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Booleano v1.0a1 documentation" href="../index.html" />
+    <link rel="up" title="Quick tutorials" href="index.html" />
+    <link rel="next" title="Evaluable Parsing Tutorial" href="evaluable-parsing.html" />
+    <link rel="prev" title="Quick tutorials" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="evaluable-parsing.html" title="Evaluable Parsing Tutorial"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Quick tutorials"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Booleano v1.0a1 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Quick tutorials</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="convertible-parsing-tutorial">
+<h1>Convertible Parsing Tutorial<a class="headerlink" href="#convertible-parsing-tutorial" title="Permalink to this headline">¶</a></h1>
+<div class="admonition-todo admonition " id="todo-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">Rewrite this tutorial to explain step-by-step how to develop an small
+yet real project with Booleano.</p>
+</div>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p><strong>Convertible parsing</strong> is when the boolean expressions should be converted into
+something else, most likely another filter.</p>
+</div>
+<div class="section" id="what-you-need">
+<h2>What you need<a class="headerlink" href="#what-you-need" title="Permalink to this headline">¶</a></h2>
+<p>For this you need a <a title="booleano.parser.Grammar" class="reference external" href="../api/parser.html#booleano.parser.Grammar"><tt class="xref docutils literal"><span class="pre">grammar</span></tt></a>, passed to a
+<a title="booleano.parser.ConvertibleParseManager" class="reference external" href="../api/parser.html#booleano.parser.ConvertibleParseManager"><tt class="xref docutils literal"><span class="pre">convertible</span> <span class="pre">parse</span> <span class="pre">manager</span></tt></a>
+and finally, your <a title="booleano.operations.converters.BaseConverter" class="reference external" href="../api/operations.html#booleano.operations.converters.BaseConverter"><tt class="xref docutils literal"><span class="pre">converter</span> <span class="pre">class</span></tt></a>.</p>
+<div class="section" id="configuring-the-grammar">
+<h3>Configuring the grammar<a class="headerlink" href="#configuring-the-grammar" title="Permalink to this headline">¶</a></h3>
+<p>We&#8217;re going to use the grammar with the default tokens, except for the
+&#8220;belongs to&#8221; and &#8220;is sub-set of&#8221; operators (the default tokens are &#8220;∈&#8221; and &#8220;⊂&#8221;,
+respectively, which is not easy to type in a keyboard):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">booleano.parser</span> <span class="kn">import</span> <span class="n">Grammar</span>
+
+<span class="n">grammar</span> <span class="o">=</span> <span class="n">Grammar</span><span class="p">(</span><span class="n">belongs_to</span><span class="o">=</span><span class="s">&quot;in&quot;</span><span class="p">,</span> <span class="n">is_subset</span><span class="o">=</span><span class="s">&quot;is subset of&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>With this <tt class="docutils literal"><span class="pre">grammar</span></tt>, we can write expressions like:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">&quot;thursday&quot;</span> <span class="pre">in</span> <span class="pre">{&quot;monday&quot;,</span> <span class="pre">&quot;tuesday&quot;,</span> <span class="pre">&quot;wednesday&quot;,</span> <span class="pre">&quot;thursday&quot;,</span> <span class="pre">&quot;friday&quot;}</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">&quot;thursday&quot;</span> <span class="pre">in</span> <span class="pre">week_days</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">{&quot;thursday&quot;,</span> <span class="pre">&quot;monday&quot;}</span> <span class="pre">is</span> <span class="pre">subset</span> <span class="pre">of</span> <span class="pre">{&quot;monday&quot;,</span> <span class="pre">&quot;tuesday&quot;,</span> <span class="pre">&quot;wednesday&quot;,</span> <span class="pre">&quot;thursday&quot;,</span> <span class="pre">&quot;friday&quot;}</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">{&quot;thursday&quot;,</span> <span class="pre">&quot;monday&quot;}</span> <span class="pre">is</span> <span class="pre">subset</span> <span class="pre">of</span> <span class="pre">week_days</span></tt></li>
+</ul>
+</div>
+<div class="section" id="configuring-the-convertible-parse-manager">
+<h3>Configuring the convertible parse manager<a class="headerlink" href="#configuring-the-convertible-parse-manager" title="Permalink to this headline">¶</a></h3>
+<p>This is easy. You just need the grammar we created before:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">booleano.parser</span> <span class="kn">import</span> <span class="n">ConvertibleParseManager</span>
+
+<span class="n">parse_manager</span> <span class="o">=</span> <span class="n">ConvertibleParseManager</span><span class="p">(</span><span class="n">grammar</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="defining-a-converter">
+<h3>Defining a converter<a class="headerlink" href="#defining-a-converter" title="Permalink to this headline">¶</a></h3>
+<p>You have to subclass <a title="booleano.operations.converters.BaseConverter" class="reference external" href="../api/operations.html#booleano.operations.converters.BaseConverter"><tt class="xref docutils literal"><span class="pre">booleano.operations.converters.BaseConverter</span></tt></a>
+and define its abstract methods (i.e., the node-specific converters) so they
+return the data type you want.</p>
+</div>
+</div>
+<div class="section" id="parsing-and-converting-expressions">
+<h2>Parsing and converting expressions<a class="headerlink" href="#parsing-and-converting-expressions" title="Permalink to this headline">¶</a></h2>
+<p>That&#8217;s all you need. Your module should look like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">booleano.parser</span> <span class="kn">import</span> <span class="n">Grammar</span><span class="p">,</span> <span class="n">ConvertibleParseManager</span>
+<span class="kn">from</span> <span class="nn">your_project</span> <span class="kn">import</span> <span class="n">YourCustomConverter</span>
+
+<span class="n">grammar</span> <span class="o">=</span> <span class="n">Grammar</span><span class="p">(</span><span class="n">belongs_to</span><span class="o">=</span><span class="s">&quot;in&quot;</span><span class="p">,</span> <span class="n">is_subset</span><span class="o">=</span><span class="s">&quot;is subset of&quot;</span><span class="p">)</span>
+<span class="n">parse_manager</span> <span class="o">=</span> <span class="n">ConvertibleParseManager</span><span class="p">(</span><span class="n">grammar</span><span class="p">)</span>
+<span class="n">converter</span> <span class="o">=</span> <span class="n">YourCustomConverter</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>It&#8217;s now time to put out parser to the test! Let&#8217;s start by checking how
+expressions are parsed:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">parse_manager</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;&quot;thursday&quot; in {&quot;monday&quot;, &quot;tuesday&quot;, &quot;wednesday&quot;, &quot;thursday&quot;, &quot;friday&quot;}&#39;</span><span class="p">)</span>
+<span class="go">&lt;Parse tree (convertible) &lt;BelongsTo &lt;Set &lt;String &quot;monday&quot;&gt;, &lt;String &quot;tuesday&quot;&gt;, &lt;String &quot;friday&quot;&gt;, &lt;String &quot;thursday&quot;&gt;, &lt;String &quot;wednesday&quot;&gt;&gt; &lt;String &quot;thursday&quot;&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parse_manager</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;today == &quot;2009-07-17&quot;&#39;</span><span class="p">)</span>
+<span class="go">&lt;Parse tree (convertible) &lt;Equal &lt;Placeholder variable &quot;today&quot;&gt; &lt;String &quot;2009-07-17&quot;&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parse_manager</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;today != &quot;2009-07-17&quot;&#39;</span><span class="p">)</span>
+<span class="go">&lt;Parse tree (convertible) &lt;NotEqual &lt;Placeholder variable &quot;today&quot;&gt; &lt;String &quot;2009-07-17&quot;&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parse_manager</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;~ today == &quot;2009-07-17&quot;&#39;</span><span class="p">)</span>
+<span class="go">&lt;Parse tree (convertible) &lt;Not &lt;Equal &lt;Placeholder variable &quot;today&quot;&gt; &lt;String &quot;2009-07-17&quot;&gt;&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parse_manager</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;today &gt; &quot;2009-07-17&quot;&#39;</span><span class="p">)</span>
+<span class="go">&lt;Parse tree (convertible) &lt;GreaterThan &lt;Placeholder variable &quot;today&quot;&gt; &lt;String &quot;2009-07-17&quot;&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parse_manager</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;time:today == &quot;sunday&quot; &amp; ~weather:will_it_rain_today(&quot;paris&quot;)&#39;</span><span class="p">)</span>
+<span class="go">&lt;Parse tree (convertible) &lt;And &lt;Equal &lt;Placeholder variable &quot;today&quot; at namespace=&quot;time&quot;&gt; &lt;String &quot;sunday&quot;&gt;&gt; &lt;Not &lt;Placeholder function call &quot;will_it_rain_today&quot;(&lt;String &quot;paris&quot;&gt;) at namespace=&quot;weather&quot;&gt;&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p>OK, it seems like all the expressions above were parsed as expected.</p>
+<p>In order to convert these trees with <tt class="docutils literal"><span class="pre">YourCustomConverter</span></tt>, you&#8217;d just need
+to pass its instance <tt class="docutils literal"><span class="pre">converter</span></tt> to the parse tree (which is a callable).
+For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">parse_tree</span> <span class="o">=</span> <span class="n">parse_manager</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;today &gt; &quot;2009-07-17&quot;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">the_conversion_result</span> <span class="o">=</span> <span class="n">parse_tree</span><span class="p">(</span><span class="n">converter</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And <tt class="docutils literal"><span class="pre">the_conversion_result</span></tt> will be, well, the conversion result.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="">Convertible Parsing Tutorial</a><ul>
+<li><a class="reference external" href="#overview">Overview</a></li>
+<li><a class="reference external" href="#what-you-need">What you need</a><ul>
+<li><a class="reference external" href="#configuring-the-grammar">Configuring the grammar</a></li>
+<li><a class="reference external" href="#configuring-the-convertible-parse-manager">Configuring the convertible parse manager</a></li>
+<li><a class="reference external" href="#defining-a-converter">Defining a converter</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#parsing-and-converting-expressions">Parsing and converting expressions</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="index.html"
+                                  title="previous chapter">Quick tutorials</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="evaluable-parsing.html"
+                                  title="next chapter">Evaluable Parsing Tutorial</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/tutorials/convertible-parsing.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="evaluable-parsing.html" title="Evaluable Parsing Tutorial"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Quick tutorials"
+             >previous</a> |</li>
+        <li><a href="../index.html">Booleano v1.0a1 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Quick tutorials</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009, Gustavo Narea.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.3.
+    </div>
+  </body>
+</html>

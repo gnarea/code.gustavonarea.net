@@ -1,0 +1,148 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>repoze.who.plugins.ldap Changelog &mdash; repoze.who.plugins.ldap v1.1a1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.1a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="repoze.who.plugins.ldap v1.1a1 documentation" href="index.html" />
+    <link rel="prev" title="Trying the demo project" href="Demo.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Demo.html" title="Trying the demo project"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">repoze.who.plugins.ldap v1.1a1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="repoze-who-plugins-ldap-changelog">
+<h1>repoze.who.plugins.ldap Changelog<a class="headerlink" href="#repoze-who-plugins-ldap-changelog" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="alpha-1-2010-01-03">
+<h2>1.1 Alpha 1 (2010-01-03)<a class="headerlink" href="#alpha-1-2010-01-03" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<ul class="simple">
+<li>Changed the license to the <a class="reference external" href="http://repoze.org/license.html">Repoze license</a>.</li>
+<li>Provided <tt class="docutils literal"><span class="pre">start_tls</span></tt> option both for the authenticator and the metadata
+provider.</li>
+<li>Enable both pattern-replacement and subtree searches for the naming
+attribute in <tt class="docutils literal"><span class="pre">_get_dn()</span></tt>.</li>
+<li>Enable configuration of the naming attribute</li>
+<li>Enable the option to bind to the server with privileged credential before
+doing searches</li>
+<li>Add a restrict pattern to pre-authentication DN searches</li>
+<li>Let the user choose whether to return the full DN or the supplied login as
+the user identifier</li>
+</ul>
+</blockquote>
+</div>
+<div class="section" id="id1">
+<h2>1.0 (2008-09-11)<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>The initial release.</p>
+<blockquote>
+<ul class="simple">
+<li>Provided the LDAP authenticator, which is compatible with identifiers that
+define the &#8216;login&#8217; item in the identity dict.</li>
+<li>Included the plugin to load metadata about the authenticated user from the
+LDAP server.</li>
+<li>Documented how to install and use the plugins.</li>
+<li>Included Turbogears 2 demo project, using the plugin. There is also a section
+in the documentation to explain how the demo works.</li>
+</ul>
+</blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">repoze.who.plugins.ldap Changelog</a><ul>
+<li><a class="reference internal" href="#alpha-1-2010-01-03">1.1 Alpha 1 (2010-01-03)</a></li>
+<li><a class="reference internal" href="#id1">1.0 (2008-09-11)</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Demo.html"
+                        title="previous chapter">Trying the demo project</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/Changes.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Demo.html" title="Trying the demo project"
+             >previous</a> |</li>
+        <li><a href="index.html">repoze.who.plugins.ldap v1.1a1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2008-2010, Gustavo Narea.
+      Last updated on Jun 03, 2010.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0b2.
+    </div>
+  </body>
+</html>

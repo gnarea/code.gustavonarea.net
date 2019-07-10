@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>repoze.who.restrict</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="repoze.who.plugins.ldap-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://code.gustavonarea.net/repoze.who.plugins.ldap/">repoze.who LDAP plugin</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="repoze-module.html">Package&nbsp;repoze</a> ::
+        <a href="repoze.who-module.html">Package&nbsp;who</a> ::
+        Module&nbsp;restrict
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="repoze.who.restrict-module.html">Module repoze.who.restrict</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment"># Authorization middleware</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">pkg_resources</tt> <tt class="py-keyword">import</tt> <tt class="py-name">EntryPoint</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"> </tt>
+<a name="authenticated_predicate"></a><div id="authenticated_predicate-def"><a name="L4"></a><tt class="py-lineno"> 4</tt> <a class="py-toggle" href="#" id="authenticated_predicate-toggle" onclick="return toggle('authenticated_predicate');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.restrict-module.html#authenticated_predicate">authenticated_predicate</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="authenticated_predicate-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="authenticated_predicate-expanded"><a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line">    <tt class="py-keyword">def</tt> <tt class="py-def-name">_predicate</tt><tt class="py-op">(</tt><tt class="py-param">environ</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-string">'REMOTE_USER'</tt> <tt class="py-keyword">in</tt> <tt id="link-0" class="py-name" targets="Variable repoze.who.tests.test_config.DummyApp.environ=repoze.who.tests.test_config.DummyApp-class.html#environ,Variable repoze.who.tests.test_middleware.DummyApp.environ=repoze.who.tests.test_middleware.DummyApp-class.html#environ,Variable repoze.who.tests.test_restrict.DummyApp.environ=repoze.who.tests.test_restrict.DummyApp-class.html#environ"><a title="repoze.who.tests.test_config.DummyApp.environ
+repoze.who.tests.test_middleware.DummyApp.environ
+repoze.who.tests.test_restrict.DummyApp.environ" class="py-name" href="#" onclick="return doclink('link-0', 'environ', 'link-0');">environ</a></tt> <tt class="py-keyword">or</tt> <tt class="py-string">'repoze.who.identity'</tt> <tt class="py-keyword">in</tt> <tt id="link-1" class="py-name"><a title="repoze.who.tests.test_config.DummyApp.environ
+repoze.who.tests.test_middleware.DummyApp.environ
+repoze.who.tests.test_restrict.DummyApp.environ" class="py-name" href="#" onclick="return doclink('link-1', 'environ', 'link-0');">environ</a></tt> </tt>
+</div><a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">_predicate</tt> </tt>
+</div><a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"> </tt>
+<a name="PredicateRestriction"></a><div id="PredicateRestriction-def"><a name="L9"></a><tt class="py-lineno"> 9</tt> <a class="py-toggle" href="#" id="PredicateRestriction-toggle" onclick="return toggle('PredicateRestriction');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="repoze.who.restrict.PredicateRestriction-class.html">PredicateRestriction</a><tt class="py-op">:</tt> </tt>
+</div><div id="PredicateRestriction-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="PredicateRestriction-expanded"><a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"> </tt>
+<a name="PredicateRestriction.__init__"></a><div id="PredicateRestriction.__init__-def"><a name="L11"></a><tt class="py-lineno">11</tt> <a class="py-toggle" href="#" id="PredicateRestriction.__init__-toggle" onclick="return toggle('PredicateRestriction.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.restrict.PredicateRestriction-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">app</tt><tt class="py-op">,</tt> <tt class="py-param">predicate</tt><tt class="py-op">,</tt> <tt class="py-param">enabled</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kw</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PredicateRestriction.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="PredicateRestriction.__init__-expanded"><a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Function repoze.who.plugins.tests.fixtures.testapp.app()=repoze.who.plugins.tests.fixtures.testapp-module.html#app"><a title="repoze.who.plugins.tests.fixtures.testapp.app" class="py-name" href="#" onclick="return doclink('link-2', 'app', 'link-2');">app</a></tt> <tt class="py-op">=</tt> <tt id="link-3" class="py-name"><a title="repoze.who.plugins.tests.fixtures.testapp.app" class="py-name" href="#" onclick="return doclink('link-3', 'app', 'link-2');">app</a></tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">enabled</tt> <tt class="py-op">=</tt> <tt class="py-name">enabled</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">        <tt class="py-name">options</tt> <tt class="py-op">=</tt> <tt class="py-name">kw</tt><tt class="py-op">.</tt><tt class="py-name">copy</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">predicate</tt> <tt class="py-op">=</tt> <tt class="py-name">predicate</tt><tt class="py-op">(</tt><tt class="py-op">**</tt><tt class="py-name">options</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"> </tt>
+<a name="PredicateRestriction.__call__"></a><div id="PredicateRestriction.__call__-def"><a name="L17"></a><tt class="py-lineno">17</tt> <a class="py-toggle" href="#" id="PredicateRestriction.__call__-toggle" onclick="return toggle('PredicateRestriction.__call__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.restrict.PredicateRestriction-class.html#__call__">__call__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">environ</tt><tt class="py-op">,</tt> <tt class="py-param">start_response</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PredicateRestriction.__call__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="PredicateRestriction.__call__-expanded"><a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">enabled</tt><tt class="py-op">:</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">predicate</tt><tt class="py-op">(</tt><tt id="link-4" class="py-name"><a title="repoze.who.tests.test_config.DummyApp.environ
+repoze.who.tests.test_middleware.DummyApp.environ
+repoze.who.tests.test_restrict.DummyApp.environ" class="py-name" href="#" onclick="return doclink('link-4', 'environ', 'link-0');">environ</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">                <tt class="py-name">start_response</tt><tt class="py-op">(</tt><tt class="py-string">'401 Unauthorized'</tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name"><a title="repoze.who.plugins.tests.fixtures.testapp.app" class="py-name" href="#" onclick="return doclink('link-5', 'app', 'link-2');">app</a></tt><tt class="py-op">(</tt><tt id="link-6" class="py-name"><a title="repoze.who.tests.test_config.DummyApp.environ
+repoze.who.tests.test_middleware.DummyApp.environ
+repoze.who.tests.test_restrict.DummyApp.environ" class="py-name" href="#" onclick="return doclink('link-6', 'environ', 'link-0');">environ</a></tt><tt class="py-op">,</tt> <tt class="py-name">start_response</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"> </tt>
+<a name="make_authenticated_restriction"></a><div id="make_authenticated_restriction-def"><a name="L24"></a><tt class="py-lineno">24</tt> <a class="py-toggle" href="#" id="make_authenticated_restriction-toggle" onclick="return toggle('make_authenticated_restriction');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.restrict-module.html#make_authenticated_restriction">make_authenticated_restriction</a><tt class="py-op">(</tt><tt class="py-param">app</tt><tt class="py-op">,</tt> <tt class="py-param">global_config</tt><tt class="py-op">,</tt> <tt class="py-param">enabled</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="make_authenticated_restriction-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="make_authenticated_restriction-expanded"><a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-7" class="py-name" targets="Class repoze.who.restrict.PredicateRestriction=repoze.who.restrict.PredicateRestriction-class.html"><a title="repoze.who.restrict.PredicateRestriction" class="py-name" href="#" onclick="return doclink('link-7', 'PredicateRestriction', 'link-7');">PredicateRestriction</a></tt><tt class="py-op">(</tt><tt id="link-8" class="py-name"><a title="repoze.who.plugins.tests.fixtures.testapp.app" class="py-name" href="#" onclick="return doclink('link-8', 'app', 'link-2');">app</a></tt><tt class="py-op">,</tt> <tt id="link-9" class="py-name" targets="Function repoze.who.restrict.authenticated_predicate()=repoze.who.restrict-module.html#authenticated_predicate"><a title="repoze.who.restrict.authenticated_predicate" class="py-name" href="#" onclick="return doclink('link-9', 'authenticated_predicate', 'link-9');">authenticated_predicate</a></tt><tt class="py-op">,</tt> <tt class="py-name">enabled</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"> </tt>
+<a name="make_predicate_restriction"></a><div id="make_predicate_restriction-def"><a name="L27"></a><tt class="py-lineno">27</tt> <a class="py-toggle" href="#" id="make_predicate_restriction-toggle" onclick="return toggle('make_predicate_restriction');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="repoze.who.restrict-module.html#make_predicate_restriction">make_predicate_restriction</a><tt class="py-op">(</tt><tt class="py-param">app</tt><tt class="py-op">,</tt> <tt class="py-param">global_config</tt><tt class="py-op">,</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">                               <tt class="py-param">predicate</tt><tt class="py-op">,</tt> <tt class="py-param">enabled</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kw</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="make_predicate_restriction-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="make_predicate_restriction-expanded"><a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">predicate</tt><tt class="py-op">,</tt> <tt class="py-name">basestring</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">        <tt class="py-name">predicate</tt> <tt class="py-op">=</tt> <tt class="py-name">EntryPoint</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Method repoze.who.config.WhoConfig.parse()=repoze.who.config.WhoConfig-class.html#parse"><a title="repoze.who.config.WhoConfig.parse" class="py-name" href="#" onclick="return doclink('link-10', 'parse', 'link-10');">parse</a></tt><tt class="py-op">(</tt><tt class="py-string">'x=%s'</tt> <tt class="py-op">%</tt> <tt class="py-name">predicate</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">load</tt><tt class="py-op">(</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-11" class="py-name"><a title="repoze.who.restrict.PredicateRestriction" class="py-name" href="#" onclick="return doclink('link-11', 'PredicateRestriction', 'link-7');">PredicateRestriction</a></tt><tt class="py-op">(</tt><tt id="link-12" class="py-name"><a title="repoze.who.plugins.tests.fixtures.testapp.app" class="py-name" href="#" onclick="return doclink('link-12', 'app', 'link-2');">app</a></tt><tt class="py-op">,</tt> <tt class="py-name">predicate</tt><tt class="py-op">,</tt> <tt class="py-name">enabled</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kw</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="repoze.who.plugins.ldap-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://code.gustavonarea.net/repoze.who.plugins.ldap/">repoze.who LDAP plugin</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Jun  3 10:41:58 2010
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
